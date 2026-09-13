@@ -183,7 +183,8 @@ You can change the model and reasoning effort during a session without changing 
 
 ![App settings](assets/app-settings.webp)
 
-Here's a summary of the key settings areas:
+<details>
+<summary>Settings reference: What each area controls</summary>
 
 | Setting | What you can do |
 |---|---|
@@ -199,7 +200,10 @@ Here's a summary of the key settings areas:
 
 The **Model providers** setting connects the app to additional providers. It does not replace the model picker below the prompt box. You do not need to configure a provider for this exercise if a model is already available.
 
-### Voice Dictation (optional)
+</details>
+
+<details>
+<summary>Optional: Voice dictation</summary>
 
 Voice dictation turns speech into editable prompt text, which can save time and effort when creating prompts.
 
@@ -213,6 +217,8 @@ Go back to the GitHub Copilot app's **Settings** dialog. Select **Voice dictatio
 3. Note the keyboard shortcut for activating voice dictation.
 4. Exit the **Settings** dialog and return to the main app window.
 5. Create a new chat under **Chats** and test voice dictation by using the keyboard shortcut.
+
+</details>
 
 ---
 

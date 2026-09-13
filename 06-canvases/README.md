@@ -238,6 +238,9 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     If one part is wrong, use the matching repair prompt:
 
+    <details>
+    <summary>Repair prompts (use the one matching what's wrong)</summary>
+
     ```text
     Keep the current canvas. Add any missing stages, checklist items, or actions from my original request. Do not redesign parts that already work.
     ```
@@ -249,6 +252,8 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     ```text
     Keep the current canvas. Give baseline, implementation, browser validation, and final-check actions enough time to complete npm and browser work. Show loading, success, and error states.
     ```
+
+    </details>
 
     If the canvas still does not match after two focused repairs, use the [Markdown fallback](#markdown-fallback) and continue with the validation steps manually.
 
@@ -314,6 +319,11 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
 You've seen how the workbench reflects what actually happened in the session, not because a chat response sounds confident. Copilot can update the canvas after an action gathers evidence, but you decide whether that evidence is sufficient.
 
+<a id="markdown-fallback"></a>
+
+<details>
+<summary>Optional: Markdown fallback if the canvas doesn't work</summary>
+
 ### Markdown fallback
 
 If `/create-canvas` is unavailable or the generated canvas still does not work after two focused repairs, keep the same workflow in a Markdown artifact:
@@ -327,6 +337,8 @@ Update an item only after the current session produces matching terminal, diff, 
 ```
 
 Open the artifact from the session's **Files** tab. Run the baseline, implementation, browser, and final-check steps from the session, then ask the agent to update the artifact with the evidence you verified. The Markdown artifact does not have action buttons, but it keeps the same plan and validation record visible.
+
+</details>
 
 <details>
 <summary>Behind the canvas: Where canvas files live</summary>

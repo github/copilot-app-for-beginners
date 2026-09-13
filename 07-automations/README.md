@@ -193,6 +193,9 @@ A manual automation answers "What's the status right now?" A scheduled automatio
 
 ---
 
+<details>
+<summary>Optional: Event triggers and cloud automations</summary>
+
 ## Event Triggers
 
 Schedules run on the clock. Event triggers run in response to something happening in the repository.
@@ -224,8 +227,6 @@ Event-triggered automations deserve extra caution because they react to external
 
 > ⚠️ **Security note**: Issue titles and PR bodies can contain untrusted text. A broad trigger paired with write tools increases **prompt-injection** risk because hostile text in an issue could steer the agent into unintended actions. Read-only summaries with narrow filters reduce that surface.
 
----
-
 ## Cloud Automations
 
 Every automation you've created so far is **local**: it runs from your machine while the app is open. A **cloud automation** runs on GitHub-hosted infrastructure, so it can fire even when your laptop is closed.
@@ -251,6 +252,8 @@ When you enable **Run in cloud**, a **Tools** dropdown appears. Each tool grants
 <img src="assets/app-automation-cloud-tools.webp" alt="Cloud automation Tools selector with Read issue, List issues, and Search issues selected, showing 3 tools selected while write actions are unchecked" width="800" />
 
 Select only the tools the task requires. For this read-only report, **3 tools selected** means that **Read issue**, **List issues**, and **Search issues** remain enabled. Deselect every write tool. You can always add tools later after the output proves trustworthy.
+
+</details>
 
 ---
 
