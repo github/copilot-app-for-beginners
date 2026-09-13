@@ -253,7 +253,7 @@ This agent cannot run the tests or save its own report. That restriction is inte
 
 ## Give the Agent Only What It Needs
 
-The explainer needs only read and search tools. Start with project context and the smallest useful customization. Review a skill's instructions and an agent's tool list before use. Don't add editing or shell access just to make the read-only exercise work.
+Match an agent's tools to its task, and add nothing beyond that.
 
 ![Give the agent only what it needs](assets/least-tool-principle.webp)
 

@@ -384,29 +384,18 @@ repo:YOUR-OWNER/copilot-app-for-beginners is:pr is:open
 
 A **CI check** is an automated validation run on a pull request, often through GitHub Actions.
 
-1. Open the pull request titled **Failing stats check practice**.
-1. Review the failed **Book app web** check.
+1. Open the pull request titled **Failing stats check practice** and review the failed **Book app web** check.
 
-![Failing stats check practice pull request showing the failed Book app web validation check](assets/app-pr-failing-check.webp)
+   ![Failing stats check practice pull request showing the failed Book app web validation check](assets/app-pr-failing-check.webp)
 
-1. Select **Fix failing checks** if it's available. Otherwise, start a session from the pull request and submit:
+1. Select **Fix failing checks** if it's available. Otherwise, start a session from the pull request as you did in the previous exercise, then submit:
 
    ```text
    Analyze the failing check. Explain the root cause, identify the likely file in samples/book-app-web, and propose the smallest fix. Don't weaken the failing test.
    ```
 
-1. Confirm that the fix restores favorite counting for both read and unread favorites.
-1. Validate locally:
+1. Confirm that the fix restores favorite counting for both read and unread favorites, then follow the same validate → commit → push → confirm pattern as the previous exercise: run `npm test -- --run` and `npm run build` in `samples/book-app-web`, start `npm run dev` to confirm the favorite count includes both read and unread favorites, then ask Copilot to commit and push.
 
-   ```bash
-   cd samples/book-app-web
-   npm install
-   npm test -- --run
-   npm run build
-   ```
-
-1. Start the app with `npm run dev`, confirm the favorite count includes both read and unread favorites, then press `Ctrl+C` to stop the development server.
-1. Inspect the final diff, then ask Copilot to commit and push the fix.
 1. Return to the pull request and confirm that the **Book app web** check reruns successfully.
 
 Don't mark a pull request ready until the diff is focused and the local and GitHub evidence agree.

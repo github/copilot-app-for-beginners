@@ -50,10 +50,6 @@ A view of what changed between two versions of files. In this course, the diff i
 
 Asking GitHub Copilot to address a specific review comment or failing check while the diff and validation evidence stay visible. Official pull request views may also show **Fix** and **Fix failing checks**. It keeps follow-up work small and reviewable.
 
-## Home
-
-The app landing view. Start a session, connect a repository, and see **Up next** GitHub items from connected repos.
-
 ## Interactive
 
 A session mode where you and the agent work step by step. The agent waits for your input more often than in Autopilot.
@@ -77,6 +73,10 @@ A tool server that uses Model Context Protocol to connect Copilot to external to
 ## My work
 
 The app view that gathers your GitHub issues, pull requests, review requests, and failing checks in one inbox. Official default sections are **All**, **Active**, **Review requests**, and **Done**. It supports search qualifiers such as `repo:` and `is:pr`.
+
+## New
+
+The app's landing view in the sidebar. Start a chat without a project, select a connected project for a project session, choose a mode and model, or start from a sample project idea.
 
 ## Outer loop
 

@@ -197,9 +197,6 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
 1. In the current session, type `/` in the prompt box and select `/create-canvas`, **then** paste the prompt below:
 
-    <details>
-    <summary>Feature Workbench canvas prompt</summary>
-
     ```text
     Create a reusable, user-scoped Feature Workbench canvas for the local dev inner loop in @samples/book-app-web. Simple, compact, beginner-readable. No GitHub writes, no source edits while building it.
 
@@ -217,6 +214,22 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     Only mark checklist/rail items from recorded evidence, never chat inference. Dense layout, no big empty textareas, no duplicate buttons, user scope.
     ```
+
+    <details>
+    <summary>What this prompt is asking for, in plain language</summary>
+
+    This prompt is dense because it's written for the app to build the canvas, not for you to memorize. Here's what its key phrases mean, using terms from [the glossary earlier in this chapter](#a-canvas-is-a-shared-control-panel):
+
+    | Phrase in the prompt | What it means |
+    |---|---|
+    | "Every button = agent-callable action" | Each button asks the agent to do real work (like running tests), not just change something on your screen |
+    | "never call exit_plan_mode/ask_user elsewhere" | Plan approval should only happen in the session's **Plan** tab, not through a canvas popup |
+    | "polled from exit_plan_mode events" | The canvas checks the plan's approval status periodically instead of you having to refresh it |
+    | "give each a multi-minute timeout" | Test, build, and browser actions can take longer than a typical quick response, so don't let the canvas give up early |
+    | "user scope" | The canvas is saved to your machine across projects, not committed to this repository |
+
+    You don't need to write or fully parse this prompt yourself. Paste it as-is and use the table above to understand what the app builds from it.
+
     </details>
 
     <img src="assets/app-create-canvas-command.webp" alt="The /create-canvas skill selected in the prompt box typeahead" width="800" />
