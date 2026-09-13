@@ -1,0 +1,65 @@
+name: 🐛 Bug Report
+description: Report an issue with course content, broken examples, or incorrect instructions
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve this course! Please fill out the details below so we can fix the issue quickly.
+
+  - type: dropdown
+    id: chapter
+    attributes:
+      label: Which chapter is affected?
+      options:
+        - "00 - Setup"
+        - "01 - Tour the App"
+        - "02 - Sessions, Worktrees, and Context"
+        - "03 - Development and GitHub Workflows"
+        - "04 - Skills and Custom Agents"
+        - "05 - MCP Servers and Plugins"
+        - "06 - Canvases"
+        - "07 - Automations"
+        - "Sample code (samples/book-app-web)"
+        - "Appendices"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the issue clearly. If a step, prompt, or command didn't work as described, include the exact text you used.
+      placeholder: "When I submitted the prompt from the 'Start a Session from an Issue' exercise, I got..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      placeholder: "I expected the Copilot app to generate a plan like the one shown in the example..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Your OS, GitHub Copilot app version, and Node.js version
+      placeholder: |
+        - OS: macOS 26 / Windows 11 / Ubuntu 24.04
+        - GitHub Copilot app version: (Settings > General > Check for updates)
+        - Node.js version: (run `node -v`)
+        - npm version: (run `npm -v`)
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or terminal output
+      description: If applicable, paste terminal output or attach screenshots from the app
+    validations:
+      required: false
