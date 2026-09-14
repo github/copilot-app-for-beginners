@@ -102,6 +102,8 @@ Each chapter follows the same beginner-friendly pattern:
 - [Using automations][automations]
 - [Working with canvas extensions][canvas-docs]
 - [Customizing the GitHub Copilot app][customizing]
+- [Public app repository][app-readme]
+- [GitHub Copilot app changelog][ga-changelog]
 
 ## Appendices
 
@@ -110,27 +112,6 @@ Each chapter follows the same beginner-friendly pattern:
 - [Training GitHub scenarios](./appendices/training-github-scenarios.md)
 - [Troubleshooting reference](./appendices/troubleshooting-reference.md)
 - [Book App Web sample](./samples/book-app-web/README.md)
-
-## Contributing
-
-Course samples are designed to support predictable learning exercises. If you contribute, avoid changing sample behavior unless the course instructions and checks are updated at the same time.
-
-Suggested flow:
-
-1. Fork the repository
-2. Create a feature branch
-3. Update the relevant course file
-4. Verify links and sample commands
-5. Open a pull request
-
-## License
-
-This project is licensed under the terms of the MIT open source license. See [LICENSE](./LICENSE) for details.
-
-## Additional References
-
-- [Public app repository][app-readme]
-- [GitHub Copilot app changelog][ga-changelog]
 
 [about-app]: https://docs.github.com/copilot/concepts/agents/github-copilot-app
 [getting-started]: https://docs.github.com/copilot/how-tos/github-copilot-app/getting-started
