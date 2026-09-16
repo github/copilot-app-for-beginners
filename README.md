@@ -71,14 +71,14 @@ This course focuses on the GitHub Copilot app. Along the way, you'll see how it 
 
 | Chapter | Title | What learners do |
 |:--:|---|---|
-| 00 | 🚀 [Setup](./00-setup/README.md) | Prepare the course environment |
-| 01 | 👋 [Tour the App](./01-tour-the-app/README.md) | Learn why you'd use the app, then tour key features: UI, Chats, settings, sessions, modes, and model controls |
-| 02 | 🌳 [Sessions, Worktrees, and Context](./02-sessions-worktrees-context/README.md) | Start isolated sessions and use `@`, `#`, and `/` for context |
-| 03 | ⚡ [Development and GitHub Workflows](./03-development-workflows/README.md) | Review, debug, test, and preview a change, then move it through My work, issues, PRs, review comments, checks, and guided fixes |
-| 04 | 🧰 [Skills and Custom Agents](./04-skills-custom-agents/README.md) | Update a review skill, create a read-only custom agent, and validate one skill-guided improvement |
-| 05 | 🔌 [MCP Servers and Plugins](./05-mcp-plugins/README.md) | Retrieve documentation through an MCP server and use a plugin's skill for a focused recommendation |
-| 06 | 🖼️ [Canvases](./06-canvases/README.md) | Run `/create-canvas` for a visual session board to keep the plan, progress and validation evidence visible |
-| 07 | 🔁 [Automations](./07-automations/README.md) | Start with a manual open-work summary, then learn schedules and optional cloud automations |
+| 00 | [Setup](./00-setup/README.md) | Prepare the course environment |
+| 01 | [Tour the App](./01-tour-the-app/README.md) | Learn why you'd use the app, then tour key features: UI, Chats, settings, sessions, modes, and model controls |
+| 02 | [Sessions, Worktrees, and Context](./02-sessions-worktrees-context/README.md) | Start isolated sessions and use `@`, `#`, and `/` for context |
+| 03 | [Development and GitHub Workflows](./03-development-workflows/README.md) | Review, debug, test, and preview a change, then move it through My work, issues, PRs, review comments, checks, and guided fixes |
+| 04 | [Skills and Custom Agents](./04-skills-custom-agents/README.md) | Update a review skill, create a read-only custom agent, and validate one skill-guided improvement |
+| 05 | [MCP Servers and Plugins](./05-mcp-plugins/README.md) | Retrieve documentation through an MCP server and use a plugin's skill for a focused recommendation |
+| 06 | [Canvases](./06-canvases/README.md) | Run `/create-canvas` for a visual session board to keep the plan, progress and validation evidence visible |
+| 07 | [Automations](./07-automations/README.md) | Start with a manual open-work summary, then learn schedules and optional cloud automations |
 
 ## 📖 How This Course Works
 
@@ -96,6 +96,7 @@ Each chapter follows the same beginner-friendly pattern:
 ## References
 
 - [GitHub Copilot app overview][about-app]
+- [GitHub Copilot app videos][about-app-videos]
 - [Getting started with the app][getting-started]
 - [Working with sessions][agent-sessions]
 - [Issues and pull requests][issues-prs]
@@ -114,6 +115,7 @@ Each chapter follows the same beginner-friendly pattern:
 - [Book App Web sample](./samples/book-app-web/README.md)
 
 [about-app]: https://docs.github.com/copilot/concepts/agents/github-copilot-app
+[about-app-videos]: https://www.youtube.com/watch?v=LsA4vIX_3UY&list=PLNBWjViYXaIY
 [getting-started]: https://docs.github.com/copilot/how-tos/github-copilot-app/getting-started
 [agent-sessions]: https://docs.github.com/copilot/how-tos/github-copilot-app/agent-sessions
 [issues-prs]: https://docs.github.com/copilot/how-tos/github-copilot-app/managing-issues-and-pull-requests
