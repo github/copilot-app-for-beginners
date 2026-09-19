@@ -114,6 +114,10 @@ Each chapter follows the same beginner-friendly pattern:
 - [Troubleshooting reference](./appendices/troubleshooting-reference.md)
 - [Book App Web sample](./samples/book-app-web/README.md)
 
+## License
+
+This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) file for the full terms.
+
 [about-app]: https://docs.github.com/copilot/concepts/agents/github-copilot-app
 [about-app-videos]: https://www.youtube.com/watch?v=LsA4vIX_3UY&list=PLNBWjViYXaIY
 [getting-started]: https://docs.github.com/copilot/how-tos/github-copilot-app/getting-started
