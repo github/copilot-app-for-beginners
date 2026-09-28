@@ -1,4 +1,4 @@
-![GitHub Copilot app for Beginners](assets/course-hero-command-center.webp)
+![GitHub Copilot app for Beginners](assets/github-copilot-app-for-beginners.webp)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)&ensp;
 [![GitHub Copilot app documentation](https://img.shields.io/badge/GitHub-Copilot_App_Docs-00a3ee?style=flat-square&logo=github)](https://docs.github.com/en/copilot/concepts/agents/github-copilot-app)&ensp;
