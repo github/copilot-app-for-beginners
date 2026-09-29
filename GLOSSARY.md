@@ -36,7 +36,7 @@ A GitHub-hosted environment where an agent can work away from your local machine
 
 ## Create from
 
-The sidebar control next to a project name that starts a session from a branch, issue, or pull request.
+The sidebar control next to a project name that starts a session from a branch, issue, or pull request. It appears when you point to the project in the sidebar.
 
 ## Custom agent
 

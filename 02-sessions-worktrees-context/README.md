@@ -119,7 +119,7 @@ An **empty state** is the message shown when no books match your filters. You'll
 
 Perform these steps:
 
-1. In the sidebar, find the `copilot-app-for-beginners` project and select its **Create from** icon.
+1. In the sidebar, point to the `copilot-app-for-beginners` project, then select the **Create from** icon that appears next to it.
 
    <img src="assets/app-create-from-icon-step1.svg" alt="Create session from branch" width="800" />
 
