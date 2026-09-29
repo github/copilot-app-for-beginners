@@ -37,30 +37,21 @@ You still check the result. A chart does not guarantee a good performance.
 
 These features solve different problems. You don't need a custom agent for every skill or a skill for every prompt.
 
-| Feature | What it adds | Example in this chapter |
-| --- | --- | --- |
-| Repository instructions | Shared rules for work across this project | Keep the Book App's stack and behavior unchanged |
-| Skill | Instructions and resources for a repeated task | Update and apply a book-app review checklist |
-| Custom agent | A named role with instructions and a selected set of tools | Create a read-only book-app explainer |
+| Feature | Where it lives | When it applies | Example in this chapter |
+| --- | --- | --- | --- |
+| One-off prompt | The current conversation | When you send it | Ask a single question about the Book App |
+| Repository instructions | `.github/copilot-instructions.md` | Across tasks in this project | Keep the Book App's stack and behavior unchanged |
+| Skill | `.github/skills/<name>/SKILL.md` | When the task matches its description or you invoke it | Update and apply a book-app review checklist |
+| Custom agent | `.github/agents/<name>.agent.md` | When you select it with `/agent` or the agent picker | Create a read-only book-app explainer |
+
+Instructions are the house rules. A skill is the chart for one kind of song. Use a skill when you repeat the same kind of work:
+
+<img src="assets/skill-vs-one-off-prompt.webp" alt="One-off prompt versus skill: a skill is a reusable checklist that lives in the repo and gives the same guidance each time" width="800" />
 
 Find skills in the sidebar **Customize** tab. Select custom agents with `/agent` or the agent picker in the prompt box.
 
 > [!TIP]
-> **Optional exploration:** After you complete this chapter's exercises, browse the Awesome Copilot directories for examples of community-created [agents][awesome-agents] and [skills][awesome-skills]. Use `book-app-reviewer` and `book-app-explainer` for this chapter. Before you add or use another customization, review the agent's tools or the skill's instructions.
-
-### Skill versus instructions versus a one-off prompt
-
-The repository's `.github/copilot-instructions.md` file gives the Copilot app project-wide rules. A skill adds instructions for one kind of task.
-
-| Guidance | Where it lives | When it applies | Best for |
-| --- | --- | --- | --- |
-| One-off prompt | The current conversation | When you send it | A single request |
-| Repository instructions | `.github/copilot-instructions.md` | Across tasks in this project | The stack, file locations, and project rules |
-| Skill | `.github/skills/<name>/SKILL.md` | When the task matches its description or you invoke it | A repeated workflow |
-
-<img src="assets/skill-vs-one-off-prompt.webp" alt="One-off prompt versus skill" width="800" />
-
-Instructions are the house rules. A skill is the chart for one kind of song.
+> **Optional exploration:** After you complete this chapter's exercises, browse the Awesome Copilot directories for examples of community-created [agents][awesome-agents] and [skills][awesome-skills]. Before you add or use another customization, review the agent's tools or the skill's instructions.
 
 > [!IMPORTANT]
 > A skill tells Copilot how to approach a task, but its instructions do not enforce what Copilot is allowed to do. For example, a skill that says "review without editing" does not disable file-editing tools. Skills can also include scripts or tell Copilot to use tools, so read unfamiliar skills before enabling them. The course review skill contains instructions only.
@@ -85,13 +76,7 @@ Keep this session for all the exercises. When you open a file in your editor, us
 
 ## Skills: Save a Review Checklist
 
-A drill can do different jobs with different attachments. Skills work in a similar way: they give the Copilot app reusable instructions for specific tasks. For the Book App, the `book-app-reviewer` skill supplies the review checklist.
-
-<img src="assets/power-tools-analogy.webp" alt="A drill with attachments represents skills in the Copilot app for commit messages, security audits, tests, and code review" width="800" />
-
-The skill names in the graphic are examples. This exercise uses `book-app-reviewer`.
-
-Start with the review skill you found in the practice session. A skill is a folder with a `SKILL.md` file. The course includes one at:
+A skill is a folder with a `SKILL.md` file. For the Book App, the course includes a review checklist skill at:
 
 ```text
 .github/skills/book-app-reviewer/SKILL.md
@@ -172,17 +157,7 @@ The checklist defines how to review the code. Next, you'll define a different ro
 
 ## Custom Agents: Define a Role and Its Tools
 
-Custom agents are similar to specialists.
-
-For example, if you need to make repairs to your house, you choose a specialist based on the job:
-
-| Job | Specialist | Why |
-| --- | --- | --- |
-| Repair a leaking pipe | Plumber | Knows plumbing requirements and has the right tools |
-| Replace electrical wiring | Electrician | Knows electrical safety requirements |
-| Install a new roof | Roofer | Chooses materials for the local weather |
-
-Custom agents apply the same idea to code review, testing, security, and documentation. Define the instructions once, then select that agent when you need its specific role.
+You don't call one general helper for every repair on a house. You call a plumber, an electrician, or a roofer. Custom agents apply the same idea to code review, testing, security, and documentation: define the role once, then select that agent when you need it.
 
 <img src="assets/hiring-specialists-analogy.webp" alt="A plumber, electrician, and roofer illustrate specialist roles, compared with AI agents for code review, testing, security, and documentation" width="800" />
 
@@ -249,13 +224,9 @@ The agent profile is a Markdown file with YAML frontmatter, like a skill:
 
 **How It Works:** The Markdown defines the role and answer format. The `tools` list limits available tools; omitting it would allow all available tools. The folder scope in the instructions guides the agent, but it is not a file-system sandbox.
 
-This agent cannot run the tests or save its own report. That restriction is intentional. Use the default agent when you need those actions.
+This agent cannot run the tests or save its own report. That restriction is intentional: match an agent's tools to its task, and add nothing beyond that. Use the default agent when you need those actions.
 
-## Give the Agent Only What It Needs
-
-Match an agent's tools to its task, and add nothing beyond that.
-
-![Give the agent only what it needs](assets/least-tool-principle.webp)
+### Checkpoint
 
 After these exercises, you should have:
 
@@ -266,22 +237,24 @@ After these exercises, you should have:
 
 ## Troubleshooting
 
+If you are still stuck, see the [Troubleshooting Reference](../appendices/troubleshooting-reference.md).
+
 <details>
 <summary>Skill and custom-agent problems</summary>
 
-### A Changed Skill or New Agent Is Missing
+### A changed skill or new agent is missing
 
 Confirm that you saved the file in this session's worktree. Check the path and YAML frontmatter. For skills, try `/skills reload`. For a new agent or a missing reload command, wait for active work in all sessions to finish. Quit and reopen the GitHub Copilot app, then return to the same session. Closing a window is not the same as quitting the app. Do not start from `main` again to reload uncommitted files.
 
-### Generic Advice from the Copilot app
+### Generic advice from the Copilot app
 
 Invoke the skill from the `/` menu or name it explicitly. Expand the activity to see whether it loaded. Ask for file-specific evidence and the rules applied. Different wording alone does not show whether the skill worked.
 
-### I Cannot Find Skills or Custom Agents
+### I cannot find skills or custom agents
 
 Use the sidebar **Customize** tab. Custom agents are selected with `/agent` or the prompt-box agent picker. Labels and available commands can vary by app version.
 
-### The Custom Agent Cannot Run Tests
+### The custom agent cannot run tests
 
 The example permits only reading and searching. Return to the default agent to run commands. Do not add shell access just to make the read-only exercise work.
 
@@ -309,7 +282,7 @@ The exercises stopped at review and explanation. Now use one reviewed recommenda
    Plan only the recommendation I select from this chapter. Name the source, CSS, and test files it affects. Preserve filtering, statistics, and the existing design. Include test, build, and browser checks. Do not implement yet.
    ```
 
-1. Before implementation, open **Terminal** in the review panel. From the session's repository root, run:
+1. Before implementation, record a baseline. Open **Terminal** in the review panel and run these commands from the repository root:
 
    ```bash
    cd samples/book-app-web
@@ -318,9 +291,7 @@ The exercises stopped at review and explanation. Now use one reviewed recommenda
    npm run build
    ```
 
-   - If you are already in `samples/book-app-web`, do not repeat `cd`.
-   - If this worktree already has its dependencies, skip `npm install`.
-   - Record the test count and build result. Stop if either command fails; resolve the baseline problem before changing the app.
+   Record the test count and build result. If either command fails, fix the baseline problem before you change the app.
 
 1. Review the plan, switch to **Interactive**, and ask the Copilot app to implement only that change. Do not approve unrelated refactoring or new dependencies.
 2. Inspect **Changes**, then rerun `npm test -- --run` and `npm run build` from `samples/book-app-web`. Confirm that the tests and build pass without weakening existing tests.

@@ -59,16 +59,9 @@ An automation has four beginner-friendly parts:
 
 ![Automation trigger to agent run](assets/automation-trigger-to-run.webp)
 
-### Local versus cloud, in one line
+### Start Manual and Local
 
-- **Local automation**: runs from your machine while the app can reach the project
-- **Cloud automation**: can run on GitHub-hosted infrastructure when policy and repository settings allow it
-
-Start local and manual. Add cloud only after the prompt is trustworthy.
-
-### Start Manual
-
-Manual automations run on demand. They're the safest first step because you can:
+Manual automations run on demand from your machine. They're the safest first step because you can:
 
 - test the prompt
 - inspect output
@@ -77,6 +70,8 @@ Manual automations run on demand. They're the safest first step because you can:
 - confirm tools are minimal
 
 ![Start manual, then expand automations](assets/manual-first-path.webp)
+
+Add a schedule, an event trigger, or cloud execution only after the manual prompt gives trustworthy results.
 
 ### A Good Starter Automation
 
@@ -140,7 +135,7 @@ To create an automation:
 
    ![New automation form with filled details](assets/app-new-automation.webp)
 
-   **Expected output:** Your automation should appear under **Your automations** with the **Manual** label. The run should start immediately and appear under **Recent runs**.
+   **Expected Output:** Your automation should appear under **Your automations** with the **Manual** label. The run should start immediately and appear under **Recent runs**.
 
 1. Wait for the run to complete. The status should change to a success indicator.
 
@@ -151,9 +146,9 @@ To create an automation:
 
    | PR | CI | Comments | Next action |
    |---|---|---|---|
-   | #5 Improve empty-state copy | ✅ Pass | ⚠️ 1 unresolved; reviewer asks for more helpful guidance | Address the review comment |
-   | #6 Failing stats check practice | ❌ Fail: Book app web | None | Fix the failing test in `ReadingStats.tsx` |
-   | #7 Reading dashboard merge-readiness | ✅ Pass | None | Ready to merge |
+   | #6 Improve empty-state copy | ✅ Pass | ⚠️ 1 unresolved; reviewer asks for more helpful guidance | Address the review comment |
+   | #7 Failing stats check practice | ❌ Fail: Book app web | None | Fix the favorite count in `ReadingStats.tsx` |
+   | #8 Reading dashboard merge-readiness | ✅ Pass | None | Ready to merge |
 
 Your PR numbers and titles may differ. The key is that each row includes CI status, comment status, and a concrete next action. If the table is empty, confirm the Chapter 00 setup script created practice pull requests, then check repository permissions.
 
@@ -183,7 +178,7 @@ The manual report worked. Now make it run every morning so the summary is waitin
    - The next morning, open the **run history** and confirm a new run completed.
    - If the summary is too long or noisy, tighten the prompt. For example, limit it to PRs with failing checks, then save again.
 
-**Expected result** The automation card shows a daily schedule. The next run appears in the history without you pressing play. If the result is noisy, you know where to narrow the prompt.
+**Expected Output:** The automation card shows a daily schedule. The next run appears in the history without you pressing play. If the result is noisy, you know where to narrow the prompt.
 
 ### Why schedule instead of running manually?
 
@@ -222,10 +217,8 @@ Event-triggered automations deserve extra caution because they react to external
 1. **Start read-only.** A summary is safer than an automation that posts comments or edits the repository.
 2. **Limit repository scope.** Target one repository, not every repository you can access.
 3. **Filter by label or search query.** Narrow the issue or PR trigger so the automation does not fire on every new item.
-4. **Avoid write tools until the summary is reliable.** Review several runs before enabling tools that push changes or add comments.
+4. **Avoid write tools until the summary is reliable.** A broad trigger paired with write tools increases prompt-injection risk. Review several runs before enabling tools that push changes or add comments.
 5. **Review run history regularly.** Check that the automation is firing at the expected frequency and producing useful output.
-
-> ⚠️ **Security note**: Issue titles and PR bodies can contain untrusted text. A broad trigger paired with write tools increases **prompt-injection** risk because hostile text in an issue could steer the agent into unintended actions. Read-only summaries with narrow filters reduce that surface.
 
 ## Cloud Automations
 
@@ -278,14 +271,12 @@ If you are still stuck, see the [Troubleshooting Reference](../appendices/troubl
 
 ## Key Takeaways
 
-1. Automations turn repeatable prompts into reusable runs.
+1. Every automation needs a trigger, prompt, tool set, and review path.
 2. Manual automations are the safest first step. Test the prompt before adding a schedule.
-3. Every automation needs a trigger, prompt, tool set, and review path.
-4. A review readiness report is a strong beginner automation because it is useful, read-only, and adds analysis that **My work** alone does not provide.
-5. Scheduled automations answer "what changed since yesterday?" without requiring you to remember to ask.
-6. Event triggers for issues and pull requests react to repository activity. Start read-only and filter narrowly.
-7. Cloud automations run when your machine is off, but depend on organization policy, billing, and permissions.
-8. Apply least privilege: give an automation only the tools it needs. Keep write actions out of early automations that read issue content, so untrusted text is less able to steer the agent.
+3. A read-only review readiness report is a strong first automation because it adds analysis that **My work** alone does not provide.
+4. Scheduled automations answer "what changed since yesterday?" without requiring you to remember to ask.
+5. Event triggers and cloud automations come later. Start read-only, filter narrowly, and check policy, billing, and permissions.
+6. Apply least privilege: give an automation only the tools it needs, so untrusted issue or PR text is less able to steer the agent.
 
 ---
 
@@ -302,7 +293,7 @@ Create one manual automation for your own workflow:
 5. Run it once.
 6. Inspect the run history and revise the prompt.
 
-Success criteria: You're able to explain why the automation is safe to run again.
+**Success criteria:** You're able to explain why the automation is safe to run again.
 
 ---
 
@@ -316,7 +307,7 @@ You've gone from setup and orientation through sessions, worktrees, and context;
 |---|---|
 | Sessions and worktrees | Work in scoped branches and isolated worktrees. Parallel sessions were optional |
 | Context | Use prompts, files, issues, and instructions intentionally |
-| Development and GitHub | Plan, change, and validate with tests, builds, browser previews, and diffs, then move work through issues, PRs, checks, and guided fixes |
+| Development and GitHub | Plan, change, and validate with tests, builds, browser previews, and diffs, then move work through issues, PRs, review comments, and failing checks |
 | Instructions and roles | Repository instructions, reusable skills, and read-only custom agents |
 | Connected tools and packages | MCP servers for documentation and plugins that supply capabilities |
 | Visibility | Canvases for shared, inspectable state |

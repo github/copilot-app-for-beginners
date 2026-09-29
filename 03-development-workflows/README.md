@@ -90,9 +90,9 @@ Attach only the context that helps with the current task. Focused context makes 
    npm test -- --run
    ```
 
-The **Terminal** should show four passing tests:
+   The **Terminal** should show four passing tests:
 
-![Review panel with Changes, Terminal, and the Book App Web tab](assets/app-workspace-panel.webp)
+   ![Review panel with Changes, Terminal, and the Book App Web tab](assets/app-workspace-panel.webp)
 
 1. Run:
 
@@ -273,6 +273,8 @@ The diagram shows the main path toward a merge. Feedback or a failed check can s
 
 **My work** is the app's inbox for issues, pull requests, review requests, and checks.
 
+In the filters below, replace `YOUR-OWNER` with the username or organization that owns your fork.
+
 1. Open **My work** and stay on **All**.
 1. Filter your fork by typing `repo:` in the search box, then select your repository:
 
@@ -280,11 +282,11 @@ The diagram shows the main path toward a merge. Feedback or a failed check can s
    repo:YOUR-OWNER/copilot-app-for-beginners
    ```
 
-![My work filtered to the course repository, showing its issues and pull requests](assets/app-my-work-filtered.webp)
+   ![My work filtered to the course repository, showing its issues and pull requests](assets/app-my-work-filtered.webp)
 
-Alternatively, select **All repositories** at the top of **My work**, then select your repository from the list.
+   Alternatively, select **All repositories** at the top of **My work**, then select your repository from the list.
 
-<img src="assets/app-filter-repo.webp" alt="My work repository list with callouts for All repositories and the course repository" width="800" />
+   <img src="assets/app-filter-repo.webp" alt="My work repository list with callouts for All repositories and the course repository" width="800" />
 
 This view shows both issues and pull requests from the course repository. Add another qualifier when you want to narrow the list even further:
 
@@ -302,20 +304,15 @@ This view shows both issues and pull requests from the course repository. Add an
 
 Confirm that opening an item shows its title, repository, number, and current status. If an expected item is missing, check the filter, repository access, and organization policy.
 
-Replace `YOUR-OWNER` with the username or organization that owns your fork.
-
 ### 5. Start from an Issue and Open a Pull Request
 
-Issue 1 asks you to make search in the book app case-insensitive. The intentional bug exists only on the `practice-search-case-bug` branch.
+Issue 1 asks you to make search in the book app case-insensitive. The intentional bug exists only on the `practice-search-case-bug` branch. You'll attach the issue with `#`, as in Chapter 02, and this time finish with a pull request.
 
 1. In **My work**, open the **Make search case-insensitive** issue and review the details. If needed, review the scenario in [`samples/app-course-issues.md`](../samples/app-course-issues.md#issue-1-make-search-case-insensitive).
 
-![Issue 1 detail view in My work](assets/app-issue-new-session.webp)
+   ![Issue 1 detail view in My work](assets/app-issue-new-session.webp)
 
-> [!NOTE]
-> In a previous chapter, you attached an issue to a session with the `#<issue-number>` syntax. Here, you will attach the issue again and create a pull request from that session.
-
-1. Select **Create from** next to the course project.
+1. Start the session from the practice branch so the bug is present: select **Create from** next to the course project.
 1. Choose **Branches**, then select `practice-search-case-bug`.
 1. In the prompt box, type `#1`, then select **Make search case-insensitive** to attach the issue. If your issue has a different number, type `#` and select it by title.
 1. Set the mode to **Plan**, add the following prompt after the attached issue, then submit:
@@ -367,10 +364,9 @@ repo:YOUR-OWNER/copilot-app-for-beginners is:pr is:open
 1. Open the pull request titled **Improve empty-state copy**.
 1. Find the conversation comment asking for more helpful guidance.
 
-![Pull request conversation with the empty-state copy comment](assets/app-pr-review-comment.webp)
+   ![Pull request conversation with the empty-state copy comment](assets/app-pr-review-comment.webp)
 
-1. Select the checkbox next to the PR in **My work**.
-1. At the bottom of the screen, select **Actions** followed by **New session** to start a session from the pull request.
+1. Select **New session** at the top of the pull request to start a session on the pull request's branch.
 1. Ask Copilot:
 
    ```text
@@ -394,7 +390,13 @@ A **CI check** is an automated validation run on a pull request, often through G
    Analyze the failing check. Explain the root cause, identify the likely file in samples/book-app-web, and propose the smallest fix. Don't weaken the failing test.
    ```
 
-1. Confirm that the fix restores favorite counting for both read and unread favorites, then follow the same validate → commit → push → confirm pattern as the previous exercise: run `npm test -- --run` and `npm run build` in `samples/book-app-web`, start `npm run dev` to confirm the favorite count includes both read and unread favorites, then ask Copilot to commit and push.
+1. Inspect the diff. Confirm that the fix restores favorite counting for both read and unread favorites and does not change the test.
+
+1. In **Terminal**, run `npm install`, `npm test -- --run`, and `npm run build` in `samples/book-app-web`.
+
+1. Start `npm run dev` and confirm in the **Browser** tab that the favorite count includes both read and unread favorites. Then press `Ctrl+C` to stop the server.
+
+1. Ask Copilot to commit and push the change.
 
 1. Return to the pull request and confirm that the **Book app web** check reruns successfully.
 
@@ -430,23 +432,23 @@ If you're still stuck, see the [Troubleshooting Reference](../appendices/trouble
 <details>
 <summary>Development and GitHub workflow problems</summary>
 
-### Browser Preview Doesn't Update
+### Browser preview doesn't update
 
 Confirm that the development server is running in the current session's worktree and that the **Browser** tab is using the **Local** URL shown in the **Terminal** tab.
 
-### Tests Fail Only in One Session
+### Tests fail only in one session
 
 Confirm that dependencies are installed in that worktree and that the session is using the expected practice branch.
 
-### I Can't See an Issue or Pull Request
+### I can't see an issue or pull request
 
 Check the active **My work** filter, repository access, permissions, and organization policy.
 
-### Local Results and CI Don't Agree
+### Local results and CI don't agree
 
 Compare the Node.js version, dependency installation, branch contents, environment variables, and generated files.
 
-### A Pull Request Is Still Blocked
+### A pull request is still blocked
 
 Confirm that required checks reran, review comments are resolved, and branch protection or merge rules aren't waiting for another approval.
 

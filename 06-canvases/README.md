@@ -4,13 +4,9 @@
 
 Chapter 05 introduced MCP servers and plugins. Now you'll use a canvas extension, which can be installed through a plugin or created for your own workflow.
 
-Chat works well for instruction and ambiguity. Once a GitHub Copilot session is doing real work, a long chat thread becomes hard to scan. You need a visible workspace for human-agent collaboration.
+Chat works well for questions and discussion. Once a session is doing real work, a long chat thread becomes hard to scan. A **canvas** fixes this: it is a shared board in the side panel that both you and the agent can see and update. You create one with `/create-canvas` and a description of the board you want.
 
-That place is a **canvas**.
-
-A canvas is a shared board in the side panel. You create it with `/create-canvas` and describe the board you want. The app builds it from your prompt and keeps it in sync with you and the agent.
-
-This chapter asks `/create-canvas` for a **session board**: plan steps, validation checks, and notes.
+In this chapter, you'll try a community canvas, then build a session board and a Feature Workbench that keep plan steps, validation checks, and notes visible.
 
 ## Learning Objectives
 
@@ -27,20 +23,24 @@ By the end of this chapter, you'll be able to:
 
 ## Prerequisites
 
-1. Exercise 1 installs a community plugin. Enterprise-managed settings can restrict which plugins and marketplaces are available in the GitHub Copilot app. If you cannot install the plugin, read Exercise 1 and continue to Exercise 2.
-1. Confirm the sample app is ready.
+Complete [Chapter 05](../05-mcp-plugins/README.md) so you know how to install and review a plugin.
 
-    - Use **Create from** > **Branches** > `main` to start a new worktree session for the course repository. Select **Interactive** mode and **Default agent**.
-    - In the review panel's **Terminal** tab, run the following commands from the worktree's repository root:
+> [!NOTE]
+> Exercise 1 installs a community plugin. Enterprise-managed settings can restrict which plugins and marketplaces are available. If you cannot install the plugin, read Exercise 1 and continue to Exercise 2.
 
-        ```bash
-        cd samples/book-app-web
-        npm install
-        npm test -- --run
-        npm run build
-        ```
+Prepare a session and confirm that the sample app is ready:
 
-Confirm these results before you start the exercise:
+1. Use **Create from** > **Branches** > `main` to start a new worktree session for the course repository. Select **Interactive** mode and **Default agent**.
+1. In the review panel's **Terminal** tab, run the following commands from the worktree's repository root:
+
+    ```bash
+    cd samples/book-app-web
+    npm install
+    npm test -- --run
+    npm run build
+    ```
+
+Confirm these results before you start the exercises:
 
 | Command | Expected result |
 |---|---|
@@ -58,19 +58,7 @@ Imagine a band planning a song. They could argue their options in a long group c
 
 ![Arrangement board analogy for canvases](assets/arrangement-board-canvas.webp)
 
-| Group chat | Arrangement board |
-|---|---|
-| Good for discussion | Good for information that you and the agent both update |
-| Hard to scan later | Easy to inspect at a glance |
-| Mostly linear | Can show sections, parts, previews, and controls |
-| Updates are buried | Updates are visible |
-
 A canvas is the app's arrangement board for human-agent work.
-
-| Term | Meaning in this course |
-|---|---|
-| Built-in work surfaces | Plan output, terminal, browser, and the Review panel you've already seen in a session |
-| Session canvas | The board `/create-canvas` opens in the side panel for this session |
 
 ---
 
@@ -122,7 +110,7 @@ You already used these panels in earlier chapters. They come with the session. Y
 | Browser | Running app behavior |
 | Changes / Review panel | What changed and what still needs review |
 
-Those panels stay tied to the live session. In this chapter, you'll add one more surface: the session board.
+Those panels stay tied to the live session. A canvas adds one more surface that you design for the task.
 
 ### When to use a canvas
 
@@ -182,7 +170,7 @@ Start with a small canvas that works like a shared checklist. You and the agent 
 1. Ask the agent to summarize the current board state. Confirm that its answer matches your updates.
 1. Open **Changes** and confirm that creating the user-scoped canvas did not change repository files.
 
-**Expected result:** The feature proposal, checklist, and notes remain visible on the board. You and the agent can both read and update them, but the board does not run tests or edit the app.
+**Expected Output:** The feature proposal, checklist, and notes remain visible on the board. You and the agent can both read and update them, but the board does not run tests or edit the app.
 
 ## Exercise 3: Create a Feature Workbench
 
@@ -437,7 +425,7 @@ Complete this challenge only if you have permission to create issues and pull re
 
 ## What's Next
 
-In Chapter 07, you'll turn repeatable prompts into automations. You'll start with a manual open-work summary before trying schedules or cloud workflows. You don't need to merge this chapter's feature or keep its canvas open to continue.
+In Chapter 07, you'll turn repeatable prompts into automations. You'll start with a manual pull request readiness report before trying schedules, event triggers, or cloud workflows. You don't need to merge this chapter's feature or keep its canvas open to continue.
 
 **[← Back to Chapter 05](../05-mcp-plugins/README.md)** | **[Continue to Chapter 07 →](../07-automations/README.md)**
 

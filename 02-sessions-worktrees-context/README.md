@@ -47,15 +47,13 @@ This allows you to work on multiple tasks or branches simultaneously without sta
 
 ![One repository with many safe worktrees](assets/one-repo-many-worktrees.webp)
 
-### Running Multiple Sessions in Parallel
-
-When each session uses its own worktree, you can work on several tasks without mixing their file changes: one session fixing a bug while another explores a different branch, each with its own folder and diff. This is the real payoff of worktrees. For this chapter, work through one session at a time.
+Because each session has its own worktree, you can run several sessions in parallel without mixing their file changes: one session fixes a bug while another explores a different branch. For this chapter, work through one session at a time.
 
 ### Where a Session Runs
 
-When you start a session, the **Workspace** selector below the prompt box lets you choose *where* the work happens. 
+When you start a session, the workspace selector below the prompt box lets you choose *where* the work happens. It shows **New worktree** by default.
 
-![Workspace selector in the GitHub Copilot app](assets/where-sessions-run.webp)
+![Workspace selector in the GitHub Copilot app showing New worktree, Local repository, and Cloud](assets/where-sessions-run.webp)
 
 The choices trade off speed against isolation:
 
@@ -65,24 +63,13 @@ The choices trade off speed against isolation:
 | Local repository | The session works directly in your existing clone, with no separate folder | You want a quick, low-stakes look and don't mind the session touching your working folder |
 | Cloud | The session runs in a cloud sandbox on GitHub's hosted infrastructure instead of your machine | You want to offload the work or keep your local environment untouched |
 
-![Where should this session run: local repo, new worktree, or cloud sandbox](assets/session-run-location-comparison.webp)
-
 > Tip: When in doubt, choose a new worktree. It keeps your `main` checkout clean while still running on your machine, which is why the rest of this course leans on worktree-backed sessions.
 
 Worktrees separate **files and branches**. They do not separate everything on your machine. Dev servers, databases, and ports can still collide if two sessions use the same ones. When you run more than one app preview later, use different ports.
 
-### Session Settings That Matter Here
-
-Before you run multiple sessions, find the app's session settings you toured in Chapter 01:
-
-| Setting | Why it matters |
-|---|---|
-| Branch prefix | Makes app-created session branches easier to recognize. Uses `%username%-` as the default prefix |
-| App instructions | Settings → **Sessions** → **Instructions**. These apply to every session across projects |
-
 ### Context Syntax
 
-The GitHub Copilot app lets you attach context in the prompt box with `@`, `#`, and `/`.
+The GitHub Copilot app lets you add context and commands in the prompt box with a few special characters:
 
 | Syntax | Use it for | Example |
 |---|---|---|
@@ -97,15 +84,15 @@ The GitHub Copilot app lets you attach context in the prompt box with `@`, `#`, 
 
 Slash commands are shortcuts you type in the prompt box. They can open app utilities, invoke agent behaviors, inspect usage, or trigger installed skills. The safest way to discover what your app supports is to type `/` in the prompt box and read the palette. Commands can vary by app version, enabled plugins, installed skills, and organization policy.
 
-For this chapter, you only need `/chronicle` and `/context`.
+For this chapter, you only need two commands:
 
 | Command | What it's for | Use it when... |
 |---|---|---|
-| `/chronicle` | Summarizes session history and past work | You want a session recap or standup-style summary |
-| `/context` | Opens session context and token usage details when available | You want to see how much conversation and file text the session is holding |
+| `/chronicle` | Summarizes session history and past work. Add `standup` to format the recap as a short standup-style summary | You want a session recap |
+| `/context` | Shows the session's branch, worktree, token usage, and context details | You want to see how much conversation and file text the session is holding |
 
 <details>
-<summary>Key GitHub Copilot app Slash Commands</summary>
+<summary>Optional: Other slash commands you may see</summary>
 
 | Command | Description |
 |---|---|
@@ -113,9 +100,8 @@ For this chapter, you only need `/chronicle` and `/context`.
 | `/chronicle` | Summarize session history, generate standups, search past work, or get workflow/cost tips. |
 | `/collect-debug-logs` | Collect app logs for troubleshooting or filing GitHub Copilot app issues. |
 | `/context` | Show session context details such as token usage (how much text the model is holding), context window size, and AI credit spend. |
-| `/create-canvas` | Create a canvas from the current session for a richer editable/inspectable surface. |
+| `/create-canvas` | Create a canvas from the current session. Chapter 06 covers canvases. |
 | `/orchestrate` | Coordinate multi-session or multi-repo work by delegating to child sessions. |
-| `/remote` | Work with remote-session/remote-control flows when available in your build. |
 | `/research` | Conduct research on a topic or question and summarize the findings. |
 | `/review` | Request a review of the current session or a specific piece of code. |
 | `/rubber-duck` | Ask a critic agent to review a plan, diff, tests, design, or proposed approach. |
@@ -153,9 +139,9 @@ Perform these steps:
 
    ![Plan generated to solve issue 3](assets/plan-from-issue.webp)
 
-1. Select `Exit plan mode and I will prompt myself` to exit plan mode and continue with your own prompts.
+1. Select **Exit plan mode and I will prompt myself** to exit plan mode and continue with your own prompts.
 
-   Before making changes, run the Book App and observe its current behaviour so you have a baseline for comparison.
+   Before making changes, run the Book App and observe its current behavior so you have a baseline for comparison.
 
 1. Submit this prompt:
 
@@ -177,14 +163,9 @@ Perform these steps:
 
 1. Reload the browser tab and try the same search again. Confirm that the empty-state message suggests changing the search term, genre, or reading status.
 
-## Slash Commands
+## Exercise: Check the Session with Slash Commands
 
-Slash commands are shortcuts you run in the prompt box. Here you'll use:
-
-- `/chronicle` to get a quick recap of what the session has done so far. Adding the `standup` argument formats that recap as a short, standup meeting-style summary.
-- `/context` to check how much context the session is using, as well as inspect the branch and worktree the session is running in.
-
-Perform these steps:
+Use the two slash commands from [Slash Commands](#slash-commands) to review the session you just worked in.
 
 1. In the prompt box for the session you have been using, submit the following slash command:
 
@@ -192,7 +173,7 @@ Perform these steps:
    /chronicle standup
    ```
 
-   **Expected output:** Copilot should summarize what happened in the session and what decisions or changes were made.
+   **Expected Output:** Copilot should summarize what happened in the session and what decisions or changes were made.
 
    ![Chronicle standup example output](assets/chronicle-standup-output.webp)
 
@@ -206,7 +187,7 @@ Perform these steps:
 
    Context is the content the GitHub Copilot app is using for the current session. Checking it helps you know when a session is getting overloaded before you add more files, issues, or instructions.
 
-   **Expected output:** The GitHub Copilot app opens the session menu and displays session, token, context, and usage information.
+   **Expected Output:** The GitHub Copilot app opens the session menu and displays session, token, context, and usage information.
 
    ![Session Context](assets/context-information.webp)
 
@@ -249,13 +230,10 @@ Worktrees isolate files and branches, not ports. Stop one Vite server or start t
 
 ## Key Takeaways
 
-1. Sessions are focused agent workspaces.
-2. Worktrees keep session changes separate from your main checkout.
-3. The workspace selector lets a session run in your local clone, a new worktree, or a cloud sandbox; a new worktree is the safe default.
-4. Worktrees isolate files and branches, but not ports, databases, or background processes.
-5. Run parallel sessions on different ports to avoid collisions.
-6. `@`, `#`, and `/` help you control context and commands.
-7. Slash commands can be used to quickly access features and information within the app.
+1. Sessions are focused agent workspaces with their own branch, diff, and history.
+2. Worktrees keep session changes separate from your main checkout. A new worktree is the safe default.
+3. Worktrees isolate files and branches, but not ports, databases, or background processes. Use different ports for parallel previews.
+4. `@` attaches files and folders, `#` attaches issues and pull requests, and `/` runs commands such as `/chronicle` and `/context`.
 
 ---
 

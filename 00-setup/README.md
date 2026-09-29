@@ -11,6 +11,14 @@ Once the app can see the repository, Chapter 01 explains why you'd use the app a
 
 > ⏱️ **Estimated Time**: ~20 minutes
 
+## The Course Theme: Working in a Recording Studio
+
+Throughout this course, a recording studio is the recurring analogy for working with the GitHub Copilot app. Each chapter connects a part of agent-driven development to preparing, recording, reviewing, and refining a track.
+
+Before you record anything, you get the studio ready. You sign in for access, plug in your gear, load the song you'll work on, and run a quick soundcheck before you commit a single take. This chapter is that preparation: install the app, connect the repository, check your tools, and load the practice items.
+
+![Setting up the studio analogy for GitHub Copilot app setup](assets/studio-setup-soundcheck.webp)
+
 ## Prerequisites
 
 - A [GitHub account](https://github.com/signup)
@@ -36,8 +44,6 @@ You will check the tool versions in the Copilot app's **Terminal** tab after con
     <img src="assets/pick-a-theme.webp" alt="Choose an app theme" width="800" />
 
 The app opens the **New** page. Next, connect your copy of the course repository.
-
-![GitHub Copilot app New page](../assets/github-copilot-app.webp)
 
 ## Connect to your repository
 
@@ -67,7 +73,7 @@ Select **+** next to **Projects**, then choose the option that matches what you 
 ## Check your tools in Terminal
 
 > [!NOTE]
-> Use the GitHub Copilot app's **Terminal** tab to run commands. Use the prompt box to send requests to the agent. In [Chapter 03](../03-development-workflows/README.md#confirm-the-sample-app-is-ready), you will use Terminal again to run tests, build the sample app, and start its development server.
+> Use the GitHub Copilot app's **Terminal** tab to run commands. Use the prompt box to send requests to the agent.
 
 1. Confirm that the sidebar shows `copilot-app-for-beginners` under **Projects**.
 
@@ -153,7 +159,7 @@ After setup, you should have:
 - [ ] [Practice branches](../appendices/training-github-scenarios.md#manual-fallback-create-practice-branches)
 - [ ] [Training pull requests](../appendices/training-github-scenarios.md#manual-fallback-create-pull-request-scenarios)
 
-### Your first prompt
+## Your First Prompt
 
 Return to the prompt box in the project session. Submit this request to the Copilot app, not to Terminal:
 
@@ -167,11 +173,12 @@ Give me an overview of the copilot-app-for-beginners course repository. Focus on
 
 ## Troubleshooting
 
+If you are still stuck, see the [Troubleshooting Reference](../appendices/troubleshooting-reference.md).
 
 <details>
 <summary>Setup and access problems</summary>
 
-### I Cannot Sign In
+### I cannot sign in
 
 Check:
 
@@ -180,7 +187,7 @@ Check:
 - Your organization left the **GitHub Copilot app** policy enabled (separate from the Copilot CLI policy)
 - If your organization uses `*.ghe.com`, you selected **Sign in to GitHub Enterprise Cloud**
 
-### I Cannot See the Repository
+### I cannot see the repository
 
 Check:
 
@@ -188,7 +195,7 @@ Check:
 - You selected the correct account or organization
 - You tried **Open folder** if the repository is already cloned
 
-### A Chat Cannot Explain the Repository
+### A chat cannot explain the repository
 
 Check:
 
@@ -196,7 +203,7 @@ Check:
 - The prompt mentions `copilot-app-for-beginners`
 - The app has permission to read the project folder
 
-### The Script Stops for an Organization Fork
+### The script stops for an organization fork
 
 The script stops before changing a repository owned by an organization. Use this command only if you are authorized to set up that organization fork and have confirmed that the `Repository:` line shows the correct target:
 
@@ -204,7 +211,7 @@ The script stops before changing a repository owned by an organization. Use this
 node .github/scripts/setup-training-scenarios.js --yes --allow-shared-repository
 ```
 
-### Practice Items Were Not Created
+### Practice items were not created
 
 If issues are missing, open your fork on GitHub.com. Under **Settings** > **Features**, enable **Issues**, then rerun the script.
 
@@ -222,17 +229,7 @@ If you cannot run the script, complete the [manual setup steps in the Training G
 
 ## What's Next
 
-### The Course Theme: Working in a Recording Studio
-
-Throughout this course, we'll use a recording studio as a recurring analogy for working with the GitHub Copilot app. Each chapter will connect a part of agent-driven development to the familiar process of preparing, recording, reviewing and refining a track.
-
-Before you record anything, you get the studio ready. You sign in for access, plug in your gear, load the song you'll work on and run a quick soundcheck before you commit a single take.
-
-![Setting up the studio analogy for GitHub Copilot app setup](assets/studio-setup-soundcheck.webp)
-
-The setup you just completed is the software equivalent of preparing that studio.
-
-In the next chapter, you'll answer a practical question first: why use the GitHub Copilot app if you already use GitHub Copilot in an editor or terminal? Then you'll tour the interface and learn about the different session types and modes.
+Your studio is ready. In the next chapter, you'll answer a practical question first: why use the GitHub Copilot app if you already use GitHub Copilot in an editor or terminal? Then you'll tour the interface and learn about the different session types and modes.
 
 **[← Back to course README](../README.md)** | **[Continue to Chapter 01 →](../01-tour-the-app/README.md)**
 

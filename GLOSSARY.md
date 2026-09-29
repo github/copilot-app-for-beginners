@@ -46,21 +46,13 @@ A specialized agent configuration for a role or workflow, such as review, docume
 
 A view of what changed between two versions of files. In this course, the diff is one of the main places where you inspect agent work before accepting it.
 
-## Guided fix
-
-Asking GitHub Copilot to address a specific review comment or failing check while the diff and validation evidence stay visible. Official pull request views may also show **Fix** and **Fix failing checks**. It keeps follow-up work small and reviewable.
-
-## Interactive
-
-A session mode where you and the agent work step by step. The agent waits for your input more often than in Autopilot.
-
 ## Inner loop
 
 The local development cycle on your machine: review, debug, test, and preview a change before it goes to GitHub.
 
-## Local sandbox
+## Interactive
 
-A local execution environment with restrictions on file system, network, or system access. It keeps work closer to your machine while limiting what the agent can reach.
+A session mode where you and the agent work step by step. The agent waits for your input more often than in Autopilot.
 
 ## Model
 
@@ -98,6 +90,10 @@ A packaged extension that can add capabilities to the GitHub Copilot app. Plugin
 
 Pull request. A GitHub request to review and merge changes from one branch into another.
 
+## Project session
+
+A session connected to a repository. Use it when the agent needs repository context, needs to change code, or must create an artifact such as a pull request. Project sessions use a new worktree by default.
+
 ## Prompt injection
 
 A risk where untrusted text, such as an issue title or body, tries to steer the agent into unintended actions. Read-only tasks and least-privilege tool choices reduce the risk.
@@ -105,6 +101,10 @@ A risk where untrusted text, such as an issue title or body, tries to steer the 
 ## Reasoning effort
 
 A setting that controls how much thinking the model spends on a task. Higher effort can help complex work, but may be slower or more expensive.
+
+## Review panel
+
+The session side panel for diffs (**Changes**), **Terminal**, **Browser** preview, and other work surfaces. Open it with **View** > **Toggle Review Panel**.
 
 ## Rubber duck
 
@@ -117,10 +117,6 @@ A GitHub Copilot app workspace where an agent can plan, edit, run commands, insp
 ## Skill
 
 Reusable guidance that helps the agent handle a specific kind of task. In this course, repo-local skills are the beginner-friendly way to add focused expertise. In the GitHub Copilot app, find them under **Customize → Skills**.
-
-## Workspace panel
-
-The session side panel for diffs, terminal, browser preview, and other work surfaces. Open it with **Toggle panel** in the upper-right corner.
 
 ## Worktree
 

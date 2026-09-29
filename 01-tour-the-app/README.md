@@ -24,36 +24,20 @@ If you jumped straight here, pause and complete [Chapter 00: Setup](../00-setup/
 
 If you already use GitHub Copilot in VS Code or use Copilot CLI in the terminal, why bother with a separate app?
 
-### The challenge
+GitHub Copilot in the editor or terminal is excellent next to the code you already have open. The harder part is supervising agent work end to end: planning, isolated edits, tests, previews, issues, and pull requests. When that work is spread across tools, you have to piece the story together yourself and ask "where was I?"
 
-GitHub Copilot in the editor or terminal is excellent next to the code you already have open. VS Code can also open multi-root workspaces when you need more than one folder. The harder part is supervising agent work end to end: planning, isolated edits, tests, previews, issues, and pull requests. You end up piecing the story together yourself and asking "where was I?"
+The app does not replace your editor. It gives you one desktop place to run and review agent work:
 
-| Challenge | What it feels like |
-|---|---|
-| Shared working copy | Two agent tasks touch the same folder and branch, and the changes blur together |
-| Scattered evidence | Plan in chat, diff in the editor, tests in a terminal, PR in the browser |
-| Explore versus change | A quick question and a real code change feel the same until files start changing |
-| Repeat work | You retype the same prompt every week for PR summaries, checks or cleanup tasks |
-
-### The solution
-
-The GitHub Copilot app is designed to make that supervision loop easier. It is not a replacement for your editor, and it is not "multi-project support" by itself. Editors already handle multi-folder work. The app gives you a desktop place to run and review project sessions, keep task evidence together, and move work through GitHub without hunting across tools.
-
-| Challenge | What the app adds |
-|---|---|
-| Shared working copy | Project sessions keep focused work separate (you'll learn about worktrees later) |
-| Scattered evidence | Project sessions, diffs, terminal output, browser previews, and GitHub work in one desktop app |
-| Explore versus change | Chats for safe questions; project sessions when you are ready to work in the repo |
-| Repeat work | Automations save a prompt and run it on demand, on a schedule or from selected GitHub events |
+| Challenge | What it feels like | What the app adds |
+|---|---|---|
+| Shared working copy | Two agent tasks touch the same folder and branch, and the changes blur together | Project sessions keep focused work separate (Chapter 02 explains worktrees) |
+| Scattered evidence | Plan in chat, diff in the editor, tests in a terminal, PR in the browser | Sessions, diffs, terminal output, browser previews, and GitHub work in one app |
+| Explore versus change | A quick question and a real code change feel the same until files start changing | Chats for safe questions; project sessions when you are ready to work in the repo |
+| Repeat work | You retype the same prompt every week for PR summaries, checks, or cleanup | Automations save a prompt and run it on demand, on a schedule, or from GitHub events |
 
 ![Editor versus GitHub Copilot app](assets/editor-vs-app.webp)
 
-You still keep your editor. The app makes it easy to open the project in VS Code when you want to read code, debug, or edit by hand:
-
-- Stay in VS Code, JetBrains, or your usual editor for deep editing and the IDE workflow you already know
-- Open the GitHub Copilot app when you want to run project sessions, pick a mode, review what changed, and move work through issues and pull requests
-- Jump back to VS Code from the app any time you want the full editor on the same project
-- Use Automations later for repeatable agent work you do not want to retype each time
+Keep VS Code, JetBrains, or your usual editor for deep editing. From the app, you can open the same project in VS Code any time you want the full editor.
 
 ## Tour the App
 
@@ -83,20 +67,22 @@ This is where you manage the ways to extend the app: skills, Model Context Proto
 
 ### Projects and chats
 
-The sidebar groups agent interactions under **Projects**. You can use a **Chat session** or a **Project session**.
+The sidebar groups agent interactions under **Chats** and your connected **Projects**. The next section explains when to use each one.
+
+## Chats, Project Sessions, and Modes
+
+### From the Studio: In the Control Room
+
+A producer in the control room doesn't handle every song the same way. Some quick questions just need a fast answer. Some takes need close direction. Some need the arrangement charted out first.
+
+![Producer's control room with a Chat Session and Project Session switch and Interactive, Plan, and Autopilot sections on the mixing desk](assets/producer-control-room-modes.webp)
+
+The GitHub Copilot app works the same way. First you choose the kind of session. Then you choose a mode for how closely you direct the work.
 
 | Use this | When you're trying to... | Creates branch or worktree? |
 |---|---|---|
 | Chat session | Ask questions, brainstorm, summarize, orient yourself | No |
 | Project session | Plan, inspect, edit, test, or create PR-ready work | Usually yes, depending on session settings |
-
-### From the Studio: In the Control Room
-
-A producer in the control room doesn't handle every song the same way. Some takes need close direction. Some need the arrangement charted out first. Some quick questions just need a fast answer.
-
-![Producer's control room analogy for GitHub Copilot app session modes](assets/producer-control-room-modes.webp)
-
-The GitHub Copilot app works the same way:
 
 ### Chat sessions
 
@@ -114,9 +100,7 @@ Chat sessions help you learn and brainstorm without starting a branch. They are 
    In the GitHub Copilot app, explain when I should use a chat and when I should use a project session. Do not create or change files.
    ```
 
-**Expected Output:** The app should explain that chats are useful for general questions and that project sessions provide repository context for code work. It should not create or change files.
-
-No branch or worktree is created for this prompt. This makes chats useful for general technical questions and brainstorming.
+**Expected Output:** The app should explain that chats are useful for general questions and that project sessions provide repository context for code work. It should not create or change files, and no branch or worktree is created.
 
 ### Project sessions
 
@@ -147,7 +131,7 @@ I'm learning the copilot-app-for-beginners course. Give me a beginner-friendly t
 | Plan | "Plan first, execute when ready" <br> Copilot creates a plan before executing | The initial approach and project details matter |
 | Autopilot | "End-to-end execution without interruption" <br> Copilot works independently | Tasks that are well defined and have clear outcomes |
 
-### Models and reasoning effort
+## Models and Reasoning Effort
 
 The session mode controls how independently the agent works. The model and reasoning settings control how it processes your request.
 
@@ -164,7 +148,7 @@ For a repository tour or a short explanation, keep **Auto** or the current model
 
 You do not need a specific model for this course. Available models and effort levels vary. Some models do not offer an effort setting.
 
-#### Try the controls
+### Try the controls
 
 1. Keep the Chapter 00 project session open. Select **Interactive** mode below the prompt box.
 2. Open the model control. If you choose a model yourself, use **Model** to view the choices and select one. For this exercise, you can keep **Auto** or your current model.
@@ -179,7 +163,9 @@ You do not need a specific model for this course. Available models and effort le
 
 You can change the model and reasoning effort during a session without changing its mode.
 
-### Settings
+## Settings
+
+Select the gear icon at the bottom of the sidebar to open **Settings**. You do not need to change anything now, but it helps to know where each option lives.
 
 ![App settings](assets/app-settings.webp)
 
@@ -229,15 +215,15 @@ If you are still stuck, see the [Troubleshooting Reference](../appendices/troubl
 <details>
 <summary>First navigation problems</summary>
 
-### I Cannot Find a Setting Shown in the Chapter
+### I cannot find a setting shown in the chapter
 
 Settings can vary by app version, operating system, organization policy, and enabled features. Look for the closest matching category, then check the official docs if the screen still does not match.
 
-### Voice Dictation Does Not Work
+### Voice dictation does not work
 
 Check microphone permission, local transcription model download status, shortcut conflicts, and language support.
 
-### A Mode or Model Option Is Missing
+### A mode or model option is missing
 
 Check your plan, organization policy, project settings, and app version.
 
@@ -247,12 +233,11 @@ Check your plan, organization policy, project settings, and app version.
 
 ## Key Takeaways
 
-1. Keep your editor for deep coding. Open the GitHub Copilot app when agent work needs a clearer place to run and review.
-2. From the app, you can open the project in VS Code any time you want the full editor.
-3. The app is organized around work surfaces: New for starting work, My work for GitHub items, Projects and chats, Automations, and Customize for extending the app.
-4. **Chat sessions** are for exploration. **Project sessions** are for focused repository work. **Automations** are for repeatable agent runs.
-5. **Interactive**, **Plan** and **Autopilot** change the level of autonomy.
-6. Choose the model and reasoning effort below the prompt box. Keep the defaults for simple tasks; consider higher effort for complex work.
+1. Keep your editor for deep coding. Open the GitHub Copilot app when agent work needs a clearer place to run and review, and jump back to VS Code any time.
+2. The app is organized around work surfaces: New for starting work, My work for GitHub items, Projects and chats, Automations, and Customize for extending the app.
+3. **Chat sessions** are for exploration. **Project sessions** are for focused repository work. **Automations** are for repeatable agent runs.
+4. **Interactive**, **Plan**, and **Autopilot** change the level of autonomy.
+5. Choose the model and reasoning effort below the prompt box. Keep the defaults for simple tasks; consider higher effort for complex work.
 
 ## What's Next
 

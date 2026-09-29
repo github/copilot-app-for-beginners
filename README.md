@@ -72,23 +72,23 @@ This course focuses on the GitHub Copilot app. Along the way, you'll see how it 
 | Chapter | Title | What learners do |
 |:--:|---|---|
 | 00 | [Setup](./00-setup/README.md) | Prepare the course environment |
-| 01 | [Tour the App](./01-tour-the-app/README.md) | Learn why you'd use the app, then tour key features: UI, Chats, settings, sessions, modes, and model controls |
-| 02 | [Sessions, Worktrees, and Context](./02-sessions-worktrees-context/README.md) | Start isolated sessions and use `@`, `#`, and `/` for context |
-| 03 | [Development and GitHub Workflows](./03-development-workflows/README.md) | Review, debug, test, and preview a change, then move it through My work, issues, PRs, review comments, checks, and guided fixes |
+| 01 | [Tour the App](./01-tour-the-app/README.md) | Learn why you'd use the app, then tour chats, project sessions, modes, models, and settings |
+| 02 | [Sessions, Worktrees, and Context](./02-sessions-worktrees-context/README.md) | Start isolated worktree sessions and use `@`, `#`, and `/` for context and commands |
+| 03 | [Development and GitHub Workflows](./03-development-workflows/README.md) | Review, debug, test, and preview a change, then move it through My work, issues, PRs, review comments, and checks |
 | 04 | [Skills and Custom Agents](./04-skills-custom-agents/README.md) | Update a review skill, create a read-only custom agent, and validate one skill-guided improvement |
 | 05 | [MCP Servers and Plugins](./05-mcp-plugins/README.md) | Retrieve documentation through an MCP server and use a plugin's skill for a focused recommendation |
 | 06 | [Canvases](./06-canvases/README.md) | Run `/create-canvas` for a visual session board to keep the plan, progress and validation evidence visible |
-| 07 | [Automations](./07-automations/README.md) | Start with a manual open-work summary, then learn schedules and optional cloud automations |
+| 07 | [Automations](./07-automations/README.md) | Create a manual PR review readiness report, schedule it, then learn about event triggers and cloud automations |
 
 ## 📖 How This Course Works
 
 Each chapter follows the same beginner-friendly pattern:
 
-1. An introduction - why the topic matters
-2. A supporting real-world analogy
+1. An introduction: why the topic matters
+2. A recording-studio analogy ("From the Studio")
 3. Core agent-development concepts
-4. Hands-on examples using `samples/book-app-web`
-5. Key takeaways, an assignment, and additional resources
+4. Hands-on exercises using `samples/book-app-web`
+5. Key takeaways, an assignment (from Chapter 02 on), and source references
 
 > [!NOTE]
 > When a chapter shows a model response, remember that model output varies due to the non-deterministic nature of LLMs. Your app version, model, reasoning setting, repository context, and enabled tools can also change the structure of the response.
