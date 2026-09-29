@@ -1,6 +1,6 @@
 # Training GitHub Scenarios
 
-The root README and Chapter 00 include the normal fork, clone, and setup-script path. This appendix explains what [the setup script](../.github/scripts/setup-training-scenarios.js) creates and gives manual fallback steps for learners who cannot run it.
+Chapter 00 covers the normal fork, connect, and setup-script path. This appendix explains what [the setup script](../.github/scripts/setup-training-scenarios.js) creates and gives manual fallback steps for learners who cannot run it.
 
 Use a fork or disposable training repository. Do not use a production repository.
 
@@ -10,8 +10,7 @@ Use a fork or disposable training repository. Do not use a production repository
 |---|---|---|
 | Nine labels and five issues | [Course issue drafts](../samples/app-course-issues.md) | Chapters 02, 03 |
 | Seven practice branches | [Branch names and changes](#manual-fallback-create-practice-branches) | Chapters 02, 03 |
-| Three pull requests and one conversation comment | [Pull request setup](#manual-fallback-create-pull-request-scenarios) | Chapters 03, 07 |
-| One failing-check PR | [Failing-check example](#manual-fallback-create-a-failing-check-example) | Chapters 03, 07 |
+| Three pull requests: one with a conversation comment and one with an intentional failing check | [Pull request setup](#manual-fallback-create-pull-request-scenarios) and [failing-check example](#manual-fallback-create-a-failing-check-example) | Chapters 03, 07 |
 
 ## Prerequisites
 

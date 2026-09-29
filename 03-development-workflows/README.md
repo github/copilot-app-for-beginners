@@ -140,7 +140,7 @@ In Chapter 02, you attached an issue to practice giving Copilot focused context.
 
 1. Open the **Changes** tab and inspect the diff. Confirm that the change is focused on the filtered-book data flow. If it isn't, ask Copilot to revise it before continuing.
 
-### Validate the Fix
+#### Validate the fix
 
 1. Review the output in the session's **Terminal** tab. If Copilot already ran these commands after the fix, you don't need to run them again. Otherwise, run:
 

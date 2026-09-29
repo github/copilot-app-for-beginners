@@ -82,9 +82,11 @@ Pick work you already do more than once:
 
 Avoid first automations that write code, post comments, change labels, approve reviews, or merge pull requests.
 
-> 💡 **Tip**: Automations are saved in the app, not committed with the repository. Treat the prompt like production instructions: keep secrets out of it, and give the automation only the tools it needs.
+> [!TIP]
+> Automations are saved in the app, not committed with the repository. Treat the prompt like production instructions: keep secrets out of it, and give the automation only the tools it needs.
 
-> ⚠️ **Security note**: Issue titles and bodies can contain untrusted text. A read-only summary is safer than an automation that posts comments or edits the repository. That reduces **prompt-injection** risk, where hostile text tries to steer the agent.
+> [!WARNING]
+> Issue titles and bodies can contain untrusted text. A read-only summary is safer than an automation that posts comments or edits the repository. That reduces **prompt-injection** risk, where hostile text tries to steer the agent.
 
 ---
 
@@ -104,7 +106,7 @@ Before creating the automation, confirm work items exist. Open **My work** and f
 repo:YOUR-OWNER/copilot-app-for-beginners is:pr is:open
 ```
 
-Replace `YOUR-OWNER` with the username or organization that owns your fork. You should see at least three open pull requests from the Chapter 00 setup script: one with a failing CI check, one with an unresolved review comment, and one that is ready to merge. If the list is empty, [run the script now](../00-setup/README.md#seed-the-repository) before continuing.
+Replace `YOUR-OWNER` with the username or organization that owns your fork. You should see at least three open pull requests from the Chapter 00 setup script. If you completed Chapter 03, the review comment and the failing check may already be fixed, and your search-fix pull request also appears. That is expected; the report shows whatever state your pull requests are in now. If the list is empty, [run the script now](../00-setup/README.md#seed-the-repository) before continuing.
 
 ### Exercise: Create a Manual Review Readiness Report
 
@@ -131,6 +133,7 @@ To create an automation:
    Present the results as a table. Do not edit files, add comments, change labels, approve reviews, or merge anything.
    ```
 
+1. Below the prompt, use **Select project** to choose your `copilot-app-for-beginners` project. The prompt says "this repository", so the automation must target your fork.
 1. Select the arrow next to **Create**, then select **Create and run**.
 
    ![New automation form with filled details](assets/app-new-automation.webp)
@@ -148,17 +151,20 @@ To create an automation:
    |---|---|---|---|
    | #6 Improve empty-state copy | ✅ Pass | ⚠️ 1 unresolved; reviewer asks for more helpful guidance | Address the review comment |
    | #7 Failing stats check practice | ❌ Fail: Book app web | None | Fix the favorite count in `ReadingStats.tsx` |
-   | #8 Reading dashboard merge-readiness | ✅ Pass | None | Ready to merge |
+   | #8 Reading dashboard merge-readiness practice | ✅ Pass | None | Ready to merge |
 
-Your PR numbers and titles may differ. The key is that each row includes CI status, comment status, and a concrete next action. If the table is empty, confirm the Chapter 00 setup script created practice pull requests, then check repository permissions.
+Your PR numbers, titles, and statuses may differ. The key is that each row includes CI status, comment status, and a concrete next action. If the table is empty, confirm the Chapter 00 setup script created practice pull requests, then check repository permissions.
 
-**How it works:** The automation saves the prompt and trigger so you can run the same bounded task again later. Because the prompt is read-only, the risk stays low while you learn the review loop. Unlike **My work**, which lists open items, this report explains why a PR is blocked, not only that it exists.
+**How It Works:** The automation saves the prompt and trigger so you can run the same bounded task again later. Because the prompt is read-only, the risk stays low while you learn the review loop. Unlike **My work**, which lists open items, this report explains why a PR is blocked, not only that it exists.
 
 ---
 
 ### Exercise: Schedule the Review Readiness Report
 
 The manual report worked. Now make it run every morning so the summary is waiting when you start your day.
+
+> [!NOTE]
+> This automation is local. A scheduled local run happens only when your computer is awake and the GitHub Copilot app is running. If your computer is asleep at the scheduled time, the run does not happen.
 
 1. Open **Automations** in the sidebar and find your `PR review readiness report`.
 1. Select the automation, then select **Edit**.
@@ -167,7 +173,7 @@ The manual report worked. Now make it run every morning so the summary is waitin
 
    Before you save, narrow the scope so the scheduled report stays useful:
 
-      - Confirm the automation targets only your fork, not every repository you can access. You can **Select project** to narrow it down.
+      - Confirm that **Select project** still shows your `copilot-app-for-beginners` project, so the automation targets only your fork.
       - If the prompt is noisy after a few runs, add a label or branch filter to reduce the output.
 
 1. Save the automation.
@@ -178,13 +184,14 @@ The manual report worked. Now make it run every morning so the summary is waitin
    - The next morning, open the **run history** and confirm a new run completed.
    - If the summary is too long or noisy, tighten the prompt. For example, limit it to PRs with failing checks, then save again.
 
-**Expected Output:** The automation card shows a daily schedule. The next run appears in the history without you pressing play. If the result is noisy, you know where to narrow the prompt.
+**Expected Output:** The automation card shows a daily schedule. If the app was running at the scheduled time, the next run appears in the history without you pressing play. If the result is noisy, you know where to narrow the prompt.
 
 ### Why schedule instead of running manually?
 
 A manual automation answers "What's the status right now?" A scheduled automation answers "What changed since yesterday?" without requiring you to remember to ask.
 
-> 💡 **Tip**: The app also supports **Hourly**, **Weekly**, and **CRON** schedules. CRON gives you the most control. The app validates the expression and shows a human-readable preview before you save.
+> [!TIP]
+> The app also supports **Hourly**, **Weekly**, and **CRON** schedules. CRON gives you the most control. The app validates the expression and shows a human-readable preview before you save.
 
 ---
 
@@ -244,7 +251,7 @@ When you enable **Run in the cloud**, a **Tools** dropdown appears. Each tool gr
 
 <img src="assets/app-automation-cloud-tools.webp" alt="Cloud automation Tools selector with Read issue, List issues, and Search issues selected, showing 3 tools selected while write actions are unchecked" width="800" />
 
-Select only the tools the task requires. For this read-only report, **3 tools selected** means that **Read issue**, **List issues**, and **Search issues** remain enabled. Deselect every write tool. You can always add tools later after the output proves trustworthy.
+Select only the tools the task requires. The screenshot shows three read-only issue tools selected (**Read issue**, **List issues**, and **Search issues**) and every write tool cleared. For the pull request readiness report, select the equivalent read-only tools for pull requests, checks, and reviews instead. Leave every write tool cleared. You can add tools later, after the output proves trustworthy.
 
 </details>
 
@@ -305,7 +312,7 @@ You've gone from setup and orientation through sessions, worktrees, and context;
 
 | Area | What you practiced |
 |---|---|
-| Sessions and worktrees | Work in scoped branches and isolated worktrees. Parallel sessions were optional |
+| Sessions and worktrees | Work in scoped branches and isolated worktrees |
 | Context | Use prompts, files, issues, and instructions intentionally |
 | Development and GitHub | Plan, change, and validate with tests, builds, browser previews, and diffs, then move work through issues, PRs, review comments, and failing checks |
 | Instructions and roles | Repository instructions, reusable skills, and read-only custom agents |

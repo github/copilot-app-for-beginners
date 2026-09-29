@@ -1,13 +1,16 @@
 ![Chapter 00: Setup](assets/chapter-header.svg)
 
+> **What if one short setup gave you a practice repository full of real issues, branches, and pull requests?**
+
+Before you can direct agents in the GitHub Copilot app, you need the app installed, your copy of the course repository connected, and the practice items that later chapters use. This chapter gets all three ready.
+
 ## Learning Objectives
 
 By the end of this chapter, you'll be able to:
 
 - Install and set up the GitHub Copilot app
-- Connect the repository to an agent session
-
-Once the app can see the repository, Chapter 01 explains why you'd use the app and starts the real hands-on path.
+- Connect your fork of the course repository to a project session
+- Run the setup script that creates the course's practice issues, branches, and pull requests
 
 > ⏱️ **Estimated Time**: ~20 minutes
 

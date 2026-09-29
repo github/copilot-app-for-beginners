@@ -63,7 +63,8 @@ The choices trade off speed against isolation:
 | Local repository | The session works directly in your existing clone, with no separate folder | You want a quick, low-stakes look and don't mind the session touching your working folder |
 | Cloud | The session runs in a cloud sandbox on GitHub's hosted infrastructure instead of your machine | You want to offload the work or keep your local environment untouched |
 
-> Tip: When in doubt, choose a new worktree. It keeps your `main` checkout clean while still running on your machine, which is why the rest of this course leans on worktree-backed sessions.
+> [!TIP]
+> When in doubt, choose a new worktree. It keeps your `main` checkout clean while still running on your machine, which is why the rest of this course leans on worktree-backed sessions.
 
 Worktrees separate **files and branches**. They do not separate everything on your machine. Dev servers, databases, and ports can still collide if two sessions use the same ones. When you run more than one app preview later, use different ports.
 
@@ -78,7 +79,8 @@ The GitHub Copilot app lets you add context and commands in the prompt box with 
 | `/` | Slash commands | `/chronicle standup` |
 | `&` | Other sessions, when the prompt box offers it | Type `&` and pick a session from the list |
 
-> Tip: Provide the smallest amount of useful context. Less is often more.
+> [!TIP]
+> Provide the smallest amount of useful context. Less is often more.
 
 ### Slash Commands
 

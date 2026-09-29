@@ -10,7 +10,7 @@ By the end of this chapter, you'll be able to:
 
 - Explain why you should use the GitHub Copilot app compared to using Copilot in an editor or Copilot CLI in the terminal
 - Identify key app features and settings
-- Explain the session modes: Interactive, Plan and Autopilot
+- Explain the session modes: Interactive, Plan, and Autopilot
 - Select a model and reasoning effort based on task complexity
 - Optionally try voice dictation
 
@@ -51,13 +51,13 @@ This is the landing view. You can start a chat without a project, select a conne
 
 ### My work
 
-This is your GitHub inbox for issues, pull requests and review requests. You can start work on an item from this view. The practice issues and pull requests created during setup should appear here.
+This is your GitHub inbox for issues, pull requests, and review requests. You can start work on an item from this view. The practice issues and pull requests created during setup should appear here.
 
 ![My work view](assets/app-my-work-page.webp)
 
 ### Automations
 
-The **Automations** view is where you create recurring agent tasks. The view shows templates that can run manually or on a daily or weekly cadence. Automations can also be triggered by events. You choose local or cloud execution when you configure an automation. We'll dive deeper into automations in a later lesson.
+The **Automations** view is where you create recurring agent tasks. The view shows templates that can run manually or on a daily or weekly cadence. Automations can also be triggered by events. You choose local or cloud execution when you configure an automation. Chapter 07 covers automations.
 
 ![Automations view](assets/app-automations-page.webp)
 

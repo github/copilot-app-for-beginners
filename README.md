@@ -22,13 +22,13 @@ This course treats the app as a place to guide and review work, not a magic code
 
 By the end of the course, you'll be able to:
 
-- Install, sign in and set up the GitHub Copilot app
+- Install, sign in, and set up the GitHub Copilot app
 - Start sessions from prompts, issues, and pull requests
 - Explain Interactive, Plan, and Autopilot modes
 - Use worktree-backed sessions without colliding with your main branch
 - Attach and manage agent context
 - Review diffs, run tests, preview a web app, and validate changes
-- Use *My work* view for issues, PRs, review comments, and failing checks
+- Use the **My work** view for issues, PRs, review comments, and failing checks
 - Understand where settings, instructions, skills, custom agents, MCP servers, plugins, canvases, and automations fit
 
 The main sample used throughout the course can be found at:

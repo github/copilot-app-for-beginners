@@ -12,10 +12,10 @@ In this chapter, you'll try a community canvas, then build a session board and a
 
 By the end of this chapter, you'll be able to:
 
-- Explain why canvases exist and when a long chat thread gets in the way
+- Explain when a canvas works better than a long chat thread
+- Install and try a community canvas from a plugin
 - Create a session canvas with `/create-canvas`
 - Keep plan state and validation evidence visible on that canvas
-- Explain the difference between chat history and a canvas that keeps current information visible and editable
 
 > ⏱️ **Estimated Time**: ~70-90 minutes
 
@@ -129,7 +129,7 @@ Before building your own canvas, try one from the community. [Awesome GitHub Cop
 
 ![Repository Issues Kanban preview](assets/repo-issues-kanban.webp)
 
-1. From the canvas page, select **+ Install in GitHub Copilot app** to install it in your GitHub Copilot app.
+1. On the [Repository Issues Kanban][issues-kanban] page of the Awesome Copilot website, select **+ Install in GitHub Copilot app** to install it in your GitHub Copilot app.
 
     - Select **Allow** when prompted to install the plugin.
     - Select **Install** to install it from the Awesome Copilot marketplace. The package name is `accessibility-kanban@awesome-copilot`.
@@ -206,7 +206,7 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     <details>
     <summary>What this prompt is asking for, in plain language</summary>
 
-    This prompt is dense because it's written for the app to build the canvas, not for you to memorize. Here's what its key phrases mean, using terms from [the glossary earlier in this chapter](#a-canvas-is-a-shared-control-panel):
+    This prompt is dense because it's written for the app to build the canvas, not for you to memorize. Here's what its key phrases mean, using terms from [Terms used in the exercises](#a-canvas-is-a-shared-control-panel) earlier in this chapter:
 
     | Phrase in the prompt | What it means |
     |---|---|
