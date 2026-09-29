@@ -240,7 +240,7 @@ Cloud automations depend on settings outside your control in a public fork:
 - **Billing**: cloud runs consume Copilot usage. Check your plan before enabling a high-frequency schedule.
 - **Repository visibility**: some cloud flows are unavailable for public or forked repositories.
 
-When you enable **Run in cloud**, a **Tools** dropdown appears. Each tool grants the cloud agent a specific capability, such as pushing changes, updating labels, or creating a pull request.
+When you enable **Run in the cloud**, a **Tools** dropdown appears. Each tool grants the cloud agent a specific capability, such as pushing changes, updating labels, or creating a pull request.
 
 <img src="assets/app-automation-cloud-tools.webp" alt="Cloud automation Tools selector with Read issue, List issues, and Search issues selected, showing 3 tools selected while write actions are unchecked" width="800" />
 
