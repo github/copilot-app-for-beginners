@@ -70,3 +70,7 @@ diff against this file.
 - "New", "My work", "Automations", and "Customize" are top-level Quick links
   when Streamer Mode is enabled.
 - "Chats" and connected repositories appear under "Projects".
+- The **+** on the **Chats** row and on each project row appears only while the
+  pointer is over that row. Screenshots taken without hover do not show it, so
+  do not report it as missing. Course steps should tell learners to point to the
+  row first. The **+** next to the **Projects** heading is always visible.

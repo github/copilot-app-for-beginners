@@ -90,7 +90,7 @@ The GitHub Copilot app works the same way. First you choose the kind of session.
 
 Chat sessions help you learn and brainstorm without starting a branch. They are useful for general questions before you choose a repository. Try it:
 
-- Select the **+** next to **Chats** in the sidebar to start a new quick chat.
+- Point to **Chats** in the sidebar, then select the **+** that appears next to it to start a new quick chat.
 - Open the project picker below the prompt and confirm that **Chat** is selected.
    ![Quick chat with callouts for the Chats add control and project picker](assets/app-quick-chat.webp)
 - Keep **Chat** selected.

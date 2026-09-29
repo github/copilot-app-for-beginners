@@ -77,7 +77,7 @@ Select **+** next to **Projects**, then choose the option that matches what you 
 
 1. Confirm that the sidebar shows `copilot-app-for-beginners` under **Projects**.
 
-1. Select **+** next to the `copilot-app-for-beginners` project to start a project session.
+1. Point to the `copilot-app-for-beginners` project in the sidebar, then select the **+** that appears next to it to start a project session.
 
 1. Select the workspace selector below the prompt box, then choose **Local repository** instead of **New worktree**.
 
