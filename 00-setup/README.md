@@ -43,7 +43,7 @@ Before you record anything, you get the studio ready. You sign in for access, pl
 
     <img src="assets/pick-a-theme.webp" alt="Choose an app theme" width="800" />
 
-The app opens the **New** page. Next, connect your copy of the course repository.
+The app opens the **New** view. Next, connect your copy of the course repository.
 
 ## Connect to your repository
 
