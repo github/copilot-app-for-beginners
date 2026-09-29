@@ -11,14 +11,6 @@ Once the app can see the repository, Chapter 01 explains why you'd use the app a
 
 > ⏱️ **Estimated Time**: ~20 minutes
 
-## The Course Theme: Working in a Recording Studio
-
-Throughout this course, a recording studio is the recurring analogy for working with the GitHub Copilot app. Each chapter connects a part of agent-driven development to preparing, recording, reviewing, and refining a track.
-
-Before you record anything, you get the studio ready. You sign in for access, plug in your gear, load the song you'll work on, and run a quick soundcheck before you commit a single take. This chapter is that preparation: install the app, connect the repository, check your tools, and load the practice items.
-
-![Setting up the studio analogy for GitHub Copilot app setup](assets/studio-setup-soundcheck.webp)
-
 ## Prerequisites
 
 - A [GitHub account](https://github.com/signup)
@@ -29,6 +21,14 @@ Before you record anything, you get the studio ready. You sign in for access, pl
 - [GitHub CLI (`gh`)](https://cli.github.com) for the initial one-time setup script used in the course
 
 You will check the tool versions in the Copilot app's **Terminal** tab after connecting your repository.
+
+## The Course Theme: Working in a Recording Studio
+
+Throughout this course, a recording studio is the recurring analogy for working with the GitHub Copilot app. Each chapter connects a part of agent-driven development to preparing, recording, reviewing, and refining a track.
+
+Before you record anything, you get the studio ready. You sign in for access, plug in your gear, load the song you'll work on, and run a quick soundcheck before you commit a single take. This chapter is that preparation: install the app, connect the repository, check your tools, and load the practice items.
+
+![Setting up the studio analogy for GitHub Copilot app setup](assets/studio-setup-soundcheck.webp)
 
 ## Installation
 
@@ -159,7 +159,7 @@ After setup, you should have:
 - [ ] [Practice branches](../appendices/training-github-scenarios.md#manual-fallback-create-practice-branches)
 - [ ] [Training pull requests](../appendices/training-github-scenarios.md#manual-fallback-create-pull-request-scenarios)
 
-## Your First Prompt
+## Your first prompt
 
 Return to the prompt box in the project session. Submit this request to the Copilot app, not to Terminal:
 

@@ -205,7 +205,7 @@ The agent profile is a Markdown file with YAML frontmatter, like a skill:
 
 1. Inspect the new file in **Changes**. Confirm that `tools` contains only `read` and `search`.
 2. Type `/agent` in the prompt box.
-3. Select **book-app-explainer** from the agent list, then send the completed `/agent book-app-explainer` command. Confirm that the agent picker below the prompt box shows `book-app-explainer`. If it is not listed, follow [A Changed Skill or New Agent Is Missing](#a-changed-skill-or-new-agent-is-missing), then try again.
+3. Select **book-app-explainer** from the agent list, then send the completed `/agent book-app-explainer` command. Confirm that the agent picker below the prompt box shows `book-app-explainer`. If it is not listed, follow [A changed skill or new agent is missing](#a-changed-skill-or-new-agent-is-missing), then try again.
 
    <img src="assets/app-custom-agent-picker.webp" alt="The /agent suggestions with book-app-explainer highlighted and its read-only description visible" width="800" />
 

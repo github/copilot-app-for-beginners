@@ -20,7 +20,7 @@ Related chapter: [01 Tour the App](../01-tour-the-app/)
 
 | Symptom | Likely cause | Try this |
 |---|---|---|
-| Learner is unsure which mode to use | Modes sound like skill levels | Use Chats for exploration, Plan when you want an approach first, Interactive when you want to steer each step, and Autopilot for a clear low-risk task |
+| Unsure which mode to use | Modes sound like skill levels | Use Chats for exploration, Plan when you want an approach first, Interactive when you want to steer each step, and Autopilot for a clear low-risk task |
 | Responses are slow or costly | Model, reasoning effort, or context is larger than needed | Lower reasoning effort for simple tasks and attach only useful context |
 | Settings look different from screenshots | App version or platform difference | Check the app version. Labels and layout can vary by version and platform |
 | Voice dictation does not work | Microphone permission or local transcription model | Check OS microphone permission, voice settings, downloaded model, shortcut, and language support |

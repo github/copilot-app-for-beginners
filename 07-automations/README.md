@@ -61,7 +61,7 @@ An automation has four beginner-friendly parts:
 
 ### Start Manual and Local
 
-Manual automations run on demand from your machine. They're the safest first step because you can:
+A manual automation runs only when you start it. Keep it local while you test it. A manual, local automation is the safest first step because you can:
 
 - test the prompt
 - inspect output

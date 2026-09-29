@@ -238,7 +238,7 @@ The rubber duck agent acts as a constructive critic. It can identify missing evi
 1. Select the empty background area of one book card so the whole card is highlighted (step 2 in the image).
 1. An `article.book-card` attachment appears in the prompt box (step 3 in the image), and Pick & Polish turns off.
 
-![Pick & Polish with an article.book-card attachment in the prompt box](assets/app-pick-and-polish.webp)
+   ![Pick & Polish with an article.book-card attachment in the prompt box](assets/app-pick-and-polish.webp)
 
 1. With the element still attached, submit:
 
@@ -366,7 +366,7 @@ repo:YOUR-OWNER/copilot-app-for-beginners is:pr is:open
 
    ![Pull request conversation with the empty-state copy comment](assets/app-pr-review-comment.webp)
 
-1. Select **New session** at the top of the pull request to start a session on the pull request's branch.
+1. Select **New session** at the top of the pull request to start a session for the pull request.
 1. Ask Copilot:
 
    ```text

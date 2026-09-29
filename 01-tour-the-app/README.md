@@ -28,7 +28,7 @@ GitHub Copilot in the editor or terminal is excellent next to the code you alrea
 
 The app does not replace your editor. It gives you one desktop place to run and review agent work:
 
-| Challenge | What it feels like | What the app adds |
+| Challenge | What it feels like | What Copilot app adds |
 |---|---|---|
 | Shared working copy | Two agent tasks touch the same folder and branch, and the changes blur together | Project sessions keep focused work separate (Chapter 02 explains worktrees) |
 | Scattered evidence | Plan in chat, diff in the editor, tests in a terminal, PR in the browser | Sessions, diffs, terminal output, browser previews, and GitHub work in one app |
@@ -67,7 +67,7 @@ This is where you manage the ways to extend the app: skills, Model Context Proto
 
 ### Projects and chats
 
-The sidebar groups agent interactions under **Chats** and your connected **Projects**. The next section explains when to use each one.
+The **Projects** area of the sidebar lists **Chats** and each connected project. The next section explains when to use a chat and when to use a project session.
 
 ## Chats, Project Sessions, and Modes
 
