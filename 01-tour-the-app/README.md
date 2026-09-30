@@ -100,7 +100,7 @@ Chat sessions help you learn and brainstorm without starting a branch. They are 
    In the GitHub Copilot app, explain when I should use a chat and when I should use a project session. Do not create or change files.
    ```
 
-**Expected Output:** The app should explain that chats are useful for general questions and that project sessions provide repository context for code work. It should not create or change files, and no branch or worktree is created.
+**Expected Output:** The app should explain that chats are useful for general questions and that project sessions provide repository context for code work. It should not change any files, and the app does not create a branch or worktree for a chat.
 
 ### Project sessions
 

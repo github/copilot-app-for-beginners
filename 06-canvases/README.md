@@ -4,7 +4,7 @@
 
 Chapter 05 introduced MCP servers and plugins. Now you'll use a canvas extension, which can be installed through a plugin or created for your own workflow.
 
-Chat works well for questions and discussion. Once a session is doing real work, a long chat thread becomes hard to scan. A **canvas** fixes this: it is a shared board in the side panel that both you and the agent can see and update. You create one with `/create-canvas` and a description of the board you want.
+Chat works well for questions and discussion. But once a session is doing real work, a long chat thread gets hard to scan. A **canvas** is a shared board in the side panel that you and the agent can both see and update. You create one with `/create-canvas` and a description of the board you want.
 
 In this chapter, you'll try a community canvas, then build a session board and a Feature Workbench that keep plan steps, validation checks, and notes visible.
 

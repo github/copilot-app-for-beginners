@@ -1,6 +1,6 @@
 ![Chapter 00: Setup](assets/chapter-header.svg)
 
-> **What if one short setup gave you a practice repository full of real issues, branches, and pull requests?**
+> **What if one short setup gave you a repository full of issues, branches, and pull requests to practice on?**
 
 Before you can direct agents in the GitHub Copilot app, you need the app installed, your copy of the course repository connected, and the practice items that later chapters use. This chapter gets all three ready.
 
