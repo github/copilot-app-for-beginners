@@ -71,6 +71,6 @@ diff against this file.
   when Streamer Mode is enabled.
 - "Chats" and connected repositories appear under "Projects".
 - The **+** on the **Chats** row, and the **+** and **Create from** icons on each
-  project row, appear only while the pointer is over that row. Screenshots taken without hover do not show it, so
-  do not report it as missing. Course steps should tell learners to point to the
+  project row, appear only while the pointer is over that row. Screenshots taken
+  without hover do not show these controls, so do not report them as missing. Course steps should tell learners to point to the
   row first. The **+** next to the **Projects** heading is always visible.
