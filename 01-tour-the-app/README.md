@@ -173,7 +173,7 @@ You do not need a specific model for this course. Available models, effort level
     In samples/book-app-web, explain how filterBooks searches book titles and authors. Does letter case affect the results? Refer to the relevant file. Do not change any files.
     ```
 
-**Expected Output: Copilot app should explain that search matches titles and authors without depending on letter case. It should refer to `samples/book-app-web/src/App.tsx` and leave the files unchanged.
+**Expected Output:** The Copilot app should explain that search matches titles and authors without depending on letter case. It should refer to `samples/book-app-web/src/App.tsx` and leave the files unchanged.
 
 You can change the model and reasoning effort during a session without changing its mode.
 

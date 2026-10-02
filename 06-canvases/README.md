@@ -88,7 +88,7 @@ A custom canvas can include:
 
 | Term | Meaning |
 |---|---|
-| Agent-callable action | A canvas control that can ask the agent to do work, such as running tests |
+| Agent-callable action | An action that the canvas gives the agent, such as updating a checklist item. In Exercise 3, each canvas button also asks the agent to do work, such as running tests |
 | User scope | The canvas is available to you across projects and is not committed to this repository |
 | Local-only UI | A control that changes only what you see and does not tell the agent about the change |
 | Event | A recorded state change, such as a plan being approved |
@@ -168,7 +168,7 @@ Start with a small canvas that works like a shared checklist. You and the agent 
 1. Enter a short feature proposal.
 1. Mark **Plan** complete and add a next decision.
 1. Ask the agent to summarize the current board state. Confirm that its answer matches your updates.
-1. Open **Changes** and confirm that creating the user-scoped canvas did not change repository files.
+1. Open the **Changes** tab in the review panel and confirm that it lists no changed files. Creating a user-scoped canvas does not change repository files.
 
 **Expected Output:** The feature proposal, checklist, and notes remain visible on the board. You and the agent can both read and update them, but the board does not run tests or edit the app.
 
@@ -458,7 +458,7 @@ Complete this challenge only if you have permission to create issues and pull re
 
 ## What's Next
 
-In Chapter 07, you'll turn repeatable prompts into automations. You'll create a manual pull request readiness report and then schedule it. The chapter ends with event triggers and cloud automations. You don't need to merge this chapter's feature or keep its canvas open to continue.
+In Chapter 07, you'll turn repeatable prompts into automations. You'll create a manual pull request readiness report and then schedule it. The chapter ends with an optional section on event triggers and cloud automations. You don't need to merge this chapter's feature or keep its canvas open to continue.
 
 **[← Back to Chapter 05](../05-mcp-plugins/README.md)** | **[Continue to Chapter 07 →](../07-automations/README.md)**
 
