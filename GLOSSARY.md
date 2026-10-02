@@ -4,7 +4,7 @@ Quick reference for beginner terms used in this course.
 
 ## Agent Merge
 
-An advanced finishing workflow. Official docs enable it with the **agent merge** toggle at the top of a pull request view. It can read the pull request, work on blockers, and merge when GitHub allows. Use it only after you understand the diff, tests, required reviews, and branch protection rules.
+An advanced finishing workflow. Select the merge-readiness button at the top of a pull request, such as **Ready to merge**, to open the **Merge pull request** panel with its **Agent merge** toggle. It can read the pull request, work on blockers, and merge when GitHub allows. Use it only after you understand the diff, tests, required reviews, and branch protection rules.
 
 ## Automation
 
@@ -20,11 +20,11 @@ A named line of work in git. A branch lets you make changes without changing the
 
 ## Canvas
 
-A shared board created with `/create-canvas` and opened in the session side panel. You describe what you want on it, and the app builds the canvas. In this course you ask for a session board: the plan, the checks you ran, and the next decision.
+A shared, interactive board that opens in the right side panel of a session. You and the agent can both update it. You can install a canvas, for example from a plugin, or create one with `/create-canvas` and a description of what you want. In this course, you try a community canvas, then create a session board and a Feature Workbench.
 
 ## Chat
 
-A lightweight GitHub Copilot app conversation for questions, brainstorming, or repository exploration. The sidebar calls this **Chats**. A chat does not create a branch or worktree, which makes it safe for exploring before you change code.
+A lightweight GitHub Copilot app conversation for questions, brainstorming, or repository exploration. The sidebar lists your chats under **Chats**. A chat does not create a branch or worktree, which makes it safe for exploring before you change code.
 
 ## CI check
 
@@ -36,7 +36,7 @@ A GitHub-hosted environment where an agent can work away from your local machine
 
 ## Create from
 
-The sidebar control next to a project name that starts a session from a branch, issue, or pull request.
+The sidebar control next to a project name that starts a session from a branch, issue, or pull request. It appears when you point to the project in the sidebar.
 
 ## Custom agent
 
@@ -46,21 +46,17 @@ A specialized agent configuration for a role or workflow, such as review, docume
 
 A view of what changed between two versions of files. In this course, the diff is one of the main places where you inspect agent work before accepting it.
 
-## Guided fix
+## Inner loop
 
-Asking GitHub Copilot to address a specific review comment or failing check while the diff and validation evidence stay visible. Official pull request views may also show **Fix** and **Fix failing checks**. It keeps follow-up work small and reviewable.
+The local development cycle on your machine: review, debug, test, and preview a change before it goes to GitHub.
 
 ## Interactive
 
 A session mode where you and the agent work step by step. The agent waits for your input more often than in Autopilot.
 
-## Inner loop
+## Issues
 
-The local development cycle on your machine: review, debug, test, and preview a change before it goes to GitHub.
-
-## Local sandbox
-
-A local execution environment with restrictions on file system, network, or system access. It keeps work closer to your machine while limiting what the agent can reach.
+The sidebar view that lists the GitHub issues that involve you. Tabs such as **Assigned to me** and **Created by me** filter the list, and the repository picker limits it to one repository. Start a session from an issue, or select **New issue** to create one.
 
 ## Model
 
@@ -68,19 +64,15 @@ The AI system used for a response or session. Different models may vary in speed
 
 ## Model Context Protocol (MCP) server
 
-A tool server that uses Model Context Protocol to connect Copilot to external tools and data. MCP servers are useful, but they can add permissions, credentials, and complexity. In the GitHub Copilot app, manage them from the sidebar **Customize** tab.
-
-## My work
-
-The app view that gathers your GitHub issues, pull requests, review requests, and failing checks in one inbox. Official default sections are **All**, **Active**, **Review requests**, and **Done**. It supports search qualifiers such as `repo:` and `is:pr`.
+A tool server that uses Model Context Protocol to connect Copilot to external tools and data. MCP servers are useful, but they can add permissions, credentials, and complexity. In the GitHub Copilot app, manage them from the **Customize** view in the sidebar.
 
 ## New
 
-The app's landing view in the sidebar. Start a chat without a project, select a connected project for a project session, choose a mode and model, or start from a sample project idea.
+The app's landing view in the sidebar. Start a chat without a project, select a connected project for a project session, choose a mode and model, or start from a suggested prompt.
 
 ## Outer loop
 
-The GitHub side of the same workflow: find work in My work, start sessions from issues, open pull requests, and ask Copilot to address review comments and failing checks.
+The GitHub side of the same workflow: find work in the **Issues** and **Pull requests** views, start sessions from issues, open pull requests, and ask Copilot to address review comments and failing checks.
 
 ## Pick & Polish
 
@@ -92,19 +84,31 @@ A session mode where the agent proposes a plan first. You review and approve bef
 
 ## Plugin
 
-A packaged extension that can add capabilities to the GitHub Copilot app. Plugins may include custom agents, skills, hooks, MCP server configurations, or LSP server configurations. In the app, plugins can also package canvas extensions. Enable only what a workflow needs. Browse and install plugins from the sidebar **Customize** tab.
+A packaged extension that can add capabilities to the GitHub Copilot app. Plugins may include custom agents, skills, hooks, MCP server configurations, or LSP server configurations. In the app, plugins can also package canvas extensions. Enable only what a workflow needs. Browse and install plugins from the **Customize** view in the sidebar.
 
 ## PR
 
 Pull request. A GitHub request to review and merge changes from one branch into another.
 
+## Project session
+
+A session connected to a repository. Use it when the agent needs repository context, needs to change code, or must create an artifact such as a pull request. Project sessions use a new worktree by default.
+
 ## Prompt injection
 
 A risk where untrusted text, such as an issue title or body, tries to steer the agent into unintended actions. Read-only tasks and least-privilege tool choices reduce the risk.
 
+## Pull requests
+
+The sidebar view that lists the GitHub pull requests that involve you. Tabs such as **Authored by me** and **Review requests** filter the list, and the repository picker limits it to one repository. Open a pull request to read its checks and comments, or start a session to work on it.
+
 ## Reasoning effort
 
 A setting that controls how much thinking the model spends on a task. Higher effort can help complex work, but may be slower or more expensive.
+
+## Review panel
+
+The session side panel for diffs (**Changes**), **Terminal**, **Browser** preview, and other work surfaces. Open it in a session with **View** > **Toggle Review Panel**.
 
 ## Rubber duck
 
@@ -112,15 +116,11 @@ A built-in critic agent, invoked with `/rubber-duck`, that reviews a plan, diff,
 
 ## Session
 
-A GitHub Copilot app workspace where an agent can plan, edit, run commands, inspect diffs, and report progress. Sessions may run in a local repository, a new worktree, or a cloud sandbox.
+A GitHub Copilot app workspace where an agent can plan, edit, run commands, inspect diffs, and report progress. Sessions may run in a new worktree, your current checkout, or a cloud sandbox.
 
 ## Skill
 
 Reusable guidance that helps the agent handle a specific kind of task. In this course, repo-local skills are the beginner-friendly way to add focused expertise. In the GitHub Copilot app, find them under **Customize → Skills**.
-
-## Workspace panel
-
-The session side panel for diffs, terminal, browser preview, and other work surfaces. Open it with **Toggle panel** in the upper-right corner.
 
 ## Worktree
 

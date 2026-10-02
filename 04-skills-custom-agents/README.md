@@ -2,7 +2,7 @@
 
 > **What if you could reuse your review checklist instead of typing the same reminders for each task?**
 
-Chapter 03 connected a code change to its diff, tests, browser preview, and pull request. This chapter helps you reuse that workflow. You will start with a [skill](../GLOSSARY.md#skill) that stores review guidance for `samples/book-app-web`.
+Chapter 03 connected a code change to its diff, tests, browser preview, and pull request. This chapter shows how to save parts of that workflow so that you can reuse them. You will start with a [skill](../GLOSSARY.md#skill) that stores review guidance for `samples/book-app-web`.
 
 You'll also create a [custom agent](../GLOSSARY.md#custom-agent) that explains the sample without editing it. Skills supply reusable task instructions; custom agents define a role and its available tools. Chapter 05 covers connections to external tools and packaged capabilities.
 
@@ -33,34 +33,25 @@ You still check the result. A chart does not guarantee a good performance.
 
 ## Core Concepts
 
-### Choose the feature that fits the task
+### Choose the Feature That Fits the Task
 
 These features solve different problems. You don't need a custom agent for every skill or a skill for every prompt.
 
-| Feature | What it adds | Example in this chapter |
-| --- | --- | --- |
-| Repository instructions | Shared rules for work across this project | Keep the Book App's stack and behavior unchanged |
-| Skill | Instructions and resources for a repeated task | Update and apply a book-app review checklist |
-| Custom agent | A named role with instructions and a selected set of tools | Create a read-only book-app explainer |
+| Feature | Where it lives | When it applies | Example in this chapter |
+| --- | --- | --- | --- |
+| One-off prompt | The current conversation | When you send it | Ask a single question about the Book App |
+| Repository instructions | `.github/copilot-instructions.md` | Across tasks in this project | Keep the Book App's stack and behavior unchanged |
+| Skill | `.github/skills/<name>/SKILL.md` | When the task matches its description or you invoke it | Update and apply a book-app review checklist |
+| Custom agent | `.github/agents/<name>.agent.md` | When you select it with `/agent` or the agent picker | Create a read-only book-app explainer |
 
-Find skills in the sidebar **Customize** tab. Select custom agents with `/agent` or the agent picker in the prompt box.
+Instructions are the house rules. A skill is the chart for one kind of song. Use a skill when you repeat the same kind of work:
+
+<img src="assets/skill-vs-one-off-prompt.webp" alt="One-off prompt versus skill: a skill is a reusable checklist that lives in the repo and gives the same guidance each time" width="800" />
+
+Find skills in the **Customize** view in the sidebar. Select custom agents with `/agent` or the agent picker in the prompt box.
 
 > [!TIP]
-> **Optional exploration:** After you complete this chapter's exercises, browse the Awesome Copilot directories for examples of community-created [agents][awesome-agents] and [skills][awesome-skills]. Use `book-app-reviewer` and `book-app-explainer` for this chapter. Before you add or use another customization, review the agent's tools or the skill's instructions.
-
-### Skill versus instructions versus a one-off prompt
-
-The repository's `.github/copilot-instructions.md` file gives the Copilot app project-wide rules. A skill adds instructions for one kind of task.
-
-| Guidance | Where it lives | When it applies | Best for |
-| --- | --- | --- | --- |
-| One-off prompt | The current conversation | When you send it | A single request |
-| Repository instructions | `.github/copilot-instructions.md` | Across tasks in this project | The stack, file locations, and project rules |
-| Skill | `.github/skills/<name>/SKILL.md` | When the task matches its description or you invoke it | A repeated workflow |
-
-<img src="assets/skill-vs-one-off-prompt.webp" alt="One-off prompt versus skill" width="800" />
-
-Instructions are the house rules. A skill is the chart for one kind of song.
+> **Optional exploration:** After you complete this chapter's exercises, browse the Awesome Copilot directories for examples of community-created [agents][awesome-agents] and [skills][awesome-skills]. Before you add or use another customization, review the agent's tools or the skill's instructions.
 
 > [!IMPORTANT]
 > A skill tells Copilot how to approach a task, but its instructions do not enforce what Copilot is allowed to do. For example, a skill that says "review without editing" does not disable file-editing tools. Skills can also include scripts or tell Copilot to use tools, so read unfamiliar skills before enabling them. The course review skill contains instructions only.
@@ -85,13 +76,7 @@ Keep this session for all the exercises. When you open a file in your editor, us
 
 ## Skills: Save a Review Checklist
 
-A drill can do different jobs with different attachments. Skills work in a similar way: they give the Copilot app reusable instructions for specific tasks. For the Book App, the `book-app-reviewer` skill supplies the review checklist.
-
-<img src="assets/power-tools-analogy.webp" alt="A drill with attachments represents skills in the Copilot app for commit messages, security audits, tests, and code review" width="800" />
-
-The skill names in the graphic are examples. This exercise uses `book-app-reviewer`.
-
-Start with the review skill you found in the practice session. A skill is a folder with a `SKILL.md` file. The course includes one at:
+A skill is a folder with a `SKILL.md` file. For the Book App, the course includes a review checklist skill at:
 
 ```text
 .github/skills/book-app-reviewer/SKILL.md
@@ -122,11 +107,11 @@ HTML heading levels (`h1`, `h2`, and `h3`) describe the page structure, not just
 
 1. Confirm that the skill is enabled for the course project. Ignore the course-authoring skills.
 
-    - **Personal** means skills stored in your home directory and available across projects
-    - **Project** means repository skills
-    - **Built-in** means skills supplied with the app.
+    - **All** shows every installed skill
+    - **Project** shows repository skills
+    - **Built-in** shows skills supplied with the app
 
-   ![Customize Skills with callouts for Customize, Skills, Project, and the book-app-reviewer search](assets/app-customize-skills.webp)
+   ![Customize Skills with callouts for Customize, Skills, Project, and the book-app-reviewer result](assets/app-customize-skills.webp)
 
 1. Return to your chapter session and submit:
 
@@ -172,17 +157,7 @@ The checklist defines how to review the code. Next, you'll define a different ro
 
 ## Custom Agents: Define a Role and Its Tools
 
-Custom agents are similar to specialists.
-
-For example, if you need to make repairs to your house, you choose a specialist based on the job:
-
-| Job | Specialist | Why |
-| --- | --- | --- |
-| Repair a leaking pipe | Plumber | Knows plumbing requirements and has the right tools |
-| Replace electrical wiring | Electrician | Knows electrical safety requirements |
-| Install a new roof | Roofer | Chooses materials for the local weather |
-
-Custom agents apply the same idea to code review, testing, security, and documentation. Define the instructions once, then select that agent when you need its specific role.
+You don't call one general helper for every repair on a house. You call a plumber, an electrician, or a roofer. Custom agents apply the same idea to code review, testing, security, and documentation: define the role once, then select that agent when you need it.
 
 <img src="assets/hiring-specialists-analogy.webp" alt="A plumber, electrician, and roofer illustrate specialist roles, compared with AI agents for code review, testing, security, and documentation" width="800" />
 
@@ -201,7 +176,7 @@ The agent profile is a Markdown file with YAML frontmatter, like a skill:
 
 ### Exercise: Create a Read-Only Book App Explainer
 
-1. Return to the chapter session in **Interactive** mode with the default agent selected.
+1. Return to the chapter session in **Interactive** mode. If an agent picker appears below the prompt box, select **Default agent**.
 2. Copy the instruction and the complete Markdown block into one message, then send it:
 
    ```text
@@ -229,12 +204,13 @@ The agent profile is a Markdown file with YAML frontmatter, like a skill:
    ```
 
 1. Inspect the new file in **Changes**. Confirm that `tools` contains only `read` and `search`.
+1. Load the new agent. The app loads custom agents when it starts. Wait for active work in all sessions to finish, then quit the GitHub Copilot app and open it again. Closing the window is not the same as quitting the app. Then select this chapter's session in the sidebar.
 2. Type `/agent` in the prompt box.
-3. Select **book-app-explainer** from the agent list, then send the completed `/agent book-app-explainer` command. Confirm that the agent picker below the prompt box shows `book-app-explainer`. If it is not listed, follow [A Changed Skill or New Agent Is Missing](#a-changed-skill-or-new-agent-is-missing), then try again.
+3. Select **book-app-explainer** from the agent list, then send the completed `/agent book-app-explainer` command. Confirm that the agent picker below the prompt box shows `book-app-explainer`. If `/agent` or the agent is still not listed, follow [A changed skill or new agent is missing](#a-changed-skill-or-new-agent-is-missing), then try again.
 
    <img src="assets/app-custom-agent-picker.webp" alt="The /agent suggestions with book-app-explainer highlighted and its read-only description visible" width="800" />
 
-   The screenshot shows the selection before the command is sent, so the agent picker still shows **Default agent**. After you send the command, use the live agent picker as the check: it should show **book-app-explainer**.
+   The screenshot shows the selection before the command is sent, so the agent picker still shows **Default agent**. After you send the command, use the live agent picker as the check: it should show **book-app-explainer**. The agent picker appears below the prompt box only when a custom agent is available.
 
 1. With the agent selected, submit:
 
@@ -249,13 +225,9 @@ The agent profile is a Markdown file with YAML frontmatter, like a skill:
 
 **How It Works:** The Markdown defines the role and answer format. The `tools` list limits available tools; omitting it would allow all available tools. The folder scope in the instructions guides the agent, but it is not a file-system sandbox.
 
-This agent cannot run the tests or save its own report. That restriction is intentional. Use the default agent when you need those actions.
+This agent cannot run the tests or save its own report. That restriction is intentional: match an agent's tools to its task, and add nothing beyond that. Use the default agent when you need those actions.
 
-## Give the Agent Only What It Needs
-
-Match an agent's tools to its task, and add nothing beyond that.
-
-![Give the agent only what it needs](assets/least-tool-principle.webp)
+### Checkpoint
 
 After these exercises, you should have:
 
@@ -266,22 +238,24 @@ After these exercises, you should have:
 
 ## Troubleshooting
 
+If something does not work as expected, check the problems below. The [Troubleshooting Reference](../appendices/troubleshooting-reference.md) lists problems and fixes for all chapters.
+
 <details>
 <summary>Skill and custom-agent problems</summary>
 
-### A Changed Skill or New Agent Is Missing
+### A changed skill or new agent is missing
 
 Confirm that you saved the file in this session's worktree. Check the path and YAML frontmatter. For skills, try `/skills reload`. For a new agent or a missing reload command, wait for active work in all sessions to finish. Quit and reopen the GitHub Copilot app, then return to the same session. Closing a window is not the same as quitting the app. Do not start from `main` again to reload uncommitted files.
 
-### Generic Advice from the Copilot app
+### Generic advice from the Copilot app
 
 Invoke the skill from the `/` menu or name it explicitly. Expand the activity to see whether it loaded. Ask for file-specific evidence and the rules applied. Different wording alone does not show whether the skill worked.
 
-### I Cannot Find Skills or Custom Agents
+### I cannot find skills or custom agents
 
-Use the sidebar **Customize** tab. Custom agents are selected with `/agent` or the prompt-box agent picker. Labels and available commands can vary by app version.
+Use the **Customize** view in the sidebar. Custom agents are selected with `/agent` or the prompt-box agent picker. Labels and available commands can vary by app version.
 
-### The Custom Agent Cannot Run Tests
+### The custom agent cannot run tests
 
 The example permits only reading and searching. Return to the default agent to run commands. Do not add shell access just to make the read-only exercise work.
 
@@ -302,14 +276,14 @@ The example permits only reading and searching. Return to the default agent to r
 
 The exercises stopped at review and explanation. Now use one reviewed recommendation to complete the Chapter 03 inner loop.
 
-1. Stay in the same worktree with the default agent. Use the skill's heading recommendation. If the review didn't identify a needed change, choose a focused test for the current heading structure.
-2. Set the mode to **Plan**. Type `/`, select `/book-app-reviewer`, then add the specific recommendation to this prompt and submit it:
+1. Stay in the same worktree and use the default agent. Choose the skill's heading recommendation. If the review found no needed change, add a focused test for the current heading structure instead.
+1. Set the mode to **Plan**. Type `/`, select `/book-app-reviewer`, add your recommendation to this prompt, and submit it:
 
    ```text
    Plan only the recommendation I select from this chapter. Name the source, CSS, and test files it affects. Preserve filtering, statistics, and the existing design. Include test, build, and browser checks. Do not implement yet.
    ```
 
-1. Before implementation, open **Terminal** in the review panel. From the session's repository root, run:
+1. While Copilot plans, record a baseline. In the review panel's **Terminal** tab, run these commands from the repository root:
 
    ```bash
    cd samples/book-app-web
@@ -318,26 +292,23 @@ The exercises stopped at review and explanation. Now use one reviewed recommenda
    npm run build
    ```
 
-   - If you are already in `samples/book-app-web`, do not repeat `cd`.
-   - If this worktree already has its dependencies, skip `npm install`.
-   - Record the test count and build result. Stop if either command fails; resolve the baseline problem before changing the app.
+   Note the test count and the build result. Both must pass before you change the app.
 
-1. Review the plan, switch to **Interactive**, and ask the Copilot app to implement only that change. Do not approve unrelated refactoring or new dependencies.
-2. Inspect **Changes**, then rerun `npm test -- --run` and `npm run build` from `samples/book-app-web`. Confirm that the tests and build pass without weakening existing tests.
-3. Start the app with `npm run dev`. Open its **Local** URL in the review panel's **Browser** tab. Check the headings at desktop and narrow widths. Ask the Copilot app to inspect the rendered heading levels; appearance alone doesn't show heading structure.
-4. Search for `hobbit`, then `zzzz-no-match`. Confirm that the first search shows **The Hobbit** and the second shows no books. The statistics must match each result, and the empty-state message must mention changing the search term, genre, or reading status.
-5. Stop the development server with `Ctrl+C` in its terminal.
-6. Ask the default agent to save a short record:
+1. Review the plan, then select **Exit plan mode and I will prompt myself**. Ask the Copilot app to implement only that change, with no unrelated refactoring or new dependencies.
+1. Validate the change with the Chapter 03 inner loop:
+   - Inspect **Changes**, then rerun `npm test -- --run` and `npm run build`. Don't weaken existing tests.
+   - Start the app with `npm run dev` and open its **Local** URL in the **Browser** tab. Check the headings at a wide and a narrow width. Ask the Copilot app to confirm the rendered heading levels, because appearance alone doesn't show them.
+   - Search for `hobbit`, then `zzzz-no-match`. Confirm that the statistics match each result and that the empty-state message mentions changing the search term, genre, or reading status.
+   - Stop the development server with `Ctrl+C`.
+1. Ask the default agent to save a short record:
 
    ```text
    Create samples/book-app-web/docs/chapter-04-review.md. If it exists, update it without removing prior notes.
 
-   Record the skill rules applied, the custom agent's role and tool limits, the change made, and the commands and browser checks actually completed. If an exercise was blocked, record the reason instead of claiming it ran. Mark unperformed checks clearly.
-
-   Change only this document. Do not commit or push.
+   Record the skill rules applied, the custom agent's role and tool limits, the change made, and only the commands and browser checks that actually ran. If a check was blocked, record why. Change only this document. Do not commit or push.
    ```
 
-**Success criteria:** Your diff contains the skill update, agent profile, one focused app or test change, and the review record. Tests and the build pass. You can explain the difference between repository instructions, a skill, and a custom agent.
+**Success Criteria:** Your diff contains the skill update, agent profile, one focused app or test change, and the review record. Tests and the build pass. You can explain the difference between repository instructions, a skill, and a custom agent.
 
 If you want to keep this work, review the full diff before you use the Chapter 03 pull request workflow. Otherwise, leave it as practice in this worktree. Chapter 05 starts a new session from `main` and doesn't require these changes to be merged.
 
@@ -347,7 +318,7 @@ You now have reusable review instructions and a small read-only agent. Both cust
 
 In Chapter 05, you'll extend what the app can access. You'll connect an MCP server for documentation and install a plugin that supplies a reusable skill.
 
-[**← Back to Chapter 03**](../03-development-workflows/README.md) | [**Continue to Chapter 05 →**](../05-mcp-plugins/README.md)
+**[← Back to Chapter 03](../03-development-workflows/README.md)** | **[Continue to Chapter 05 →](../05-mcp-plugins/README.md)**
 
 ---
 

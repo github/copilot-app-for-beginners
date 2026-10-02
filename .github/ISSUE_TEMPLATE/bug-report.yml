@@ -31,7 +31,7 @@ body:
     attributes:
       label: What happened?
       description: Describe the issue clearly. If a step, prompt, or command didn't work as described, include the exact text you used.
-      placeholder: "When I submitted the prompt from the 'Start a Session from an Issue' exercise, I got..."
+      placeholder: "When I submitted the prompt from the 'Start a Session from a Branch and Attach an Issue' exercise, I got..."
     validations:
       required: true
 

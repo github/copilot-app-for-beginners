@@ -7,7 +7,7 @@ The previous chapters introduced the app, project sessions, worktrees, and conte
 - The **inner loop** happens on your machine: understand the task, change the code, inspect the diff, run tests, and preview the result.
 - The **outer loop** happens on GitHub: start from an issue, open a pull request, respond to review feedback, and confirm checks pass.
 
-The GitHub Copilot app connects both loops, but you remain responsible for reviewing the evidence and deciding what ships.
+GitHub Copilot app connects both loops, but you remain responsible for reviewing the evidence and deciding what ships.
 
 ## Learning Objectives
 
@@ -15,7 +15,7 @@ By the end of this chapter, you'll be able to:
 
 - Use the review panel, tests, build output, and browser preview to validate a local change
 - Add a regression test and ask the rubber duck agent to critique your work
-- Use **My work** to move from an issue to a pull request
+- Use the **Issues** and **Pull requests** views to move from an issue to a pull request
 - Ask GitHub Copilot to address review comments and failing checks
 - Explain where human judgment fits in both loops
 
@@ -45,10 +45,12 @@ A confident response from Copilot isn't the same as validated software. Use thes
 |---|---|---|
 | Diff | Review panel **Changes** tab | The change is focused and understandable |
 | Tests and build | Review panel **Terminal** tab | The relevant tests and build complete successfully |
-| Running app | Review panel **Browser** tab | The behavior works as expected |
-| GitHub checks | Pull request in **My work** | Continuous integration (CI) agrees with your local results |
+| Running app | Review panel **Browser** tab | The behavior works as expected (in the case of a web app) |
+| GitHub checks | Pull request in the **Pull requests** view | Continuous integration (CI) agrees with your local results |
 
-<img src="assets/development-loop.webp" alt="Inner loop on your machine: understand, change, validate, and review. Outer loop on GitHub: issue, pull request, feedback, and checks. Human judgment applies to both." width="600" />
+<img src="assets/development-loop.webp" alt="Development loop. Inner loop on your machine: understand, change, inspect, test and build, and preview. Outer loop on GitHub: issue, pull request, feedback, checks, and merge. Human judgment applies to both loops." width="600" />
+
+Human judgment applies to both loops. In the inner loop, you decide whether the diff, tests, build, and preview show that the change is ready. In the outer loop, you review the pull request, its comments, and its checks, and you decide when it is ready to merge.
 
 ## Confirm the Sample App Is Ready
 
@@ -64,7 +66,7 @@ Copilot doesn't work from your prompt alone. It also uses settings, instructions
 | Context layer | What it includes |
 |---|---|
 | Prompt | What you ask in the current turn, including files, folders, issues, or pull requests attached with `@` and `#` |
-| Settings | Your app-wide session instructions and project-specific notes |
+| Settings | App instructions that apply to every session, and instructions for one project |
 | Instructions | Shared repository guidance such as `.github/copilot-instructions.md` or `AGENTS.md` |
 | Repo files | The code, tests, documentation, and other files Copilot can access |
 
@@ -72,7 +74,7 @@ Attach only the context that helps with the current task. Focused context makes 
 
 </details>
 
-1. Create a new session for the `copilot-app-for-beginners` project.
+1. Point to the `copilot-app-for-beginners` project in the sidebar and select **+**. Confirm that the workspace selector below the prompt box shows **New worktree**. If it doesn't, open the selector and choose **New worktree**.
 1. Set the mode to **Interactive**, then submit:
 
    ```text
@@ -90,9 +92,9 @@ Attach only the context that helps with the current task. Focused context makes 
    npm test -- --run
    ```
 
-The **Terminal** should show four passing tests:
+   The **Terminal** should show four passing tests:
 
-![Review panel with Changes, Terminal, and the Book App Web tab](assets/app-workspace-panel.webp)
+   ![Review panel with the Terminal tab open, showing four passing tests](assets/app-workspace-panel.webp)
 
 1. Run:
 
@@ -132,7 +134,7 @@ In Chapter 02, you attached an issue to practice giving Copilot focused context.
    ```
 
 1. Review the plan. It should connect the displayed statistics to the books currently shown after filters are applied.
-1. Switch to **Interactive**, then submit:
+1. Select **Exit plan mode and I will prompt myself**. The mode returns to **Interactive**. Submit:
 
    ```text
    Implement the plan. Keep the fix small, explain the root cause, and run the relevant tests.
@@ -140,7 +142,7 @@ In Chapter 02, you attached an issue to practice giving Copilot focused context.
 
 1. Open the **Changes** tab and inspect the diff. Confirm that the change is focused on the filtered-book data flow. If it isn't, ask Copilot to revise it before continuing.
 
-### Validate the Fix
+#### Validate the Fix
 
 1. Review the output in the session's **Terminal** tab. If Copilot already ran these commands after the fix, you don't need to run them again. Otherwise, run:
 
@@ -215,14 +217,14 @@ The rubber duck agent acts as a constructive critic. It can identify missing evi
 1. Compare the critique with the evidence you gathered. Address any relevant gap before continuing.
 
 > [!NOTE]
-> The rubber duck agent is available when the main session uses a Claude or GPT model. If the command is unavailable, switch to one of those models or submit the same request without the slash command.
+> The rubber duck agent uses a different AI model from your session's model to critique the work. Copilot uses it only when a suitable critic model is available. If `/rubber-duck` is unavailable, choose a different model for the session, or submit the same request without the slash command.
 
 <details>
 <summary>Optional: Use Pick &amp; Polish for a UI Change</summary>
 
 **Pick & Polish** lets you select an element in the app's browser preview and attach it directly to your next prompt. Copilot receives the selected element as context, so you can ask for a focused UI change without describing where the element is in the code.
 
-1. Start a new session from the `practice-card-polish` branch.
+1. Select **Create from** next to the course project, choose **Branches**, then select `practice-card-polish`.
 1. In the session's **Terminal** tab, run:
 
    ```bash
@@ -238,7 +240,7 @@ The rubber duck agent acts as a constructive critic. It can identify missing evi
 1. Select the empty background area of one book card so the whole card is highlighted (step 2 in the image).
 1. An `article.book-card` attachment appears in the prompt box (step 3 in the image), and Pick & Polish turns off.
 
-![Pick & Polish with an article.book-card attachment in the prompt box](assets/app-pick-and-polish.webp)
+   ![Pick & Polish with an article.book-card attachment in the prompt box](assets/app-pick-and-polish.webp)
 
 1. With the element still attached, submit:
 
@@ -265,57 +267,39 @@ The outer loop is:
 5. Respond to feedback and failing checks.
 6. Merge only when the diff, local evidence, and GitHub checks agree.
 
-![Issue-to-merge workflow with a session, diff, approval gates, pull request, checks, and merge](assets/issue-to-merged-pr.webp)
+![Issue-to-merge workflow: issue, session, diff, approval gate, pull request, checks, approval gate, and merge. Feedback or a failed check goes back to the session.](assets/issue-to-merged-pr.webp)
 
 The diagram shows the main path toward a merge. Feedback or a failed check can send the work back to the session for another focused change and validation cycle.
 
-### 4. Find Work in My work
+### 4. Find Work in Issues and Pull requests
 
-**My work** is the app's inbox for issues, pull requests, review requests, and checks.
+The **Issues** and **Pull requests** views in the sidebar list the GitHub work that involves you. Each view has tabs, such as **Assigned to me**, and a repository picker.
 
-1. Open **My work** and stay on **All**.
-1. Filter your fork by typing `repo:` in the search box, then select your repository:
+1. Select **Issues** in the sidebar and stay on the **Assigned to me** tab.
+1. Select **All repositories** at the top of the view, then select your fork from the list.
 
-   ```text
-   repo:YOUR-OWNER/copilot-app-for-beginners
-   ```
+   <img src="assets/app-filter-repo.webp" alt="Issues repository picker with callouts for All repositories and the course repository" width="800" />
 
-![My work filtered to the course repository, showing its issues and pull requests](assets/app-my-work-filtered.webp)
+   The view now lists only the practice issues from your fork.
 
-Alternatively, select **All repositories** at the top of **My work**, then select your repository from the list.
+   ![Issues view filtered to the course repository](assets/app-issues-filtered.webp)
 
-<img src="assets/app-filter-repo.webp" alt="My work repository list with callouts for All repositories and the course repository" width="800" />
+1. Select **Pull requests** in the sidebar, then select your fork in its repository picker too. Each view keeps its own repository selection. The practice pull requests appear on the **Authored by me** tab.
 
-This view shows both issues and pull requests from the course repository. Add another qualifier when you want to narrow the list even further:
+> [!TIP]
+> You can filter with a query instead. Select the filter icon at the right end of the tab row to show the query box, then add `repo:YOUR-OWNER/copilot-app-for-beginners` to the query. Replace `YOUR-OWNER` with the username or organization that owns your fork. The repository picker then shows **Custom**. A typed query resets when you change tabs, so the picker is easier for this course.
 
-- Open issues:
-
-  ```text
-  repo:YOUR-OWNER/copilot-app-for-beginners is:issue is:open
-  ```
-
-- Open pull requests:
-
-  ```text
-  repo:YOUR-OWNER/copilot-app-for-beginners is:pr is:open
-  ```
-
-Confirm that opening an item shows its title, repository, number, and current status. If an expected item is missing, check the filter, repository access, and organization policy.
-
-Replace `YOUR-OWNER` with the username or organization that owns your fork.
+Confirm that opening an item shows its title, repository, number, and current status. If an expected item is missing, check the selected tab and repository, your repository access, and organization policy.
 
 ### 5. Start from an Issue and Open a Pull Request
 
-Issue 1 asks you to make search in the book app case-insensitive. The intentional bug exists only on the `practice-search-case-bug` branch.
+Issue 1 asks you to make search in the book app case-insensitive. The intentional bug exists only on the `practice-search-case-bug` branch. You'll attach the issue with `#`, as in Chapter 02, and this time finish with a pull request.
 
-1. In **My work**, open the **Make search case-insensitive** issue and review the details. If needed, review the scenario in [`samples/app-course-issues.md`](../samples/app-course-issues.md#issue-1-make-search-case-insensitive).
+1. In **Issues**, open the **Make search case-insensitive** issue and review the details. If needed, review the scenario in [`samples/app-course-issues.md`](../samples/app-course-issues.md#issue-1-make-search-case-insensitive).
 
-![Issue 1 detail view in My work](assets/app-issue-new-session.webp)
+   ![Make search case-insensitive issue open in the Issues view](assets/app-issue-new-session.webp)
 
-> [!NOTE]
-> In a previous chapter, you attached an issue to a session with the `#<issue-number>` syntax. Here, you will attach the issue again and create a pull request from that session.
-
-1. Select **Create from** next to the course project.
+1. Start the session from the practice branch so the bug is present. The issue's **New session** button starts from `main`, where search already works, so select **Create from** next to the course project instead.
 1. Choose **Branches**, then select `practice-search-case-bug`.
 1. In the prompt box, type `#1`, then select **Make search case-insensitive** to attach the issue. If your issue has a different number, type `#` and select it by title.
 1. Set the mode to **Plan**, add the following prompt after the attached issue, then submit:
@@ -324,7 +308,7 @@ Issue 1 asks you to make search in the book app case-insensitive. The intentiona
    Use the attached issue as the source of truth. Create a small implementation and validation plan. Name the files you expect to change and the tests or browser checks that should prove the fix. Don't edit files yet.
    ```
 
-1. Review the plan, switch to **Interactive**, then submit:
+1. Review the plan, then select **Exit plan mode and I will prompt myself**. The mode returns to **Interactive**. Submit:
 
    ```text
    Implement the plan. Include a focused regression test that proves uppercase and lowercase searches return the same result.
@@ -346,7 +330,7 @@ Issue 1 asks you to make search in the book app case-insensitive. The intentiona
 
 1. Review the draft, then select **Create PR** at the top of the session.
 1. After the pull request is created, select it above the prompt box to view its details.
-1. You can also view the pull request in **My work**.
+1. You can also find the pull request in the **Pull requests** view.
 
 Don't merge this practice pull request. The correct search behavior is already on `main`.
 
@@ -356,21 +340,16 @@ Your local evidence should show that the behavior works. The pull request now gi
 
 The setup script created two separate pull requests for this exercise. They aren't the search-fix pull request you just opened.
 
-Filter **My work** again:
-
-```text
-repo:YOUR-OWNER/copilot-app-for-beginners is:pr is:open
-```
+Select **Pull requests** in the sidebar. Your fork should still be selected in the repository picker, and the practice pull requests appear on the **Authored by me** tab.
 
 #### Respond to a Review Comment
 
 1. Open the pull request titled **Improve empty-state copy**.
 1. Find the conversation comment asking for more helpful guidance.
 
-![Pull request conversation with the empty-state copy comment](assets/app-pr-review-comment.webp)
+   ![Pull request conversation with the empty-state copy comment](assets/app-pr-review-comment.webp)
 
-1. Select the checkbox next to the PR in **My work**.
-1. At the bottom of the screen, select **Actions** followed by **New session** to start a session from the pull request.
+1. Select **New session** at the top of the pull request to start a session for the pull request.
 1. Ask Copilot:
 
    ```text
@@ -388,13 +367,19 @@ A **CI check** is an automated validation run on a pull request, often through G
 
    ![Failing stats check practice pull request showing the failed Book app web validation check](assets/app-pr-failing-check.webp)
 
-1. Select **Fix failing checks** if it's available. Otherwise, start a session from the pull request as you did in the previous exercise, then submit:
+1. Select **New session** at the top of the pull request, then submit the prompt below. The new session's **PR** tab also has a **Fix failing checks** button, but this exercise uses your own prompt so that you can see and steer each step.
 
    ```text
    Analyze the failing check. Explain the root cause, identify the likely file in samples/book-app-web, and propose the smallest fix. Don't weaken the failing test.
    ```
 
-1. Confirm that the fix restores favorite counting for both read and unread favorites, then follow the same validate → commit → push → confirm pattern as the previous exercise: run `npm test -- --run` and `npm run build` in `samples/book-app-web`, start `npm run dev` to confirm the favorite count includes both read and unread favorites, then ask Copilot to commit and push.
+1. Inspect the diff. Confirm that the fix restores favorite counting for both read and unread favorites and does not change the test.
+
+1. In **Terminal**, run `npm install`, `npm test -- --run`, and `npm run build` in `samples/book-app-web`.
+
+1. Start `npm run dev` and confirm in the **Browser** tab that the favorite count includes both read and unread favorites. Then press `Ctrl+C` to stop the server.
+
+1. Ask Copilot to commit and push the change.
 
 1. Return to the pull request and confirm that the **Book app web** check reruns successfully.
 
@@ -403,7 +388,7 @@ Don't mark a pull request ready until the diff is focused and the local and GitH
 <details>
 <summary>Optional: Agent Merge</summary>
 
-[Agent Merge](https://docs.github.com/copilot/how-tos/github-copilot-app/managing-issues-and-pull-requests#merging-a-pull-request) can help carry a pull request through review comments, checks, and merge requirements. You enable it from the merge-readiness control at the top of a pull request. It runs in the background, can continue after the app restarts, and merges only when GitHub allows it.
+[Agent Merge](https://docs.github.com/copilot/how-tos/github-copilot-app/managing-issues-and-pull-requests#merging-a-pull-request) can help carry a pull request through review comments, checks, and merge requirements. To find it, select the merge-readiness button at the top of a pull request, such as **Ready to merge**. The **Merge pull request** panel opens with an **Agent merge** toggle. Agent Merge runs in the background, can continue after the app restarts, and merges only when GitHub allows it.
 
 Although you won't use Agent Merge in this course, it may be appropriate when:
 
@@ -425,28 +410,28 @@ Agent Merge is a finishing aid, not a replacement for human review.
 
 ## Troubleshooting
 
-If you're still stuck, see the [Troubleshooting Reference](../appendices/troubleshooting-reference.md).
+If something does not work as expected, check the problems below. The [Troubleshooting Reference](../appendices/troubleshooting-reference.md) lists problems and fixes for all chapters.
 
 <details>
 <summary>Development and GitHub workflow problems</summary>
 
-### Browser Preview Doesn't Update
+### Browser preview doesn't update
 
 Confirm that the development server is running in the current session's worktree and that the **Browser** tab is using the **Local** URL shown in the **Terminal** tab.
 
-### Tests Fail Only in One Session
+### Tests fail only in one session
 
 Confirm that dependencies are installed in that worktree and that the session is using the expected practice branch.
 
-### I Can't See an Issue or Pull Request
+### I can't see an issue or pull request
 
-Check the active **My work** filter, repository access, permissions, and organization policy.
+Check the selected tab and repository picker in the **Issues** or **Pull requests** view, then check repository access, permissions, and organization policy.
 
-### Local Results and CI Don't Agree
+### Local results and CI don't agree
 
 Compare the Node.js version, dependency installation, branch contents, environment variables, and generated files.
 
-### A Pull Request Is Still Blocked
+### A pull request is still blocked
 
 Confirm that required checks reran, review comments are resolved, and branch protection or merge rules aren't waiting for another approval.
 
@@ -460,7 +445,7 @@ Confirm that required checks reran, review comments are resolved, and branch pro
 2. The outer loop happens on GitHub: issue, pull request, feedback, checks, and merge.
 3. The review panel keeps the local diff, terminal output, and browser preview visible.
 4. Tests protect behavior and make refactoring safer.
-5. **My work** connects GitHub issues and pull requests to project sessions.
+5. The **Issues** and **Pull requests** views connect GitHub work to project sessions.
 6. A change is ready only when the diff, local validation, GitHub checks, and human review agree.
 
 ## Assignment
@@ -470,14 +455,16 @@ Confirm that required checks reran, review comments are resolved, and branch pro
 Run both loops on a small UI task:
 
 1. Choose a task:
-   - If you skipped **Pick & Polish**, open Issue 4, **Polish book card spacing and responsive layout**, and start a session on the `practice-card-polish` branch.
+   - If you skipped **Pick & Polish**, open Issue 4, **Polish book card spacing and responsive layout**. Then use **Create from** > **Branches** to start a session on the `practice-card-polish` branch.
    - If you completed it, start a new session from `main` and improve the filter-row labels or helper text instead.
 1. Use **Plan** mode to define one small UI improvement, then switch to **Interactive** to implement it.
 1. Inspect the diff and confirm that it stays focused on the selected UI area.
 1. Run `npm test -- --run` and `npm run build`.
-1. Preview the app at desktop and mobile widths.
+1. Preview the app at a wide and a narrow width. To check the narrow width, drag the left edge of the review panel to make the **Browser** tab narrower.
 1. Open a pull request with a summary that reports only the validation you performed.
-1. Review the pull request in **My work** and confirm its checks pass.
+1. Review the pull request in the **Pull requests** view and confirm its checks pass.
+
+**Success Criteria:** Your pull request contains one focused UI change, its summary lists only the checks you ran, and the **Book app web** check passes.
 
 ## What's Next
 

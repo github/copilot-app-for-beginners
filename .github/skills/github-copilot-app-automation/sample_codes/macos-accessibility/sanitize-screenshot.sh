@@ -4,6 +4,14 @@
 # handles or repository owners with "copilotdev". Avatars and unrelated owners
 # remain.
 #
+# The identities come from the app's Accessibility tree. While a dialog is open,
+# the app hides the sidebar (and its profile control) from Accessibility, even
+# though the sidebar is still visible in the screenshot. So the identities are
+# cached per process the first time they are found, and later captures of the
+# same process reuse the cache. prepare-persona.sh fills the cache before any
+# dialog can be open. If no profile name is known, the capture fails instead of
+# saving an image that could show a real name.
+#
 # Usage:
 #   sanitize-screenshot.sh <process_id> <input_png> <output_png>
 set -euo pipefail
@@ -42,4 +50,24 @@ swiftc "$identity_source" -o "$identity_finder" 2>/dev/null || {
   exit 1
 }
 "$identity_finder" "$target_pid" >"$identities"
+
+cache_dir="${TMPDIR:-/tmp}/copilot-capture-identities"
+cache="$cache_dir/$target_pid.json"
+has_names() {
+  python3 -c 'import json,sys; raise SystemExit(not json.load(open(sys.argv[1])).get("displayNames"))' "$1"
+}
+if has_names "$identities"; then
+  mkdir -p "$cache_dir"
+  chmod 700 "$cache_dir"
+  cp "$identities" "$cache"
+  chmod 600 "$cache"
+elif [ -f "$cache" ] && has_names "$cache"; then
+  # A dialog hides the sidebar from Accessibility. Use the cached identities.
+  cp "$cache" "$identities"
+else
+  echo "No profile name was found for process $target_pid, and no cached identities exist." >&2
+  echo "Close any open dialog and capture once, or rerun prepare-persona.sh." >&2
+  exit 6
+fi
+
 python3 "$sanitizer" "$input_png" "$output_png" "$identities"

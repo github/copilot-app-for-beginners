@@ -29,18 +29,22 @@ For each screenshot, launch a new app process from the persistent, signed-in
 ```bash
 SK=.github/skills/github-copilot-app-automation/sample_codes/macos-accessibility
 PERSONA="demo"
-REPO="$HOME/Desktop/projects/copilot-app-for-beginners"
+# The local clone of the training fork, not the upstream course repository.
+REPO="$HOME/copilot-app-for-beginners"
 COPILOT_PID="$(bash "$SK/prepare-persona.sh" "$PERSONA" "$REPO" 60)"
 ```
 
 This keeps the existing login and persona data, starts a separate app process,
-switches only that process to full screen, resets the display zoom and zooms in
-twice, enables and verifies **Streamer Mode**, verifies that the account is
-signed in, verifies the exact local repository, and returns its process ID. If the
+sets only that window to a standard 1920x1080-point frame, resets the display
+zoom and zooms in twice (the zoom is measured and confirmed), enables and
+verifies **Streamer Mode**, verifies that the account is signed in, verifies the
+exact local repository, dismisses transient banners, and returns its process
+ID. If the
 repository is missing, the pre-step opens the exact folder through the native
 folder picker and verifies it before capture. A setup failure keeps the process
 for inspection and does not return a successful process ID. Do not select a
-target by app name when another Copilot instance is open.
+target by app name when another Copilot instance is open. Do not use full
+screen: it can draw the menu bar and title bar over the app content.
 
 Before preparing the visible state, extract the Markdown around the image
 reference:
@@ -59,7 +63,12 @@ Add numbered red callouts when one screenshot shows two or more controls that
 the reader must select in order. The nearby instructions must identify each
 number, for example, "select **+** (callout 1), then select **Add GitHub
 repository** (callout 2)." Do not add callouts to a single-action screenshot,
-an output example, or an evidence screenshot.
+an output example, or an evidence screenshot. To point at one item without a
+sequence, such as a menu item to select, use a red highlight box (`--box`)
+instead. To point at one small status or control, such as a status pill, use a
+red arrow (`--arrow TAIL_X:TAIL_Y:HEAD_X:HEAD_Y`). Recreate the callouts,
+boxes, or arrows of an existing image when you retake it, at the new positions
+of the same controls.
 
 Keep the process ID and use it for all UI operations and capture. Do not use
 `navigate_to` or other app/session APIs to prepare this window because those
@@ -71,10 +80,14 @@ The persona can still show the current GitHub account name and avatar.
 Process-specific capture automatically derives the visible profile name from
 the accessibility tree and replaces that text with **Copilot Dev**. If an
 account handle or repository owner matches the normalized profile name, it
-replaces that text with **copilotdev**. It preserves the avatar and unrelated
-people and organizations. On a Settings screen, it also removes the displayed
-app version. Never hard-code a person's name or an app version. Never treat
-the persona name alone as proof that the capture is sanitized.
+replaces that text with **copilotdev**, including inside paths and branch names.
+The macOS account name and machine name, which terminal prompts and paths can
+show, become **copilotdev** and **copilot-dev-mac**. It preserves the avatar
+and unrelated people and organizations. On a Settings screen, it also removes
+the displayed app version. Never hard-code a person's name or an app version.
+Never treat the persona name alone as proof that the capture is sanitized.
+Zoom in on every replaced span: a partial replacement can leave letters of the
+private name next to the new text.
 
 ## Non-Interactive / Hidden-Session Rule
 
@@ -128,20 +141,23 @@ Observed on this machine:
 
 After macOS Accessibility permission was enabled, `System Events` could address the app as process `GitHub Copilot`.
 
-Useful exposed controls:
+Useful exposed controls (app 1.1.26; see [app-ui-map.md](references/app-ui-map.md) for the full map):
 
 | Control | Role | Use |
 |---|---|---|
 | `GitHub Copilot` | `AXWindow` | Main app window |
 | `GitHub Copilot` | `AXWebArea` | Main webview-backed app content |
 | `Sidebar` | `AXGroup` | Sidebar region |
-| `Toggle sidebar` | `AXCheckBox` | Collapse/expand sidebar |
-| `Create new project or session` | `AXPopUpButton` | New project/session menu |
-| `New session in <project>` | `AXButton` | Project-specific new session entry |
+| `Toggle sidebar, Command + B` | `AXCheckBox` | Collapse/expand sidebar |
+| `New`, `Pull requests`, `Issues`, `Automations`, `Customize` | `AXButton` | Sidebar views (Quick links) |
+| `More` | `AXPopUpButton` | Sidebar menu with **Edit sidebar...** |
+| `New project or session` | `AXPopUpButton` | Projects **+** menu |
+| `New session in <project>` | `AXButton` | Project-specific new session entry (visible on hover or focus) |
 | `Message` | `AXTextArea` | Prompt composer |
-| `Select model` | `AXComboBox` | Model picker |
-| `Conversation timeline` | `AXGroup` | Main conversation history |
-| `Open changes` | `AXButton` | Diff/changes surface |
+| `Project: <project>` | `AXComboBox` | Composer project picker |
+| `Workspace: <choice>, branch: <branch>` | `AXPopUpButton` | **Where to work** menu |
+| `Toggle panel, Command + Option + B` | `AXCheckBox` | Review panel |
+| `Add tab, Command + T` | `AXPopUpButton` | Review panel tab menu |
 
 See [macos-accessibility.md](references/macos-accessibility.md) for scripts and caveats.
 
@@ -177,41 +193,58 @@ Use [type-and-clear-draft.applescript](sample_codes/macos-accessibility/type-and
 Only use this workflow when the user has agreed the App can be visible or when the target state is already visible in a dedicated App window. Capture from a **sanitized training account** on the training fork — never the user's real private projects.
 
 1. Run `screenshot-context.py` for the referenced image and turn the nearby
-   course text into a concrete capture checklist.
-2. Launch a new full-screen process from the persistent `demo` persona with
-   `prepare-persona.sh`. The pre-step resets zoom, zooms in twice, and enables
-   and verifies **Streamer Mode**. It fails closed if Streamer Mode cannot be
-   verified. Pass the exact local training repository and keep the returned
-   process ID.
+   course text into a concrete capture checklist. If you retake an existing
+   image, view the old image first and list its callouts, boxes, and crop.
+2. Launch a new process from the persistent `demo` persona with
+   `prepare-persona.sh`. The pre-step sets a standard 1920x1080-point window,
+   resets zoom, zooms in twice, and enables and verifies **Streamer Mode**. It
+   fails closed if Streamer Mode or the zoom cannot be verified. Pass the exact
+   local training repository and keep the returned process ID. Turn off Siri
+   before you capture: its waveform orb can appear next to a focused text field,
+   and the capture script fails when it sees the orb.
 3. Map that process with `COPILOT_PID="$COPILOT_PID" map-app.sh` so steps match
    the current app build.
 4. Navigate that process to the exact state with Accessibility controls and let
-   spinners settle.
-5. Capture the window owned by that process ID and convert it to WebP. When the
-   image requires ordered callouts, pass each badge in instruction order at its
-   final 1920x1080 coordinates:
+   spinners settle. Use `prepare-copilot-state.swift` for states that a named
+   action cannot create: `focus` shows a hover-only control (such as the **+**
+   on the **Chats** row), `highlight-menu-item` selects a menu item with the
+   keyboard (web menus ignore synthetic pointer moves), `set-value` fills a
+   field without pressing Return, and `park` moves the pointer and focus away
+   so no hover effects or focus rings remain.
+5. Find the final coordinates of each control with
+   `locate-copilot-element.swift`, then capture the window owned by that process
+   ID and convert it to WebP. Pass callouts in instruction order, highlight
+   boxes, and an optional crop, all in final 1920x1080 coordinates:
    ```bash
    bash sample_codes/macos-accessibility/capture-window.sh \
      <chapter>/assets <base-name> 40 "$COPILOT_PID"
 
    bash sample_codes/macos-accessibility/capture-window.sh \
      00-setup/assets app-add-project 40 "$COPILOT_PID" \
-     --callout 1:472:324 --callout 2:743:501
+     --callout 1:372:338 --callout 2:585:437
+
+   bash sample_codes/macos-accessibility/capture-window.sh \
+     06-canvases/assets app-open-repo-issues-canvas 40 "$COPILOT_PID" \
+     --box 1287:266:1551:309 --crop 352:0:1920:700
    ```
 6. For callout images, confirm that every badge is next to its control, does not
    cover a label or icon, and matches the instruction order. The standard style
-   is a 26px-radius `#ff594b` circle with a white number.
+   is a 26px-radius `#ff594b` circle with a white number. Keep each badge at
+   least its radius plus 2 px from the image edge.
 7. Keep PNG as the source artifact; use WebP in web/course pages.
-8. Confirm that both files are exactly 1920x1080.
+8. Confirm that full-window files are exactly 1920x1080. A crop keeps the size
+   of its crop rectangle.
 9. Confirm that the image has a 2px `#cccccc` border inside its edges.
 10. Confirm that the output keeps the avatar, shows **Copilot Dev** instead of a
    person's profile name, and uses **copilotdev** for matching personal
-   repository owners.
+   repository owners, paths, and branch names.
 11. For Settings screenshots, confirm that no app version is visible.
 12. Review the screenshot for other private data before committing or
    publishing.
-13. Close the exact process with `cleanup-persona.sh` only after the capture is
-   verified. Keep the signed-in persona for the next screenshot.
+13. Restore any persona state that you changed for the capture (hidden
+   projects, installed plugins or MCP servers, test automations or sessions),
+   then close the exact process with `cleanup-persona.sh` only after the
+   capture is verified. Keep the signed-in persona for the next screenshot.
 
 To work through the course's pending shots, discover them dynamically and process one at a time (never hardcode the list): `screenshots.sh list` -> `screenshots.sh next` -> capture -> `screenshots.sh embed`. See [missing-screenshots.md](references/missing-screenshots.md).
 
@@ -225,14 +258,16 @@ Use:
 - [ensure-streamer-mode.swift](sample_codes/macos-accessibility/ensure-streamer-mode.swift) — enables and verifies Streamer Mode before screenshot preparation
 - [cleanup-persona.sh](sample_codes/macos-accessibility/cleanup-persona.sh) — stops one exact screenshot process and preserves the signed-in persona
 - [launch-persona.sh](sample_codes/macos-accessibility/launch-persona.sh) — low-level launcher used by `prepare-persona.sh`
-- [control-copilot-window.swift](sample_codes/macos-accessibility/control-copilot-window.swift) — activates or enters full screen for one exact app process
+- [control-copilot-window.swift](sample_codes/macos-accessibility/control-copilot-window.swift) — sets the 1920x1080-point capture frame and the measured 125% capture zoom for one exact app process
 - [control-copilot-ui.swift](sample_codes/macos-accessibility/control-copilot-ui.swift) — presses one named Accessibility control in an exact app process
+- [prepare-copilot-state.swift](sample_codes/macos-accessibility/prepare-copilot-state.swift) — prepares transient states: focus a hover-only control, highlight a menu item, set a field value, dismiss banners, and park the pointer
+- [locate-copilot-element.swift](sample_codes/macos-accessibility/locate-copilot-element.swift) — prints the final 1920x1080 coordinates of named controls for callouts, boxes, and crops
 - [find-private-identities.swift](sample_codes/macos-accessibility/find-private-identities.swift) — derives profile names and matching personal repository owners without hard-coded identities
-- [sanitize-screenshot.sh](sample_codes/macos-accessibility/sanitize-screenshot.sh) — replaces identity text while preserving avatars
-- [app-ui-map.md](references/app-ui-map.md) — sanitized factual UI map (menus, sidebar, composer controls), regenerable via map-app.sh
-- [capture-window.sh](sample_codes/macos-accessibility/capture-window.sh) — recommended: process-filtered CoreGraphics window capture + WebP
-- [finalize-screenshot.py](sample_codes/macos-accessibility/finalize-screenshot.py) — enforces 1920x1080 output and adds the required 2px `#cccccc` inside border
-- [add-step-callouts.py](sample_codes/macos-accessibility/add-step-callouts.py) — adds ordered red step badges to a finalized screenshot when one image shows multiple actions
+- [sanitize-screenshot.sh](sample_codes/macos-accessibility/sanitize-screenshot.sh) — replaces identity text while preserving avatars; caches identities per process because dialogs can hide the sidebar
+- [app-ui-map.md](references/app-ui-map.md) — sanitized factual UI map (menus, sidebar, views, composer controls), regenerable via map-app.sh
+- [capture-window.sh](sample_codes/macos-accessibility/capture-window.sh) — recommended: process-filtered CoreGraphics window capture + WebP, with `--callout`, `--box`, `--arrow`, and `--crop`
+- [finalize-screenshot.py](sample_codes/macos-accessibility/finalize-screenshot.py) — enforces 1920x1080 output, adds the required 2px `#cccccc` inside border, and crops
+- [add-step-callouts.py](sample_codes/macos-accessibility/add-step-callouts.py) — adds ordered red step badges, red highlight boxes, and red arrows to a finalized screenshot
 - [find-copilot-window.swift](sample_codes/macos-accessibility/find-copilot-window.swift) — lists on-screen Copilot windows with their window and process IDs
 - [map-app.sh](sample_codes/macos-accessibility/map-app.sh) — version-stamped UI map for grounding steps and diffing app updates
 - [capture-copilot-window.sh](sample_codes/macos-accessibility/capture-copilot-window.sh) — older Accessibility-rectangle fallback

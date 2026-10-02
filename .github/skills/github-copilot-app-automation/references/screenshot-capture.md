@@ -6,13 +6,16 @@ Capture visible GitHub Copilot app states for course material:
 
 - Save a **PNG** as the high-quality source artifact.
 - Save a **WebP** optimized version for web delivery.
-- Make both files exactly **1920x1080**.
-- Add a **2px `#cccccc` border** inside the image edges.
-- Reset display zoom, then zoom in exactly twice before preparing the screen.
+- Make full-window files exactly **1920x1080**. A crop keeps the size of its
+  crop rectangle.
+- Add a **2px `#cccccc` border** inside the image edges, also on crops.
+- Capture a standard 1920x1080-point window, not full screen.
+- Reset display zoom, then zoom in exactly twice (125%) before preparing the
+  screen.
 - Enable and verify **Streamer Mode** before preparing the screen.
 - Remove the app version from Settings screenshots after capture.
 - Add ordered red number callouts when one image shows multiple controls that
-  the reader must select in sequence.
+  the reader must select in sequence. Use a red highlight box for one item.
 - Keep screenshots deterministic and safe by using a known separate session that is already visible, or by getting explicit approval before changing the visible App window.
 
 ## Dedicated Persona Instance
@@ -23,7 +26,8 @@ For each course screenshot, launch a new process from the persistent, signed-in
 ```bash
 SK=.github/skills/github-copilot-app-automation/sample_codes/macos-accessibility
 PERSONA="demo"
-REPO="$HOME/Desktop/projects/copilot-app-for-beginners"
+# The local clone of the training fork, not the upstream course repository.
+REPO="$HOME/copilot-app-for-beginners"
 COPILOT_PID="$(bash "$SK/prepare-persona.sh" "$PERSONA" "$REPO" 60)"
 ```
 
@@ -33,12 +37,16 @@ The preparation workflow:
 - Keeps login and account state in `CopilotPersonas/demo`.
 - Starts a new app instance with `open -na`.
 - Finds the new process instead of reusing an existing Copilot process.
-- Switches only that process to full screen.
-- Resets display zoom and zooms in twice.
+- Sets only that process's main window to a standard 1920x1080-point frame,
+  centered on its display.
+- Resets display zoom, zooms in twice, and measures a sidebar control to
+  confirm the 125% zoom. It retries and fails if it cannot confirm the zoom.
 - Enables and verifies Streamer Mode so unreleased features are hidden.
 - Verifies that the persona is signed in.
 - Opens the exact repository path through the native folder picker if needed.
 - Verifies that the repository name appears in the selected process.
+- Dismisses transient banners (only buttons on a safe allowlist) and moves the
+  pointer away from the content.
 - Prints its process ID for exact capture targeting.
 
 The separate `HOME` isolates app files, but it does not isolate credentials in
@@ -46,13 +54,19 @@ the macOS Keychain. The new instance can still show the signed-in account name
 and avatar. Process-specific capture reads the profile control, replaces the
 person's name with **Copilot Dev**, and keeps the avatar. It also replaces a
 visible account handle or repository owner with **copilotdev** when that value
-matches the normalized profile name. It does not hard-code real names or
-replace unrelated people or organizations. On Settings screens, it removes
-the displayed app version because that value changes frequently.
+matches the normalized profile name, also inside paths and branch names. The
+macOS account name and the machine name, which terminal prompts and paths can
+show, become **copilotdev** and **copilot-dev-mac**. It does not hard-code real
+names or replace unrelated people or organizations. On Settings screens, it
+removes the displayed app version because that value changes frequently.
 
-The automation caller needs macOS Accessibility permission to switch the new
-window to full screen. Full-screen mode creates or activates a separate macOS
-Space, so wait for the transition before navigating or capturing.
+The identities are cached for each process the first time the sidebar is
+visible, because an open dialog can hide the sidebar from Accessibility.
+`cleanup-persona.sh` removes that cache.
+
+The automation caller needs macOS Accessibility permission to set the window
+frame and zoom. Do not use full screen for course captures: while the app is
+active, macOS can draw the menu bar and title bar over the app content.
 
 Do not use `navigate_to` or another app/session API to prepare this window.
 Those APIs belong to the Copilot instance that hosts the agent and can navigate
@@ -97,6 +111,108 @@ tables, terminal evidence, or images that only illustrate a concept.
 
 If a current label differs from the course, update the directly related text.
 Do not reproduce an obsolete UI to keep old text unchanged.
+
+When you retake an existing image, view the old image first. Recreate its
+numbered callouts, highlight boxes, and arrows on the same controls at their
+new positions, and keep a similar crop. If the old target no longer exists
+(for example, a **Running...** state that now ends in seconds), point at the
+nearest element that shows the same result, and say so in your report.
+
+## Prepare Transient UI States
+
+Many course states are hard to create with a plain button press. Use
+[prepare-copilot-state.swift](../sample_codes/macos-accessibility/prepare-copilot-state.swift)
+and [locate-copilot-element.swift](../sample_codes/macos-accessibility/locate-copilot-element.swift):
+
+| Need | Approach |
+|---|---|
+| Show a hover-only control, such as **New chat** (+) on the **Chats** row or **Create from** on a project row | `focus <label>`: a focused control also shows its focus ring and tooltip |
+| Show a menu item as selected | Open the menu, then `highlight-menu-item <label>`. Web menus ignore synthetic pointer moves, so this presses Down until the item is active |
+| Fill a field without submitting | `set-value <label> <text>` never presses Return |
+| Remove hover effects, tooltips, and focus rings | `park` (add `keep-focus` when the image must show a focused field) |
+| Remove promotions and notices | `dismiss-banners` presses only allowlisted buttons such as **Close banner** or **Not now** |
+| Place callouts, boxes, and crops | `locate-copilot-element <pid> <label> [role]` prints final 1920x1080 coordinates |
+
+Other observed quirks:
+
+- An open dialog hides the sidebar from Accessibility. Sanitization uses the
+  identity cache from an earlier capture of the same process.
+- The review panel splitter keeps focus after keyboard resizing. Press Tab,
+  then Escape, before capture.
+- A first-run learner has no project, so the Projects **+** menu shows no
+  **Start session in** group. To show their view, clear **Show in sidebar** on
+  the project's Settings page, capture, and then select it again.
+- Restore every persona change after capture: hidden projects, installed
+  plugins and MCP servers, test automations, and temporary sessions.
+- The review panel does not open on the New view. Submit a first prompt so the
+  session exists, then open the panel.
+- Each capture brings the persona window to the front. A Return key press that
+  the user types in another app at that moment goes to the persona. When a
+  **Review plan** or **Question** box is waiting, Return submits the selected
+  option, and **Approve and implement this plan** starts Autopilot. Capture
+  these states quickly, then choose **Exit plan mode and I will prompt myself**
+  or delete the session. If an agent starts work by mistake, stop it, check the
+  worktree, and delete the session.
+- To show the branch name `copilotdev-…` in a new session, set **Settings** >
+  **Sessions** > **Default branch prefix** to `copilotdev-` before you start the
+  session, and restore `%username%-` after capture. The sanitizer replaces
+  names in most text, but faint or partly hidden branch text can stay
+  readable.
+- Long descriptions in `/` and `@` typeahead rows scroll sideways after about
+  half a second. To show the start of the text, type the command and capture
+  within about 0.3 seconds, or capture with `screencapture -l <window id>` and
+  then run the sanitizer and finalizer yourself.
+- The Terminal prompt shows the macOS user and computer name. Before capture,
+  run `PROMPT='%1~ %# '` and `clear` in the Terminal tab so the prompt shows
+  only the folder name.
+- A new custom agent file loads only after the app restarts. Close the persona
+  with `cleanup-persona.sh`, then start it again with `prepare-persona.sh`.
+- Persona workspace choices persist. Note the workspace selector value
+  (**New worktree** or **Current checkout**) before you change it, and restore
+  it after capture.
+- On the sign-in and onboarding screens, `launch-persona.sh` cannot set the
+  zoom and prints no process ID. Find the persona process by its `HOME` value.
+- A website install button opens a `ghapp://` link. Do not use `open` with that
+  link, because macOS sends it to the default app instance, which can be the
+  user's own app. Send it only to the persona's process ID. The agent's host
+  app cannot get the macOS Automation permission, so use a small signed helper
+  app that declares `NSAppleEventsUsageDescription`. macOS then asks the user
+  to **Allow** it once.
+- All app instances use the same WebKit storage in the real
+  `~/Library/WebKit/com.github.githubapp` folder. Persona activity can change
+  some web UI state in the user's own app, such as the repository selection in
+  the Issues and Pull requests views.
+- `tesseract` cannot read a file in `/tmp`, because it resolves `/tmp` to
+  `/private/tmp` and then fails. It prints an error, and a scan that greps its
+  output reports no matches. Pipe the image instead
+  (`dwebp -quiet a.webp -o - | tesseract stdin -`), or keep files in the
+  session folder. Treat empty OCR output as a failure, not a clean result.
+- Typeahead rows, project picker rows, and some option buttons report wrong
+  Accessibility frames (for example 955x911). The center of such a frame can be
+  outside the persona window, and a real click there goes to another app.
+  Click the visible row instead, and refuse any point outside the persona
+  window frame.
+- `/chronicle standup` reports every session of the signed-in account from the
+  last day, including sessions from other computers. Scroll the chat so only
+  the course session shows, and run the OCR privacy check for the names of
+  other sessions.
+- The sanitizer sometimes cannot find the profile name with OCR. It then keeps
+  only `<name>.raw.png`. Delete that raw file at once, and capture again.
+- When the app stages an update, a **Ready to update** toast (Restart now,
+  Later) appears at the bottom right, and the files are in
+  `<persona>/.copilot/updater`. Select **Later**. Before you close the persona,
+  delete `staged-update.bin` and `staged-manifest.json`, so the persona cannot
+  install the update into the shared `/Applications` app bundle.
+- Chapter 06 Feature Workbench timing (Claude Opus 5.5): `/create-canvas`
+  takes about 5 minutes. **Generate plan** shows **Working...** for only about
+  15 seconds, or about 3 seconds when the agent reuses an earlier plan, so
+  capture within 2 seconds, in a fresh session. **Run baseline** ends in about
+  6 seconds, so capture the finished state with the test tool call expanded.
+  **Browser validation** can start the dev server as an attached background
+  task. The turn then stays open, and the action stays on **Working...** (after
+  20 minutes it shows **Timed out**) until you stop the server in
+  **Background**. The agent can also install `playwright-core` in `/tmp`.
+  Check that it deletes that folder.
 
 ## Hidden Session Limitation
 
@@ -187,32 +303,35 @@ For research artifacts:
 1. Extract the image context with `screenshot-context.py`.
 2. Launch a new process from the signed-in `demo` persona with
    `prepare-persona.sh`.
-3. Confirm that the pre-step reset display zoom, zoomed in twice, and verified
-   Streamer Mode as enabled. Then use process-scoped Accessibility to reach the
-   required state.
+3. Confirm that the pre-step set the capture frame, confirmed the 125% zoom,
+   and verified Streamer Mode as enabled. Then use process-scoped Accessibility
+   to reach the required state.
 4. Wait 1-2 seconds for UI to settle.
 5. Run `capture-window.sh` with the process ID returned by
    `prepare-persona.sh`. For a multi-action screenshot, add repeated
-   `--callout NUMBER:X:Y` arguments. Coordinates use the final 1920x1080 image:
+   `--callout NUMBER:X:Y` arguments. For one item, add `--box
+   LEFT:TOP:RIGHT:BOTTOM`. To keep only a detail area, add `--crop
+   LEFT:TOP:RIGHT:BOTTOM`. All coordinates use the final 1920x1080 image:
 
    ```bash
    bash "$SK/capture-window.sh" 00-setup/assets app-add-project 40 \
      "$COPILOT_PID" \
-     --callout 1:472:324 \
-     --callout 2:743:501
+     --callout 1:372:338 \
+     --callout 2:585:437
    ```
 
 6. Confirm that the callout numbers match the nearby instructions. Place each
    circle next to its control without covering the control label or icon. The
    standard style is a 26px-radius `#ff594b` circle with a white number.
 7. Confirm that profile text shows **Copilot Dev**, the avatar remains, and any
-   matching personal repository owner shows **copilotdev**.
-8. Confirm that the PNG and WebP are both exactly 1920x1080.
+   matching personal repository owner, path, or branch name shows
+   **copilotdev**. Zoom in on each replaced span.
+8. Confirm that the PNG and WebP are both exactly 1920x1080, or the crop size.
 9. Confirm that both files have a 2px `#cccccc` inside border.
 10. For Settings screens, confirm that no app version remains visible.
 11. Inspect file sizes and image dimensions.
 12. Review for other private data before moving images into course assets.
-13. Run `cleanup-persona.sh` after verification.
+13. Restore persona changes, then run `cleanup-persona.sh` after verification.
 
 ## Example
 
@@ -220,7 +339,7 @@ For research artifacts:
 SK=.github/skills/github-copilot-app-automation/sample_codes/macos-accessibility
 PERSONA="demo"
 COPILOT_PID="$(bash "$SK/prepare-persona.sh" \
-  "$PERSONA" "$HOME/Desktop/projects/copilot-app-for-beginners" 60)"
+  "$PERSONA" "$HOME/copilot-app-for-beginners" 60)"
 
 # Navigate this new instance to the required state, then capture it.
 bash "$SK/capture-window.sh" assets/screenshots 01-tour-the-app-session-ui 40 "$COPILOT_PID"
@@ -249,26 +368,40 @@ bash sample_codes/macos-accessibility/capture-window.sh \
 
 It uses [find-copilot-window.swift](../sample_codes/macos-accessibility/find-copilot-window.swift)
 (CoreGraphics) to locate the window id. For a process-specific capture, it
-reactivates that process and its full-screen Space immediately before polling.
-It then runs `screencapture -x -l <id>` plus a WebP encode and warns if the
-capture looks blank (a sign Screen Recording is denied).
+activates that process immediately before polling, waits for transient system
+indicators to fade (`COPILOT_CAPTURE_SETTLE_SECONDS`, default 2), and fails
+with exit code 5 if a Siri waveform orb is visible. It then runs
+`screencapture -x -o -l <id>` (without the window shadow) plus a WebP encode and
+warns if the capture looks blank (a sign Screen Recording is denied).
 
 When a process ID is supplied, `capture-window.sh` also:
 
 1. Reads the profile control from the exact app process.
 2. Derives the person's display name without a hard-coded name list.
 3. Finds repository owners whose normalized value matches that display name.
-4. Uses OCR to replace the display name with **Copilot Dev** and matching
-   owners with **copilotdev**.
-5. Verifies that OCR no longer finds the original identity text.
+4. Uses OCR (a 3x grayscale copy) to replace the display name with **Copilot
+   Dev**, matching owners with **copilotdev**, and the local account and
+   machine names with **copilotdev** and **copilot-dev-mac**. It redraws the
+   text in the measured font, size, weight, and color, and moves the rest of
+   the line so the spacing stays the same.
+5. Verifies with two more OCR passes that the original identity text is gone.
 6. Removes the displayed app version when the screenshot shows Settings.
-7. Resizes the sanitized PNG and WebP to exactly 1920x1080, adds the required
-   2px `#cccccc` inside border, and verifies both.
+7. Resizes the sanitized PNG to exactly 1920x1080 and adds the required 2px
+   `#cccccc` inside border.
 
-When `--callout` arguments are supplied, the script adds the badges after
-sanitization and 1920x1080 finalization, then encodes the annotated PNG as
-WebP. Callout numbers must be consecutive from 1. At least two callouts are
-required.
+When `--callout`, `--box`, or `--arrow` arguments are supplied, the script adds
+the badges, outlines, and arrows after sanitization and 1920x1080 finalization.
+Callout numbers must be consecutive from 1, and one callout alone is rejected.
+Boxes are 4px `#ff594b` outlines and need no callouts. Arrows are 5px
+`#ff594b` lines with a filled head at `HEAD_X:HEAD_Y`, at least 44px long.
+When `--crop` is supplied, the script then cuts out that rectangle and adds the
+border again. Finally, it encodes the PNG as WebP and verifies the size and
+border of both files.
+
+To try callout positions without a retake, capture once without callouts. Then
+copy the PNG, run `add-step-callouts.py` on the copy with 1920x1080
+coordinates, run `finalize-screenshot.py <png> --crop L:T:R:B`, and encode it
+with `cwebp -lossless -q 82 -m 6 -metadata none`.
 
 The script removes a Settings version and enforces 1920x1080 even when no
 process ID is supplied. Identity discovery requires a process ID, so course
