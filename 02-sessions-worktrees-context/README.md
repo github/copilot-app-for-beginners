@@ -9,8 +9,7 @@ In Chapter 01 you saw the "shared working copy" problem: two agent tasks can blu
 By the end of this chapter, you'll be able to:
 
 - Start a worktree-backed session from a branch and attach an issue as context
-- Explain what a git worktree is and why you'd use it
-- Understand why isolated sessions protect your main branch
+- Explain what a git worktree is and how it keeps each session's changes out of your `main` checkout
 - Add relevant context to a session so Copilot can understand the task and its supporting information
 - Decide between working in your current checkout, an isolated worktree, or a cloud sandbox
 - Use `/chronicle standup` and `/context` to review a session

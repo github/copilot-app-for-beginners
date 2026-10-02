@@ -4,7 +4,7 @@
 
 Chapter 06 made session work visible with canvases. This chapter makes repeatable work reusable.
 
-Automations let you save agent tasks in the GitHub Copilot app and run them on demand or later on a schedule. You'll start with a manual review readiness report that runs only when you choose, then schedule it so the summary is waiting each morning. The chapter closes with event triggers and cloud automations.
+Automations let you save agent tasks in the GitHub Copilot app and run them on demand or later on a schedule. You'll start with a manual review readiness report that runs only when you choose, then schedule it so the summary is waiting each morning. The chapter closes with an optional section on event triggers and cloud automations.
 
 ## Learning Objectives
 
@@ -13,8 +13,8 @@ By the end of this chapter, you'll be able to:
 - Explain when to automate recurring agent work instead of starting a manual session
 - Create and test an on-demand local automation
 - Schedule an automation and review its run history
-- Recognize event triggers, such as **Issue** and **Pull request**, and when they are appropriate
-- Explain what cloud automations need and how to limit their tools
+- Optionally recognize event triggers, such as **Issue** and **Pull request**, and when they are appropriate
+- Optionally explain what cloud automations need and how to limit their tools
 
 > ⏱️ **Estimated Time**: ~50 minutes
 

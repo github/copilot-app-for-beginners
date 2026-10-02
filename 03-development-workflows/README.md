@@ -50,6 +50,8 @@ A confident response from Copilot isn't the same as validated software. Use thes
 
 <img src="assets/development-loop.webp" alt="Inner loop on your machine: understand, change, validate, and review. Outer loop on GitHub: issue, pull request, feedback, and checks. Human judgment applies to both." width="600" />
 
+Human judgment applies to both loops. In the inner loop, you decide whether the diff, tests, build, and preview show that the change is ready. In the outer loop, you review the pull request, its comments, and its checks, and you decide when it is ready to merge.
+
 ## Confirm the Sample App Is Ready
 
 The repository includes `.github/copilot-instructions.md`, which gives Copilot project-specific guidance. It describes the sample app, its beginner-friendly conventions, and its validation commands.

@@ -10,6 +10,7 @@ By the end of this chapter, you'll be able to:
 
 - Explain why you should use the GitHub Copilot app compared to using Copilot in an editor or Copilot CLI in the terminal
 - Identify key app features and settings
+- Choose between a chat and a project session for a task
 - Explain the session modes: Interactive, Plan, and Autopilot
 - Select a model and reasoning effort based on task complexity
 - Optionally try voice dictation
@@ -246,7 +247,7 @@ Check your plan, organization policy, project settings, and app version.
 
 ## Key Takeaways
 
-1. Keep your editor for deep coding. Open the GitHub Copilot app when agent work needs a clearer place to run and review, and jump back to VS Code any time.
+1. Keep your editor for deep coding. Open the GitHub Copilot app when agent work needs a clearer place to run and review, and jump back to your editor any time.
 2. The app is organized around work surfaces: New for starting work, Pull requests and Issues for GitHub items, Automations for repeatable tasks, Customize for extending the app, and Projects for chats and sessions.
 3. **Chat sessions** are for exploration. **Project sessions** are for focused repository work. **Automations** are for repeatable agent runs.
 4. **Interactive**, **Plan**, and **Autopilot** change the level of autonomy.
