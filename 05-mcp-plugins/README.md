@@ -225,7 +225,7 @@ Summarize the evidence from these exercises. You don't need another code change 
    Separate completed work from proposed browser checks. If an exercise couldn't run, state why and do not invent results or sources. Use only this session's existing evidence. Do not edit files, run commands, or make more external requests.
    ```
 
-2. Compare the table with the tool activity, retrieved guidance, and sources. Correct any unsupported claims. Open **Changes** and confirm that the exercises left repository files unchanged.
+2. Compare the table with the tool activity, retrieved guidance, and sources. Correct any unsupported claims. Open the **Changes** tab in the review panel and confirm that it lists no changed files.
 3. Explain in your own words why the Context7 connection is an MCP server and Modern Web Guidance is a plugin supplying a skill.
 4. Disable only the MCP connection or plugin you added for this exercise if you don't want to keep using it. Leave pre-existing tools unchanged. Chapter 06 doesn't require either integration to remain enabled.
 

@@ -7,7 +7,7 @@ The previous chapters introduced the app, project sessions, worktrees, and conte
 - The **inner loop** happens on your machine: understand the task, change the code, inspect the diff, run tests, and preview the result.
 - The **outer loop** happens on GitHub: start from an issue, open a pull request, respond to review feedback, and confirm checks pass.
 
-The GitHub Copilot app connects both loops, but you remain responsible for reviewing the evidence and deciding what ships.
+GitHub Copilot app connects both loops, but you remain responsible for reviewing the evidence and deciding what ships.
 
 ## Learning Objectives
 
@@ -45,10 +45,10 @@ A confident response from Copilot isn't the same as validated software. Use thes
 |---|---|---|
 | Diff | Review panel **Changes** tab | The change is focused and understandable |
 | Tests and build | Review panel **Terminal** tab | The relevant tests and build complete successfully |
-| Running app | Review panel **Browser** tab | The behavior works as expected |
+| Running app | Review panel **Browser** tab | The behavior works as expected (in the case of a web app) |
 | GitHub checks | Pull request in the **Pull requests** view | Continuous integration (CI) agrees with your local results |
 
-<img src="assets/development-loop.webp" alt="Inner loop on your machine: understand, change, validate, and review. Outer loop on GitHub: issue, pull request, feedback, and checks. Human judgment applies to both." width="600" />
+<img src="assets/development-loop.webp" alt="Development loop. Inner loop on your machine: understand, change, inspect, test and build, and preview. Outer loop on GitHub: issue, pull request, feedback, checks, and merge. Human judgment applies to both loops." width="600" />
 
 Human judgment applies to both loops. In the inner loop, you decide whether the diff, tests, build, and preview show that the change is ready. In the outer loop, you review the pull request, its comments, and its checks, and you decide when it is ready to merge.
 
@@ -267,7 +267,7 @@ The outer loop is:
 5. Respond to feedback and failing checks.
 6. Merge only when the diff, local evidence, and GitHub checks agree.
 
-![Issue-to-merge workflow with a session, diff, approval gates, pull request, checks, and merge](assets/issue-to-merged-pr.webp)
+![Issue-to-merge workflow: issue, session, diff, approval gate, pull request, checks, approval gate, and merge. Feedback or a failed check goes back to the session.](assets/issue-to-merged-pr.webp)
 
 The diagram shows the main path toward a merge. Feedback or a failed check can send the work back to the session for another focused change and validation cycle.
 
@@ -455,14 +455,16 @@ Confirm that required checks reran, review comments are resolved, and branch pro
 Run both loops on a small UI task:
 
 1. Choose a task:
-   - If you skipped **Pick & Polish**, open Issue 4, **Polish book card spacing and responsive layout**, and start a session on the `practice-card-polish` branch.
+   - If you skipped **Pick & Polish**, open Issue 4, **Polish book card spacing and responsive layout**. Then use **Create from** > **Branches** to start a session on the `practice-card-polish` branch.
    - If you completed it, start a new session from `main` and improve the filter-row labels or helper text instead.
 1. Use **Plan** mode to define one small UI improvement, then switch to **Interactive** to implement it.
 1. Inspect the diff and confirm that it stays focused on the selected UI area.
 1. Run `npm test -- --run` and `npm run build`.
-1. Preview the app at desktop and mobile widths.
+1. Preview the app at a wide and a narrow width. To check the narrow width, drag the left edge of the review panel to make the **Browser** tab narrower.
 1. Open a pull request with a summary that reports only the validation you performed.
 1. Review the pull request in the **Pull requests** view and confirm its checks pass.
+
+**Success Criteria:** Your pull request contains one focused UI change, its summary lists only the checks you ran, and the **Book app web** check passes.
 
 ## What's Next
 

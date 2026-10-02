@@ -81,7 +81,7 @@ A custom canvas can include:
 - agent-callable actions, such as updating a checklist item
 - artifacts such as plans, checklists, dashboards, browser previews, terminals, or documents
 
-<img src="assets/human-agent-shared-surface.webp" alt="Human and agent shared canvas surface" width="800" />
+<img src="assets/human-agent-shared-surface.webp" alt="You and the agent share one canvas. You use UI controls, the agent uses actions such as get, add, and move, and both sides can change the same board." width="800" />
 
 <details>
 <summary>Terms used in the exercises</summary>
@@ -449,10 +449,10 @@ Complete this challenge only if you have permission to create issues and pull re
 
 1. Add actions that create an issue for the assessed feature.
 1. Create a pull request that links to the issue.
-1. Request Copilot review.
+1. If Copilot code review is available to you, request a Copilot review.
 1. Keep the issue, pull-request link, and review status visible as evidence on the canvas.
 
-**Challenge Success Criteria:** The canvas shows an open pull request linked to the issue, with Copilot review requested. Do not merge the pull request as part of this assignment.
+**Challenge Success Criteria:** The canvas shows an open pull request linked to the issue. If you requested a Copilot review, the canvas also shows its status. Do not merge the pull request as part of this assignment.
 
 ---
 

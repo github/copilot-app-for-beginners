@@ -276,14 +276,14 @@ The example permits only reading and searching. Return to the default agent to r
 
 The exercises stopped at review and explanation. Now use one reviewed recommendation to complete the Chapter 03 inner loop.
 
-1. Stay in the same worktree with the default agent. Use the skill's heading recommendation. If the review didn't identify a needed change, choose a focused test for the current heading structure.
-2. Set the mode to **Plan**. Type `/`, select `/book-app-reviewer`, then add the specific recommendation to this prompt and submit it:
+1. Stay in the same worktree and use the default agent. Choose the skill's heading recommendation. If the review found no needed change, add a focused test for the current heading structure instead.
+1. Set the mode to **Plan**. Type `/`, select `/book-app-reviewer`, add your recommendation to this prompt, and submit it:
 
    ```text
    Plan only the recommendation I select from this chapter. Name the source, CSS, and test files it affects. Preserve filtering, statistics, and the existing design. Include test, build, and browser checks. Do not implement yet.
    ```
 
-1. Before implementation, record a baseline. Open **Terminal** in the review panel and run these commands from the repository root:
+1. While Copilot plans, record a baseline. In the review panel's **Terminal** tab, run these commands from the repository root:
 
    ```bash
    cd samples/book-app-web
@@ -292,21 +292,20 @@ The exercises stopped at review and explanation. Now use one reviewed recommenda
    npm run build
    ```
 
-   Record the test count and build result. If either command fails, fix the baseline problem before you change the app.
+   Note the test count and the build result. Both must pass before you change the app.
 
-1. Review the plan, then select **Exit plan mode and I will prompt myself** to return to **Interactive**. Ask the Copilot app to implement only that change. Do not approve unrelated refactoring or new dependencies.
-2. Inspect **Changes**, then rerun `npm test -- --run` and `npm run build` from `samples/book-app-web`. Confirm that the tests and build pass without weakening existing tests.
-3. Start the app with `npm run dev`. Open its **Local** URL in the review panel's **Browser** tab. Check the headings at desktop and narrow widths. Ask the Copilot app to inspect the rendered heading levels; appearance alone doesn't show heading structure.
-4. Search for `hobbit`, then `zzzz-no-match`. Confirm that the first search shows **The Hobbit** and the second shows no books. The statistics must match each result, and the empty-state message must mention changing the search term, genre, or reading status.
-5. Stop the development server with `Ctrl+C` in its terminal.
-6. Ask the default agent to save a short record:
+1. Review the plan, then select **Exit plan mode and I will prompt myself**. Ask the Copilot app to implement only that change, with no unrelated refactoring or new dependencies.
+1. Validate the change with the Chapter 03 inner loop:
+   - Inspect **Changes**, then rerun `npm test -- --run` and `npm run build`. Don't weaken existing tests.
+   - Start the app with `npm run dev` and open its **Local** URL in the **Browser** tab. Check the headings at a wide and a narrow width. Ask the Copilot app to confirm the rendered heading levels, because appearance alone doesn't show them.
+   - Search for `hobbit`, then `zzzz-no-match`. Confirm that the statistics match each result and that the empty-state message mentions changing the search term, genre, or reading status.
+   - Stop the development server with `Ctrl+C`.
+1. Ask the default agent to save a short record:
 
    ```text
    Create samples/book-app-web/docs/chapter-04-review.md. If it exists, update it without removing prior notes.
 
-   Record the skill rules applied, the custom agent's role and tool limits, the change made, and the commands and browser checks actually completed. If an exercise was blocked, record the reason instead of claiming it ran. Mark unperformed checks clearly.
-
-   Change only this document. Do not commit or push.
+   Record the skill rules applied, the custom agent's role and tool limits, the change made, and only the commands and browser checks that actually ran. If a check was blocked, record why. Change only this document. Do not commit or push.
    ```
 
 **Success Criteria:** Your diff contains the skill update, agent profile, one focused app or test change, and the review record. Tests and the build pass. You can explain the difference between repository instructions, a skill, and a custom agent.

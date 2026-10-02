@@ -53,7 +53,7 @@ Because each session has its own worktree, you can run several sessions in paral
 
 When you start a session with **+**, the workspace selector below the prompt box lets you choose *where* the work happens. The menu also has **Base branch**, which sets the branch that a new worktree starts from.
 
-The app remembers your last choice. You chose **Current checkout** in Chapter 00, so switch back now: point to the `copilot-app-for-beginners` project, select **+**, open the workspace selector, and choose **New worktree**. You don't need to submit a prompt; the app keeps the choice. A session that you start with **Create from** always gets a new worktree.
+The app remembers your last choice. You chose **Current checkout** in Chapter 00, so switch back now: point to the `copilot-app-for-beginners` project, select **+**, open the workspace selector, and choose **New worktree**. You don't need to submit a prompt; the app keeps the choice. A session that you start with **Create from** (more on that in a moment) always gets a new worktree.
 
 ![Where to work menu in the GitHub Copilot app showing New worktree, Current checkout, Cloud, and Base branch](assets/where-sessions-run.webp)
 
@@ -101,7 +101,6 @@ For this chapter, you only need two commands:
 | Command | Description |
 |---|---|
 | `/agent` | Select or switch the active agent for a session. It appears after you add a custom agent (Chapter 04). |
-| `/chronicle` | Summarize session history, generate standups, search past work, or get workflow/cost tips. |
 | `/collect-debug-logs` | Create a debug log archive for troubleshooting, or upload one as a secret gist. |
 | `/context` | Show session context details such as token usage (how much text the model is holding), context window size, and AI credit spend. |
 | `/create-canvas` | Create or change a canvas with the built-in canvas-authoring skill. Chapter 06 covers canvases. |
@@ -125,7 +124,7 @@ Perform these steps:
 
 1. In the sidebar, point to the `copilot-app-for-beginners` project, then select the **Create from** icon that appears next to it.
 
-   <img src="assets/app-create-from-icon-step1.svg" alt="Create session from branch" width="800" />
+   <img src="assets/app-create-from-icon.webp" alt="Create session from branch" width="800" />
 
 1. Select the **Branches** tab, then select `practice-empty-state-copy`. The app starts a new session from that branch in a new worktree.
 
@@ -251,7 +250,7 @@ Worktrees isolate files and branches, not ports. Stop one Vite server or start t
 
 Use the workflow from this chapter to add a light and dark theme to the Book App in an isolated worktree. The earlier exercise used `#` to attach an issue; this time, use `@` to attach the code the agent needs. Keep the work local. Chapter 03 covers the issue and pull request workflow.
 
-1. In the sidebar, select **Create from** for the `copilot-app-for-beginners` project and start a new worktree session from `main`.
+1. In the sidebar, point to the `copilot-app-for-beginners` project and select **Create from**. On the **Branches** tab, select `main` to start a new worktree session.
 
 1. Ask Copilot to run `samples/book-app-web` and open the preview.
 
