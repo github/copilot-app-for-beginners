@@ -27,9 +27,10 @@ For every `app-*` screenshot, compare the **exact on-screen text** to how the
 course refers to it:
 
 1. **Label casing and wording** — UI labels must match the screenshot verbatim,
-   including casing. For example the sidebar shows `My work` (lowercase "w"),
-   `Home`, `Automations`, `Search`, `Sessions`, `Quick chats`. Flag any course
-   text that writes `My Work`, `Quick Chats`, etc.
+   including casing. For example the sidebar shows `Pull requests` (lowercase
+   "r"), `Issues`, `Automations`, `Customize`, `More`, and the `Chats` row under
+   `Projects`. Flag any course text that writes `Pull Requests`, `New Chat`,
+   etc.
 2. **Buttons, menu items, and dialog options** — names the README tells the user
    to click must match the screenshot, e.g. `Create from…`, `Toggle review panel`,
    `Exit plan mode and I will prompt myself`, `Local folder or repository`,
@@ -75,7 +76,7 @@ UI map disagree, trust the screenshot and note that the UI map needs a refresh.
 4. **Cross-check** the transcribed text against the README using the rules in
    *What To Check* above. Also scan the whole course for the visible labels to
    catch casing drift in chapters that do not embed the image
-   (e.g. `grep -rn "My Work" .`).
+   (e.g. `grep -rn "Pull Requests" .`).
 
 5. **Report** findings (see *Output*). Do not edit images or rename files as part
    of the check. Only propose or apply text fixes if the user asks.
@@ -100,4 +101,4 @@ Keep citations exact (`path/README.md:NN`) so fixes are easy to apply.
 - Screenshots may contain account names, private repo names, or paths. Do not
   copy private data into the report; describe the UI generically.
 - Casing matters: product labels use the app's exact sentence case
-  (e.g. `My work`, `Quick chats`), even inside Title Case headings.
+  (e.g. `Pull requests`, `Assigned to me`), even inside Title Case headings.

@@ -483,7 +483,6 @@ function ensurePrComment(prNumber, marker, body) {
     "pr",
     "view",
     prNumber,
-    "--comments",
     "--json",
     "comments",
   ]);
@@ -869,12 +868,21 @@ Course use:
   }
 
   log("");
+  if (dryRun) {
+    log("Dry run complete. No changes were made.");
+    log(
+      "Confirm that the Repository line above shows your fork, then run the script again with --yes.",
+    );
+    return;
+  }
   log("Setup complete.");
   log("Next checks:");
   log(
     "- Open the GitHub Copilot app and connect this fork/training repository.",
   );
-  log("- Confirm the seeded issues and PRs appear in My work.");
+  log(
+    "- Confirm the seeded issues and PRs appear in the Issues and Pull requests views.",
+  );
   log(
     "- Wait for the failing-check PR workflow to finish before using that lesson.",
   );

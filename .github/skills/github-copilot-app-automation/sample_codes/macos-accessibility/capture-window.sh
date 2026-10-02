@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 #
 # Capture the visible GitHub Copilot app window by its CoreGraphics window id.
+# The window should use the 16:9 capture frame that launch-persona.sh applies.
 # Output PNG and WebP files are always normalized to 1920x1080 with a 2px
 # #cccccc inside border. Settings screenshots have the displayed app version
-# removed. Optional ordered callouts are added after finalization.
+# removed. Optional ordered callouts and highlight boxes are added after
+# finalization. An optional --crop then cuts out a detail area (all coordinates
+# use the finalized 1920x1080 image) and adds the same border to the crop.
+#
+# Before capture, the script fails if a system overlay is visible in the app,
+# such as the Siri waveform orb that macOS can show next to a focused text field.
 #
 # Why this exists: the app is WebKit-backed, and `System Events` sometimes
 # reports `count of windows = 0` even when a window is visible, which breaks the
@@ -27,13 +33,18 @@
 #
 # Usage:
 #   capture-window.sh <output_dir> <base_name> [timeout_seconds] [process_id]
-#     [--callout NUMBER:X:Y ...]
+#     [--callout NUMBER:X:Y ...] [--box LEFT:TOP:RIGHT:BOTTOM ...]
+#     [--arrow TAIL_X:TAIL_Y:HEAD_X:HEAD_Y ...] [--crop LEFT:TOP:RIGHT:BOTTOM]
 #
 # Example:
 #   pid="$(launch-persona.sh demo 45)"
 #   capture-window.sh 04-skills-custom-agents/assets app-settings-skills 40 "$pid"
 #   capture-window.sh 00-setup/assets app-add-project 40 "$pid" \
-#     --callout 1:472:324 --callout 2:743:501
+#     --callout 1:372:338 --callout 2:585:437
+#   capture-window.sh 06-canvases/assets app-open-repo-issues-canvas 40 "$pid" \
+#     --box 1287:266:1551:309 --crop 352:0:1920:700
+#   capture-window.sh 03-development-workflows/assets app-filter-repo 40 "$pid" \
+#     --callout 1:1580:34 --callout 2:1795:157 --crop 1320:0:1916:240
 set -euo pipefail
 
 out_dir="${1:?output_dir required}"
@@ -41,8 +52,23 @@ base="${2:?base_name required}"
 timeout="${3:-30}"
 target_pid="${4:-${COPILOT_PID:-}}"
 callout_args=()
+crop=""
 if [ "$#" -gt 4 ]; then
-  callout_args=("${@:5}")
+  extra=("${@:5}")
+  index=0
+  while [ "$index" -lt "${#extra[@]}" ]; do
+    if [ "${extra[$index]}" = "--crop" ]; then
+      crop="${extra[$((index + 1))]:-}"
+      [[ "$crop" =~ ^[0-9]+:[0-9]+:[0-9]+:[0-9]+$ ]] || {
+        echo "--crop needs LEFT:TOP:RIGHT:BOTTOM." >&2
+        exit 1
+      }
+      index=$((index + 2))
+    else
+      callout_args+=("${extra[$index]}")
+      index=$((index + 1))
+    fi
+  done
 fi
 quality="${WEBP_QUALITY:-82}"
 target_width=1920
@@ -58,23 +84,38 @@ swift_src="$here/find-copilot-window.swift"
 window_control_src="$here/control-copilot-window.swift"
 finalizer="$here/finalize-screenshot.py"
 callout_tool="$here/add-step-callouts.py"
+locator_src="$here/locate-copilot-element.swift"
 [ -f "$swift_src" ] || { echo "Missing $swift_src" >&2; exit 1; }
 [ -f "$window_control_src" ] || { echo "Missing $window_control_src" >&2; exit 1; }
 [ -f "$finalizer" ] || { echo "Missing $finalizer" >&2; exit 1; }
 [ -f "$callout_tool" ] || { echo "Missing $callout_tool" >&2; exit 1; }
+[ -f "$locator_src" ] || { echo "Missing $locator_src" >&2; exit 1; }
 for tool in swift swiftc screencapture python3 tesseract; do
   command -v "$tool" >/dev/null 2>&1 || { echo "Missing required tool: $tool" >&2; exit 1; }
 done
 mkdir -p "$out_dir"
 lister="$(mktemp -t findcopilot)"
 window_control="$(mktemp -t control-copilot-window)"
+locator="$(mktemp -t locate-copilot-element)"
 identities=""
-trap 'rm -f "$lister" "$window_control"; [ -z "$identities" ] || rm -f "$identities"' EXIT
+trap 'rm -f "$lister" "$window_control" "$locator"; [ -z "$identities" ] || rm -f "$identities"' EXIT
 swiftc "$swift_src" -o "$lister" 2>/dev/null || { echo "swiftc failed to build the window lister" >&2; exit 1; }
 swiftc "$window_control_src" -o "$window_control" 2>/dev/null || { echo "swiftc failed to build the window controller" >&2; exit 1; }
+swiftc "$locator_src" -o "$locator" 2>/dev/null || { echo "swiftc failed to build the element locator" >&2; exit 1; }
 
 if [ -n "$target_pid" ]; then
   "$window_control" "$target_pid" activate "$timeout" >/dev/null
+  # Let transient system indicators (for example, the input-source badge that
+  # macOS shows next to a focused text field) fade before the capture.
+  sleep "${COPILOT_CAPTURE_SETTLE_SECONDS:-2}"
+  # System overlays are not part of the app and must not appear in course
+  # screenshots. The Siri waveform orb appears next to a focused text field
+  # when Siri is on. Fail closed instead of capturing it.
+  if "$locator" "$target_pid" "Waveform Orb" --contains >/dev/null 2>&1; then
+    echo "A Siri waveform orb is visible in process $target_pid." >&2
+    echo "Turn off Siri in System Settings > Apple Intelligence & Siri, then retry." >&2
+    exit 5
+  fi
 fi
 
 pick_window() {
@@ -121,7 +162,8 @@ png="$out_dir/$base.png"
 webp="$out_dir/$base.webp"
 raw_png="$out_dir/$base.raw.png"
 
-screencapture -x -l "$winid" "$raw_png"
+# -o omits the window shadow so the capture keeps the exact 16:9 window size.
+screencapture -x -o -l "$winid" "$raw_png"
 [ -s "$raw_png" ] || { echo "Capture produced no file. Grant Screen Recording permission to the caller." >&2; exit 3; }
 
 verdict="$(python3 - "$raw_png" <<'PY'
@@ -152,6 +194,12 @@ python3 "$finalizer" "$png"
 if [ "${#callout_args[@]}" -gt 0 ]; then
   python3 "$callout_tool" "$png" "${callout_args[@]}"
 fi
+if [ -n "$crop" ]; then
+  python3 "$finalizer" "$png" --crop "$crop"
+  IFS=: read -r crop_left crop_top crop_right crop_bottom <<<"$crop"
+  target_width=$((crop_right - crop_left))
+  target_height=$((crop_bottom - crop_top))
+fi
 
 if command -v cwebp >/dev/null 2>&1; then
   cwebp -quiet -lossless -q "$quality" -m 6 -metadata none "$png" -o "$webp"
@@ -175,7 +223,10 @@ border_width = 2
 for path in sys.argv[1:3]:
     with Image.open(path) as image:
         if image.size != expected:
-            raise SystemExit(f"{path} is {image.width}x{image.height}; expected 1920x1080.")
+            raise SystemExit(
+                f"{path} is {image.width}x{image.height}; "
+                f"expected {expected[0]}x{expected[1]}."
+            )
         pixels = image.convert("RGB")
         for offset in range(border_width):
             horizontal = [

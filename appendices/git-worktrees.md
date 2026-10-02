@@ -23,7 +23,7 @@ In the GitHub Copilot app, a session often gets its own branch and worktree. Tha
 | Branch | A named line of work in git, usually for one feature or fix |
 | Worktree | A separate folder attached to the same repo, often checked out to a session branch |
 
-The app may create a branch name such as `copilot/fix-unread-count` and a matching worktree folder. The exact name depends on your app settings and project branch prefix.
+The app names a new session branch with your branch prefix (by default, your GitHub username) and generated words, such as `octocat-bookish-invention`. The agent can rename the branch to describe the task, such as `octocat-fix-unread-count`. You can change the prefix in **Settings** > **Sessions**.
 
 ## Why the app uses worktrees
 
@@ -104,7 +104,7 @@ Before cleanup:
 2. Save anything you need by committing, opening a PR, or copying only reviewed changes.
 3. Stop dev servers, terminal tasks, and browser previews tied to that worktree.
 4. Close editors that are open in the worktree.
-5. Use the app's session cleanup or close action when available.
+5. Right-click the session in the sidebar. Select **Archive** to keep the session history, or **Delete** to remove the session and its files. Before deletion, the app backs up uncommitted changes to a recovery branch.
 
 If a worktree was created outside the app, use normal git commands only after checking the branch and path:
 

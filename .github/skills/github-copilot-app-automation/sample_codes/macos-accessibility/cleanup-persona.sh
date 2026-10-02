@@ -26,5 +26,6 @@ if ps -p "$target_pid" -o command= 2>/dev/null | grep -q '^/Applications/GitHub 
   done
 fi
 
+rm -f "${TMPDIR:-/tmp}/copilot-capture-identities/$target_pid.json"
 echo "closed_process=$target_pid"
 echo "preserved_persona=$persona"

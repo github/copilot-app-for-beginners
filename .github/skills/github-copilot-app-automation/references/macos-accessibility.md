@@ -77,8 +77,9 @@ verify the exact repository:
 ```bash
 SK=.github/skills/github-copilot-app-automation/sample_codes/macos-accessibility
 PERSONA="demo"
+# The local clone of the training fork, not the upstream course repository.
 COPILOT_PID="$(bash "$SK/prepare-persona.sh" \
-  "$PERSONA" "$HOME/Desktop/projects/copilot-app-for-beginners" 60)"
+  "$PERSONA" "$HOME/copilot-app-for-beginners" 60)"
 ```
 
 Use the returned process ID for subsequent Accessibility operations and pass it
@@ -102,11 +103,17 @@ A process-specific `capture-window.sh` run automatically:
 - Derives matching account handles and personal repository owners by normalized
   comparison.
 - Replaces profile text with `Copilot Dev`.
-- Replaces matching account handles and repository owners with `copilotdev`.
+- Replaces matching account handles and repository owners with `copilotdev`,
+  also inside paths and branch names.
+- Replaces the macOS account name and machine name with `copilotdev` and
+  `copilot-dev-mac`.
 - Keeps the avatar and unrelated people and organizations unchanged.
 - Verifies with OCR that the source identity text is absent.
 - Adds ordered red number callouts when repeated
-  `--callout NUMBER:X:Y` arguments are supplied.
+  `--callout NUMBER:X:Y` arguments are supplied, red highlight boxes for
+  `--box LEFT:TOP:RIGHT:BOTTOM`, red arrows for
+  `--arrow TAIL_X:TAIL_Y:HEAD_X:HEAD_Y`, and a bordered crop for `--crop`.
+- Fails if a Siri waveform orb is visible next to a focused field.
 
 This step requires `tesseract` and Pillow. If identity detection succeeds but
 OCR cannot find or remove the text, capture fails and keeps the `.raw.png` file

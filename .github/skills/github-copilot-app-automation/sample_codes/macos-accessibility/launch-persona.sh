@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 #
 # Launch a separate GitHub Copilot app instance with an isolated HOME, then
-# switch only that instance to full screen.
+# give only that instance the 16:9 capture frame (1920x1080 points by default).
+#
+# On a standard-resolution display, the 1920x1080-point frame captures as a
+# native 1080p image. The script then resets the web zoom and zooms in exactly
+# twice (125%), as the skill requires, and confirms the zoom.
+#
+# COPILOT_CAPTURE_WIDTH and COPILOT_CAPTURE_ZOOM_STEPS (0-7) exist only for
+# special cases. Course screenshots use the defaults.
+#
+# A standard window is used instead of full screen because full screen can
+# draw the menu bar and title bar over the app content while the app is active.
 #
 # Usage:
 #   launch-persona.sh [persona] [timeout_seconds]
@@ -70,14 +80,23 @@ done
   exit 2
 }
 
-echo "Waiting for process $pid, switching it to full screen, and applying capture zoom..." >&2
+capture_width="${COPILOT_CAPTURE_WIDTH:-1920}"
+[[ "$capture_width" =~ ^[0-9]+$ ]] || {
+  echo "COPILOT_CAPTURE_WIDTH must be a whole number of points." >&2
+  exit 1
+}
+echo "Waiting for process $pid, applying the ${capture_width}-point 16:9 capture frame and capture zoom..." >&2
 window_control="$(mktemp -t control-copilot-window)"
 trap 'rm -f "$before" "$window_control"' EXIT
 swiftc "$window_control_src" -o "$window_control" 2>/dev/null || {
   echo "swiftc failed to build the window controller." >&2
   exit 3
 }
-"$window_control" "$pid" fullscreen "$timeout" >/dev/null
-"$window_control" "$pid" capture-zoom "$timeout" >/dev/null
+"$window_control" "$pid" frame "$timeout" "$capture_width" >/dev/null
+if [ -n "${COPILOT_CAPTURE_ZOOM_STEPS:-}" ]; then
+  "$window_control" "$pid" capture-zoom "$timeout" "$COPILOT_CAPTURE_ZOOM_STEPS" >/dev/null
+else
+  "$window_control" "$pid" capture-zoom "$timeout" >/dev/null
+fi
 
 printf '%s\n' "$pid"

@@ -14,8 +14,8 @@ By the end of this chapter, you'll be able to:
 
 - Explain when a canvas works better than a long chat thread
 - Install and try a community canvas from a plugin
-- Create a session canvas with `/create-canvas`
-- Keep plan state and validation evidence visible on that canvas
+- Create your own canvases with `/create-canvas`
+- Keep plan state and validation evidence visible on a canvas
 
 > ⏱️ **Estimated Time**: ~70-90 minutes
 
@@ -30,7 +30,7 @@ Complete [Chapter 05](../05-mcp-plugins/README.md) so you know how to install an
 
 Prepare a session and confirm that the sample app is ready:
 
-1. Use **Create from** > **Branches** > `main` to start a new worktree session for the course repository. Select **Interactive** mode and **Default agent**.
+1. Use **Create from** > **Branches** > `main` to start a new worktree session for the course repository. Select **Interactive** mode. If an agent picker appears below the prompt box, select **Default agent**.
 1. In the review panel's **Terminal** tab, run the following commands from the worktree's repository root:
 
     ```bash
@@ -64,7 +64,7 @@ A canvas is the app's arrangement board for human-agent work.
 
 ## Core Concepts
 
-### A canvas is a shared control panel
+### A Canvas Is a Shared Control Panel
 
 Canvases are documented as **bidirectional** work surfaces: both sides (user and agent) can change the same board.
 
@@ -99,7 +99,7 @@ You do not need to write extension code in this chapter. These terms help you un
 
 </details>
 
-### Built-in work surfaces come first
+### Built-In Work Surfaces Come First
 
 You already used these panels in earlier chapters. They come with the session. You don't create them.
 
@@ -112,7 +112,7 @@ You already used these panels in earlier chapters. They come with the session. Y
 
 Those panels stay tied to the live session. A canvas adds one more surface that you design for the task.
 
-### When to use a canvas
+### When to Use a Canvas
 
 | Use chat when... | Use a canvas when... |
 |---|---|
@@ -129,23 +129,23 @@ Before building your own canvas, try one from the community. [Awesome GitHub Cop
 
 ![Repository Issues Kanban preview](assets/repo-issues-kanban.webp)
 
-1. On the [Repository Issues Kanban][issues-kanban] page of the Awesome Copilot website, select **+ Install in GitHub Copilot app** to install it in your GitHub Copilot app.
+1. On the [Repository Issues Kanban][issues-kanban] page of the Awesome Copilot website, select **Open in Copilot app** to install it in your GitHub Copilot app. If your browser asks to open the GitHub Copilot app, allow it.
 
-    - Select **Allow** when prompted to install the plugin.
-    - Select **Install** to install it from the Awesome Copilot marketplace. The package name is `accessibility-kanban@awesome-copilot`.
-    - Ensure the plugin is listed under your installed and enabled plugins.
+    - In the **Install plugin?** dialog, select **Allow**.
+    - In the **Install plugin** dialog, confirm that the name is `accessibility-kanban@awesome-copilot`, then select **Install**.
+    - Confirm that the plugin appears under **Installed** in **Customize** > **Plugins**, with its toggle on.
 
 1. Return to the worktree session you prepared in the prerequisites and submit the prompt `Restart canvas extensions`. This will reload the extensions and pick up the newly installed one.
-1. Navigate to **View** > **Toggle Review Panel** > **+** > **Extensions** and select **Repository Issues Kanban**. The package is named `accessibility-kanban`, but **Repository Issues Kanban** is the name shown in the app.
+1. In the review panel, select **+** (**Add tab**), then **Canvas**, and select **Repository Issues Kanban**. If the review panel is hidden, select **View** > **Toggle Review Panel** first. The package is named `accessibility-kanban`, but **Repository Issues Kanban** is the name shown in the app.
 
-    ![Repository Issues Kanban extension selection](assets/open-repo-issues-canvas.webp)
+    ![Review panel + menu with Canvas open and Repository Issues Kanban highlighted](assets/app-open-repo-issues-canvas.webp)
 
 1. The board loads issues from the current repository and organizes them by status.
 1. Drag an issue between columns and notice how the canvas keeps state visible without scrolling through chat.
 
 Take a minute to move items around. This is the interaction model you will build on in Exercise 2.
 
-## Exercise 2: Create a session board
+## Exercise 2: Create a Session Board
 
 Start with a small canvas that works like a shared checklist. You and the agent can both see and update the same feature proposal, checklist, and notes. This exercise lets you practice those basic interactions before Exercise 3 adds buttons that ask the agent to run development tasks.
 
@@ -174,7 +174,7 @@ Start with a small canvas that works like a shared checklist. You and the agent 
 
 ## Exercise 3: Create a Feature Workbench
 
-You will build a reusable canvas that manages the local development inner loop for a new book-app feature. It keeps the feature proposal, plan, implementation and evidence linked to the same session.
+You will build a reusable canvas that manages the local development inner loop for a new book-app feature. It keeps the feature proposal, plan, implementation, and evidence linked to the same session.
 
 <img src="assets/session-plan-validation-board.webp" alt="Session plan and validation board" width="800" />
 
@@ -224,10 +224,9 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
 1. The canvas should open in the right side panel once the agent is done building it.
 
-    >[!IMPORTANT]
-    > Generated results can differ between runs. Check the expected structure below before you continue. Do not repeatedly regenerate the full canvas.
+    > **Important:** Generated results can differ between runs. Check the expected structure below before you continue. Do not repeatedly regenerate the full canvas.
 
-    <img src="assets/app-create-canvas-screenshot.webp" alt="Screenshot of the feature workbench canvas" width="800" />
+    <img src="assets/app-create-canvas-screenshot.webp" alt="Feature Workbench canvas in the side panel with five stages, a feature proposal field, actions, a checklist, and an empty evidence area" width="800" />
 
     Confirm that the canvas has:
 
@@ -267,29 +266,29 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     This will:
     - Switch the session mode to **Plan**
     - Send a prompt that asks the agent to create an implementation plan for the proposed feature
-    - Keep the canvas at the **Propose** stage and show the status as **Working ...**
+    - Keep the canvas at the **Propose** stage and show the status as **Working...**
 
-        ![Feature Workbench at the Propose stage while the implementation plan is being generated](assets/propose.webp)
+        ![Feature Workbench at the Propose stage with the status Working... while the session is in Plan mode](assets/app-feature-workbench-propose.webp)
 
-1. Review the visible plan in the **Plan** tab. In the plan approval controls, select **2. Exit plan mode and I will prompt myself**. Then return to the canvas. The **Plan** stage should be complete, and the feature status should show **Approved**.
+1. Review the plan in the **Plan** tab. In the **Review plan** box at the bottom of the chat, select **Exit plan mode and I will prompt myself**. Then select the **Feature Workbench** tab to return to the canvas. The **Plan** stage should be complete, and the feature status should show **Approved**.
 
-    ![Screenshot of the approved plan](assets/plan.webp)
+    ![Feature Workbench with the Propose and Plan stages complete and the status Approved](assets/app-feature-workbench-plan.webp)
 
 1. Select **Run baseline** on the canvas. This ensures that the initial state of the application is recorded before making any changes.
 
-    Confirm that the canvas records the individual Vitest test total and build result from terminal output. Expand the working section in the chat to confirm that the right test commands were executed and that the evidence matches the reported results. 
-    
+    Confirm that the canvas records the Vitest test total and the build result from the terminal output. In the chat, expand the tool calls for this action to see the commands that Copilot ran (`npm test -- --run` and `npm run build`). The evidence should match the totals in their output.
+
     The board is useful only when it stays linked to evidence from the same session. Checking a validation box because the chat sounded confident is not enough.
 
-    ![The baseline action runs four tests before implementation](assets/baseline.webp)
+    ![Expanded npm test output with 4 passed tests, next to the Feature Workbench Baseline evidence of 4/4 tests and a passing build](assets/app-feature-workbench-baseline.webp)
 
-    When the action finishes, the **Baseline** stage should show as complete. The baseline test and build items should show **Done**, and the evidence should include the number of tests.
+    When the action finishes, the **Baseline** stage should show as complete. The **Baseline test** and **Baseline build** checklist items should be marked done, and the evidence should include the number of tests.
 
-1. Select **Implement** to build the feature according to the generated plan.
+1. Select **Implement** to build the feature from the approved plan.
 
-    See the **Changes** tab to review the modifications and confirm it is limited to the approved feature. The canvas will update to reflect the current **Implement** stage, check off items related to implementation on the checklist and include Diff changes as part of the evidence.
+    When the action finishes, the canvas marks the **Implement** stage complete, checks off the implementation items in the checklist, and adds a **Diff** row to the evidence. Select the **Changes** pill above the prompt box to open the **Changes** tab, and confirm that the changes are limited to the approved feature.
 
-    ![The Feature Workbench records implementation and diff evidence](assets/implement.webp)
+    ![Feature Workbench with the Implement stage complete and a Diff row in the evidence, next to the Changes pill above the prompt box](assets/app-feature-workbench-implement.webp)
 
 1. Select **Browser validation** to have the agent perform a visual check in the browser. You can manually test the feature by interacting with the application and observing the visual changes. In the browser, apply a filter and confirm **Clear filters** appears.
 
@@ -303,7 +302,9 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     | You select **Clear filters** | Search, genre, and reading status return to their defaults |
     | Filters have been cleared | **Clear filters** is not visible, and the full book list and statistics return |
 
-    ![The Feature Workbench runs browser validation](assets/browser-validation.webp)
+    ![Feature Workbench with Browser evidence recorded while Browser validation still shows Working..., next to Copilot's report that browser validation passed](assets/app-feature-workbench-browser-validation.webp)
+
+    When you finish the checks, select **Background** above the prompt box and stop the dev server. Until the dev server stops, **Browser validation** can keep showing **Working...**, even after Copilot reports the result.
 
 1. Select **Run final checks** to confirm that the existing automated checks still pass.
 
@@ -316,7 +317,7 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     | Browser | All five browser states above were checked |
     | Final | Tests and build pass, and the final test total is at least the baseline total |
 
-    ![Final evidence shows four baseline tests and six final tests](assets/validate.webp)
+    ![Feature Workbench with all five stages complete, and evidence that shows 4 baseline tests and 9 final tests](assets/app-feature-workbench-validate.webp)
 
 You've seen how the workbench reflects what actually happened in the session, not because a chat response sounds confident. Copilot can update the canvas after an action gathers evidence, but you decide whether that evidence is sufficient.
 
@@ -325,7 +326,7 @@ You've seen how the workbench reflects what actually happened in the session, no
 <details>
 <summary>Optional: Markdown fallback if the canvas doesn't work</summary>
 
-### Markdown fallback
+### Markdown Fallback
 
 If `/create-canvas` is unavailable or the generated canvas still does not work after two focused repairs, keep the same workflow in a Markdown artifact:
 
@@ -351,7 +352,7 @@ You ran `/create-canvas` in Exercises 2 and 3. Opening the generated files is op
 | `~/.copilot/extensions` | User | Personal experiments. Prefer this in the course so nothing is committed |
 | `.github/extensions` | Project or team | Shared course and team workflows |
 
-A canvas commonly includes `package.json`, an entry file such as `extension.mjs`, and optional JSON artifacts for persisted state.
+A canvas includes an entry file such as `extension.mjs`. It can also include other modules, an HTML view, a `package.json` file for metadata and dependencies, and files that store its state.
 
 Pause before accepting extra generated code. Inspect capability names, stored state, UI controls, and whether any private data is included.
 
@@ -363,23 +364,50 @@ If a canvas fails to open after edits, check extension dependencies, reload requ
 
 ## Troubleshooting
 
-If you are still stuck, see the [Troubleshooting Reference](../appendices/troubleshooting-reference.md).
+If something does not work as expected, check the problems below. The [Troubleshooting Reference](../appendices/troubleshooting-reference.md) lists problems and fixes for all chapters.
 
 <details>
-<summary>Canvas issues</summary>
+<summary>Canvas problems</summary>
 
-| Problem | What to check |
-|---|---|
-| No canvas opens | Confirm you typed `/create-canvas`. Restart canvas extensions once. If the command or panel is still missing, use the [Markdown fallback](#markdown-fallback) |
-| Community canvas is not listed | Look for **Repository Issues Kanban**. `accessibility-kanban` is the package name, not the display name |
-| Generated layout is incomplete | Compare it with the expected structure and use one focused repair prompt |
-| Plan stays in Working state | Complete the plan approval control in the **Plan** tab, then refresh the canvas evidence |
-| Built-in terminal or browser missing | Review panel toggle, View menu, app version |
-| Agent says it updated the board but state looks wrong | Ask for the full board again and compare it with terminal or browser evidence |
-| Validation marked complete without proof | Require evidence; uncheck items that lack output |
-| Baseline and final totals look wrong | Compare both values with terminal output from this worktree. Do not copy totals from an example image or another session |
-| Browser or terminal validation is stale | Confirm the command ran in the correct `samples/book-app-web` worktree |
-| Sensitive data appears in a custom canvas | Remove it, regenerate safe sample data, retake screenshots |
+### No canvas opens
+
+Confirm that you typed `/create-canvas`. Submit the prompt `Restart canvas extensions` once. If the command or the panel is still missing, use the [Markdown fallback](#markdown-fallback).
+
+### The community canvas is not listed
+
+Look for **Repository Issues Kanban**. `accessibility-kanban` is the package name, not the name that the app shows.
+
+### The generated layout is incomplete
+
+Compare the canvas with the expected structure in the exercise. Then use the one repair prompt that matches the missing part.
+
+### The plan status stays at Working
+
+Answer the **Review plan** box at the bottom of the chat. Then select **Refresh evidence** on the canvas.
+
+### The Terminal or Browser tab is missing
+
+If the review panel is hidden, select **View** > **Toggle Review Panel**. In the review panel, select **+**, then **Terminal** or **Browser**. If the tab is still missing, update the app to the latest version.
+
+### The agent says it updated the board, but the board looks wrong
+
+Ask the agent for the full board again. Compare it with the evidence in the terminal or browser.
+
+### A validation item is complete without proof
+
+Ask for the evidence, such as test output or a browser check. Uncheck any item that has no output to support it.
+
+### The baseline or final totals look wrong
+
+Compare both values with the terminal output from this worktree. Do not copy totals from an example image or another session.
+
+### Browser or terminal validation is stale
+
+Confirm that the command ran in the `samples/book-app-web` folder of this session's worktree. Then run the check again.
+
+### Sensitive data appears in a custom canvas
+
+Remove the data and replace it with safe sample data. If you took screenshots of the canvas, take them again.
 
 </details>
 
@@ -398,19 +426,24 @@ If you are still stuck, see the [Troubleshooting Reference](../appendices/troubl
 
 ![Assignment](../assets/assignment.webp)
 
-### Core assignment
+### Core Assignment
 
 Extend the Feature Workbench with an **Assess** stage after **Propose**. The stage must compare a feature proposal with the app's current behavior before planning starts.
 
 Pick one small, beginner-safe improvement in `samples/book-app-web` that you have not already shipped in an earlier chapter.
 
-1. Add an **Assess** stage after **Propose** to evaluate the feature proposal against the app's current behavior.
+1. Add an **Assess** stage after **Propose** to evaluate the feature proposal against the app's current behavior. Type `/`, select `/create-canvas`, and submit a focused change request, like the repair prompts in Exercise 3. For example:
+
+    ```text
+    Keep the current Feature Workbench canvas. Add an Assess stage between Propose and Plan. Assess asks the agent to compare the feature proposal with the app's current behavior and records the result as evidence. Do not redesign parts that already work.
+    ```
+
 1. Run the workbench through assess, plan, baseline, implement, and validate.
 1. Confirm that each completed stage has evidence from the current session.
 
-**Core success criteria:** The canvas shows evidence-backed progress from assessment through local validation, and you can identify the next decision without rereading the whole chat.
+**Core Success Criteria:** The canvas shows evidence-backed progress from assessment through local validation, and you can identify the next decision without rereading the whole chat.
 
-### Optional GitHub workflow challenge
+### Optional GitHub Workflow Challenge
 
 Complete this challenge only if you have permission to create issues and pull requests in the training repository. Review the [issue and pull-request workflow from Chapter 03](../03-development-workflows/README.md) before you start.
 
@@ -419,13 +452,13 @@ Complete this challenge only if you have permission to create issues and pull re
 1. Request Copilot review.
 1. Keep the issue, pull-request link, and review status visible as evidence on the canvas.
 
-**Challenge success criteria:** The canvas shows an open pull request linked to the issue, with Copilot review requested. Do not merge the pull request as part of this assignment.
+**Challenge Success Criteria:** The canvas shows an open pull request linked to the issue, with Copilot review requested. Do not merge the pull request as part of this assignment.
 
 ---
 
 ## What's Next
 
-In Chapter 07, you'll turn repeatable prompts into automations. You'll start with a manual pull request readiness report before trying schedules, event triggers, or cloud workflows. You don't need to merge this chapter's feature or keep its canvas open to continue.
+In Chapter 07, you'll turn repeatable prompts into automations. You'll create a manual pull request readiness report and then schedule it. The chapter ends with event triggers and cloud automations. You don't need to merge this chapter's feature or keep its canvas open to continue.
 
 **[← Back to Chapter 05](../05-mcp-plugins/README.md)** | **[Continue to Chapter 07 →](../07-automations/README.md)**
 

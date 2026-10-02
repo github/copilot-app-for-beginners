@@ -13,8 +13,8 @@ By the end of this chapter, you'll be able to:
 - Explain when to automate recurring agent work instead of starting a manual session
 - Create and test an on-demand local automation
 - Schedule an automation and review its run history
-- Recognize event triggers (issue-created, pull-request) and when they are appropriate
-- Understand cloud automations
+- Recognize event triggers, such as **Issue** and **Pull request**, and when they are appropriate
+- Explain what cloud automations need and how to limit their tools
 
 > ⏱️ **Estimated Time**: ~50 minutes
 
@@ -22,7 +22,7 @@ By the end of this chapter, you'll be able to:
 
 ## Prerequisites
 
-Complete [Chapter 06](../06-canvases/README.md) and the preceding chapters. You'll reuse **My work** from Chapter 03 and the tool-access principles from Chapters 04 and 05. You don't need to keep a canvas open or an MCP server or plugin enabled for this chapter.
+Complete [Chapter 06](../06-canvases/README.md) and the preceding chapters. You'll reuse the **Pull requests** view from Chapter 03 and the tool-access principles from Chapters 04 and 05. You don't need to keep a canvas open or an MCP server or plugin enabled for this chapter.
 
 If you skipped the setup script earlier, [run it now](../00-setup/README.md#seed-the-repository) before the first automation exercise. The review readiness report needs open pull requests to inspect.
 
@@ -100,26 +100,22 @@ In these exercises, you'll:
 
 ### Confirm Work Items Exist
 
-Before creating the automation, confirm work items exist. Open **My work** and filter to your fork:
+Before creating the automation, confirm work items exist. Select **Pull requests** in the sidebar, then select your fork in the repository picker.
 
-```text
-repo:YOUR-OWNER/copilot-app-for-beginners is:pr is:open
-```
-
-Replace `YOUR-OWNER` with the username or organization that owns your fork. You should see at least three open pull requests from the Chapter 00 setup script. If you completed Chapter 03, the review comment and the failing check may already be fixed, and your search-fix pull request also appears. That is expected; the report shows whatever state your pull requests are in now. If the list is empty, [run the script now](../00-setup/README.md#seed-the-repository) before continuing.
+On the **Authored by me** tab, you should see at least three open pull requests from the Chapter 00 setup script. If you completed Chapter 03, the review comment and the failing check may already be fixed, and your search-fix pull request also appears. That is expected; the report shows whatever state your pull requests are in now. If the list is empty, [run the script now](../00-setup/README.md#seed-the-repository) before continuing.
 
 ### Exercise: Create a Manual Review Readiness Report
 
 This automation answers a real daily question: which pull requests are ready to merge, and what's blocking the ones that aren't?
 
-**My work** already lists your open pull requests, but it doesn't synthesize merge-readiness across them. A review readiness report adds that analysis: CI status, unresolved comments, and what each PR needs next.
+The **Pull requests** view already lists your open pull requests, but it doesn't synthesize merge-readiness across them. A review readiness report adds that analysis: CI status, unresolved comments, and what each PR needs next.
 
 To create an automation:
 
 1. Open **Automations** in the sidebar.
 1. Select **New automation**.
 1. Provide a name for the automation: `PR review readiness report`
-1. Select **Manual** as the trigger.
+1. Change the **Trigger** from **Daily** to **Manual**.
 1. Paste the prompt below:
 
    ```text
@@ -134,11 +130,12 @@ To create an automation:
    ```
 
 1. Below the prompt, use **Select project** to choose your `copilot-app-for-beginners` project. The prompt says "this repository", so the automation must target your fork.
+1. In the **Workspace** picker that appears next to the project, select **Current checkout**. This report only reads data, so each run doesn't need its own new worktree.
 1. Select the arrow next to **Create**, then select **Create and run**.
 
    ![New automation form with filled details](assets/app-new-automation.webp)
 
-   **Expected Output:** Your automation should appear under **Your automations** with the **Manual** label. The run should start immediately and appear under **Recent runs**.
+   **Expected Output:** Your automation should appear under **Your automations** with the **Manual** trigger. The run should start immediately and appear under **Recent runs**.
 
 1. Wait for the run to complete. The status should change to a success indicator.
 
@@ -155,7 +152,7 @@ To create an automation:
 
 Your PR numbers, titles, and statuses may differ. The key is that each row includes CI status, comment status, and a concrete next action. If the table is empty, confirm the Chapter 00 setup script created practice pull requests, then check repository permissions.
 
-**How It Works:** The automation saves the prompt and trigger so you can run the same bounded task again later. Because the prompt is read-only, the risk stays low while you learn the review loop. Unlike **My work**, which lists open items, this report explains why a PR is blocked, not only that it exists.
+**How It Works:** The automation saves the prompt and trigger so you can run the same bounded task again later. Because the prompt is read-only, the risk stays low while you learn the review loop. Unlike the **Pull requests** view, which lists open items, this report explains why a PR is blocked, not only that it exists.
 
 ---
 
@@ -169,24 +166,25 @@ The manual report worked. Now make it run every morning so the summary is waitin
 1. Open **Automations** in the sidebar and find your `PR review readiness report`.
 1. Select the automation, then select **Edit**.
 1. Change the **Trigger** from **Manual** to **Daily**.
-1. Choose a time that runs before your workday starts, for example **08:00**.
+1. Set **Hours** to a time before your workday starts, for example **08:00**, and keep **Minute** at **:00**.
 
    Before you save, narrow the scope so the scheduled report stays useful:
 
-      - Confirm that **Select project** still shows your `copilot-app-for-beginners` project, so the automation targets only your fork.
+      - Confirm that the project picker still shows your `copilot-app-for-beginners` project, so the automation targets only your fork.
       - If the prompt is noisy after a few runs, add a label or branch filter to reduce the output.
 
-1. Save the automation.
+1. Select **Save automation**.
 
    After saving:
 
-   - Check the automation card. It should show the **Daily** label and the next scheduled time.
-   - The next morning, open the **run history** and confirm a new run completed.
+   - Check the automation card. It should show the **Daily** trigger.
+   - Open the automation and select its name at the top. **Automation details** shows the **Schedule** and the **Next run** time.
+   - The next morning, check **Recent runs** and confirm a new run completed.
    - If the summary is too long or noisy, tighten the prompt. For example, limit it to PRs with failing checks, then save again.
 
-**Expected Output:** The automation card shows a daily schedule. If the app was running at the scheduled time, the next run appears in the history without you pressing play. If the result is noisy, you know where to narrow the prompt.
+**Expected Output:** The automation card shows the **Daily** trigger, and **Automation details** shows when the next run happens. If the app was running at the scheduled time, the new run appears under **Recent runs** without you selecting **Run**. If the result is noisy, you know where to narrow the prompt.
 
-### Why schedule instead of running manually?
+### Why Schedule Instead of Running Manually?
 
 A manual automation answers "What's the status right now?" A scheduled automation answers "What changed since yesterday?" without requiring you to remember to ask.
 
@@ -217,7 +215,7 @@ Choose the trigger that matches the event you want the automation to handle. Sch
 
 <img src="assets/app-automation-new-triggers.webp" alt="Automation trigger options in the new-automation form" width="800" />
 
-### Keeping event triggers safe
+### Keeping Event Triggers Safe
 
 Event-triggered automations deserve extra caution because they react to external input:
 
@@ -233,7 +231,7 @@ Every automation you've created so far is **local**: it runs from your machine w
 
 ![Local versus cloud automations](assets/local-vs-cloud-automations.webp)
 
-### When to consider cloud
+### When to Consider Cloud
 
 Move an automation to the cloud only after the local version works reliably and you understand the permission model. Cloud is a good fit when:
 
@@ -241,17 +239,17 @@ Move an automation to the cloud only after the local version works reliably and 
 - Multiple team members should see the same run history.
 - The trigger is an event (issue created, PR opened) that can happen at any time.
 
-Cloud automations depend on settings outside your control in a public fork:
+Cloud automations have requirements that you may not control:
 
-- **Copilot cloud agent** must be enabled for the repository.
-- **Billing**: cloud runs consume Copilot usage. Check your plan before enabling a high-frequency schedule.
-- **Repository visibility**: some cloud flows are unavailable for public or forked repositories.
+- **Copilot cloud agent** must be enabled for the repository, and the organization must allow automations.
+- **Repository visibility**: the repository must be private or internal. Cloud automations are not available in public repositories. A fork of this public course repository is public, so read this section without creating a cloud automation.
+- **Billing**: each cloud run starts a Copilot cloud agent session that uses GitHub Actions minutes and AI credits. This usage is billed to the person who created the automation. Check your plan before you enable a high-frequency schedule.
 
-When you enable **Run in the cloud**, a **Tools** dropdown appears. Each tool grants the cloud agent a specific capability, such as pushing changes, updating labels, or creating a pull request.
+When you enable **Run in the cloud**, a **Tools** dropdown appears. It starts with **All tools selected**. Each tool grants the cloud agent a specific capability, such as pushing changes, updating labels, or creating a pull request. Built-in tools are always available.
 
-<img src="assets/app-automation-cloud-tools.webp" alt="Cloud automation Tools selector with Read issue, List issues, and Search issues selected, showing 3 tools selected while write actions are unchecked" width="800" />
+<img src="assets/app-automation-cloud-tools.webp" alt="Cloud automation Tools selector with Read PR, List PRs, and Search PRs selected, showing 3 tools selected while write tools such as Create PR are cleared" width="800" />
 
-Select only the tools the task requires. The screenshot shows three read-only issue tools selected (**Read issue**, **List issues**, and **Search issues**) and every write tool cleared. For the pull request readiness report, select the equivalent read-only tools for pull requests, checks, and reviews instead. Leave every write tool cleared. You can add tools later, after the output proves trustworthy.
+Select only the tools the task requires. The list starts with every tool selected, so clear each tool you don't need. The screenshot shows the pull request readiness report with three read-only pull request tools selected (**Read PR**, **List PRs**, and **Search PRs**) and every write tool cleared. For CI status, the report may also need a read-only **Actions** tool, such as **List workflows**. You can add tools later, after the output proves trustworthy.
 
 </details>
 
@@ -259,18 +257,30 @@ Select only the tools the task requires. The screenshot shows three read-only is
 
 ## Troubleshooting
 
-If you are still stuck, see the [Troubleshooting Reference](../appendices/troubleshooting-reference.md).
+If something does not work as expected, check the problems below. The [Troubleshooting Reference](../appendices/troubleshooting-reference.md) lists problems and fixes for all chapters.
 
 <details>
-<summary>Automation issues</summary>
+<summary>Automation problems</summary>
 
-| Problem | What to check |
-|---|---|
-| Local automation does not run | App availability, project still connected, local tools and credentials |
-| Review readiness report is empty | Setup script completed, repository permissions, filters, whether PRs are open |
-| Cloud automation unavailable | Organization policy, repository settings, billing, selected tools, public vs private repository limits |
-| Scheduled run is noisy | Prompt scope, schedule frequency, repository or label filters |
-| Automation made surprising suggestions | Remove tools, make the prompt more bounded, add explicit non-goals |
+### A local automation does not run
+
+A local run happens only when your computer is awake and the GitHub Copilot app is running. Also confirm that the project is still connected and that the local tools and credentials that the prompt needs still work.
+
+### The review readiness report is empty
+
+Confirm that the setup script finished and that your fork has open pull requests. See [Confirm Work Items Exist](#confirm-work-items-exist). Then check your repository permissions and any filters in the prompt.
+
+### Cloud automations are unavailable
+
+Cloud automations are not available in public repositories, and a fork of this course is public. In a private or internal repository, check the organization policy, repository settings, billing, and the tools that you selected. See [Cloud Automations](#cloud-automations).
+
+### A scheduled run is noisy
+
+Narrow the prompt, run the schedule less often, or add a label or branch filter to reduce the output.
+
+### The automation made surprising suggestions
+
+Make the prompt more specific, and list what the automation must not do. For a cloud automation, also clear the tools that the task does not need.
 
 </details>
 
@@ -280,7 +290,7 @@ If you are still stuck, see the [Troubleshooting Reference](../appendices/troubl
 
 1. Every automation needs a trigger, prompt, tool set, and review path.
 2. Manual automations are the safest first step. Test the prompt before adding a schedule.
-3. A read-only review readiness report is a strong first automation because it adds analysis that **My work** alone does not provide.
+3. A read-only review readiness report is a strong first automation because it adds analysis that the **Pull requests** view alone does not provide.
 4. Scheduled automations answer "what changed since yesterday?" without requiring you to remember to ask.
 5. Event triggers and cloud automations come later. Start read-only, filter narrowly, and check policy, billing, and permissions.
 6. Apply least privilege: give an automation only the tools it needs, so untrusted issue or PR text is less able to steer the agent.
@@ -296,11 +306,11 @@ Create one manual automation for your own workflow:
 1. Name it clearly.
 2. Use a manual trigger.
 3. Write a prompt with one bounded task.
-4. Give it only read-only tools if possible.
+4. Keep it read-only. In the prompt, tell it not to edit files, post comments, or change GitHub items. Local automations have no tool list. If you later move the automation to the cloud, select only read-only tools in its **Tools** list.
 5. Run it once.
 6. Inspect the run history and revise the prompt.
 
-**Success criteria:** You're able to explain why the automation is safe to run again.
+**Success Criteria:** You're able to explain why the automation is safe to run again.
 
 ---
 

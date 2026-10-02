@@ -26,7 +26,7 @@ If you cannot create issues or pull requests, read the workflows and follow alon
 
 ## Recommended path: Fork, clone, run the setup script
 
-1. Follow [Chapter 00](../00-setup/README.md#connect-to-your-repository) to fork and connect the repository, open a **Local repository** session, and check your tools and GitHub CLI sign-in in the **Terminal** tab.
+1. Follow [Chapter 00](../00-setup/README.md#connect-to-your-repository) to fork and connect the repository, open a **Current checkout** session, and check your tools and GitHub CLI sign-in in the **Terminal** tab.
 2. From the root folder of your cloned fork, preview what the setup script will do:
 
    ```bash
@@ -86,7 +86,7 @@ Create these five issues in your fork. Use each linked draft's problem descripti
 | [Polish book card spacing and responsive layout](../samples/app-course-issues.md#issue-4-polish-book-card-spacing-and-responsive-layout) | `ui`, `responsive`, `book-app-web` |
 | [Simulate a failing stats test for CI practice](../samples/app-course-issues.md#issue-5-simulate-a-failing-stats-test-for-ci-practice) | `ci`, `tests`, `book-app-web` |
 
-Assign each issue to yourself so it is easier to find in **My work**. Issue and PR numbers can vary. Match items by title rather than by a fixed number.
+Assign each issue to yourself so it appears on the **Assigned to me** tab of the **Issues** view. Issue and PR numbers can vary. Match items by title rather than by a fixed number.
 
 ## Manual fallback: Create practice branches
 
@@ -203,6 +203,6 @@ Before starting Chapter 02 on a fresh training fork, confirm:
 - [ ] All three PRs are open against the default branch.
 - [ ] **Improve empty-state copy** has the conversation comment shown above.
 - [ ] **Failing stats check practice** has the expected failing **Book app web** check, and the other two PRs pass.
-- [ ] You can see your fork's issues and PRs in **My work** in the GitHub Copilot app.
+- [ ] You can see your fork's issues and PRs in the **Issues** and **Pull requests** views of the GitHub Copilot app.
 
 If you already completed an exercise, its PR state or check result may have changed. Rerunning the script does not undo that work.

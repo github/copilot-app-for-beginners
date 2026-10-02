@@ -14,11 +14,12 @@ chapters add, edit, or remove placeholders over time.
 > From the repo root, with:
 > `SK=.github/skills/github-copilot-app-automation/sample_codes/macos-accessibility`
 
-Prepare a new full-screen persona instance before each screenshot:
+Prepare a new persona instance (standard 1920x1080-point window, 125% zoom)
+before each screenshot. Pass the local clone of the training fork:
 
 ```bash
 COPILOT_PID="$(bash "$SK/prepare-persona.sh" \
-  demo "$HOME/Desktop/projects/copilot-app-for-beginners" 60)"
+  demo "$HOME/copilot-app-for-beginners" 60)"
 ```
 
 Keep this process ID. It prevents capture from selecting another open Copilot
@@ -47,24 +48,25 @@ bash "$SK/screenshots.sh" next          # or: next 13   for a specific index
 #    two or more controls that the reader must select in order.
 python3 "$SK/screenshot-context.py" <chapter>/README.md <slug>.webp
 
-# c) Prepare the dedicated full-screen demo persona and get that instance to the
-#    required state. Run the Node.js setup script first for data shots.
+# c) Prepare the dedicated demo persona and get that instance to the required
+#    state. Run the Node.js setup script first for data shots.
 COPILOT_PID="$(bash "$SK/prepare-persona.sh" \
-  demo "$HOME/Desktop/projects/copilot-app-for-beginners" 60)"
+  demo "$HOME/copilot-app-for-beginners" 60)"
 
 # d) Capture (PNG + WebP into the chapter's assets/). Use the slug from step (a),
 #    or any name you prefer:
 bash "$SK/capture-window.sh" <assets_dir> <slug> 40 "$COPILOT_PID"
 
 #    For one image that shows multiple ordered actions, append one callout for
-#    each action. Use final 1920x1080 image coordinates:
+#    each action. Use final 1920x1080 image coordinates (locate-copilot-element
+#    prints them). Use --box for one item and --crop for a detail area:
 bash "$SK/capture-window.sh" <assets_dir> <slug> 40 "$COPILOT_PID" \
   --callout 1:X:Y --callout 2:X:Y
 
 # e) Confirm the avatar remains, profile text shows "Copilot Dev", and a
-#    matching personal repository owner shows "copilotdev". Then review for
-#    other private data. Confirm that callouts match the instruction order and
-#    do not cover control labels or icons.
+#    matching personal repository owner, path, or branch shows "copilotdev".
+#    Then review for other private data. Confirm that callouts match the
+#    instruction order and do not cover control labels or icons.
 
 # f) Replace the placeholder with the embed:
 bash "$SK/screenshots.sh" embed <file> <line> <slug>.webp "<alt text>"
@@ -84,10 +86,10 @@ Judge each shot from its description — don't rely on a stored list:
 - **App-chrome shots** (settings tabs, composer, pickers, the new-automation
   form): capturable any time; no seeded data needed. Keep private panels (e.g.,
   the sidebar session list) out of frame, or capture from a clean account.
-- **Data shots** (My work, issue/PR details, diffs, failing checks, run history,
-  a live session or canvas): need the **training fork** with
-  `node .github/scripts/setup-training-scenarios.js --yes` run, from a
-  sanitized account.
+- **Data shots** (Issues and Pull requests views, issue/PR details, diffs,
+  failing checks, run history, a live session or canvas): need the **training
+  fork** with `node .github/scripts/setup-training-scenarios.js --yes` run,
+  from a sanitized account.
 - **Policy/build-gated shots** (Agent Merge, cloud automations, canvas authoring):
   capture when available; otherwise leave the placeholder as demo-only.
 

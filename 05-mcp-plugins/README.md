@@ -20,7 +20,7 @@ By the end of this chapter, you'll be able to:
 
 ## Prerequisites
 
-Complete [Chapter 04](../04-skills-custom-agents/README.md) so you're familiar with skills, custom agents, and the **Customize** tab. Use your course fork and the Node.js setup from Chapter 00. You don't need to merge Chapter 04's changes into this chapter.
+Complete [Chapter 04](../04-skills-custom-agents/README.md) so you're familiar with skills, custom agents, and the **Customize** view. Use your course fork and the Node.js setup from Chapter 00. You don't need to merge Chapter 04's changes into this chapter.
 
 The Context7 exercise needs internet access and permission to add an MCP server. The plugin exercise needs permission to install a plugin and use its documentation tool, which runs through Node.js. No cloud-provider subscription or deployment is required.
 
@@ -36,7 +36,7 @@ An MCP server is like a connection to that equipment: it exposes tools the agent
 
 ## Core Concepts
 
-### MCP server versus plugin
+### MCP Server Versus Plugin
 
 | Feature | What it adds | Example in this chapter |
 |---|---|---|
@@ -45,7 +45,7 @@ An MCP server is like a connection to that equipment: it exposes tools the agent
 
 A plugin can include an MCP server, but the two aren't interchangeable. You can connect a server directly, and a plugin can supply a skill without adding a server.
 
-Find both under the sidebar **Customize** tab. Start with the tools you already have; add an integration only when it supplies something the task needs. Every extra tool is more noise for the agent and more access to review.
+Find both in the **Customize** view in the sidebar. Start with the tools you already have; add an integration only when it supplies something the task needs. Every extra tool is more noise for the agent and more access to review.
 
 <img src="assets/least-tool-principle.webp" alt="A toolbox where only Repo, Docs, and Skill are highlighted: give the agent only what it needs for less noise" width="700" />
 
@@ -53,7 +53,7 @@ Find both under the sidebar **Customize** tab. Start with the tools you already 
 
 1. Select **Create from** next to your course project.
 2. Select **Branches**, then `main`, to start a session in a new worktree.
-3. Set the mode to **Interactive** and confirm that **Default agent** is selected. Do not select the read-only explainer agent from Chapter 04 if it appears.
+3. Set the mode to **Interactive**. If an agent picker appears below the prompt box, confirm that it shows **Default agent**, not the read-only explainer agent from Chapter 04.
 4. Submit:
 
    ```text
@@ -92,22 +92,21 @@ In React, a label's `htmlFor` value can match an input's `id` to connect the lab
 Start by getting the Context7 MCP server configured in the GitHub Copilot app. If it's already connected, skip the add-server steps.
 
 1. Open **Customize**, then **MCP**.
-2. Select **Add server** and locate **Context7**.
-3. Review the values in the configuration dialog:
+2. Search for `context7`, then select **Add server** on the **Context7** row.
+3. Review the values in the **Context7** configuration dialog:
 
    | Setting | Value |
    |---|---|
    | Server name | `context7` |
-   | Transport | `HTTP` |
+   | Server type | `HTTP` |
    | URL | `https://mcp.context7.com/mcp` |
 
-   > [!NOTE]
-   > HTTP means the Copilot app connects to a hosted server instead of starting a local process.
+   The `HTTP` server type means the Copilot app connects to a hosted server instead of starting a local process.
 
-   <img src="assets/app-context7-configuration.webp" alt="Add MCP Server dialog with server name context7, HTTP selected, and URL https://mcp.context7.com/mcp" width="800" />
+   <img src="assets/app-context7-configuration.webp" alt="Context7 MCP server dialog with server name context7, HTTP selected, and URL https://mcp.context7.com/mcp" width="800" />
 
 1. Select **Add server**.
-2. Confirm that the connection is enabled and connected in the **Installed** view under **Customize**.
+2. Confirm that **Context7** appears under **Installed** in the **MCP** tab, with its connected icon and enabled toggle.
 3. Return to the chapter session you created earlier. Use **Interactive** mode with the default agent.
 4. Submit:
 
@@ -149,14 +148,14 @@ The skill uses `npx` to download and run its documentation tool. Node.js and int
 > Enterprise-managed settings can restrict which plugins and marketplaces are available in the GitHub Copilot app. If you cannot install `modern-web-guidance` or access the `awesome-copilot` marketplace, read the example and expected output, record the exercise as blocked, and continue. Do not change company-managed settings to complete the exercise.
 
 1. In **Customize**, select **Plugins**.
-2. Search for `modern-web-guidance`. Use the marketplace filter to select `awesome-copilot`. If that marketplace is missing and your policy permits it, use the gear icon beside the filter to add `github/awesome-copilot`.
+2. Search for `modern-web-guidance`, then expand the **awesome-copilot** marketplace under **Available**. The app searches a marketplace only after you expand it. If that marketplace is missing and your policy permits it, select the gear icon (**Manage marketplaces**) and add `github/awesome-copilot`.
 
-   <img src="assets/app-customize-plugins.webp" alt="Customize Plugins with callouts for Plugins, search, marketplace filter, and Install" width="800" />
+   <img src="assets/app-customize-plugins.webp" alt="Customize Plugins with callouts for Plugins, search, the awesome-copilot marketplace, and Install" width="800" />
 
-   The screenshot shows the plugin before installation. After installation, use the live **Installed** view as the check: the plugin should appear there with its enabled toggle on.
+   The screenshot shows the plugin before installation. After installation, the plugin appears under **Installed** in the **Plugins** tab with its enabled toggle on.
 
 1. Confirm that the plugin's source is `GoogleChrome/modern-web-guidance`. Review the plugin's description, then select **Install** if it isn't already installed.
-2. Confirm that the plugin is enabled in the **Installed** view under **Customize**.
+2. Confirm that the plugin appears under **Installed** in the **Plugins** tab with its enabled toggle on.
 3. Return to the project session in **Interactive** mode with the default agent. Submit `/skills reload`, then type `/` and select the installed `modern-web-guidance` skill. The displayed command can include a plugin prefix. Add this prompt:
 
    ```text
@@ -175,14 +174,14 @@ The skill uses `npx` to download and run its documentation tool. Node.js and int
 
 ## Troubleshooting
 
-If you are still stuck, see the [Troubleshooting Reference](../appendices/troubleshooting-reference.md).
+If something does not work as expected, check the problems below. The [Troubleshooting Reference](../appendices/troubleshooting-reference.md) lists problems and fixes for all chapters.
 
 <details>
 <summary>MCP and plugin problems</summary>
 
 ### I cannot find MCP or plugins in Settings
 
-Use the sidebar **Customize** tab. Labels and available commands can vary by app version.
+Use the **Customize** view in the sidebar. Labels and available commands can vary by app version.
 
 ### An MCP server is enabled but its tools fail
 
@@ -196,7 +195,7 @@ If the plugin no longer supplies the skill, record the exercise as blocked rathe
 
 ### The agent cannot use the integration
 
-Confirm that **Default agent** is selected, not the read-only explainer from Chapter 04. Then check tool approvals and organization policy. Don't broaden an agent's tools or change policy just to finish the exercise.
+If an agent picker appears below the prompt box, confirm that it shows **Default agent**, not the read-only explainer from Chapter 04. Then check **Tool permissions** in the mode menu below the prompt box, and check organization policy. Don't broaden an agent's tools or change policy just to finish the exercise.
 
 </details>
 
@@ -230,7 +229,7 @@ Summarize the evidence from these exercises. You don't need another code change 
 3. Explain in your own words why the Context7 connection is an MCP server and Modern Web Guidance is a plugin supplying a skill.
 4. Disable only the MCP connection or plugin you added for this exercise if you don't want to keep using it. Leave pre-existing tools unchanged. Chapter 06 doesn't require either integration to remain enabled.
 
-**Success criteria:** You can distinguish an MCP connection from a plugin, identify the tool and source evidence from each integration you used, and explain what stayed local. If an integration was blocked, your summary says so instead of claiming it ran. No Book App files changed.
+**Success Criteria:** You can distinguish an MCP connection from a plugin, identify the tool and source evidence from each integration you used, and explain what stayed local. If an integration was blocked, your summary says so instead of claiming it ran. No Book App files changed.
 
 ## What's Next
 
@@ -238,7 +237,7 @@ You now know how to connect external tools and use packaged capabilities without
 
 In Chapter 06, you'll use canvases to keep a session's plan, progress, and validation evidence visible. You'll start by exploring a community canvas installed through a plugin, building on the installation workflow from this chapter.
 
-[**← Back to Chapter 04**](../04-skills-custom-agents/README.md) | [**Continue to Chapter 06 →**](../06-canvases/README.md)
+**[← Back to Chapter 04](../04-skills-custom-agents/README.md)** | **[Continue to Chapter 06 →](../06-canvases/README.md)**
 
 ---
 

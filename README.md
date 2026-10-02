@@ -10,11 +10,13 @@
 
 > Learn to direct and orchestrate AI coding agents from a single desktop app.
 
-Think of the GitHub Copilot app as a desktop cockpit for agentic coding work. Here, *agentic* means AI agents can plan and take actions for you, while you still supervise what they do. The app brings together sessions, plans, diffs, tests, browser previews, AI chats, issues, pull requests, and more so you can guide that work without bouncing between multiple tools.
+The GitHub Copilot app is a desktop control center for working with coding agents, giving you one place to direct, observe, and validate their work. Instead of simply asking AI for code, you can give agents a goal, provide the right context, and let them plan and take action while you stay in control of the work.
 
-This course treats the app as a place to guide and review work, not a magic code button. You'll practice choosing context, picking a session mode, checking evidence, and deciding when automation is appropriate to use.
+The app brings sessions, plans, code changes, tests, browser previews, AI chats, issues, pull requests, and more into one place, making it easier to direct agentic work and review the results without constantly switching between tools.
 
-![GitHub Copilot app](assets/github-copilot-app.webp)
+Throughout this course, you'll learn to treat Copilot app as a place to guide, review, and validate work, not as a magic code button. You'll practice providing effective context, choosing the right session mode, reviewing evidence, and deciding when automation makes sense and when you should stay more closely involved.
+
+![GitHub Copilot app](assets/app-github-copilot-app.webp)
 
 <a id="what-youll-learn"></a>
 
@@ -23,12 +25,12 @@ This course treats the app as a place to guide and review work, not a magic code
 By the end of the course, you'll be able to:
 
 - Install, sign in, and set up the GitHub Copilot app
-- Start sessions from prompts, issues, and pull requests
+- Start sessions from prompts, branches, and pull requests, and attach issues as context
 - Explain Interactive, Plan, and Autopilot modes
 - Use worktree-backed sessions without colliding with your main branch
 - Attach and manage agent context
 - Review diffs, run tests, preview a web app, and validate changes
-- Use the **My work** view for issues, PRs, review comments, and failing checks
+- Use the **Issues** and **Pull requests** views for issues, PRs, review comments, and failing checks
 - Understand where settings, instructions, skills, custom agents, MCP servers, plugins, canvases, and automations fit
 
 The main sample used throughout the course can be found at:
@@ -46,9 +48,9 @@ This course is designed for:
 - Teams evaluating how to keep humans in control while agents do more work
 - Copilot CLI or IDE Copilot users who want to understand where the desktop app fits
 
-No agentic development experience is required. Basic GitHub, Git, and JavaScript project familiarity will help. The sample app is a small React/Vite project, so basic npm command familiarity helps in the development chapters. Use the current [Node.js LTS](https://nodejs.org) for `samples/book-app-web`.
+No agentic development experience is required. Basic GitHub, Git, and software development familiarity will help. The sample app is a small React/Vite project, so basic npm command familiarity helps in the development chapters. Use the current [Node.js LTS](https://nodejs.org) for `samples/book-app-web`.
 
-The GitHub Copilot app works with a Copilot plan or with your own model provider. Business and Enterprise accounts need the **GitHub Copilot app** policy left enabled. That policy is separate from the Copilot CLI policy.
+The GitHub Copilot app works with a Copilot plan or with your own model provider.
 
 <a id="understanding-the-github-copilot-family"></a>
 
@@ -74,15 +76,15 @@ This course focuses on the GitHub Copilot app. Along the way, you'll see how it 
 | 00 | [Setup](./00-setup/README.md) | Prepare the course environment |
 | 01 | [Tour the App](./01-tour-the-app/README.md) | Learn why you'd use the app, then tour chats, project sessions, modes, models, and settings |
 | 02 | [Sessions, Worktrees, and Context](./02-sessions-worktrees-context/README.md) | Start isolated worktree sessions and use `@`, `#`, and `/` for context and commands |
-| 03 | [Development and GitHub Workflows](./03-development-workflows/README.md) | Review, debug, test, and preview a change, then move it through My work, issues, PRs, review comments, and checks |
+| 03 | [Development and GitHub Workflows](./03-development-workflows/README.md) | Review, debug, test, and preview a change, then move it through issues, PRs, review comments, and checks |
 | 04 | [Skills and Custom Agents](./04-skills-custom-agents/README.md) | Update a review skill, create a read-only custom agent, and validate one skill-guided improvement |
 | 05 | [MCP Servers and Plugins](./05-mcp-plugins/README.md) | Retrieve documentation through an MCP server and use a plugin's skill for a focused recommendation |
-| 06 | [Canvases](./06-canvases/README.md) | Run `/create-canvas` for a visual session board to keep the plan, progress and validation evidence visible |
+| 06 | [Canvases](./06-canvases/README.md) | Try a community canvas, then use `/create-canvas` to build boards that keep the plan, progress, and validation evidence visible |
 | 07 | [Automations](./07-automations/README.md) | Create a manual PR review readiness report, schedule it, then learn about event triggers and cloud automations |
 
 ## 📖 How This Course Works
 
-Each chapter follows the same beginner-friendly pattern:
+After the setup chapter, each chapter follows the same beginner-friendly pattern:
 
 1. An introduction: why the topic matters
 2. A recording-studio analogy ("From the Studio")

@@ -39,6 +39,7 @@ setup_source="$here/setup-copilot-persona.swift"
 control_source="$here/control-copilot-ui.swift"
 identity_source="$here/find-private-identities.swift"
 streamer_source="$here/ensure-streamer-mode.swift"
+state_source="$here/prepare-copilot-state.swift"
 [ -f "$setup_source" ] || {
   echo "Missing $setup_source" >&2
   exit 1
@@ -46,13 +47,15 @@ streamer_source="$here/ensure-streamer-mode.swift"
 [ -f "$control_source" ] || { echo "Missing $control_source" >&2; exit 1; }
 [ -f "$identity_source" ] || { echo "Missing $identity_source" >&2; exit 1; }
 [ -f "$streamer_source" ] || { echo "Missing $streamer_source" >&2; exit 1; }
+[ -f "$state_source" ] || { echo "Missing $state_source" >&2; exit 1; }
 
 pid="$(bash "$here/launch-persona.sh" "$persona" "$timeout")"
 setup_binary="$(mktemp -t setup-copilot-persona)"
 control_binary="$(mktemp -t control-copilot-ui)"
 identity_binary="$(mktemp -t find-private-identities)"
 streamer_binary="$(mktemp -t ensure-streamer-mode)"
-trap 'rm -f "$setup_binary" "$control_binary" "$identity_binary" "$streamer_binary"' EXIT
+state_binary="$(mktemp -t prepare-copilot-state)"
+trap 'rm -f "$setup_binary" "$control_binary" "$identity_binary" "$streamer_binary" "$state_binary"' EXIT
 swiftc "$control_source" -o "$control_binary" 2>/dev/null || {
   echo "swiftc failed to build the UI control tool." >&2
   exit 2
@@ -69,12 +72,23 @@ swiftc "$streamer_source" -o "$streamer_binary" 2>/dev/null || {
   echo "swiftc failed to build the Streamer Mode tool." >&2
   exit 2
 }
+swiftc "$state_source" -o "$state_binary" 2>/dev/null || {
+  echo "swiftc failed to build the UI state tool." >&2
+  exit 2
+}
 
 identities="$("$identity_binary" "$pid")"
 if ! python3 -c 'import json,sys; raise SystemExit(not json.load(sys.stdin)["displayNames"])' <<<"$identities"; then
   echo "Persona '$persona' is not signed in. Process $pid was kept for inspection." >&2
   exit 3
 fi
+# Cache the identities for this process. Captures taken while a dialog is open
+# cannot read the profile control, so sanitize-screenshot.sh uses this cache.
+cache_dir="${TMPDIR:-/tmp}/copilot-capture-identities"
+mkdir -p "$cache_dir"
+chmod 700 "$cache_dir"
+printf '%s\n' "$identities" >"$cache_dir/$pid.json"
+chmod 600 "$cache_dir/$pid.json"
 
 if ! "$streamer_binary" "$pid" "$timeout" >/dev/null; then
   echo "Streamer Mode could not be enabled and verified. Process $pid was kept for inspection." >&2
@@ -95,4 +109,8 @@ if ! "$control_binary" "$pid" exists "$repository_name" AXButton >/dev/null 2>&1
 fi
 
 "$control_binary" "$pid" press New AXButton >/dev/null
+# Remove promotions and update notices, then move the pointer off the content
+# so no hover state or tooltip appears in the first capture.
+"$state_binary" "$pid" dismiss-banners >/dev/null || true
+"$state_binary" "$pid" park >/dev/null || true
 printf '%s\n' "$pid"

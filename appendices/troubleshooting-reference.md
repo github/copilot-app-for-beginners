@@ -8,9 +8,10 @@ Related chapter: [00 Setup](../00-setup/)
 
 | Symptom | Likely cause | Try this |
 |---|---|---|
-| Sign-in fails | Account, network, SSO, or GitHub Enterprise Server URL issue | Confirm the account, browser sign-in, Enterprise Server URL if used, and network access |
+| Sign-in fails | Account, network, SSO, or GitHub Enterprise Cloud sign-in issue | Confirm the account, browser sign-in, and network access. If your organization uses `*.ghe.com`, select **Sign in to GitHub Enterprise Cloud** |
 | App access is unavailable | Copilot plan, own model provider, or organization policy | Confirm a Copilot plan or a configured model provider. For Business or Enterprise, confirm the **GitHub Copilot app** policy is enabled (it is separate from the Copilot CLI policy) |
 | Git is not detected | Git is missing or not on PATH | Install Git and restart the app |
+| On Windows, `npm` fails because running scripts is disabled | PowerShell's execution policy blocks `npm.ps1` | Use `npm.cmd` in place of `npm`. For another fix, open the Windows section in [Check your tools in Terminal](../00-setup/README.md#check-your-tools-in-terminal) |
 | Repository does not appear | Repository access or picker filter | Check account access, organization membership, repository permissions, and whether to add a local folder, GitHub repo, or URL |
 | A chat cannot summarize the repo | Repo not connected or context is too broad | Reconnect the project and ask for a small overview of the course repo |
 
@@ -51,7 +52,7 @@ Related chapter: [03 Development and GitHub Workflows](../03-development-workflo
 | Browser preview does not update | Dev server, hot reload, or wrong port | Restart the server in the correct worktree and confirm the browser URL |
 | Diff is hard to trust | Too many unrelated changes | Ask the agent to explain the diff, then split or revert unrelated edits |
 | Pick & Polish changes hurt accessibility | Visual update changed contrast, layout, or labels | Review with accessibility goals and rerun tests or manual checks |
-| Issue or PR is missing from My work | Filters or permissions | Clear filters, check repository access, and confirm assignment or review request |
+| Issue or PR is missing from the Issues or Pull requests view | Wrong tab, repository picker, or permissions | Check the selected tab and repository, check repository access, and confirm assignment or review request |
 | Cannot push a branch | No write access to upstream | Use a fork or a repository where you have write access |
 | CI fails but local tests pass | Different environment, secrets, or branch protection | Read the failing check log and compare Node version, commands, and secrets |
 | PR remains blocked | Required reviews, checks, branch protection, or conflicts | Triage in this order: failing checks, merge conflicts, required reviews, stale reviews, branch rules |
@@ -80,7 +81,7 @@ Related chapter: [05 MCP Servers and Plugins](../05-mcp-plugins/)
 | Cannot find MCP or Plugins in Settings | Customization is in the sidebar | Open **Customize → MCP** or **Customize → Plugins** |
 | MCP server fails | Authentication, network, or policy issue | Check connection status, URL, credentials, and organization policy. Don't put credentials in prompts or repository files |
 | Plugin capability is missing | Plugin disabled or its skill hasn't loaded | Check **Customize → Plugins**, run `/skills reload`, and look for a plugin-prefixed skill name. Follow the chapter's restart instructions if needed |
-| Agent cannot use an integration | Read-only explainer is still selected or tool access is blocked | Select **Default agent**, then check approvals and policy |
+| Agent cannot use an integration | Read-only explainer is still selected or tool access is blocked | If an agent picker appears below the prompt box, select **Default agent**. Then check approvals and policy |
 | Integration is blocked by policy | Installation or external access isn't permitted | Read the example and expected output, record the limitation, and continue without changing policy |
 
 ## Chapter 06: Canvases
