@@ -152,7 +152,10 @@ case "park":
           let frame = rect(window) else {
         fail("Process \(pid) has no accessible window.", code: 3)
     }
-    movePointer(to: CGPoint(x: frame.maxX - 6, y: frame.maxY - 6))
+    // In built-in display mode, the pointer belongs to the user on other displays.
+    if ProcessInfo.processInfo.environment["COPILOT_CAPTURE_DISPLAY"] != "builtin" {
+        movePointer(to: CGPoint(x: frame.maxX - 6, y: frame.maxY - 6))
+    }
     if !(arguments.count > 3 && arguments[3] == "keep-focus") {
         var pending = [window]
         while let element = pending.popLast() {

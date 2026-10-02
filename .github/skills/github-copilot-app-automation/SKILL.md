@@ -36,7 +36,7 @@ COPILOT_PID="$(bash "$SK/prepare-persona.sh" "$PERSONA" "$REPO" 60)"
 
 This keeps the existing login and persona data, starts a separate app process,
 sets only that window to a standard 1920x1080-point frame, resets the display
-zoom and zooms in twice (the zoom is measured and confirmed), enables and
+zoom and zooms in four times (the zoom is measured and confirmed), enables and
 verifies **Streamer Mode**, verifies that the account is signed in, verifies the
 exact local repository, dismisses transient banners, and returns its process
 ID. If the
@@ -45,6 +45,14 @@ folder picker and verifies it before capture. A setup failure keeps the process
 for inspection and does not return a successful process ID. Do not select a
 target by app name when another Copilot instance is open. Do not use full
 screen: it can draw the menu bar and title bar over the app content.
+
+To keep working on other displays during capture, set
+`COPILOT_CAPTURE_DISPLAY=builtin` for both `prepare-persona.sh` and
+`capture-window.sh`. The window then opens on the built-in laptop display and
+zooms in three times instead of four, because the laptop frame is smaller.
+After setup, focus goes back to the app that you used before. The pointer is
+not moved, and the capture does not activate the persona. Do not type during
+the first launch seconds, and keep the laptop display on its current Space.
 
 Before preparing the visible state, extract the Markdown around the image
 reference:
@@ -197,7 +205,7 @@ Only use this workflow when the user has agreed the App can be visible or when t
    image, view the old image first and list its callouts, boxes, and crop.
 2. Launch a new process from the persistent `demo` persona with
    `prepare-persona.sh`. The pre-step sets a standard 1920x1080-point window,
-   resets zoom, zooms in twice, and enables and verifies **Streamer Mode**. It
+   resets zoom, zooms in four times, and enables and verifies **Streamer Mode**. It
    fails closed if Streamer Mode or the zoom cannot be verified. Pass the exact
    local training repository and keep the returned process ID. Turn off Siri
    before you capture: its waveform orb can appear next to a focused text field,
@@ -258,7 +266,7 @@ Use:
 - [ensure-streamer-mode.swift](sample_codes/macos-accessibility/ensure-streamer-mode.swift) — enables and verifies Streamer Mode before screenshot preparation
 - [cleanup-persona.sh](sample_codes/macos-accessibility/cleanup-persona.sh) — stops one exact screenshot process and preserves the signed-in persona
 - [launch-persona.sh](sample_codes/macos-accessibility/launch-persona.sh) — low-level launcher used by `prepare-persona.sh`
-- [control-copilot-window.swift](sample_codes/macos-accessibility/control-copilot-window.swift) — sets the 1920x1080-point capture frame and the measured 125% capture zoom for one exact app process
+- [control-copilot-window.swift](sample_codes/macos-accessibility/control-copilot-window.swift) — sets the 1920x1080-point capture frame and the measured 175% capture zoom (150% on the built-in display) for one exact app process
 - [control-copilot-ui.swift](sample_codes/macos-accessibility/control-copilot-ui.swift) — presses one named Accessibility control in an exact app process
 - [prepare-copilot-state.swift](sample_codes/macos-accessibility/prepare-copilot-state.swift) — prepares transient states: focus a hover-only control, highlight a menu item, set a field value, dismiss banners, and park the pointer
 - [locate-copilot-element.swift](sample_codes/macos-accessibility/locate-copilot-element.swift) — prints the final 1920x1080 coordinates of named controls for callouts, boxes, and crops

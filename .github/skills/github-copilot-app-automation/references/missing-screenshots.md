@@ -14,7 +14,7 @@ chapters add, edit, or remove placeholders over time.
 > From the repo root, with:
 > `SK=.github/skills/github-copilot-app-automation/sample_codes/macos-accessibility`
 
-Prepare a new persona instance (standard 1920x1080-point window, 125% zoom)
+Prepare a new persona instance (standard 1920x1080-point window, 175% zoom)
 before each screenshot. Pass the local clone of the training fork:
 
 ```bash

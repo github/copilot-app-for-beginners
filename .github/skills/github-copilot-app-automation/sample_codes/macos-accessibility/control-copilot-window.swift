@@ -14,9 +14,11 @@
 // keeps the window buttons inside the sidebar header, as learners see them.
 // Full screen can draw the menu bar and title bar over the app content while
 // the app is active, so it is not used for course captures.
+// With COPILOT_CAPTURE_DISPLAY=builtin, "frame" puts the window on the built-in
+// laptop display instead, so you can keep working on other displays.
 //
 // "capture-zoom" resets the web zoom (Command+0) and then zooms in (Command+=)
-// exactly twice by default, as the skill requires. That gives 125%. It waits
+// four times by default, as the skill requires. That gives 175%. It waits
 // for the app content to load first, and then measures a sidebar control to
 // confirm that the zoom took effect. It retries, and it fails if it cannot
 // confirm the zoom.
@@ -175,7 +177,19 @@ if mode == "frame" {
     let origin = point(targetWindow, "AXPosition") ?? .zero
     let current = size(targetWindow, "AXSize") ?? CGSize(width: 800, height: 600)
     let center = CGPoint(x: origin.x + current.width / 2, y: primaryHeight - (origin.y + current.height / 2))
-    let screen = NSScreen.screens.first { $0.frame.contains(center) } ?? primary
+    let builtinScreen = NSScreen.screens.first {
+        guard let id = $0.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID else {
+            return false
+        }
+        return CGDisplayIsBuiltin(id) != 0
+    }
+    let wantsBuiltin = ProcessInfo.processInfo.environment["COPILOT_CAPTURE_DISPLAY"] == "builtin"
+    if wantsBuiltin && builtinScreen == nil {
+        fail("COPILOT_CAPTURE_DISPLAY=builtin is set, but no built-in display was found.", code: 7)
+    }
+    let screen = wantsBuiltin
+        ? builtinScreen!
+        : NSScreen.screens.first { $0.frame.contains(center) } ?? primary
     let visible = screen.visibleFrame
     // Convert the visible frame from Cocoa (bottom-left) to Accessibility
     // (top-left) coordinates.
@@ -224,7 +238,7 @@ if mode == "frame" {
 if mode == "capture-zoom" {
     // Zoom levels that Command+= steps through, starting at 100%.
     let levels: [Double] = [100, 110, 125, 150, 175, 200, 250, 300]
-    var steps = 2
+    var steps = 4
     if let extraArgument {
         guard let explicitSteps = Int(extraArgument), (0..<levels.count).contains(explicitSteps) else {
             fail("Zoom steps must be a whole number from 0 to \(levels.count - 1).")

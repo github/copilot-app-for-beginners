@@ -502,7 +502,7 @@ def calibrated_font(
         fail("No supported system font was found.")
 
     def fit(path: str, weight: float | None) -> tuple[float, ImageFont.FreeTypeFont]:
-        # The app zoom (125%) gives fractional pixel sizes, so try quarter
+        # The app zoom (for example, 175%) gives fractional pixel sizes, so try quarter
         # sizes. Whole sizes alone can miss the real size by enough to choose
         # the wrong family.
         best_fit: tuple[float, ImageFont.FreeTypeFont] | None = None

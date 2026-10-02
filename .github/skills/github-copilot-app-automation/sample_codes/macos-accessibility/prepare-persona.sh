@@ -49,6 +49,12 @@ state_source="$here/prepare-copilot-state.swift"
 [ -f "$streamer_source" ] || { echo "Missing $streamer_source" >&2; exit 1; }
 [ -f "$state_source" ] || { echo "Missing $state_source" >&2; exit 1; }
 
+# In built-in display mode, give focus back to the app that you used before.
+front_pid=""
+if [ "${COPILOT_CAPTURE_DISPLAY:-}" = "builtin" ]; then
+  front_pid="$(osascript -e 'tell application "System Events" to get unix id of first process whose frontmost is true' 2>/dev/null || true)"
+fi
+
 pid="$(bash "$here/launch-persona.sh" "$persona" "$timeout")"
 setup_binary="$(mktemp -t setup-copilot-persona)"
 control_binary="$(mktemp -t control-copilot-ui)"
@@ -113,4 +119,7 @@ fi
 # so no hover state or tooltip appears in the first capture.
 "$state_binary" "$pid" dismiss-banners >/dev/null || true
 "$state_binary" "$pid" park >/dev/null || true
+if [ -n "$front_pid" ] && [ "$front_pid" != "$pid" ]; then
+  osascript -e "tell application \"System Events\" to set frontmost of (first process whose unix id is $front_pid) to true" >/dev/null 2>&1 || true
+fi
 printf '%s\n' "$pid"

@@ -10,7 +10,7 @@ Capture visible GitHub Copilot app states for course material:
   crop rectangle.
 - Add a **2px `#cccccc` border** inside the image edges, also on crops.
 - Capture a standard 1920x1080-point window, not full screen.
-- Reset display zoom, then zoom in exactly twice (125%) before preparing the
+- Reset display zoom, then zoom in exactly four times (175%) before preparing the
   screen.
 - Enable and verify **Streamer Mode** before preparing the screen.
 - Remove the app version from Settings screenshots after capture.
@@ -39,8 +39,9 @@ The preparation workflow:
 - Finds the new process instead of reusing an existing Copilot process.
 - Sets only that process's main window to a standard 1920x1080-point frame,
   centered on its display.
-- Resets display zoom, zooms in twice, and measures a sidebar control to
-  confirm the 125% zoom. It retries and fails if it cannot confirm the zoom.
+- Resets display zoom, zooms in four times, and measures a sidebar control to
+  confirm the 175% zoom. With `COPILOT_CAPTURE_DISPLAY=builtin`, it uses the
+  built-in laptop display and three zoom steps (150%). It retries and fails if it cannot confirm the zoom.
 - Enables and verifies Streamer Mode so unreleased features are hidden.
 - Verifies that the persona is signed in.
 - Opens the exact repository path through the native folder picker if needed.
@@ -303,7 +304,7 @@ For research artifacts:
 1. Extract the image context with `screenshot-context.py`.
 2. Launch a new process from the signed-in `demo` persona with
    `prepare-persona.sh`.
-3. Confirm that the pre-step set the capture frame, confirmed the 125% zoom,
+3. Confirm that the pre-step set the capture frame, confirmed the 175% zoom,
    and verified Streamer Mode as enabled. Then use process-scoped Accessibility
    to reach the required state.
 4. Wait 1-2 seconds for UI to settle.
@@ -419,6 +420,11 @@ display the capture context cannot reach, no window is found and nothing can be
 captured — even though the window is "open." Drag the app onto the same desktop
 as the terminal running the capture, then retry. `capture-window.sh` polls for
 the duration of its timeout, so you can move the window while it waits.
+
+With `COPILOT_CAPTURE_DISPLAY=builtin`, the persona window opens on the built-in
+laptop display. The active Space of each display is visible, so capture works
+while you work on other displays. Set the same variable for `capture-window.sh`
+so it does not activate the persona.
 
 ## Use a sanitized training account
 

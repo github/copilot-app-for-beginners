@@ -104,7 +104,9 @@ swiftc "$window_control_src" -o "$window_control" 2>/dev/null || { echo "swiftc 
 swiftc "$locator_src" -o "$locator" 2>/dev/null || { echo "swiftc failed to build the element locator" >&2; exit 1; }
 
 if [ -n "$target_pid" ]; then
-  "$window_control" "$target_pid" activate "$timeout" >/dev/null
+  # In built-in display mode, do not take focus from the app that you use.
+  [ "${COPILOT_CAPTURE_DISPLAY:-}" = "builtin" ] || \
+    "$window_control" "$target_pid" activate "$timeout" >/dev/null
   # Let transient system indicators (for example, the input-source badge that
   # macOS shows next to a focused text field) fade before the capture.
   sleep "${COPILOT_CAPTURE_SETTLE_SECONDS:-2}"
