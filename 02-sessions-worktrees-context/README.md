@@ -55,7 +55,7 @@ When you start a session with **+**, the workspace selector below the prompt box
 
 The app remembers your last choice. You chose **Current checkout** in Chapter 00, so switch back now: point to the `copilot-app-for-beginners` project, select **+**, open the workspace selector, and choose **New worktree**. You don't need to submit a prompt; the app keeps the choice. A session that you start with **Create from** (more on that in a moment) always gets a new worktree.
 
-![Where to work menu in the GitHub Copilot app showing New worktree, Current checkout, Cloud, and Base branch](assets/where-sessions-run.webp)
+![Where to work menu in the GitHub Copilot app showing New worktree, Current checkout, Cloud, and Base branch](assets/app-where-sessions-run.webp)
 
 The choices trade off speed against isolation:
 

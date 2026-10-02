@@ -40,7 +40,7 @@ Before you record anything, you get the studio ready. You sign in for access, pl
 2. Open the app and select **Sign in to GitHub**.
 3. Sign in with your GitHub account.
 
-    <img src="assets/sign-in-to-app.webp" alt="Sign in to the Copilot app" width="800" />
+    <img src="assets/app-sign-in.webp" alt="Sign in to the Copilot app" width="800" />
 
 4. At **Connect your repositories**, leave every repository unselected, then select **Continue**. You'll connect your fork of the GitHub Copilot app for Beginners repository in the next section.
 
@@ -84,7 +84,7 @@ Select **+** next to **Projects**, then choose the option that matches what you 
 
     This uses the clone already on your machine for setup. You'll learn about the other options in later chapters.
 
-    <img src="assets/current-checkout-workspace-selector.webp" alt="Where to work menu with callouts for the workspace selector and Current checkout" width="800" />
+    <img src="assets/app-current-checkout-workspace-selector.webp" alt="Where to work menu with callouts for the workspace selector and Current checkout" width="800" />
 
 1. Submit this short prompt to create the session and test it out.
 

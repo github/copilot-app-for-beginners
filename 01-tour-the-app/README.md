@@ -134,7 +134,7 @@ I'm learning the copilot-app-for-beginners course. Give me a beginner-friendly t
 > - **Plan mode** is like charting the arrangement and approving it before the first take.
 > - **Autopilot** is like giving a clearly defined task to a trusted system and letting it complete it with minimal intervention.
 
-![Session modes: Interactive, Plan, and Autopilot. Pick one for the task.](assets/session-mode-decision-ladder.webp)
+![Session modes: Interactive, Plan, and Autopilot, with more autonomy from left to right. Pick the mode that fits the task.](assets/session-mode-decision-ladder.webp)
 
 | Mode | How the app interprets it | Use case |
 |---|---|---|

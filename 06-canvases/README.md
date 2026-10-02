@@ -127,7 +127,7 @@ Those panels stay tied to the live session. A canvas adds one more surface that 
 
 Before building your own canvas, try one from the community. [Awesome GitHub Copilot][awesome-copilot] is a curated collection of agents, instructions, skills, and canvas extensions you can install into the GitHub Copilot app. The [Repository Issues Kanban][issues-kanban] is a good first canvas to explore. It pulls repository issues into a kanban board you can triage and track inside a session.
 
-![Repository Issues Kanban preview](assets/repo-issues-kanban.webp)
+![Repository Issues Kanban preview](assets/app-repo-issues-kanban.webp)
 
 1. On the [Repository Issues Kanban][issues-kanban] page of the Awesome Copilot website, select **Open in Copilot app** to install it in your GitHub Copilot app. If your browser asks to open the GitHub Copilot app, allow it.
 
