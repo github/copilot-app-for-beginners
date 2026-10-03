@@ -179,7 +179,11 @@ def ocr_words(
             errors="replace",
         )
     words: list[dict[str, object]] = []
-    for row in csv.DictReader(io.StringIO(result.stdout), delimiter="\t"):
+    # Tesseract TSV does not quote fields. A word that starts with a quote
+    # mark must not make the reader join the following rows into one field.
+    for row in csv.DictReader(
+        io.StringIO(result.stdout), delimiter="\t", quoting=csv.QUOTE_NONE
+    ):
         text = row.get("text", "").strip()
         try:
             confidence = float(row.get("conf", "-1"))
@@ -502,7 +506,7 @@ def calibrated_font(
         fail("No supported system font was found.")
 
     def fit(path: str, weight: float | None) -> tuple[float, ImageFont.FreeTypeFont]:
-        # The app zoom (for example, 175%) gives fractional pixel sizes, so try quarter
+        # The app zoom (for example, 150%) gives fractional pixel sizes, so try quarter
         # sizes. Whole sizes alone can miss the real size by enough to choose
         # the wrong family.
         best_fit: tuple[float, ImageFont.FreeTypeFont] | None = None
@@ -869,7 +873,8 @@ def replace_span(image: Image.Image, replacement: Replacement) -> None:
     # The band is not plain (for example, the text sits on a chip or a
     # highlight). Replace the span in place without moving other content.
     gap = geometry.neighbor_left - geometry.right - 1
-    keep_gap = min(gap, max(3, round(gap * 0.6)))
+    # A small gap is the space between two words. Keep all of it.
+    keep_gap = gap if gap <= 12 else min(gap, max(3, round(gap * 0.6)))
     suffix = None
     if span_right <= geometry.right:
         suffix = image.crop((span_right, band_top, geometry.right + 1, band_bottom + 1))

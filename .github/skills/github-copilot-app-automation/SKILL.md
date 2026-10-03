@@ -36,7 +36,7 @@ COPILOT_PID="$(bash "$SK/prepare-persona.sh" "$PERSONA" "$REPO" 60)"
 
 This keeps the existing login and persona data, starts a separate app process,
 sets only that window to a standard 1920x1080-point frame, resets the display
-zoom and zooms in four times (the zoom is measured and confirmed), enables and
+zoom and zooms in three times (the zoom is measured and confirmed), enables and
 verifies **Streamer Mode**, verifies that the account is signed in, verifies the
 exact local repository, dismisses transient banners, and returns its process
 ID. If the
@@ -49,7 +49,7 @@ screen: it can draw the menu bar and title bar over the app content.
 To keep working on other displays during capture, set
 `COPILOT_CAPTURE_DISPLAY=builtin` for both `prepare-persona.sh` and
 `capture-window.sh`. The window then opens on the built-in laptop display and
-zooms in three times instead of four, because the laptop frame is smaller.
+zooms in twice instead of three times, because the laptop frame is smaller.
 After setup, focus goes back to the app that you used before. The pointer is
 not moved, and the capture does not activate the persona. Do not type during
 the first launch seconds, and keep the laptop display on its current Space.
@@ -205,7 +205,7 @@ Only use this workflow when the user has agreed the App can be visible or when t
    image, view the old image first and list its callouts, boxes, and crop.
 2. Launch a new process from the persistent `demo` persona with
    `prepare-persona.sh`. The pre-step sets a standard 1920x1080-point window,
-   resets zoom, zooms in four times, and enables and verifies **Streamer Mode**. It
+   resets zoom, zooms in three times, and enables and verifies **Streamer Mode**. It
    fails closed if Streamer Mode or the zoom cannot be verified. Pass the exact
    local training repository and keep the returned process ID. Turn off Siri
    before you capture: its waveform orb can appear next to a focused text field,
@@ -242,14 +242,21 @@ Only use this workflow when the user has agreed the App can be visible or when t
 7. Keep PNG as the source artifact; use WebP in web/course pages.
 8. Confirm that full-window files are exactly 1920x1080. A crop keeps the size
    of its crop rectangle.
-9. Confirm that the image has a 2px `#cccccc` border inside its edges.
-10. Confirm that the output keeps the avatar, shows **Copilot Dev** instead of a
+9. Confirm that the image has a 2px `#cccccc` border inside its edges, and
+   that no window corner shows black pixels. The app window has transparent
+   rounded corners. Put an image on white before any RGB conversion or
+   resize, or the corners turn black. `capture-window.sh` stops if it finds
+   dark corner pixels.
+10. Confirm that the three macOS window buttons do not show in the top-left
+    corner and that the sidebar icon is in their place. `capture-window.sh`
+    does this with `hide-window-controls.py`.
+11. Confirm that the output keeps the avatar, shows **Copilot Dev** instead of a
    person's profile name, and uses **copilotdev** for matching personal
    repository owners, paths, and branch names.
-11. For Settings screenshots, confirm that no app version is visible.
-12. Review the screenshot for other private data before committing or
+12. For Settings screenshots, confirm that no app version is visible.
+13. Review the screenshot for other private data before committing or
    publishing.
-13. Restore any persona state that you changed for the capture (hidden
+14. Restore any persona state that you changed for the capture (hidden
    projects, installed plugins or MCP servers, test automations or sessions),
    then close the exact process with `cleanup-persona.sh` only after the
    capture is verified. Keep the signed-in persona for the next screenshot.
@@ -266,7 +273,7 @@ Use:
 - [ensure-streamer-mode.swift](sample_codes/macos-accessibility/ensure-streamer-mode.swift) — enables and verifies Streamer Mode before screenshot preparation
 - [cleanup-persona.sh](sample_codes/macos-accessibility/cleanup-persona.sh) — stops one exact screenshot process and preserves the signed-in persona
 - [launch-persona.sh](sample_codes/macos-accessibility/launch-persona.sh) — low-level launcher used by `prepare-persona.sh`
-- [control-copilot-window.swift](sample_codes/macos-accessibility/control-copilot-window.swift) — sets the 1920x1080-point capture frame and the measured 175% capture zoom (150% on the built-in display) for one exact app process
+- [control-copilot-window.swift](sample_codes/macos-accessibility/control-copilot-window.swift) — sets the 1920x1080-point capture frame and the measured 150% capture zoom (125% on the built-in display) for one exact app process
 - [control-copilot-ui.swift](sample_codes/macos-accessibility/control-copilot-ui.swift) — presses one named Accessibility control in an exact app process
 - [prepare-copilot-state.swift](sample_codes/macos-accessibility/prepare-copilot-state.swift) — prepares transient states: focus a hover-only control, highlight a menu item, set a field value, dismiss banners, and park the pointer
 - [locate-copilot-element.swift](sample_codes/macos-accessibility/locate-copilot-element.swift) — prints the final 1920x1080 coordinates of named controls for callouts, boxes, and crops
@@ -275,6 +282,7 @@ Use:
 - [app-ui-map.md](references/app-ui-map.md) — sanitized factual UI map (menus, sidebar, views, composer controls), regenerable via map-app.sh
 - [capture-window.sh](sample_codes/macos-accessibility/capture-window.sh) — recommended: process-filtered CoreGraphics window capture + WebP, with `--callout`, `--box`, `--arrow`, and `--crop`
 - [finalize-screenshot.py](sample_codes/macos-accessibility/finalize-screenshot.py) — enforces 1920x1080 output, adds the required 2px `#cccccc` inside border, and crops
+- [hide-window-controls.py](sample_codes/macos-accessibility/hide-window-controls.py) — removes the macOS window buttons and moves the sidebar icon into their place, so screenshots do not show the operating system
 - [add-step-callouts.py](sample_codes/macos-accessibility/add-step-callouts.py) — adds ordered red step badges, red highlight boxes, and red arrows to a finalized screenshot
 - [find-copilot-window.swift](sample_codes/macos-accessibility/find-copilot-window.swift) — lists on-screen Copilot windows with their window and process IDs
 - [map-app.sh](sample_codes/macos-accessibility/map-app.sh) — version-stamped UI map for grounding steps and diffing app updates

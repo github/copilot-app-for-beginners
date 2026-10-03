@@ -116,6 +116,7 @@ To create an automation:
 1. Select **New automation**.
 1. Provide a name for the automation: `PR review readiness report`
 1. Change the **Trigger** from **Daily** to **Manual**.
+1. Make sure **Run in the cloud** is off, so the automation runs locally.
 1. Paste the prompt below:
 
    ```text
@@ -133,7 +134,7 @@ To create an automation:
 1. In the **Workspace** picker that appears next to the project, select **Current checkout**. This report only reads data, so each run doesn't need its own new worktree.
 1. Select the arrow next to **Create**, then select **Create and run**.
 
-   ![New automation form with filled details](assets/app-new-automation.webp)
+   ![New automation form with the Manual trigger, Run in the cloud off, the course project, Current checkout, and the Create and run option open](assets/app-new-automation.webp)
 
    **Expected Output:** Your automation should appear under **Your automations** with the **Manual** trigger. The run should start immediately and appear under **Recent runs**.
 
@@ -205,11 +206,13 @@ The current Trigger menu includes these event triggers:
 | Trigger | Fires when... | Example use |
 |---|---|---|
 | **Issue** | A matching issue event occurs | Summarize issue activity for triage |
+| **Automation completed** | An automation that you name under **Upstream Automations** completes | Start a follow-up report after a triage run |
 | **Discussion comment** | A comment is added to a discussion | Summarize new discussion feedback |
 | **Discussion opened** | A discussion is opened | Prepare a short discussion summary |
 | **Discussion updated** | A discussion is updated | Report what changed in a discussion |
 | **Pull request** | A matching pull request event occurs | Summarize changes for a reviewer |
 | **Sub issue added** | A sub-issue is added | Report changes to an issue breakdown |
+| **Workflow** | A GitHub Actions workflow that you name completes (for example, it fails) | Summarize why a CI run failed |
 
 Choose the trigger that matches the event you want the automation to handle. Schedule choices such as **Hourly**, **Daily**, **Weekly**, and **CRON** appear in the same menu.
 

@@ -129,8 +129,24 @@ guard let running = NSRunningApplication(processIdentifier: pid) else {
 }
 let application = AXUIElementCreateApplication(pid)
 let mode = arguments[2]
-_ = running.activate(options: [])
-Thread.sleep(forTimeInterval: 0.3)
+// Named Accessibility actions work without focus. In built-in display mode,
+// the user keeps working in another app, so activate the persona only for
+// keyboard commands, and give focus back to the previous app on exit.
+let builtinDisplay = ProcessInfo.processInfo.environment["COPILOT_CAPTURE_DISPLAY"] == "builtin"
+var previousApplication: NSRunningApplication?
+if !builtinDisplay {
+    _ = running.activate(options: [])
+    Thread.sleep(forTimeInterval: 0.3)
+} else if ["key", "highlight-menu-item"].contains(mode) {
+    previousApplication = NSWorkspace.shared.frontmostApplication
+    _ = running.activate(options: [])
+    Thread.sleep(forTimeInterval: 0.3)
+    atexit {
+        if let previous = previousApplication, previous.processIdentifier != pid {
+            _ = previous.activate(options: [])
+        }
+    }
+}
 
 switch mode {
 case "hover":

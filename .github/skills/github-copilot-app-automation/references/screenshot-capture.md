@@ -9,8 +9,16 @@ Capture visible GitHub Copilot app states for course material:
 - Make full-window files exactly **1920x1080**. A crop keeps the size of its
   crop rectangle.
 - Add a **2px `#cccccc` border** inside the image edges, also on crops.
+- Remove the macOS window buttons (close, minimize, zoom) from the top-left
+  corner and move the sidebar icon into their place, so the screenshot does
+  not show the operating system. `capture-window.sh` runs
+  `hide-window-controls.py` for this.
+- Do not let the window corners turn black. The window has transparent
+  rounded corners. Put the image on white before any RGB conversion or resize.
+  `capture-window.sh` checks the corners before it adds annotations, and stops
+  if it finds dark pixels.
 - Capture a standard 1920x1080-point window, not full screen.
-- Reset display zoom, then zoom in exactly four times (175%) before preparing the
+- Reset display zoom, then zoom in exactly three times (150%) before preparing the
   screen.
 - Enable and verify **Streamer Mode** before preparing the screen.
 - Remove the app version from Settings screenshots after capture.
@@ -39,9 +47,9 @@ The preparation workflow:
 - Finds the new process instead of reusing an existing Copilot process.
 - Sets only that process's main window to a standard 1920x1080-point frame,
   centered on its display.
-- Resets display zoom, zooms in four times, and measures a sidebar control to
-  confirm the 175% zoom. With `COPILOT_CAPTURE_DISPLAY=builtin`, it uses the
-  built-in laptop display and three zoom steps (150%). It retries and fails if it cannot confirm the zoom.
+- Resets display zoom, zooms in three times, and measures a sidebar control to
+  confirm the 150% zoom. With `COPILOT_CAPTURE_DISPLAY=builtin`, it uses the
+  built-in laptop display and two zoom steps (125%). It retries and fails if it cannot confirm the zoom.
 - Enables and verifies Streamer Mode so unreleased features are hidden.
 - Verifies that the persona is signed in.
 - Opens the exact repository path through the native folder picker if needed.
@@ -304,7 +312,7 @@ For research artifacts:
 1. Extract the image context with `screenshot-context.py`.
 2. Launch a new process from the signed-in `demo` persona with
    `prepare-persona.sh`.
-3. Confirm that the pre-step set the capture frame, confirmed the 175% zoom,
+3. Confirm that the pre-step set the capture frame, confirmed the 150% zoom,
    and verified Streamer Mode as enabled. Then use process-scoped Accessibility
    to reach the required state.
 4. Wait 1-2 seconds for UI to settle.

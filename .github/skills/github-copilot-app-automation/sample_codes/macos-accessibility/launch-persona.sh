@@ -5,11 +5,11 @@
 #
 # On a standard-resolution display, the 1920x1080-point frame captures as a
 # native 1080p image. The script then resets the web zoom and zooms in exactly
-# four times (175%), as the skill requires, and confirms the zoom.
+# three times (150%), as the skill requires, and confirms the zoom.
 #
 # Set COPILOT_CAPTURE_DISPLAY=builtin to put the window on the built-in laptop
 # display, so you can keep working on other displays. The laptop frame is
-# smaller, so this mode zooms in three times (150%) by default.
+# smaller, so this mode zooms in twice (125%) by default.
 #
 # COPILOT_CAPTURE_WIDTH and COPILOT_CAPTURE_ZOOM_STEPS (0-7) exist only for
 # special cases. Course screenshots use the defaults.
@@ -99,7 +99,7 @@ swiftc "$window_control_src" -o "$window_control" 2>/dev/null || {
 "$window_control" "$pid" frame "$timeout" "$capture_width" >/dev/null
 zoom_steps="${COPILOT_CAPTURE_ZOOM_STEPS:-}"
 if [ -z "$zoom_steps" ] && [ "${COPILOT_CAPTURE_DISPLAY:-}" = "builtin" ]; then
-  zoom_steps=3
+  zoom_steps=2
 fi
 if [ -n "$zoom_steps" ]; then
   "$window_control" "$pid" capture-zoom "$timeout" "$zoom_steps" >/dev/null

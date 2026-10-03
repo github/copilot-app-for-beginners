@@ -177,6 +177,22 @@ print(f"mean={m:.1f} stddev={sd:.1f} verdict={'BLANK-or-Screen-Recording-denied'
 PY
 )"
 
+# A Retina capture is larger than 1920x1080. Resize it first: the sanitizer
+# fits replacement text to the 1x app font sizes, so it is accurate only at 1x.
+python3 - "$raw_png" <<'PY'
+import sys
+from PIL import Image
+path = sys.argv[1]
+with Image.open(path) as image:
+    if image.width > 1920 and abs(image.width / image.height - 16 / 9) <= 0.01:
+        # Put the transparent rounded window corners on white first. A plain
+        # RGB conversion makes them black.
+        rgba = image.convert("RGBA")
+        flat = Image.new("RGBA", rgba.size, (255, 255, 255, 255))
+        flat.alpha_composite(rgba)
+        flat.convert("RGB").resize((1920, 1080), Image.Resampling.LANCZOS).save(path)
+PY
+
 if [ -n "$target_pid" ]; then
   sanitizer="$here/sanitize-screenshot.sh"
   [ -x "$sanitizer" ] || {
@@ -193,6 +209,39 @@ fi
 rm -f "$raw_png"
 
 python3 "$finalizer" "$png"
+
+# Remove the macOS window buttons and move the sidebar icon into their place,
+# so the screenshot does not show the operating system.
+python3 "$here/hide-window-controls.py" "$png"
+
+# The window has transparent rounded corners. If a step converts them to RGB
+# without a white background, they turn black. Check before annotations are
+# drawn, because a callout or box can legitimately touch a corner.
+python3 - "$png" <<'PY'
+import sys
+from PIL import Image
+
+path = sys.argv[1]
+with Image.open(path) as image:
+    pixels = image.convert("RGB")
+    width, height = pixels.size
+    luminance = lambda pixel: sum(pixel) / 3
+    for x0, y0, dx, dy in (
+        (2, 2, 1, 1),
+        (width - 3, 2, -1, 1),
+        (2, height - 3, 1, -1),
+        (width - 3, height - 3, -1, -1),
+    ):
+        reference = luminance(pixels.getpixel((x0 + 10 * dx, y0 + 10 * dy)))
+        for i in range(8):
+            for j in range(8 - i):
+                if luminance(pixels.getpixel((x0 + i * dx, y0 + j * dy))) < reference - 60:
+                    raise SystemExit(
+                        f"{path} has dark pixels in a window corner. "
+                        "Flatten transparent corners onto white before RGB conversion."
+                    )
+PY
+
 if [ "${#callout_args[@]}" -gt 0 ]; then
   python3 "$callout_tool" "$png" "${callout_args[@]}"
 fi

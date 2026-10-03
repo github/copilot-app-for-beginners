@@ -18,7 +18,7 @@
 // laptop display instead, so you can keep working on other displays.
 //
 // "capture-zoom" resets the web zoom (Command+0) and then zooms in (Command+=)
-// four times by default, as the skill requires. That gives 175%. It waits
+// three times by default, as the skill requires. That gives 150%. It waits
 // for the app content to load first, and then measures a sidebar control to
 // confirm that the zoom took effect. It retries, and it fails if it cannot
 // confirm the zoom.
@@ -238,7 +238,7 @@ if mode == "frame" {
 if mode == "capture-zoom" {
     // Zoom levels that Command+= steps through, starting at 100%.
     let levels: [Double] = [100, 110, 125, 150, 175, 200, 250, 300]
-    var steps = 4
+    var steps = 3
     if let extraArgument {
         guard let explicitSteps = Int(extraArgument), (0..<levels.count).contains(explicitSteps) else {
             fail("Zoom steps must be a whole number from 0 to \(levels.count - 1).")
