@@ -40,15 +40,7 @@ Prepare a session and confirm that the sample app is ready:
     npm run build
     ```
 
-Confirm these results before you start the exercises:
-
-| Command | Expected result |
-|---|---|
-| `npm install` | Installation completes without an error |
-| `npm test -- --run` | Vitest reports that all test files and tests passed |
-| `npm run build` | TypeScript and Vite complete the build without an error |
-
-Note the test file and test totals. Your canvas will use these values as its baseline.
+All three commands should finish without errors. Note the test totals. Your canvas will use them as its baseline.
 
 ---
 
@@ -66,20 +58,11 @@ A canvas is the app's arrangement board for human-agent work.
 
 ### A Canvas Is a Shared Control Panel
 
-Canvases are documented as **bidirectional** work surfaces: both sides (user and agent) can change the same board.
-
-Simple example:
+A canvas is **bidirectional**: you and the agent can both change the same board. For example:
 
 1. GitHub Copilot adds plan steps to the board.
 2. You uncheck a step or write "pause before edits" in the notes.
 3. GitHub Copilot continues from *your* update, not from a buried chat sentence.
-
-A custom canvas can include:
-
-- visible state
-- UI controls
-- agent-callable actions, such as updating a checklist item
-- artifacts such as plans, checklists, dashboards, browser previews, terminals, or documents
 
 <img src="assets/human-agent-shared-surface.webp" alt="You and the agent share one canvas. You use UI controls, the agent uses actions such as get, add, and move, and both sides can change the same board." width="800" />
 
@@ -101,25 +84,11 @@ You do not need to write extension code in this chapter. These terms help you un
 
 ### Built-In Work Surfaces Come First
 
-You already used these panels in earlier chapters. They come with the session. You don't create them.
-
-| Built-in work surface | What you inspect |
-|---|---|
-| Plan | Execution plan and a checklist of steps before implementation |
-| Terminal | Install, test, and build evidence |
-| Browser | Running app behavior |
-| Changes / Review panel | What changed and what still needs review |
-
-Those panels stay tied to the live session. A canvas adds one more surface that you design for the task.
+The **Plan**, **Terminal**, **Browser**, and **Changes** panels that you used in earlier chapters come with every session. A canvas adds one more surface that you design for the task.
 
 ### When to Use a Canvas
 
-| Use chat when... | Use a canvas when... |
-|---|---|
-| You need a quick answer | You need visible state |
-| The task is short | The task has multiple recurring steps |
-| The result can be text | The result needs controls or inspection |
-| You don't need to revisit it | You want a reusable work surface for the session |
+Use chat for a quick answer to a short task. Use a canvas when the work has state to keep visible, steps that repeat, or controls that you and the agent both use.
 
 <img src="assets/chat-vs-canvas.webp" alt="Chat versus canvas work surfaces" width="800" />
 
@@ -183,7 +152,7 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 > [!TIP]
 > Use the most capable model available to you when you create the canvas. The first generation needs more reasoning. After the canvas works, you can use a smaller, faster model for focused changes.
 
-1. In the current session, type `/` in the prompt box and select `/create-canvas`, **then** paste the prompt below:
+1. In the current session, type `/` in the prompt box and select `/create-canvas`, **then** paste the prompt below. It builds a five-stage workbench with action buttons, a checklist, and an evidence area. You don't need to read the prompt in full.
 
     ```text
     Create a reusable, user-scoped Feature Workbench canvas for the local dev inner loop in @samples/book-app-web. Simple, compact, beginner-readable. No GitHub writes, no source edits while building it.
@@ -206,7 +175,7 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     <details>
     <summary>What this prompt is asking for, in plain language</summary>
 
-    This prompt is dense because it's written for the app to build the canvas, not for you to memorize. Here's what its key phrases mean, using terms from [Terms used in the exercises](#a-canvas-is-a-shared-control-panel) earlier in this chapter:
+    The prompt is written for the app, not for you to memorize. Its key phrases mean the following. For other terms, see [Terms used in the exercises](#a-canvas-is-a-shared-control-panel).
 
     | Phrase in the prompt | What it means |
     |---|---|
@@ -215,8 +184,6 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     | "polled from exit_plan_mode events" | The canvas checks the plan's approval status periodically instead of you having to refresh it |
     | "give each a multi-minute timeout" | Test, build, and browser actions can take longer than a typical quick response, so don't let the canvas give up early |
     | "user scope" | The canvas is saved to your machine across projects, not committed to this repository |
-
-    You don't need to write or fully parse this prompt yourself. Paste it as-is and use the table above to understand what the app builds from it.
 
     </details>
 
@@ -263,36 +230,25 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     Add a Clear filters control that resets search, genre, and reading status to their default values. Show it only when at least one filter is active.
     ```
 
-    This will:
-    - Switch the session mode to **Plan**
-    - Send a prompt that asks the agent to create an implementation plan for the proposed feature
-    - Keep the canvas at the **Propose** stage and show the status as **Working...**
+    The session switches to **Plan** mode and the agent writes an implementation plan. The canvas stays at **Propose** with the status **Working...**.
 
-        ![Feature Workbench at the Propose stage with the status Working... while the session is in Plan mode](assets/app-feature-workbench-propose.webp)
+    ![Feature Workbench at the Propose stage with the status Working... while the session is in Plan mode](assets/app-feature-workbench-propose.webp)
 
 1. Review the plan in the **Plan** tab. In the **Review plan** box at the bottom of the chat, select **Exit plan mode and I will prompt myself**. Then select the **Feature Workbench** tab to return to the canvas. The **Plan** stage should be complete, and the feature status should show **Approved**.
 
     ![Feature Workbench with the Propose and Plan stages complete and the status Approved](assets/app-feature-workbench-plan.webp)
 
-1. Select **Run baseline** on the canvas. This ensures that the initial state of the application is recorded before making any changes.
-
-    Confirm that the canvas records the Vitest test total and the build result from the terminal output. In the chat, expand the tool calls for this action to see the commands that Copilot ran (`npm test -- --run` and `npm run build`). The evidence should match the totals in their output.
-
-    The board is useful only when it stays linked to evidence from the same session. Checking a validation box because the chat sounded confident is not enough.
+1. Select **Run baseline** on the canvas to record the app's state before any change. In the chat, expand the tool calls for this action (`npm test -- --run` and `npm run build`). Confirm that the test total and build result on the canvas match their output.
 
     ![Expanded npm test output with 4 passed tests, next to the Feature Workbench Baseline evidence of 4/4 tests and a passing build](assets/app-feature-workbench-baseline.webp)
 
-    When the action finishes, the **Baseline** stage should show as complete. The **Baseline test** and **Baseline build** checklist items should be marked done, and the evidence should include the number of tests.
+    The **Baseline** stage and its two checklist items should show as complete.
 
-1. Select **Implement** to build the feature from the approved plan.
-
-    When the action finishes, the canvas marks the **Implement** stage complete, checks off the implementation items in the checklist, and adds a **Diff** row to the evidence. Select the **Changes** pill above the prompt box to open the **Changes** tab, and confirm that the changes are limited to the approved feature.
+1. Select **Implement** to build the feature from the approved plan. When it finishes, the **Implement** stage is complete and the evidence has a **Diff** row. Select the **Changes** pill above the prompt box and confirm that the changes are limited to the approved feature.
 
     ![Feature Workbench with the Implement stage complete and a Diff row in the evidence, next to the Changes pill above the prompt box](assets/app-feature-workbench-implement.webp)
 
-1. Select **Browser validation** to have the agent perform a visual check in the browser. You can manually test the feature by interacting with the application and observing the visual changes. In the browser, apply a filter and confirm **Clear filters** appears.
-
-    Complete all of these checks:
+1. Select **Browser validation** to have the agent check the feature in the browser. Then check these states yourself:
 
     | State | Expected behavior |
     |---|---|
@@ -306,20 +262,9 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     When you finish the checks, select **Background** above the prompt box and stop the dev server. Until the dev server stops, **Browser validation** can keep showing **Working...**, even after Copilot reports the result.
 
-1. Select **Run final checks** to confirm that the existing automated checks still pass.
-
-    Compare the final evidence with your own baseline. Test counts can increase if implementation adds focused tests, but the final total must not be lower than the baseline total.
-
-    | Evidence | What to confirm |
-    |---|---|
-    | Baseline | Test and build results match the original terminal output |
-    | Diff | Changed files are limited to the approved feature |
-    | Browser | All five browser states above were checked |
-    | Final | Tests and build pass, and the final test total is at least the baseline total |
+1. Select **Run final checks**. Confirm that the tests and build pass, and that the final test total is at least the baseline total. The total can go up if the implementation added tests.
 
     ![Feature Workbench with all five stages complete, and evidence that shows 4 baseline tests and 9 final tests](assets/app-feature-workbench-validate.webp)
-
-You've seen how the workbench reflects what actually happened in the session, not because a chat response sounds confident. Copilot can update the canvas after an action gathers evidence, but you decide whether that evidence is sufficient.
 
 <a id="markdown-fallback"></a>
 
@@ -389,21 +334,9 @@ Answer the **Review plan** box at the bottom of the chat. Then select **Refresh 
 
 If the review panel is hidden, select **View** > **Toggle Review Panel**. In the review panel, select **+**, then **Terminal** or **Browser**. If the tab is still missing, update the app to the latest version.
 
-### The agent says it updated the board, but the board looks wrong
+### The board does not match the evidence
 
-Ask the agent for the full board again. Compare it with the evidence in the terminal or browser.
-
-### A validation item is complete without proof
-
-Ask for the evidence, such as test output or a browser check. Uncheck any item that has no output to support it.
-
-### The baseline or final totals look wrong
-
-Compare both values with the terminal output from this worktree. Do not copy totals from an example image or another session.
-
-### Browser or terminal validation is stale
-
-Confirm that the command ran in the `samples/book-app-web` folder of this session's worktree. Then run the check again.
+Compare the board with the terminal and browser output from this session's worktree, not with an example image or another session. Confirm that commands ran in `samples/book-app-web`. Uncheck any item that has no output to support it, then run the check again.
 
 ### Sensitive data appears in a custom canvas
 
