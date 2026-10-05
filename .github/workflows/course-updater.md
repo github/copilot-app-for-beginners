@@ -4,44 +4,15 @@ description: "Weekly check (Mondays) for new GitHub Copilot app features and upd
 on:
   schedule: weekly on monday
   workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: read
 tools:
-  bash: ["date", "jq"]
+  bash: ["curl", "gh"]
   edit:
+  web-fetch:
   github:
-    toolsets: [repos]
-mcp-scripts:
-  fetch-app-updates:
-    description: "Read changelog sections for recent Copilot app releases and return release and commit details from the past 7 days."
-    run: |
-      set -euo pipefail
-      since="$(node -p 'new Date(Date.now() - 7 * 86400000).toISOString().replace(/\.\d{3}Z$/, "Z")')"
-      releases="$(gh api --paginate --slurp 'repos/github/app/releases?per_page=100' |
-        jq --arg since "$since" '[.[][] | select(.published_at != null and .published_at >= $since) | {tag_name, published_at, html_url, body}]')"
-      tags="$(printf '%s' "$releases" | jq 'map(.tag_name)')"
-      printf '%s\n' '## Changelog: https://github.com/github/app/blob/main/changelog.md'
-      gh api 'repos/github/app/contents/changelog.md?ref=main' --jq '.content | @base64d' |
-        jq -Rrs --argjson tags "$tags" '
-          [split("\n## ")[] | select(split("\n")[0] as $tag | $tags | index($tag)) | "## " + .] as $sections |
-          if ($sections | length) != ($tags | length) then
-            error("Missing changelog sections for recent releases")
-          else
-            $sections | join("\n")
-          end'
-      printf '\n## Releases since %s\n' "$since"
-      printf '%s\n' "$releases"
-      printf '\n## Commits since %s\n' "$since"
-      gh api --paginate --slurp "repos/github/app/commits?since=$since&per_page=100" |
-        jq '[.[][] | {sha, html_url, message: .commit.message, date: .commit.committer.date}]'
-    env:
-      GH_TOKEN: "${{ secrets.GH_AW_GITHUB_TOKEN }}"
-  fetch-open-update-prs:
-    description: "Return all open PRs with the automated-update or copilot-app-updates label. An empty array means no matching PRs."
-    run: |
-      set -euo pipefail
-      gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/pulls?state=open&per_page=100" |
-        jq '[.[][] | select(any(.labels[]; .name == "automated-update" or .name == "copilot-app-updates")) | {number, title, body, html_url}]'
-    env:
-      GH_TOKEN: "${{ secrets.GH_AW_GITHUB_TOKEN }}"
+    toolsets: [repos, pull_requests]
 post-steps:
   - name: Require a complete course update check
     if: always()
@@ -79,16 +50,15 @@ You are a documentation maintainer for the Copilot App for Beginners repository.
 
 ## Step 1 — Gather recent Copilot app updates
 
-Call `fetch-app-updates` (no inputs needed). This authenticated tool reads:
+Use `web-fetch` to read the following page and extract the latest entries from the past 7 days:
 
 - https://github.com/github/app/blob/main/changelog.md — GitHub Copilot app changelog
-- Releases and commits in `github/app` from the past 7 days
 
-Use the returned changelog, release notes, and commit details to identify updates from the past 7 days. Do not use `web-fetch`, `curl`, or shell `gh` commands for these checks.
+Use the authenticated GitHub MCP tools `list_releases` and `list_commits` to check the latest releases and commits in `github/app`. Only include updates from the past 7 days.
 
-The tool result contains the fetched text in its `stdout` field. If a large result is saved to a file, use `jq -r '.stdout' <result-file>` to read that text.
+If `web-fetch` or a shell `gh` command is denied or cannot authenticate, continue with the GitHub MCP tools. Release notes and commits are valid alternative sources when `web-fetch` cannot read the changelog. Use `get_file_contents` if you need to read the changelog through MCP.
 
-If this tool or `fetch-open-update-prs` fails, report the error with `missing_data` or `missing_tool` and stop. Do not assume that a source repository is private, report that no updates are needed, or edit course content without the required source data. An incomplete check must fail the workflow.
+If the authenticated MCP reads also fail, report the error with `missing_data` or `missing_tool` and stop. Do not assume that the repository is private or report that no updates are needed without source data. An incomplete check must fail the workflow.
 
 Look for:
 
@@ -98,7 +68,9 @@ Look for:
 
 ## Step 2 — Check for existing open PRs to avoid duplicates
 
-Before doing any content comparison, call `fetch-open-update-prs` (no inputs needed). It returns all open pull requests in this repo that have the `automated-update` or `copilot-app-updates` labels. Read their titles and descriptions to understand which features or changes each PR already covers. Build a list of features that are **already addressed** by existing PRs — you must exclude those features from any updates you propose later. If every feature you found in Step 1 is already covered by an open PR, stop here and call `noop` to report that no new updates are needed.
+Before doing any content comparison, use the authenticated GitHub MCP `list_pull_requests` tool to list open pull requests in this repo. Select the PRs with either the `automated-update` or `copilot-app-updates` label. Read their titles and descriptions to understand which features or changes each PR already covers. Build a list of features that are **already addressed** by existing PRs — you must exclude those features from any updates you propose later. If every feature you found in Step 1 is already covered by an open PR, stop here and call `noop` to report that no new updates are needed.
+
+If the PR lookup fails, report `missing_data` or `missing_tool` and stop. Do not treat a failed lookup as an empty PR list.
 
 ## Step 3 — Compare against the current course content
 
