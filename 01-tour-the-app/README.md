@@ -13,7 +13,9 @@ By the end of this chapter, you'll be able to:
 - Choose between a chat and a project session for a task
 - Explain the session modes: Interactive, Plan, and Autopilot
 - Select a model and reasoning effort based on task complexity
-- Optionally try voice dictation
+- Use prompt history to reuse and search previous prompts
+- Retry a response with a different model or reasoning effort
+- Try voice dictation (optional)
 
 > ⏱️ **Estimated Time**: ~30 minutes
 
@@ -177,6 +179,17 @@ You do not need a specific model for this course. Available models, effort level
 
 You can change the model and reasoning effort during a session without changing its mode.
 
+### Try Again with a Different Model
+
+If the agent's response doesn't work for you, you can retry it with a different model or reasoning effort without re-typing your prompt. Look for the **Retry** button that appears below a response in the conversation. Select it to retry with a different model, effort level, or context window. This is useful when the first attempt doesn't quite match your needs or when a higher reasoning effort might help with a tricky problem.
+
+## Prompts and Shortcuts
+
+You'll spend most of your time typing prompts in the composer box below the session. A few helpful shortcuts and features make prompt writing easier:
+
+- **Prompt history**: Press **Ctrl+R** (or **Cmd+R** on macOS) to see your recent prompts across all sessions. You can search through them and reuse a prompt by selecting it. This saves time when you run similar work regularly.
+- **Attach context**: Type `@` to attach files and folders, `#` to attach issues and pull requests, and `/` to run commands. Chapter 02 covers context in detail.
+
 ## Settings
 
 Select the gear icon at the bottom of the sidebar to open **Settings**. You do not need to change anything now, but it helps to know where each option lives.
@@ -206,9 +219,9 @@ The **Model providers** setting connects the app to additional providers. It doe
 <details>
 <summary>Optional: Voice dictation</summary>
 
-Voice dictation turns speech into editable prompt text, which can save time and effort when creating prompts.
+Voice dictation turns speech into editable prompt text, which can save time and effort when creating prompts. It is enabled by default, but you can customize your microphone settings and transcription model.
 
-Go back to the GitHub Copilot app's **Settings** dialog. Select **Voice dictation**, set up your input device and complete the configuration steps.
+Go back to the GitHub Copilot app's **Settings** dialog. Select **Voice dictation** to set up your input device and customize the configuration if needed.
 
 > **Note:** Microphone permission is granted at the operating-system level. Follow your operating system prompts to allow the GitHub Copilot app to use the microphone.
 
