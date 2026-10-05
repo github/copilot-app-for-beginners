@@ -14,6 +14,7 @@ GitHub Copilot app connects both loops, but you remain responsible for reviewing
 By the end of this chapter, you'll be able to:
 
 - Use the review panel, tests, build output, and browser preview to validate a local change
+- Run code snippets directly from Copilot's responses using the Run button or copy and paste them into the terminal
 - Add a regression test and ask the rubber duck agent to critique your work
 - Use the **Issues** and **Pull requests** views to move from an issue to a pull request
 - Ask GitHub Copilot to address review comments and failing checks
@@ -106,6 +107,15 @@ The tests and build should pass before you introduce any changes. This gives you
 
 > [!NOTE]
 > Each practice branch opens in a separate worktree. Run `npm install` the first time you use a new worktree because dependencies aren't shared automatically.
+
+### Running Code Snippets in the Terminal
+
+When Copilot provides code snippets in a conversation, you have two ways to run them:
+
+1. **Copy and paste into the terminal** - Copy the code from Copilot's response and paste it into the Terminal tab in the review panel, just as you do above.
+2. **Run directly from the response** - Copilot's response may include a **Run** button next to Bash or PowerShell code snippets. Click it to execute the snippet directly in the session's terminal without copying and pasting. The terminal reuses the existing shell when available, so environment state and working directories carry over between runs.
+
+This direct execution is useful when you want to quickly validate a command without manually typing it, especially for longer or more complex snippets.
 
 ## Inner Loop: Develop and Validate on Your Machine
 
