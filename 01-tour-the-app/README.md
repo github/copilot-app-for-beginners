@@ -15,7 +15,7 @@ By the end of this chapter, you'll be able to:
 - Select a model and reasoning effort based on task complexity
 - Use prompt history to reuse and search previous prompts
 - Retry a response with a different model or reasoning effort
-- Optionally try voice dictation (now enabled by default)
+- Try voice dictation (optional)
 
 > ⏱️ **Estimated Time**: ~30 minutes
 
