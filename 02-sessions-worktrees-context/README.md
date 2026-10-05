@@ -11,6 +11,7 @@ By the end of this chapter, you'll be able to:
 - Start a worktree-backed session from a branch and attach an issue as context
 - Explain what a git worktree is and how it keeps each session's changes out of your `main` checkout
 - Add relevant context to a session so Copilot can understand the task and its supporting information
+- Use multiple ways to attach context: type `@` for files, `#` for issues, or drag and drop files from your computer
 - Decide between working in your current checkout, an isolated worktree, or a cloud sandbox
 - Use `/chronicle standup` and `/context` to review a session
 
@@ -83,6 +84,10 @@ The GitHub Copilot app lets you add context and commands in the prompt box with 
 
 > [!TIP]
 > Provide the smallest amount of useful context. Less is often more.
+
+### Attaching Files
+
+In addition to typing `@` to reference files and folders, you can drag files from your computer and drop them directly onto a session or agent in the sidebar. This is useful when you have files ready to attach that aren't part of the repository. The dropped files are added to the session's context, and you can continue with your prompt.
 
 ### Slash Commands
 
