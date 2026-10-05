@@ -5,7 +5,7 @@ on:
   schedule: weekly on monday
   workflow_dispatch:
 tools:
-  bash: ["date"]
+  bash: ["date", "jq"]
   edit:
   github:
     toolsets: [repos]
@@ -86,6 +86,8 @@ Call `fetch-app-updates` (no inputs needed). This authenticated tool reads:
 
 Use the returned changelog, release notes, and commit details to identify updates from the past 7 days. Do not use `web-fetch`, `curl`, or shell `gh` commands for these checks.
 
+The tool result contains the fetched text in its `stdout` field. If a large result is saved to a file, use `jq -r '.stdout' <result-file>` to read that text.
+
 If this tool or `fetch-open-update-prs` fails, report the error with `missing_data` or `missing_tool` and stop. Do not assume that a source repository is private, report that no updates are needed, or edit course content without the required source data. An incomplete check must fail the workflow.
 
 Look for:
@@ -125,3 +127,5 @@ Create a pull request with your changes, using the `main` branch as the base bra
 3. Links to the source announcements
 
 The PR should target the `main` branch and include the labels `automated-update` and `copilot-app-updates`.
+
+Match each feature to the version in its changelog heading and release record. Do not assign a feature to a different release.
