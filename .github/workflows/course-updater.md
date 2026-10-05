@@ -59,6 +59,8 @@ Use `web-fetch` to read the following page and extract the latest entries from t
 
 Use the authenticated GitHub MCP tools `list_releases` and `list_commits` to check the latest releases and commits in `github/app`. Only include updates from the past 7 days.
 
+Only consider features that have shipped in a stable GitHub release. Use the GitHub release metadata as the source of truth and exclude every release where `draft` or `prerelease` is `true`. Do not use version names, changelog entries, or wording such as "production-ready" to override that metadata. A changelog entry or commit is eligible only if you verify that it is included in a stable release published within the past 7 days. Ignore unreleased changes and changes available only in prerelease versions.
+
 If `web-fetch` or a shell `gh` command is denied or cannot authenticate, continue with the GitHub MCP tools. Release notes and commits are valid alternative sources when `web-fetch` cannot read the changelog. Use `get_file_contents` if you need to read the changelog through MCP.
 
 If the authenticated MCP reads also fail, report the error with `missing_data` or `missing_tool` and stop. Do not assume that the repository is private or report that no updates are needed without source data. An incomplete check must fail the workflow.
