@@ -1,0 +1,15 @@
+{
+  "name": "overview",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "shots": "node scripts/prepare-shots.mjs",
+    "build": "node scripts/prepare-shots.mjs && node scripts/build.mjs",
+    "dev": "npm run build && npx --yes hyperframes@0.8.134 preview",
+    "check": "npm run build && npx --yes hyperframes@0.8.134 lint && npx --yes hyperframes@0.8.134 check",
+    "snapshot": "npx --yes hyperframes@0.8.134 snapshot --no-end --at 2.6,7.2,10.5,15.9,20.6,23.6,28,34.5,41.5,45.3,49.8,53.2,58.5,66,70.8,76.8,81.6,88",
+    "render": "npm run build && npx --yes hyperframes@0.8.134 render --quality high --output renders/video.mp4",
+    "music": "node scripts/add-music.mjs",
+    "export": "ffmpeg -v error -y -i renders/video-with-music.mp4 -c:v libx264 -preset slow -crf 20 -tune animation -pix_fmt yuv420p -profile:v high -c:a aac -b:a 192k -movflags +faststart ../copilot-app-for-beginners-overview.mp4"
+  }
+}
