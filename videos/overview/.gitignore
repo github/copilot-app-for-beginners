@@ -1,0 +1,6 @@
+renders/
+snapshots/
+node_modules/
+.hyperframes/
+# Capture source PNGs are large. The lossless WebP copies are committed.
+assets/shots/*.png
