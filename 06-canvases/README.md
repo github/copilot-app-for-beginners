@@ -161,7 +161,7 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     Top: horizontal progress rail = Propose -> Plan -> Baseline -> Implement -> Validate. No Approve stage. Approval happens in the chat's Plan tab. Green = evidence-backed done, neutral = current, red = failed/blocked.
 
-    Feature proposal: text input + one Generate plan button. Switches session to plan mode, fires prompt without waiting ("Working..." status), agent inspects code + writes plan as usual, presents for approval in Plan tab (never call exit_plan_mode/ask_user elsewhere). Don't render plan text on canvas. Show only a small status pill (Working/Review/Approved/Changes requested) polled from exit_plan_mode events. No edit/approve controls on the canvas itself.
+    Feature proposal: text input + one Generate plan button. Switches session to plan mode, fires prompt without waiting ("Working" status), agent inspects code + writes plan as usual, presents for approval in Plan tab (never call exit_plan_mode/ask_user elsewhere). Don't render plan text on canvas. Show only a small status pill (Working/Review/Approved/Changes requested) polled from exit_plan_mode events. No edit/approve controls on the canvas itself.
 
     Checklist: baseline test, baseline build, implement approved plan, review diff, browser validation, screenshots (optional), final test, final build.
 
