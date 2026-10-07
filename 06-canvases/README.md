@@ -194,6 +194,9 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
 1. The canvas should open in the right side panel once the agent is done building it. This can take about 10 minutes.
 
+    > [!TIP]
+    > While you wait, read [What this prompt is asking for, in plain language](#exercise-3-create-a-feature-workbench) above, then expand the agent's tool calls in the chat to see how it builds and tests the canvas. Do not submit other prompts in this session until the canvas opens, because a new prompt can change what the agent is building.
+
     > **Important:** Generated results can differ between runs. Check the expected structure below before you continue. Do not repeatedly regenerate the full canvas.
 
     <img src="assets/app-create-canvas-screenshot.webp" alt="Feature Workbench canvas in the side panel with five stages, a feature proposal field, actions, a checklist, and an empty evidence area" width="800" />
