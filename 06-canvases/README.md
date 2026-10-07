@@ -243,15 +243,15 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     The session switches to **Plan** mode and the agent writes an implementation plan. The feature status shows **Working** until the plan is ready for review.
 
-    ![Feature Workbench at the Propose stage with the status Working... while the session is in Plan mode](assets/app-feature-workbench-propose.webp)
+    ![Feature Workbench with the Plan stage current and the status Working while the session is in Plan mode](assets/app-feature-workbench-propose.webp)
 
 1. Review the plan in the **Plan** tab. In the **Review plan** box at the bottom of the chat, select **Exit plan mode and I will prompt myself**. Then select the **Feature Workbench** tab to return to the canvas. The **Plan** stage should be complete, and the feature status should show **Approved**.
 
     ![Feature Workbench with the Propose and Plan stages complete and the status Approved](assets/app-feature-workbench-plan.webp)
 
-1. Select **Run baseline** on the canvas to record the app's state before any change. The action runs in **Autopilot** mode so that the agent does not stop to ask questions. When it ends, the session returns to **Interactive** mode. In the chat, expand the tool calls for this action (`npm test -- --run` and `npm run build`). Confirm that the test total and build result on the canvas match their output.
+1. Select **Run baseline** on the canvas to record the app's state before any change. The action runs in **Autopilot** mode so that the agent does not stop to ask questions. When it ends, the session returns to **Interactive** mode. In the chat, expand the tool calls for this action. Depending on the generated canvas, they show the `npm test -- --run` and `npm run build` output or a check tool's result with the test totals. Confirm that the test total and build result on the canvas match that output.
 
-    ![Expanded npm test output with 4 passed tests, next to the Feature Workbench Baseline evidence of 4/4 tests and a passing build](assets/app-feature-workbench-baseline.webp)
+    ![Expanded check tool output with 4 total and 4 passed tests, next to the Feature Workbench Baseline evidence of 4/4 tests and a passing build](assets/app-feature-workbench-baseline.webp)
 
     The **Baseline** stage and its two checklist items should show as complete.
 
@@ -269,13 +269,13 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     | You select **Clear filters** | Search, genre, and reading status return to their defaults |
     | Filters have been cleared | **Clear filters** is not visible, and the full book list and statistics return |
 
-    ![Feature Workbench with Browser evidence recorded while Browser validation still shows Working..., next to Copilot's report that browser validation passed](assets/app-feature-workbench-browser-validation.webp)
+    ![Feature Workbench with Browser evidence recorded and Browser validation done, next to Copilot's report of the checks that passed and the checks recorded as notes](assets/app-feature-workbench-browser-validation.webp)
 
-    When you finish the checks, select **Background** above the prompt box and stop the dev server. Until the dev server stops, **Browser validation** can keep showing **Working...**, even after Copilot reports the result.
+    When you finish the checks, stop the dev server. If the agent started it in the background, select **Background** above the prompt box and stop it. If the agent started it in a **Terminal** tab, close that tab and select **Close terminal**.
 
 1. Select **Run final checks**. Confirm that the tests and build pass, and that the final test total is at least the baseline total. The total can go up if the implementation added tests.
 
-    ![Feature Workbench with all five stages complete, and evidence that shows 4 baseline tests and 9 final tests](assets/app-feature-workbench-validate.webp)
+    ![Feature Workbench with all five stages complete, and evidence that shows 4 baseline tests and 14 final tests](assets/app-feature-workbench-validate.webp)
 
 <a id="markdown-fallback"></a>
 
