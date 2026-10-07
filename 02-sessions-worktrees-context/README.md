@@ -98,7 +98,7 @@ For this chapter, you only need two commands:
 | Command | What it's for | Use it when... |
 |---|---|---|
 | `/chronicle` | Opens session history features. `/chronicle standup` summarizes your work from the last day | You want a recap of your recent work |
-| `/context` | Shows the session's branch, worktree, token usage, and context details | You want to see how much conversation and file text the session is holding |
+| `/context` | Opens the usage popup showing token usage, context details, and AI credit spend | You want to see how much conversation and file text the session is holding |
 
 <details>
 <summary>Optional: Other slash commands you may see</summary>
@@ -107,7 +107,6 @@ For this chapter, you only need two commands:
 |---|---|
 | `/agent` | Select or switch the active agent for a session. It appears after you add a custom agent (Chapter 04). |
 | `/collect-debug-logs` | Create a debug log archive for troubleshooting, or upload one as a secret gist. |
-| `/context` | Show session context details such as token usage (how much text the model is holding), context window size, and AI credit spend. |
 | `/create-canvas` | Create or change a canvas with the built-in canvas-authoring skill. Chapter 06 covers canvases. |
 | `/orchestrate` | Coordinate multi-session or multi-repo work by delegating to child sessions. |
 | `/research` | Research a topic and produce a cited report. |
@@ -187,24 +186,28 @@ Use the two slash commands from [Slash Commands](#slash-commands) to review the 
 
    ![Chronicle standup report that lists this session's empty-state copy work under Done](assets/app-chronicle-standup-output.webp)
 
-1. Next, submit the following slash command to check the session, token, context, and worktree details:
+1. Next, submit the following slash command to check the session's token, context, and AI credit details:
 
    ```text
    /context
    ```
 
-   In the session menu, select the **Context** bar to expand its breakdown.
+   This opens the usage popup below the prompt box. You can also open it directly by selecting the AI credits icon next to the microphone icon, under the prompt box. Select the **Context** bar to expand its breakdown.
 
    Context is the content the GitHub Copilot app is using for the current session. Checking it helps you know when a session is getting overloaded before you add more files, issues, or instructions.
 
-   **Expected Output:** The GitHub Copilot app opens the session menu and displays session, token, context, and usage information.
+   **Expected Output:** The GitHub Copilot app opens the usage popup and displays plan, session, token, and context information.
 
-   ![Session menu with the session details, token totals, the expanded Context breakdown, and session spend](assets/app-context-information.webp)
+   ![Usage popup below the prompt box with session AI credits, token totals, and the expanded Context breakdown](assets/app-context-information.webp)
 
-   - The session details show the working branch and base branch, **Remote control**, **Path**, **Project**, **Session name**, **Session ID**, and **Changes**.
+   - **Plan** shows the percentage of your plan you have used. If **Streamer Mode** is on, this shows **Usage hidden** instead.
+   - **Session** shows the AI credits used by the session.
    - **Tokens** shows how many tokens the session sent to the model (up arrow) and received from the model (down arrow).
    - Expanding **Context** shows how the context window is divided among the system prompt, system tools, MCP tools, messages, free space, and buffer.
-   - **Session spend** shows the AI credits used by the session.
+   - Select **View usage and plan...** to open your account's usage and billing details.
+
+   > [!NOTE]
+   > The session's working branch, base branch, **Remote control**, **Path**, **Project**, **Session name**, and **Session ID** are available by selecting the session name at the top of the Copilot app window.
 
 > [!NOTE]
 > This practice branch contains an intentional regression. You don't need to create a pull request or merge the fix into `main`, because `main` already contains the correct behavior. Ask Copilot to stop this session's development server before continuing.
@@ -259,7 +262,7 @@ Use the workflow from this chapter to add a light and dark theme to the Book App
 
 1. Ask Copilot to run `samples/book-app-web` and open the preview.
 
-1. Submit `/context` and inspect the session details. Confirm that the working branch is separate from `main` and note the worktree path.
+1. Select the session name at the top of the window to open the session menu, and inspect the session details. Confirm that the working branch is separate from `main` and note the worktree path.
 
 1. Inspect the app and confirm that it only supports a light theme.
 
