@@ -110,7 +110,7 @@ Before building your own canvas, try one from the community. [Awesome GitHub Cop
     ![Review panel + menu with Canvas open and Repository Issues Kanban highlighted](assets/app-open-repo-issues-canvas.webp)
 
 1. The board loads issues from the current repository and organizes them by status.
-1. Drag an issue between columns and notice how the canvas keeps state visible without scrolling through chat. When you move an issue to **Plan**, the canvas asks the agent to plan that issue in a background agent. The agent reads the issue and the code but does not edit files. When the plan is ready, the card moves to **Ready**.
+1. Drag an issue between columns and notice how the canvas keeps state visible without scrolling through chat. When you move an issue to **Plan**, the canvas asks the agent to plan that issue in a background agent. The agent reads the issue and the code but does not edit files. When the plan is ready, the card moves to **Ready**. Each card that you move to **Plan** starts a new agent run, so move only one card there.
 
 Take a minute to move items around. This is the interaction model you will build on in Exercise 2.
 
@@ -136,7 +136,7 @@ Start with a small canvas that works like a shared checklist. You and the agent 
 1. When the canvas opens, confirm that it has the proposal, checklist, and notes sections.
 1. Enter a short feature proposal.
 1. Mark **Plan** complete and add a next decision.
-1. Ask the agent to summarize the current board state. Confirm that its answer matches your updates.
+1. Submit the prompt `Summarize the current Session Board state.` Confirm that the agent's answer matches your updates.
 1. In the review panel, open the **Changes** tab and confirm that it lists no changed files. If the tab is not open, select **+** (**Add tab**), then **Changes**. Creating a user-scoped canvas does not change repository files.
 
 **Expected Output:** The feature proposal, checklist, and notes remain visible on the board. You and the agent can both read and update them, but the board does not run tests or edit the app.
@@ -211,21 +211,31 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     <details>
     <summary>Repair prompts (use the one matching what's wrong)</summary>
 
+    **Parts are missing:**
+
     ```text
     Keep the current canvas. Add any missing stages, checklist items, or actions from my original request. Do not redesign parts that already work.
     ```
+
+    **Items show as complete without evidence:**
 
     ```text
     Keep the current canvas. Update checklist and progress state only from recorded action evidence. Do not infer success from chat text.
     ```
 
+    **Actions stop before the work finishes:**
+
     ```text
     Keep the current canvas. Give baseline, implementation, browser validation, and final-check actions enough time to complete npm and browser work. Show loading, success, and error states.
     ```
 
+    **An action stays disabled:**
+
     ```text
     Keep the current canvas. Screenshots and browser checks must never block a stage or action. Count only screenshots that are saved as PNG files. Record checks that the Browser tab cannot run as notes, not failures. Let Implement run after a passing baseline, and let Run final checks run after Implement. Do not redesign parts that already work.
     ```
+
+    **An action shows an error after its work is done, or the session stays in Autopilot mode:**
 
     ```text
     Keep the current canvas. Mark an action done when its evidence is recorded. Do not require a matching chat reply. Return the session to interactive mode when each action ends. Do not redesign parts that already work.
@@ -245,7 +255,7 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     ![Feature Workbench with the Plan stage current and the status Working while the session is in Plan mode](assets/app-feature-workbench-propose.webp)
 
-1. Review the plan in the **Plan** tab. In the **Review plan** box at the bottom of the chat, select **Exit plan mode and I will prompt myself**. Then select the **Feature Workbench** tab to return to the canvas. The **Plan** stage should be complete, and the feature status should show **Approved**.
+1. Review the plan in the **Plan** tab. In the **Review plan** box at the bottom of the chat, select **Exit plan mode and I will prompt myself**. Do not select **Approve and implement this plan**: the agent would start to change the app before you record a baseline. The canvas still records your approval. Then select the **Feature Workbench** tab to return to the canvas. The **Plan** stage should be complete, and the feature status should show **Approved**.
 
     ![Feature Workbench with the Propose and Plan stages complete and the status Approved](assets/app-feature-workbench-plan.webp)
 
@@ -255,11 +265,11 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     The **Baseline** stage and its two checklist items should show as complete.
 
-1. Select **Implement** to build the feature from the approved plan. When it finishes, the **Implement** stage is complete and the evidence has a **Diff** row. Select the **Changes** pill above the prompt box and confirm that the changes are limited to the approved feature.
+1. Select **Implement** to build the feature from the approved plan. When it finishes, the **Implement** stage is complete and the evidence has a **Diff** row. Select the **Changes** pill above the prompt box and confirm that the changes are limited to the approved feature. Expect changes in `samples/book-app-web` files such as `src/App.tsx`, `src/components/BookFilters.tsx`, `src/styles/app.css`, and the test files.
 
     ![Feature Workbench with the Implement stage complete and a Diff row in the evidence, next to the Changes pill above the prompt box](assets/app-feature-workbench-implement.webp)
 
-1. Select **Browser validation** to have the agent check the feature in the **Browser** tab. This can take several minutes. Then check these states yourself:
+1. Select **Browser validation** to have the agent check the feature in the **Browser** tab. This can take several minutes. Then check these states yourself in the app at `http://127.0.0.1:5173`. The agent usually opens it in a **Browser** tab named **Book App Web**. If it does not, select **+** (**Add tab**), then **Browser**, and enter the address.
 
     | State | Expected behavior |
     |---|---|
@@ -276,6 +286,8 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 1. Select **Run final checks**. Confirm that the tests and build pass, and that the final test total is at least the baseline total. The total can go up if the implementation added tests.
 
     ![Feature Workbench with all five stages complete, and evidence that shows 4 baseline tests and 14 final tests](assets/app-feature-workbench-validate.webp)
+
+**Expected Output:** All five stages are complete, and the evidence shows passing baseline and final checks, the browser result, and the changed files. Your test totals and file list can differ from the images, because the agent writes its own tests.
 
 <a id="markdown-fallback"></a>
 
@@ -343,15 +355,15 @@ Answer the **Review plan** box at the bottom of the chat. Then select **Refresh 
 
 ### An action button stays disabled
 
-The canvas enables each action only after the previous step has evidence. If **Implement** or **Run final checks** stays disabled because a screenshot or browser check could not run, use the repair prompt in Exercise 3 that makes screenshots and browser checks non-blocking.
+The canvas enables each action only after the previous step has evidence. If **Implement** or **Run final checks** stays disabled because a screenshot or browser check could not run, use the **An action stays disabled** repair prompt in Exercise 3.
 
 ### An action shows an error, but its stage is complete
 
-Some generated canvases show an error such as "No correlated agent response was saved" after the agent records the evidence. Use the repair prompt in Exercise 3 that marks an action done when its evidence is recorded.
+Some generated canvases show an error such as "No correlated agent response was saved" after the agent records the evidence. Use the **An action shows an error after its work is done** repair prompt in Exercise 3.
 
 ### The session stays in Autopilot mode
 
-Canvas actions run in **Autopilot** mode. If the session does not return to **Interactive** mode after an action, select the mode in the prompt box and change it, or use the repair prompt that returns the session to interactive mode.
+Canvas actions run in **Autopilot** mode. If the session does not return to **Interactive** mode after an action, change the mode in the prompt box. To fix the canvas for later actions, use the **An action shows an error after its work is done, or the session stays in Autopilot mode** repair prompt in Exercise 3.
 
 ### More than one Feature Workbench tab opens
 
