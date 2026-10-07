@@ -110,7 +110,7 @@ Before building your own canvas, try one from the community. [Awesome GitHub Cop
     ![Review panel + menu with Canvas open and Repository Issues Kanban highlighted](assets/app-open-repo-issues-canvas.webp)
 
 1. The board loads issues from the current repository and organizes them by status.
-1. Drag an issue between columns and notice how the canvas keeps state visible without scrolling through chat.
+1. Drag an issue between columns and notice how the canvas keeps state visible without scrolling through chat. When you move an issue to **Plan**, the canvas asks the agent to plan that issue in a background agent. The agent reads the issue and the code but does not edit files. When the plan is ready, the card moves to **Ready**.
 
 Take a minute to move items around. This is the interaction model you will build on in Exercise 2.
 
@@ -137,7 +137,7 @@ Start with a small canvas that works like a shared checklist. You and the agent 
 1. Enter a short feature proposal.
 1. Mark **Plan** complete and add a next decision.
 1. Ask the agent to summarize the current board state. Confirm that its answer matches your updates.
-1. Open the **Changes** tab in the review panel and confirm that it lists no changed files. Creating a user-scoped canvas does not change repository files.
+1. In the review panel, open the **Changes** tab and confirm that it lists no changed files. If the tab is not open, select **+** (**Add tab**), then **Changes**. Creating a user-scoped canvas does not change repository files.
 
 **Expected Output:** The feature proposal, checklist, and notes remain visible on the board. You and the agent can both read and update them, but the board does not run tests or edit the app.
 
@@ -163,9 +163,11 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     Feature proposal: text input + one Generate plan button. Switches session to plan mode, fires prompt without waiting ("Working..." status), agent inspects code + writes plan as usual, presents for approval in Plan tab (never call exit_plan_mode/ask_user elsewhere). Don't render plan text on canvas. Show only a small status pill (Working/Review/Approved/Changes requested) polled from exit_plan_mode events. No edit/approve controls on the canvas itself.
 
-    Checklist: baseline test, baseline build, implement approved plan, review diff, browser validation (when required), screenshots (when required), final test, final build.
+    Checklist: baseline test, baseline build, implement approved plan, review diff, browser validation, screenshots (optional), final test, final build.
 
-    Actions in order: Run baseline (test+build, record totals) -> Implement (approved plan only) -> Browser validation (start/reuse dev server, exercise feature, before/after screenshots) -> Run final checks (test+build) -> Refresh evidence. These 4 must never use plan mode/exit_plan_mode/ask_user (unattended), give each a multi-minute timeout not the ~60s default.
+    Actions in order: Run baseline (test+build, record totals) -> Implement (approved plan only) -> Browser validation (start/reuse dev server, check only the proposed behavior in the app's Browser tab, never start other browsers) -> Run final checks (test+build) -> Refresh evidence. These 4 must never use plan mode/exit_plan_mode/ask_user (unattended), give each a multi-minute timeout not the ~60s default. Return the session to interactive mode when each action ends. An action is done when its evidence is recorded; never require a matching chat reply.
+
+    Never block on tooling: screenshots are optional, count only PNG files actually saved. Browser checks the Browser tab can't run (e.g. real keyboard input) are notes, not failures. Run final checks is available after Implement even if Browser validation failed.
 
     Evidence: read-only, agent-posted only, no learner notes. Dense one-liners: baseline pass/fail pill, final pass/fail pill + total delta, browser summary + screenshot count, diff summary (files changed), blockers. Truncate long text. Green only if tests pass and final total >= baseline. Before any evidence: "Run a check or capture browser evidence to record it here."
 
@@ -183,13 +185,14 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     | "never call exit_plan_mode/ask_user elsewhere" | Plan approval should only happen in the session's **Plan** tab, not through a canvas popup |
     | "polled from exit_plan_mode events" | The canvas checks the plan's approval status periodically instead of you having to refresh it |
     | "give each a multi-minute timeout" | Test, build, and browser actions can take longer than a typical quick response, so don't let the canvas give up early |
+    | "Never block on tooling" | If the agent cannot save a screenshot or run a browser check, it records a note and the workflow continues |
     | "user scope" | The canvas is saved to your machine across projects, not committed to this repository |
 
     </details>
 
     <img src="assets/app-create-canvas-command.webp" alt="The /create-canvas skill selected in the prompt box typeahead" width="800" />
 
-1. The canvas should open in the right side panel once the agent is done building it.
+1. The canvas should open in the right side panel once the agent is done building it. This can take about 10 minutes.
 
     > **Important:** Generated results can differ between runs. Check the expected structure below before you continue. Do not repeatedly regenerate the full canvas.
 
@@ -220,6 +223,14 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     Keep the current canvas. Give baseline, implementation, browser validation, and final-check actions enough time to complete npm and browser work. Show loading, success, and error states.
     ```
 
+    ```text
+    Keep the current canvas. Screenshots and browser checks must never block a stage or action. Count only screenshots that are saved as PNG files. Record checks that the Browser tab cannot run as notes, not failures. Let Implement run after a passing baseline, and let Run final checks run after Implement. Do not redesign parts that already work.
+    ```
+
+    ```text
+    Keep the current canvas. Mark an action done when its evidence is recorded. Do not require a matching chat reply. Return the session to interactive mode when each action ends. Do not redesign parts that already work.
+    ```
+
     </details>
 
     If the canvas still does not match after two focused repairs, use the [Markdown fallback](#markdown-fallback) and continue with the validation steps manually.
@@ -230,7 +241,7 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
     Add a Clear filters control that resets search, genre, and reading status to their default values. Show it only when at least one filter is active.
     ```
 
-    The session switches to **Plan** mode and the agent writes an implementation plan. The canvas stays at **Propose** with the status **Working...**.
+    The session switches to **Plan** mode and the agent writes an implementation plan. The feature status shows **Working** until the plan is ready for review.
 
     ![Feature Workbench at the Propose stage with the status Working... while the session is in Plan mode](assets/app-feature-workbench-propose.webp)
 
@@ -238,7 +249,7 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     ![Feature Workbench with the Propose and Plan stages complete and the status Approved](assets/app-feature-workbench-plan.webp)
 
-1. Select **Run baseline** on the canvas to record the app's state before any change. In the chat, expand the tool calls for this action (`npm test -- --run` and `npm run build`). Confirm that the test total and build result on the canvas match their output.
+1. Select **Run baseline** on the canvas to record the app's state before any change. The action runs in **Autopilot** mode so that the agent does not stop to ask questions. When it ends, the session returns to **Interactive** mode. In the chat, expand the tool calls for this action (`npm test -- --run` and `npm run build`). Confirm that the test total and build result on the canvas match their output.
 
     ![Expanded npm test output with 4 passed tests, next to the Feature Workbench Baseline evidence of 4/4 tests and a passing build](assets/app-feature-workbench-baseline.webp)
 
@@ -248,7 +259,7 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     ![Feature Workbench with the Implement stage complete and a Diff row in the evidence, next to the Changes pill above the prompt box](assets/app-feature-workbench-implement.webp)
 
-1. Select **Browser validation** to have the agent check the feature in the browser. Then check these states yourself:
+1. Select **Browser validation** to have the agent check the feature in the **Browser** tab. This can take several minutes. Then check these states yourself:
 
     | State | Expected behavior |
     |---|---|
@@ -329,6 +340,22 @@ Compare the canvas with the expected structure in the exercise. Then use the one
 ### The plan status stays at Working
 
 Answer the **Review plan** box at the bottom of the chat. Then select **Refresh evidence** on the canvas.
+
+### An action button stays disabled
+
+The canvas enables each action only after the previous step has evidence. If **Implement** or **Run final checks** stays disabled because a screenshot or browser check could not run, use the repair prompt in Exercise 3 that makes screenshots and browser checks non-blocking.
+
+### An action shows an error, but its stage is complete
+
+Some generated canvases show an error such as "No correlated agent response was saved" after the agent records the evidence. Use the repair prompt in Exercise 3 that marks an action done when its evidence is recorded.
+
+### The session stays in Autopilot mode
+
+Canvas actions run in **Autopilot** mode. If the session does not return to **Interactive** mode after an action, select the mode in the prompt box and change it, or use the repair prompt that returns the session to interactive mode.
+
+### More than one Feature Workbench tab opens
+
+The agent can open extra copies of the canvas while it tests the canvas. A copy can show **Load failed**, or it can open in a **Browser** tab. Close the extra tabs and keep the tab that has the canvas icon and shows your proposal and evidence.
 
 ### The Terminal or Browser tab is missing
 

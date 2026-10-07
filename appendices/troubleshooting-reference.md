@@ -93,6 +93,8 @@ Related chapter: [06 Canvases](../06-canvases/)
 | Canvas does not open | `/create-canvas` missing, or extension syntax, dependency, or reload issue | Retry `/create-canvas`, or keep the same board as markdown in the session |
 | Canvas state looks stale | Stored state and visible UI are out of sync | Refresh the canvas or rerun the action that updates state |
 | Agent action fails | Capability name or input schema mismatch | Check the action name, required fields, and stored state |
+| Workbench action stays disabled | A screenshot or browser check could not run and the canvas treats it as required | Use the Exercise 3 repair prompt that makes screenshots and browser checks non-blocking |
+| Action shows an error after evidence is recorded | The canvas waits for a matching chat reply | Use the Exercise 3 repair prompt that marks an action done when its evidence is recorded |
 | Canvas contains private content | Shared surface was used like private notes | Remove secrets, private repository details, and customer data from the canvas |
 
 ## Chapter 07: Automations
