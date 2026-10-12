@@ -152,6 +152,9 @@ In Chapter 02, you attached an issue to practice giving Copilot focused context.
 
 1. Open the **Changes** tab and inspect the diff. Confirm that the change is focused on the filtered-book data flow. If it isn't, ask Copilot to revise it before continuing.
 
+   > [!TIP]
+   > If the agent changed a file you didn't intend, you can discard that file's changes directly from the diff view. Look for the discard action in the **Changes** tab. A confirmation dialog appears before the file is restored, so you can review the decision first.
+
 #### Validate the Fix
 
 1. Review the output in the session's **Terminal** tab. If Copilot already ran these commands after the fix, you don't need to run them again. Otherwise, run:

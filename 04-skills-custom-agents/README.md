@@ -227,6 +227,9 @@ The agent profile is a Markdown file with YAML frontmatter, like a skill:
 
 This agent cannot run the tests or save its own report. That restriction is intentional: match an agent's tools to its task, and add nothing beyond that. Use the default agent when you need those actions.
 
+> [!TIP]
+> After a custom agent finishes its response, it may suggest next steps. These appear as a pre-filled prompt you can review and edit before sending. You can use a suggestion to switch smoothly to another agent or continue the conversation without retyping your intent.
+
 ### Checkpoint
 
 After these exercises, you should have:
