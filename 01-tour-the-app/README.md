@@ -158,7 +158,7 @@ The session mode controls how independently the agent works. The model and reaso
 
 The model control is below the prompt box, next to the mode selector. It shows **Auto** or a model name. Open it to find **Model**, **Effort**, and **Context window**. If the **Auto** switch is on, these settings are hidden. Turn it off to see them. Some app versions show separate model and reasoning controls.
 
-With **Auto**, the Copilot app chooses a model for your task. This is different from **Autopilot**, which controls how independently the agent works.
+With **Auto**, the Copilot app chooses a model for your task and shows which model it selected in the conversation, alongside a short explanation of why it made that choice. This is different from **Autopilot**, which controls how independently the agent works.
 
 For a repository tour or a short explanation, keep **Auto** or the current model and its default reasoning effort. For a difficult bug or a change across several files, consider a model suited to complex coding and a higher effort level. Higher effort does not guarantee a correct answer.
 
