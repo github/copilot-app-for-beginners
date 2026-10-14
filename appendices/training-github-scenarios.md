@@ -175,7 +175,7 @@ This matches the script's conversation comment. Do not create an inline review t
 
 ## Manual fallback: Create a failing check example
 
-The repository includes the [Book app web workflow](../.github/workflows/book-app-web.yml). It uses Node.js 22, installs dependencies with `npm ci`, runs `npm test -- --run`, and builds `samples/book-app-web` with `npm run build`.
+The repository includes the [Book app web workflow](../.github/workflows/book-app-web.yml). It uses Node.js 24, installs dependencies with `npm ci`, runs `npm test -- --run`, and builds `samples/book-app-web` with `npm run build`.
 
 The **Failing stats check practice** PR created above is the failing-check example. Do not create a second branch or PR for it.
 
