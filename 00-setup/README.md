@@ -105,7 +105,7 @@ Select **+** next to **Projects**, then choose the option that matches what you 
     gh --version
     ```
 
-    Each command should display a version number. For `node -v`, compare the first number with the **LTS** version on the [Node.js download page](https://nodejs.org/en/download). For example, `v24.22.0` starts with `24`. If your number is lower, install the LTS version.
+    Each command should display a version number. For `node -v`, compare the first number with the **LTS** version on the [Node.js download page](https://nodejs.org/en/download). If your number is lower, install the LTS version.
 
     <details>
     <summary>Windows: npm fails because running scripts is disabled</summary>
