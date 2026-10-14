@@ -21,7 +21,7 @@ By the end of this chapter, you'll be able to:
 - A [Copilot plan](https://github.com/features/copilot/plans), or you can opt to continue with your own model provider during sign-in
     - For Copilot Business or Enterprise, the **GitHub Copilot app** policy must be enabled.
 - [Git](https://git-scm.com/install) installed on your machine
-- [Node.js LTS](https://nodejs.org) to run `samples/book-app-web` for the hands-on exercises
+- [Node.js](https://nodejs.org/en/download) (the version marked **LTS**) to run `samples/book-app-web` for the hands-on exercises
 - [GitHub CLI (`gh`)](https://cli.github.com) for the initial one-time setup script used in the course
 
 You will check the tool versions in the Copilot app's **Terminal** tab after connecting your repository.
@@ -105,7 +105,7 @@ Select **+** next to **Projects**, then choose the option that matches what you 
     gh --version
     ```
 
-    Each command should display a version number. For `node -v`, the sample app requires [Node.js LTS](https://nodejs.org) or later.
+    Each command should display a version number. For `node -v`, compare the first number with the **LTS** version on the [Node.js download page](https://nodejs.org/en/download). If your number is lower, install the LTS version.
 
     <details>
     <summary>Windows: npm fails because running scripts is disabled</summary>

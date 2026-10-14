@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "test": "vitest --environment jsdom",
+    "test": "vitest --environment jsdom --globals",
     "typecheck": "tsc --noEmit",
     "build": "tsc --noEmit && vite build"
   },
