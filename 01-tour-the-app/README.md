@@ -75,13 +75,9 @@ The **Automations** view is where you create recurring agent tasks. The view sho
 
 This is where you manage the ways to extend the app: skills, Model Context Protocol (MCP) servers, plugins, extensions, and canvases. You don't need any of them yet. Chapter 04 covers skills and custom agents, Chapter 05 covers MCP servers and plugins, and Chapter 06 introduces canvases.
 
-### More
+### Sessions and Chats
 
-Select **More**, then **Edit sidebar...** to choose which of these views appear in the sidebar. This course uses all of them, so keep them visible.
-
-### Projects and Chats
-
-The **Projects** area of the sidebar lists each connected project. After you start your first chat, a **Chats** row also appears there. The next section explains when to use a chat and when to use a project session.
+The **Sessions** area of the sidebar lists each connected project. After you start your first chat, a **Chats** row also appears there. The next section explains when to use a chat and when to use a project session.
 
 ## Chats, Project Sessions, and Modes
 
@@ -104,7 +100,7 @@ The GitHub Copilot app works the same way. First you choose the kind of session.
 
 Chat sessions help you learn and brainstorm without starting a branch. They are useful for general questions before you choose a repository. Try it:
 
-- Select **+** next to **Projects**, then select **Chat**.
+- Select **+** next to **Sessions**, then select **Chat**.
    ![Projects menu with callouts for + and Chat](assets/app-quick-chat.webp)
 - Confirm that the project picker below the prompt box shows **Chat**.
 - Submit the prompt below:
@@ -229,7 +225,7 @@ Go back to the GitHub Copilot app's **Settings** dialog. Select **Voice dictatio
 2. Select **Test mic** to verify that it is working correctly.
 3. Note the keyboard shortcut for activating voice dictation.
 4. Exit the **Settings** dialog and return to the main app window.
-5. Start a new chat (select **+** next to **Projects**, then **Chat**) and test voice dictation by using the keyboard shortcut.
+5. Start a new chat (select **+** next to **Sessions**, then **Chat**) and test voice dictation by using the keyboard shortcut.
 
 </details>
 
@@ -261,7 +257,7 @@ Check your plan, organization policy, project settings, and app version.
 ## Key Takeaways
 
 1. Keep your editor for deep coding. Open the GitHub Copilot app when agent work needs a clearer place to run and review, and jump back to your editor any time.
-2. The app is organized around work surfaces: New for starting work, Pull requests and Issues for GitHub items, Automations for repeatable tasks, Customize for extending the app, and Projects for chats and sessions.
+2. The app is organized around work surfaces: New for starting work, Pull requests and Issues for GitHub items, Automations for repeatable tasks, Customize for extending the app, and Sessions for projects and chats.
 3. **Chat sessions** are for exploration. **Project sessions** are for focused repository work. **Automations** are for repeatable agent runs.
 4. **Interactive**, **Plan**, and **Autopilot** change the level of autonomy.
 5. Choose the model and reasoning effort below the prompt box. Keep the defaults for simple tasks; consider higher effort for complex work.

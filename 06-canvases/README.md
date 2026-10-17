@@ -102,7 +102,7 @@ Before building your own canvas, try one from the community. [Awesome GitHub Cop
 
     - In the **Install plugin?** dialog, select **Allow**.
     - In the **Install plugin** dialog, confirm that the name is `accessibility-kanban@awesome-copilot`, then select **Install**.
-    - Confirm that the plugin appears under **Installed** in **Customize** > **Plugins**, with its toggle on.
+    - Select **Customize**, then the **Installed** tab. Confirm that the plugin appears under **Plugins**, with its toggle on.
 
 1. Return to the worktree session you prepared in the prerequisites and submit the prompt `Restart canvas extensions`. This will reload the extensions and pick up the newly installed one.
 1. In the review panel, select **+** (**Add tab**), then **Canvas**, and select **Repository Issues Kanban**. If the review panel is hidden, select **View** > **Toggle Review Panel** first. The package is named `accessibility-kanban`, but **Repository Issues Kanban** is the name shown in the app.

@@ -101,17 +101,13 @@ You will add two specific review rules, then use the updated skill. You will not
 
 HTML heading levels (`h1`, `h2`, and `h3`) describe the page structure, not just text size. Text alternatives convey the meaning of images and icons to people who cannot see them. A screen reader can read these alternatives aloud.
 
-1. Select **Customize**, then **Skills**.
+1. Select **Customize** (callout 1), then select the **Installed** tab (callout 2).
 
-1. Filter to **Project** and search for `book-app-reviewer`.
+1. Set the type filter to **Skills** (callout 3) and search for `book-app-reviewer`.
 
-1. Confirm that the skill is enabled for the course project. Ignore the course-authoring skills.
+1. Confirm that the result shows **Project: copilot-app-for-beginners** and that its toggle is on (callout 4). Ignore the course-authoring skills.
 
-    - **All** shows every installed skill
-    - **Project** shows repository skills
-    - **Built-in** shows skills supplied with the app
-
-   ![Customize Skills with callouts for Customize, Skills, Project, and the book-app-reviewer result](assets/app-customize-skills.webp)
+   ![Customize Installed tab with callouts for Customize, Installed, the Skills type filter, and the book-app-reviewer result](assets/app-customize-skills.webp)
 
 1. Return to your chapter session and submit:
 

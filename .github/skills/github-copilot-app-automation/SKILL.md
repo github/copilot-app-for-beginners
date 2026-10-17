@@ -149,7 +149,7 @@ Observed on this machine:
 
 After macOS Accessibility permission was enabled, `System Events` could address the app as process `GitHub Copilot`.
 
-Useful exposed controls (app 1.1.26; see [app-ui-map.md](references/app-ui-map.md) for the full map):
+Useful exposed controls (app 1.1.26, Customize and sidebar 1.1.30; see [app-ui-map.md](references/app-ui-map.md) for the full map):
 
 | Control | Role | Use |
 |---|---|---|
@@ -158,7 +158,8 @@ Useful exposed controls (app 1.1.26; see [app-ui-map.md](references/app-ui-map.m
 | `Sidebar` | `AXGroup` | Sidebar region |
 | `Toggle sidebar, Command + B` | `AXCheckBox` | Collapse/expand sidebar |
 | `New`, `Pull requests`, `Issues`, `Automations`, `Customize` | `AXButton` | Sidebar views (Quick links) |
-| `More` | `AXPopUpButton` | Sidebar menu with **Edit sidebar...** |
+| `Customize sections` | `AXTabGroup` | Customize **Browse** and **Installed** tabs (1.1.30) |
+| `Filter by type: <type>` | `AXPopUpButton` | Customize type filter: All types, MCP, Plugins, Skills, Extensions, Canvas |
 | `New project or session` | `AXPopUpButton` | Projects **+** menu |
 | `New session in <project>` | `AXButton` | Project-specific new session entry (visible on hover or focus) |
 | `Message` | `AXTextArea` | Prompt composer |
