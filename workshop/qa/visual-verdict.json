@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "reviewer": "slide-qa",
+  "mode": "full",
+  "slides_reviewed": [
+    1, 2, 3, 4, 5, 6, 7, 8, 9,
+    10, 11, 12, 13, 14, 15, 16, 17, 18,
+    19, 20, 21, 22, 23, 24, 25, 26, 27
+  ],
+  "score": {
+    "overall": 100,
+    "visual": 100,
+    "fidelity": 100
+  },
+  "collage_score": {
+    "overall": 90,
+    "readability": 21,
+    "space_management": 18,
+    "text_placement": 18,
+    "alignment": 15,
+    "cohesion": 18,
+    "evidence": "The current workshop/qa/collage.png and all 27 slide images were reviewed. The deck is readable, aligned, and cohesive; the agent-role menu and hands-on checklist remain legible."
+  },
+  "findings": [],
+  "dismissals": [],
+  "reason": "All 27 slides were visually reviewed. No P0 or P1 issues remain, and the collage score exceeds the PASS threshold."
+}

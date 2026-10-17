@@ -1,0 +1,89 @@
+{
+  "channels": {
+    "code": {
+      "findings": [],
+      "status": "SKIPPED"
+    },
+    "content": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "lint": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "ooxml": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "programmatic": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "raster": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "test": {
+      "findings": [],
+      "status": "SKIPPED"
+    },
+    "visual": {
+      "dismissals": [],
+      "findings": [],
+      "mode": null,
+      "reviewer": null,
+      "status": "PASS"
+    }
+  },
+  "content": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/copilot-app-book-app-workshop.content.json",
+  "created_at": "2026-10-13T14:45:28.597Z",
+  "deck": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/copilot-app-book-app-workshop.pptx",
+  "environment": "local",
+  "image_count": 27,
+  "metrics": {
+    "accents": [
+      "0EBE3D",
+      "2F94FF",
+      "B870FF",
+      "FE4C25",
+      "FBAE40"
+    ],
+    "built_with_engine": "2.17.1",
+    "deck_bg": "101411",
+    "engine_version": "2.17.1",
+    "fidelity_score": 100,
+    "fonts": {
+      "body": "Mona Sans",
+      "display": "Mona Sans",
+      "header": "Mona Sans",
+      "medium": "Mona Sans",
+      "mono": "Monaspace Neon"
+    },
+    "image_count": 27,
+    "incremental_render": false,
+    "libreoffice_version": "26.2.4.2",
+    "lint_finding_count": 0,
+    "mode": "dark",
+    "ooxml_finding_count": 0,
+    "overall_score": 100,
+    "qa_version": "1.12.0",
+    "raster_finding_count": 0,
+    "render_dpi": 200,
+    "renderer": "spawn",
+    "slide_count": 27,
+    "visual_score": 100,
+    "warning_count": 0
+  },
+  "schema_version": 1,
+  "score": {
+    "adjusted": 100,
+    "dismissed_count": 0,
+    "fidelity": 100,
+    "raw": 100,
+    "threshold": 75,
+    "visual": 100
+  },
+  "slide_count": 27,
+  "verdict": "PASS"
+}

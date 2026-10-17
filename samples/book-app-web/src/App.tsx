@@ -66,6 +66,7 @@ export default function App() {
         onReadingStatusChange={(readingStatus) =>
           setFilters((current) => ({ ...current, readingStatus }))
         }
+        onClearFilters={() => setFilters(defaultFilters)}
       />
 
       <section className="book-results" aria-live="polite">

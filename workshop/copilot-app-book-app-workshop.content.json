@@ -1,0 +1,419 @@
+{
+  "title": "From one idea to coordinated work",
+  "slides": [
+    {
+      "type": "title",
+      "title": "From one idea to coordinated work",
+      "subtitle": "A 90-minute, hands-on GitHub Copilot app workshop using the Book App"
+    },
+    {
+      "type": "content",
+      "title": "What makes the app different?",
+      "bullets": [
+        "Separate sessions: run focused tasks in parallel, each in its own worktree.",
+        "See the work: keep plans, diffs, terminal output, and browser preview in one session.",
+        "Specialize help: use a custom agent for a defined role and a skill for reusable task guidance.",
+        "Share state: use a canvas to keep decisions and validation evidence visible beside the work."
+      ]
+    },
+    {
+      "type": "divider",
+      "title": "Wednesday participant preflight",
+      "subtitle": "Use slides 3–5 in the short setup call"
+    },
+    {
+      "type": "content",
+      "title": "Preflight call · 20 minutes",
+      "bullets": [
+        "0–3 min · Explain the goal, public-repo access, and setup checklist.",
+        "3–8 min · Confirm app installation and sign-in.",
+        "8–13 min · Confirm repo access and add the course repo as a project.",
+        "13–18 min · Confirm Git and Node.js/npm; run sample checks.",
+        "18–20 min · Resolve blockers and confirm readiness."
+      ]
+    },
+    {
+      "type": "checklist",
+      "title": "Participant setup before class",
+      "items": [
+        {
+          "text": "GitHub account with Copilot access; organization policy allows the app"
+        },
+        {
+          "text": "Copilot app installed and signed in"
+        },
+        {
+          "text": "Clone the public course repo and add it as a Copilot app project"
+        },
+        {
+          "text": "Git available; Node.js LTS and npm installed"
+        },
+        {
+          "text": "Book App tests and build pass; preview opens"
+        },
+        {
+          "text": "GitHub CLI is not required"
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "title": "90-minute hands-on workshop",
+      "subtitle": "The app is the control room; the Book App is the work"
+    },
+    {
+      "type": "table",
+      "title": "GitHub + Copilot: from code to collaboration",
+      "headers": [
+        "Part",
+        "Role in the work"
+      ],
+      "rows": [
+        [
+          "GitHub",
+          "Shared repositories, issues, branches, pull requests, and reviews."
+        ],
+        [
+          "Copilot",
+          "Understand code, explore options, draft changes, and create tests."
+        ],
+        [
+          "Agents",
+          "Take defined tasks; people direct, review, and decide what ships."
+        ],
+        [
+          "Teams",
+          "Reduce repetitive work while staying accountable for quality."
+        ]
+      ]
+    },
+    {
+      "type": "content",
+      "title": "What is the GitHub Copilot app?",
+      "bullets": [
+        "A desktop workspace for working with Copilot agents across software tasks—not just another chat window.",
+        "Each session keeps a task's conversation and work together; worktrees can isolate changes.",
+        "See and manage work in context: plans, file changes, terminal, browser preview, and canvases.",
+        "Coordinate multiple tasks, then inspect the evidence and decide what is ready to share."
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Skills and agents: guidance meets a focused role",
+      "bullets": [
+        "A skill packages reusable instructions and resources for a task that comes up repeatedly.",
+        "Example: book-app-reviewer gives Copilot a consistent checklist for filters, stats, and accessibility.",
+        "A custom agent is a named role with focused instructions and selected tools—not a newly trained model.",
+        "Example: Book App Reviewer is read-only; it reports findings, while a person decides what to change and verifies the result."
+      ]
+    },
+    {
+      "type": "table",
+      "title": "The GitHub work loop",
+      "headers": [
+        "Stage",
+        "What happens"
+      ],
+      "rows": [
+        [
+          "Describe",
+          "State the need and what success looks like."
+        ],
+        [
+          "Plan",
+          "Review the approach before implementation."
+        ],
+        [
+          "Build",
+          "Make a focused change in an isolated worktree."
+        ],
+        [
+          "Prove",
+          "Review the diff, checks, and behavior."
+        ]
+      ]
+    },
+    {
+      "type": "content",
+      "title": "90 minutes · the learning path",
+      "bullets": [
+        "0–6 · Orient: what the app adds beyond a single chat.",
+        "6–15 · Explore the Book App and define a small user need.",
+        "15–25 · Instructor demo: sessions, worktrees, and reviewing a plan.",
+        "25–45 · Hands-on: plan and implement Clear filters in an isolated session.",
+        "45–68 · See a reviewer agent find an edge case; create and test your own agent.",
+        "68–74 · Instructor demo: connect an external tool with WorkIQ MCP.",
+        "74–85 · Prove the work: inspect the diff, run checks, and test in Browser.",
+        "85–90 · Debrief and choose a three-day experiment."
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Start with the Book App",
+      "headers": [
+        "Feature",
+        "Show learners"
+      ],
+      "rows": [
+        [
+          "Search",
+          "Find books by title or author."
+        ],
+        [
+          "Filters",
+          "Narrow by genre and reading status."
+        ],
+        [
+          "Reading stats",
+          "See totals for books currently shown."
+        ],
+        [
+          "Empty state",
+          "Search/filter combination with no results."
+        ]
+      ]
+    },
+    {
+      "type": "checklist",
+      "title": "The challenge · Clear filters",
+      "items": [
+        {
+          "text": "Show the control only when search, genre, or reading status is active"
+        },
+        {
+          "text": "Selecting it resets all three filters to their defaults"
+        },
+        {
+          "text": "The full book list and its reading stats return"
+        },
+        {
+          "text": "Keep the change small; preserve existing behavior and dependencies"
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Show the app, not just chat",
+      "bullets": [
+        "New and project sessions start the right kind of work.",
+        "Plan mode lets you review an approach before implementation.",
+        "Changes, Terminal, and Browser keep code and evidence in context.",
+        "Customize and Canvas manage reusable help and visible work state."
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Describe → plan → build → prove",
+      "headers": [
+        "Stage",
+        "What the learner does"
+      ],
+      "rows": [
+        [
+          "Describe",
+          "State the user need and observable acceptance criteria."
+        ],
+        [
+          "Plan",
+          "Inspect the approach before allowing implementation."
+        ],
+        [
+          "Build",
+          "Build in an isolated worktree; review with a custom agent."
+        ],
+        [
+          "Prove",
+          "Check the diff, tests, build, browser behavior, and canvas evidence."
+        ]
+      ]
+    },
+    {
+      "type": "checklist",
+      "title": "Hands-on 1 · Build session",
+      "items": [
+        {
+          "text": "Create Session A from the default branch in a new worktree; name it Clear filters build"
+        },
+        {
+          "text": "Use Plan mode and request a small implementation and validation plan"
+        },
+        {
+          "text": "Check the plan against the criteria; approve only when it fits"
+        },
+        {
+          "text": "Switch to Interactive and ask the agent to implement the approved plan"
+        },
+        {
+          "text": "Do not merge or push during the workshop"
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Agent example · a role with boundaries",
+      "bullets": [
+        "The Book App Reviewer is a repository-defined custom agent: a focused role, instructions, and selected tools.",
+        "It is not a new model; its read-only tools let it inspect and report without editing the app.",
+        "Run it against the Clear filters implementation and show its whitespace-only search finding.",
+        "The reviewer identifies a concern; the coding agent makes the fix, and people verify the outcome."
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Choose a focused job for your agent",
+      "bullets": [
+        "Code reviewer: find behavior gaps and cite code evidence; read-only.",
+        "Test designer: suggest edge cases, or write focused tests when allowed.",
+        "Bug investigator: trace a symptom to likely causes; show evidence.",
+        "Accessibility helper: audit labels and keyboard use, or make an approved fix.",
+        "Code explainer: teach where a feature or behavior lives; read-only.",
+        "Feature builder: implement one small change after a plan; inspect the diff.",
+        "Documentation helper: draft or update one named document."
+      ]
+    },
+    {
+      "type": "checklist",
+      "title": "Hands-on 2 · Create and test your agent",
+      "items": [
+        {
+          "text": "Inspect the Book App Reviewer definition"
+        },
+        {
+          "text": "Choose a role and decide what tools it needs"
+        },
+        {
+          "text": "Create a separate agent file under .github/agents/"
+        },
+        {
+          "text": "Reload if needed; select it and try its role on Clear filters"
+        },
+        {
+          "text": "Check its evidence and inspect any changes it made"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Mini-teach · Keep the work in context",
+      "headers": [
+        "Part of the workflow",
+        "Why it matters in the app"
+      ],
+      "rows": [
+        [
+          "Prompt",
+          "Describe this task and the outcome you need now."
+        ],
+        [
+          "Repository context",
+          "Ground work in the project files and existing patterns."
+        ],
+        [
+          "Session + worktree",
+          "Keep task history visible and changes isolated."
+        ],
+        [
+          "Canvas + checks",
+          "Track status, then verify with the diff, tests, and browser."
+        ]
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Instructor demo · WorkIQ through MCP",
+      "bullets": [
+        "MCP connects an agent session to tools and information beyond the repository.",
+        "Watch the facilitator use a preconfigured WorkIQ server for one safe, authorized example.",
+        "Notice when the agent calls the tool, what information it receives, and how the result helps the task.",
+        "Participants observe only; no WorkIQ setup or account access is required.",
+        "Treat tool output as context to review, not as proof that code or a decision is correct."
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Mini-teach · Canvas as the shared board",
+      "bullets": [
+        "Create or open a compact work board in the session side panel.",
+        "Track the feature plan, implementation, chosen agent role and work, and verification evidence.",
+        "The canvas makes status visible; it does not replace reviewing the diff or running checks.",
+        "Use the board to tell what needs attention without searching a long chat."
+      ]
+    },
+    {
+      "type": "checklist",
+      "title": "Hands-on 3 · Record and verify",
+      "items": [
+        {
+          "text": "Put acceptance criteria on the canvas; update build and agent-work status from what actually happened"
+        },
+        {
+          "text": "Inspect the agent's output and any edits; compare them with the task"
+        },
+        {
+          "text": "Run npm test -- --run and npm run build in samples/book-app-web"
+        },
+        {
+          "text": "In Browser, test no filters, each active filter, and reset behavior"
+        },
+        {
+          "text": "Record only checks you personally observed; mark blocked checks as not run"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Validate Clear filters",
+      "headers": [
+        "State",
+        "Expected result"
+      ],
+      "rows": [
+        [
+          "No active filters",
+          "Control hidden; full list and stats show."
+        ],
+        [
+          "Search, genre, or status active",
+          "Control is visible."
+        ],
+        [
+          "Select Clear filters",
+          "All filters reset; full list and stats return."
+        ],
+        [
+          "Spaces-only search",
+          "Treated as no effective filter; Clear filters stays hidden."
+        ],
+        [
+          "Automated checks",
+          "Tests and build pass; inspect actual output."
+        ]
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Compare the evidence",
+      "bullets": [
+        "Build session · What files changed? Does the diff match the plan? Did tests and build pass?",
+        "Custom agent · Did it do the selected job? Is its output grounded in evidence?",
+        "Browser · What behavior did you personally observe?",
+        "Canvas · Does the board reflect actual status, including anything not run?"
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Takeaways",
+      "bullets": [
+        "The app is a place to coordinate work, not only ask for code.",
+        "Separate sessions make concurrent tasks visible and isolated.",
+        "Skills and custom agents shape how help is delivered; MCP adds tools and information.",
+        "A canvas keeps status visible; people still inspect diffs and evidence.",
+        "Use the next three days to experiment with the app and workshop repository."
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Describe. Coordinate. Verify."
+    }
+  ]
+}

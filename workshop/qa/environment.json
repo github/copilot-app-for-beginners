@@ -1,0 +1,57 @@
+{
+  "cwd": "/Users/ekyritsi/copilot-worktrees/my-pptx-generator/ekyritsi-super-journey",
+  "environment": "local",
+  "fonts": {
+    "available": true,
+    "checked": [
+      {
+        "ok": true,
+        "requested": "Mona Sans",
+        "resolved": "Mona Sans"
+      },
+      {
+        "ok": true,
+        "requested": "Monaspace Neon",
+        "resolved": "Monaspace Neon"
+      }
+    ],
+    "ok": true,
+    "substituted": [],
+    "tool": "/opt/homebrew/bin/fc-match"
+  },
+  "node": {
+    "executable": "/opt/homebrew/Cellar/node/26.11.1/bin/node",
+    "version": "v26.11.1"
+  },
+  "output_dir": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa",
+  "platform": {
+    "machine": "arm64",
+    "release": "",
+    "system": "darwin"
+  },
+  "pptx_path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/copilot-app-book-app-workshop.pptx",
+  "render": {
+    "changed_slides": null,
+    "dpi": 200,
+    "incremental": false,
+    "libreoffice_version": "26.2.4.2",
+    "renderer": "spawn"
+  },
+  "schema_version": 1,
+  "timestamp": "2026-10-13T14:45:28.621Z",
+  "tools": {
+    "gh": "/Users/ekyritsi/Library/Caches/copilot-desktop-gh-2.102.0/gh",
+    "git": "/Users/ekyritsi/Library/Caches/github-copilot-git-2.53.0-4/bin/git",
+    "libreoffice": "/opt/homebrew/bin/soffice",
+    "pdftoppm": "/opt/homebrew/bin/pdftoppm"
+  },
+  "versions": {
+    "agents": {
+      "content-architect": "1.0.4",
+      "slide-qa": "1.0.8"
+    },
+    "engine": "2.17.1",
+    "extension": "1.5.0",
+    "qa": "1.12.0"
+  }
+}

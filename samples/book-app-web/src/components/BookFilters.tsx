@@ -9,6 +9,7 @@ type BookFiltersProps = {
   onSearchTermChange: (value: string) => void;
   onGenreChange: (value: string) => void;
   onReadingStatusChange: (value: ReadingStatus) => void;
+  onClearFilters: () => void;
 };
 
 export function BookFilters({
@@ -18,8 +19,12 @@ export function BookFilters({
   readingStatus,
   onSearchTermChange,
   onGenreChange,
-  onReadingStatusChange
+  onReadingStatusChange,
+  onClearFilters
 }: BookFiltersProps) {
+  const hasActiveFilters =
+    searchTerm.trim() !== "" || selectedGenre !== "all" || readingStatus !== "all";
+
   return (
     <section className="filters" aria-label="Book filters">
       <label>
@@ -55,6 +60,12 @@ export function BookFilters({
           <option value="unread">Unread</option>
         </select>
       </label>
+
+      {hasActiveFilters && (
+        <button className="filters__clear" type="button" onClick={onClearFilters}>
+          Clear filters
+        </button>
+      )}
     </section>
   );
 }

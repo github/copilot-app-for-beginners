@@ -116,6 +116,14 @@ After the setup chapter, each chapter follows the same beginner-friendly pattern
 - [Troubleshooting reference](./appendices/troubleshooting-reference.md)
 - [Book App Web sample](./samples/book-app-web/README.md)
 
+## 90-minute workshop
+
+This repository includes a ready-to-run beginner workshop using the Book App:
+
+- [Facilitator guide](./workshop/copilot-app-workshop-facilitator-guide.md) — preflight, run of show, prompts, and verification steps
+- [Workshop slides](./workshop/copilot-app-book-app-workshop.pptx)
+- [Reviewer agent](./.github/agents/book-app-reviewer.agent.md) and [review skill](./.github/skills/book-app-reviewer/SKILL.md)
+
 ## License
 
 This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) file for the full terms.

@@ -127,6 +127,21 @@ select {
   background: white;
 }
 
+.filters__clear {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  color: #4338ca;
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.filters__clear:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
 .book-results {
   display: grid;
   gap: 16px;

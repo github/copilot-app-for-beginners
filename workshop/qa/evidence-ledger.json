@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-13T14:45:26.611Z",
+  "deck": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/copilot-app-book-app-workshop.pptx",
+  "slide_count": 27,
+  "image_count": 27,
+  "slides": [
+    {
+      "index": 1,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-01.jpg",
+      "sha256": "35bc41a6012fe9a63930037e15a28d29be2c52f097031c4098030efd01a1520e",
+      "bytes": 140568,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:20.439Z",
+      "viewed": true
+    },
+    {
+      "index": 2,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-02.jpg",
+      "sha256": "63df257dbe599f7e6904d21652d4ed025f7b579817e0370af1bdacc26f8c4397",
+      "bytes": 180788,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:20.509Z",
+      "viewed": true
+    },
+    {
+      "index": 3,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-03.jpg",
+      "sha256": "96b518ed394c486b1bd813c07c6cf1f9d616ec075ce65359e1fce8d946b01b28",
+      "bytes": 112822,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:20.577Z",
+      "viewed": true
+    },
+    {
+      "index": 4,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-04.jpg",
+      "sha256": "fa30ad665c4482c2c88c59bcb5a073b0e7104916da206fb1c83ac65e03192e83",
+      "bytes": 162658,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:20.647Z",
+      "viewed": true
+    },
+    {
+      "index": 5,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-05.jpg",
+      "sha256": "41c8e14324fb1d70deae446194634e35d72dc966b3b751c395d4c491fab68e12",
+      "bytes": 222544,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:20.739Z",
+      "viewed": true
+    },
+    {
+      "index": 6,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-06.jpg",
+      "sha256": "ae0689003e28f5aba1ca320c08606a6f0d67cb90d1fb89b4dad120b876e264c0",
+      "bytes": 114436,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:20.812Z",
+      "viewed": true
+    },
+    {
+      "index": 7,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-07.jpg",
+      "sha256": "39d1b751e6ccbd920a0be2c6450136b7748ab83f7c2a09779deed71275a71aaa",
+      "bytes": 160337,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:20.932Z",
+      "viewed": true
+    },
+    {
+      "index": 8,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-08.jpg",
+      "sha256": "234f1f2b0567067e328d9745a5f19a27efcd1ea794d80053eb8cf75b95f45354",
+      "bytes": 192007,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.006Z",
+      "viewed": true
+    },
+    {
+      "index": 9,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-09.jpg",
+      "sha256": "0724725ea3ee2fb03a98c066efaaa1dea33baca7b0bfeb67b90c454f1ff47b71",
+      "bytes": 221767,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.075Z",
+      "viewed": true
+    },
+    {
+      "index": 10,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-10.jpg",
+      "sha256": "a943a251b498bd4b96f23b3401edeceaf89a26981735b2c2334351b1123afb5b",
+      "bytes": 135990,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.147Z",
+      "viewed": true
+    },
+    {
+      "index": 11,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-11.jpg",
+      "sha256": "a13ab7ebf5ab1985bb19013f9a971c4d2c5c8f5a4e3c0e4ae07d0bd5ab14d584",
+      "bytes": 225717,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.218Z",
+      "viewed": true
+    },
+    {
+      "index": 12,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-12.jpg",
+      "sha256": "62365039d424d64f2363b25e46c9ee9c96048c5a12219f5c282248544d17630e",
+      "bytes": 135024,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.295Z",
+      "viewed": true
+    },
+    {
+      "index": 13,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-13.jpg",
+      "sha256": "367dd779234fc1ef3e4b97eeaa601d9b9704e80eb0deec08949680e4921c3cdf",
+      "bytes": 195936,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.385Z",
+      "viewed": true
+    },
+    {
+      "index": 14,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-14.jpg",
+      "sha256": "5500789d8dd70dc05f8e3f413eba03ab48192a88a6fb3b61fd1db8f74523c428",
+      "bytes": 154614,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.454Z",
+      "viewed": true
+    },
+    {
+      "index": 15,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-15.jpg",
+      "sha256": "5c623cac38c2b77397208d6db65b511d9fe844c67f93ce7ff92fdca0e94f6873",
+      "bytes": 149912,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.530Z",
+      "viewed": true
+    },
+    {
+      "index": 16,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-16.jpg",
+      "sha256": "983543e9c2d1d564e442281f64ea5f751ee8cd052e1d486074ee879136c4bd77",
+      "bytes": 232441,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.624Z",
+      "viewed": true
+    },
+    {
+      "index": 17,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-17.jpg",
+      "sha256": "b555f293fa6d6c2ba7f8fb2e28f48c69792696fc843b185746397bfbb1c64bc5",
+      "bytes": 194392,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.694Z",
+      "viewed": true
+    },
+    {
+      "index": 18,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-18.jpg",
+      "sha256": "cef01586810357d8fbcc53ffc7b9b918fdae117b98ceb07817dc9ec9925ea2e8",
+      "bytes": 223332,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.766Z",
+      "viewed": true
+    },
+    {
+      "index": 19,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-19.jpg",
+      "sha256": "afe2ecb3cd6a87ad7b3535885629efd94323de984eaeaeac81379e999e982b2c",
+      "bytes": 209541,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.880Z",
+      "viewed": true
+    },
+    {
+      "index": 20,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-20.jpg",
+      "sha256": "d08a0eec46fc2e7e90fe86a873125333977ccea528d3dd6f3d6beb3960458869",
+      "bytes": 158655,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:21.955Z",
+      "viewed": true
+    },
+    {
+      "index": 21,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-21.jpg",
+      "sha256": "d28d3795ff234a3a9d64c8bac7a0b44197b4e77e293bc5fc07a4237affc91f45",
+      "bytes": 218292,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:22.027Z",
+      "viewed": true
+    },
+    {
+      "index": 22,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-22.jpg",
+      "sha256": "bf94d0fbb68d3f67c69d862b44b50ab5751e5f9009c886b0ac8b771c04093fc3",
+      "bytes": 187153,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:22.099Z",
+      "viewed": true
+    },
+    {
+      "index": 23,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-23.jpg",
+      "sha256": "879e2a648a0ab01927c81dbfd0f9c2a156475776698ad34dd1491d9587cb9782",
+      "bytes": 250988,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:22.193Z",
+      "viewed": true
+    },
+    {
+      "index": 24,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-24.jpg",
+      "sha256": "afb7636f76563511bcfddab04821e3a2bcd4a459c5c60724f46975fc00af74e9",
+      "bytes": 152306,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:22.269Z",
+      "viewed": true
+    },
+    {
+      "index": 25,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-25.jpg",
+      "sha256": "f6bbcf9f6caacdf04cd4fa316b9e1ef29922737113e7cbbce54fd682842513cc",
+      "bytes": 164306,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:22.339Z",
+      "viewed": true
+    },
+    {
+      "index": 26,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-26.jpg",
+      "sha256": "26bf0dfe13b2336ae2e1953cea28517a0f5a8cfa4d1ff4a27e47c1b01a0a6fc9",
+      "bytes": 175450,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:22.408Z",
+      "viewed": true
+    },
+    {
+      "index": 27,
+      "path": "/Users/ekyritsi/hackathon-purple-bear-26_copilot-app-for-beginners/workshop/qa/slide-27.jpg",
+      "sha256": "340a3e999a61da28b0d5c4fb5496b28debba701b010ab527942616816ba34ec2",
+      "bytes": 138091,
+      "width": 2667,
+      "height": 1500,
+      "mtime": "2026-10-13T14:45:22.605Z",
+      "viewed": true
+    }
+  ],
+  "reviewed_at": "2026-10-13T14:48:06.832Z"
+}
