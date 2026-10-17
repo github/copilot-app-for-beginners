@@ -66,8 +66,8 @@ Related chapter: [04 Skills and Custom Agents](../04-skills-custom-agents/)
 | Symptom | Likely cause | Try this |
 |---|---|---|
 | Copilot ignores project style | Instructions are missing or too broad | Put stable project guidance in `.github/copilot-instructions.md` |
-| Skill does not seem to apply | Skill location, metadata, or prompt mismatch | Check `.github/skills/.../SKILL.md` and prompt for the skill's purpose. In the app, open **Customize → Skills** and filter to **Project** |
-| Cannot find Skills or Custom Agents | Looking in Settings instead of the relevant picker | Open **Customize → Skills** for skills. Use `/agent` or the prompt-box agent picker for custom agents |
+| Skill does not seem to apply | Skill location, metadata, or prompt mismatch | Check `.github/skills/.../SKILL.md` and prompt for the skill's purpose. In the app, open **Customize → Installed**, set the type filter to **Skills**, and look for **Project:** under the skill name |
+| Cannot find Skills or Custom Agents | Looking in Settings instead of the relevant picker | Open **Customize → Installed** and set the type filter to **Skills**. Use `/agent` or the prompt-box agent picker for custom agents |
 | New custom agent is missing | Profile saved outside the worktree or not reloaded | Check `.github/agents/book-app-explainer.agent.md` in the current worktree. Follow the chapter's same-session restart instructions |
 | Custom agent cannot run tests | The explainer has read and search tools only | Return to the default agent; don't broaden the explainer's tools |
 | Agent has too many tools | Toolset adds noise and risk | Disable tools not needed for the task |
@@ -78,9 +78,9 @@ Related chapter: [05 MCP Servers and Plugins](../05-mcp-plugins/)
 
 | Symptom | Likely cause | Try this |
 |---|---|---|
-| Cannot find MCP or Plugins in Settings | Customization is in the sidebar | Open **Customize → MCP** or **Customize → Plugins** |
+| Cannot find MCP or Plugins in Settings | Customization is in the sidebar | Open **Customize**, then set the type filter to **MCP** or **Plugins** |
 | MCP server fails | Authentication, network, or policy issue | Check connection status, URL, credentials, and organization policy. Don't put credentials in prompts or repository files |
-| Plugin capability is missing | Plugin disabled or its skill hasn't loaded | Check **Customize → Plugins**, run `/skills reload`, and look for a plugin-prefixed skill name. Follow the chapter's restart instructions if needed |
+| Plugin capability is missing | Plugin disabled or its skill hasn't loaded | Check **Plugins** on the **Customize → Installed** tab, run `/skills reload`, and look for a plugin-prefixed skill name. Follow the chapter's restart instructions if needed |
 | Agent cannot use an integration | Read-only explainer is still selected or tool access is blocked | If an agent picker appears below the prompt box, select **Default agent**. Then check approvals and policy |
 | Integration is blocked by policy | Installation or external access isn't permitted | Read the example and expected output, record the limitation, and continue without changing policy |
 

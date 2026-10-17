@@ -75,15 +75,15 @@ A browser extension can connect your browser to a service, such as a password va
 
 Model Context Protocol defines how an AI application connects to tools and data. An **MCP server** supplies those tools. The server can run on your machine or at a remote service.
 
-The graphic shows example connections, not required installations. The app already has tools to read and search local files. Configure MCP connections under **Customize > MCP**, not the app's **Extensions** tab.
+The graphic shows example connections, not required installations. The app already has tools to read and search local files. Configure MCP connections in **Customize** with the type filter set to **MCP**, not **Extensions**.
 
 Use MCP when the task needs information or actions that the current tools don't supply. You don't need to add another GitHub server for the issue and pull request work from Chapter 03.
 
 [Context7][context7] is a documentation service with an MCP server. In this example, it supplies React documentation. It doesn't become a dependency of the Book App.
 
-<img src="assets/app-customize-mcp.webp" alt="Customize MCP filtered to Context7, with one connected and enabled server" width="800" />
+<img src="assets/app-customize-mcp.webp" alt="Customize Installed tab with the MCP filter and a context7 search, showing one connected and enabled Context7 server" width="800" />
 
-The screenshot shows one Context7 connection after setup. Your **Installed** list can be empty before this exercise. Use one connection per service.
+The screenshot shows one Context7 connection after setup. Your **MCP Servers** list on the **Installed** tab can be empty before this exercise. Use one connection per service.
 
 ### Exercise: Check the Book App's Input Labels with Context7
 
@@ -91,7 +91,7 @@ In React, a label's `htmlFor` value can match an input's `id` to connect the lab
 
 Start by getting the Context7 MCP server configured in the GitHub Copilot app. If it's already connected, skip the add-server steps.
 
-1. Open **Customize**, then **MCP**.
+1. Open **Customize**, then select the **Browse** tab. Set the type filter (**All types**) to **MCP**.
 2. Search for `context7`, then select **Add server** on the **Context7** row.
 3. Review the values in the **Context7** configuration dialog:
 
@@ -106,7 +106,7 @@ Start by getting the Context7 MCP server configured in the GitHub Copilot app. I
    <img src="assets/app-context7-configuration.webp" alt="Context7 MCP server dialog with server name context7, HTTP selected, and URL https://mcp.context7.com/mcp" width="800" />
 
 1. Select **Add server**.
-2. Confirm that **Context7** appears under **Installed** in the **MCP** tab, with its connected icon and enabled toggle.
+2. Select the **Installed** tab. Confirm that **Context7** appears under **MCP Servers**, with its connected icon and enabled toggle.
 3. Return to the chapter session you created earlier. Use **Interactive** mode with the default agent.
 4. Submit:
 
@@ -147,15 +147,15 @@ The skill uses `npx` to download and run its documentation tool. Node.js and int
 > [!NOTE]
 > Enterprise-managed settings can restrict which plugins and marketplaces are available in the GitHub Copilot app. If you cannot install `modern-web-guidance` or access the `awesome-copilot` marketplace, read the example and expected output, record the exercise as blocked, and continue. Do not change company-managed settings to complete the exercise.
 
-1. In **Customize**, select **Plugins**.
-2. Search for `modern-web-guidance`, then expand the **awesome-copilot** marketplace under **Available**. The app searches a marketplace only after you expand it. If that marketplace is missing and your policy permits it, select the gear icon (**Manage marketplaces**) and add `github/awesome-copilot`.
+1. In **Customize**, select the **Browse** tab (callout 1). Set the type filter to **Plugins** (callout 2).
+2. Search for `modern-web-guidance` (callout 3). If no result appears, select **Add** > **Manage marketplaces…**. Confirm that **awesome-copilot** is in the **Marketplaces** list. If it's missing and your policy permits it, enter `github/awesome-copilot` in **Source** and select **Add**.
 
-   <img src="assets/app-customize-plugins.webp" alt="Customize Plugins with callouts for Plugins, search, the awesome-copilot marketplace, and Install" width="800" />
+   <img src="assets/app-customize-plugins.webp" alt="Customize Browse tab with callouts for Browse, the Plugins type filter, the modern-web-guidance search, and Install" width="800" />
 
-   The screenshot shows the plugin before installation. After installation, the plugin appears under **Installed** in the **Plugins** tab with its enabled toggle on.
+   The screenshot shows the plugin before installation. After installation, the plugin appears under **Plugins** on the **Installed** tab with its enabled toggle on.
 
-1. Confirm that the plugin's source is `GoogleChrome/modern-web-guidance`. Review the plugin's description, then select **Install** if it isn't already installed.
-2. Confirm that the plugin appears under **Installed** in the **Plugins** tab with its enabled toggle on.
+1. Select **modern-web-guidance** to open its details and review the description. The details don't show the source, so compare them with the [plugin repository][modern-web-guidance] (`GoogleChrome/modern-web-guidance`). Then select **Install** (callout 4) if it isn't already installed.
+2. Select the **Installed** tab. Confirm that the plugin appears under **Plugins** with its enabled toggle on.
 3. Return to the project session in **Interactive** mode with the default agent. Submit `/skills reload`, then type `/` and select the installed `modern-web-guidance` skill. The displayed command can include a plugin prefix. Add this prompt:
 
    ```text

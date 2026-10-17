@@ -53,7 +53,7 @@ The app opens the **New** view. If it shows a short tip about a new feature, you
 
 1. [Fork the course repository on GitHub][fork-repo-link]. A fork is your own copy of the repository that lives on GitHub.
 
-2. In the Copilot app, select **+** next to **Projects**, then select **Add GitHub repository**.
+2. In the Copilot app, select **+** next to **Sessions**, then select **Add GitHub repository**.
 
     ![Projects menu with callouts for + and Add GitHub repository](assets/app-add-project.webp)
 
@@ -62,7 +62,7 @@ The app opens the **New** view. If it shows a short tip about a new feature, you
 <details>
 <summary>Other ways to connect a repository</summary>
 
-Select **+** next to **Projects**, then choose the option that matches what you have:
+Select **+** next to **Sessions**, then choose the option that matches what you have:
 
 | If you have... | Select |
 |---|---|
@@ -76,7 +76,7 @@ Select **+** next to **Projects**, then choose the option that matches what you 
 > [!NOTE]
 > Use the GitHub Copilot app's **Terminal** tab to run commands. Use the prompt box to send requests to the agent.
 
-1. Confirm that the sidebar shows `copilot-app-for-beginners` under **Projects**.
+1. Confirm that the sidebar shows `copilot-app-for-beginners` under **Sessions**.
 
 1. Point to the `copilot-app-for-beginners` project in the sidebar. Select the **+** that appears next to it to start a project session.
 

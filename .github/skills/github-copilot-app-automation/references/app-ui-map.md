@@ -1,6 +1,6 @@
 # GitHub Copilot app UI Map
 
-- app_version: 1.1.26
+- app_version: 1.1.30 (Customize view and sidebar); other sections 1.1.26
 - captured: 2026-09-30, checked again on 2026-10-01 for 1.1.26 (macOS, `demo`
   persona, Streamer Mode on)
 - privacy: project names, session names, pull request titles, and the account name
@@ -44,11 +44,10 @@ update and diff against this file.
 ## Sidebar (navigation)
 
 - Toggle sidebar (checkbox) · Search · Back · Forward · Resize sidebar
-- **Quick links**: New · Pull requests · Issues · Automations · Customize · More
-  - **More** (AXPopUpButton) has one item, **Edit sidebar...**. That dialog has
-    a check box for each Quick link (New, Pull requests, Issues, Automations,
-    Customize) to show or hide it.
-- **Projects** heading: **Configure sessions** · **New project or session** (+)
+- **Quick links**: New · Pull requests · Issues · Automations · Customize.
+  In 1.1.30 the **More** button (**Edit sidebar...**) is gone, and Settings has
+  no option to hide Quick links.
+- **Sessions** heading (named **Projects** before 1.1.30): **Configure sessions** · **New project or session** (+)
   - Configure sessions: Grouping · Ordering · Show (Project, Branch) · Status ·
     PR · Environment · Source · Reset filters · Collapse all · Mark all as read
   - New project or session (+): Chat · "Start session in" `<project>` (one row
@@ -125,27 +124,44 @@ update and diff against this file.
 
 ## Customize view
 
-- Tabs: Featured · MCP · Plugins · Skills · Extensions · Canvas · Installed;
-  tab-specific search ("Search MCP servers", "Search plugins", "Search skills")
-  and **Add** (MCP Server…, Plugin…, Skill…, Canvas from URL…).
-- MCP: Featured cards and **Available** by category. Search a server name, then
-  **Add server** on its row opens a dialog titled with the server name (About,
-  Configuration: Server name, Server type (Local/HTTP/SSE; the **Server type**
-  label is new in 1.1.26), URL, Headers, OAuth Client ID, Timeout). Installed
-  servers show a connected icon, an enabled toggle, and Actions (right-click
-  the row: Disable, Edit configuration, View on GitHub, Remove; Remove asks
-  "Remove `<name>`?").
-- Plugins: Featured cards and **Available** marketplace rows (copilot-plugins,
-  awesome-copilot). A marketplace is searched only after you expand it. The gear
-  icon is **Manage marketplaces** (Source field, Add marketplace). Installed
-  plugins have Actions (Update, Uninstall) and an enabled toggle.
-- Skills: Installed list with filters All · Project · Built-in. There is no
-  Personal filter.
-- Installed: sections that include **Extensions** and **Canvas** (with a
-  count). Canvas lists the Built-in Editor, Browser, and Terminal canvases,
-  then Personal (user-scoped) canvases. A personal canvas has no uninstall
-  action. Its details show only Copy path and Reveal in Finder, so delete
-  `~/.copilot/extensions/<name>` to remove it.
+Checked on 1.1.30 (2026-10-17). The old tabs (Featured · MCP · Plugins ·
+Skills · Extensions · Canvas · Installed) were replaced.
+
+- Tabs (AXRadioButton in **Customize sections**): **Browse** · **Installed**.
+  Top right: **Add** (AXPopUpButton "Add extension": MCP Server… · Plugin… ·
+  Skill · Canvas from URL… · Manage marketplaces…). With the **Skills** filter,
+  a **Skill folders** button also appears.
+- One search field plus **Filter by type** (AXPopUpButton "Filter by type:
+  `<type>`"): All types · MCP ("External tools and data for agents.") ·
+  Plugins ("Preconfigured Copilot capabilities.") · Skills ("Resources for
+  specialized tasks.") · Extensions ("Extensions from plugins or direct
+  installs.") · Canvas ("Agent-driven workflow interfaces."). The placeholder
+  follows the filter ("Search MCP servers", "Search plugins", "Search skills",
+  "Search installed …"). The search text and filter carry over between tabs.
+  Press the filter button with AXPress; AXShowMenu does not always open it.
+- Browse: **Editor's picks** cards (badge Canvas or Skill; Install or Enable),
+  then **All integrations** with category tabs (All · Plan · Build · Review ·
+  Test · Ship · Monitor · Design · Knowledge · Data · Communication). MCP rows
+  have **Add server, `<name>`**; plugin rows have **Install `<name>`**. An
+  installed item shows its Actions menu, status, and toggle in Browse too.
+- MCP **Add server** opens a dialog titled with the server name (About, View
+  on GitHub, Configuration: Server name, Server type Local/HTTP/SSE, URL,
+  Headers, OAuth Client ID, Timeout; Cancel · Add server). Installed servers
+  show **Connected** (green check icon), an enabled toggle, and Actions
+  (Edit configuration · Remove; Remove asks "Remove `<name>`?").
+- Plugin "view details" opens a dialog with About and "This plugin is not
+  currently installed." (Cancel · Install). It does not show the source
+  repository or marketplace. Marketplaces are not grouped in Browse; search
+  finds plugins directly. **Manage marketplaces…** has a Source field
+  ("owner/repo, Git URL, or local path"), **Add**, and a Marketplaces list
+  (awesome-copilot, Default).
+- Installed: sections **MCP Servers** (Add server) · **Plugins** (Update all,
+  Add plugin; rows with Actions and a toggle) · **Extensions** (Browse
+  extensions) · **Canvas** (Built-in Editor, Browser, Terminal, then plugin
+  and Personal canvases, each with "Open in new session") · **Skills**
+  (Browse skills). Skill rows show the source under the name, for example
+  "Project: `<project>`", with a toggle. There is no All · Project · Built-in
+  filter.
 
 ## Session composer
 
@@ -253,7 +269,7 @@ update and diff against this file.
   from** icons on each project row, appear only while the pointer is over that
   row. Screenshots taken without hover do not show these controls, so do not
   report them as missing. Course steps should tell learners to point to the
-  row first. The **+** next to the **Projects** heading is always visible.
+  row first. The **+** next to the **Sessions** heading is always visible.
 - The **Start session in** group of the Projects **+** menu lists visible
   projects. A first-run learner has no project yet, so hide the project
   (Settings > project > Show in sidebar) to show their menu, then show it again.
