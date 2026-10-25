@@ -34,6 +34,10 @@ An automated check that runs on a pull request or branch. It may run tests, buil
 
 A GitHub-hosted environment where an agent can work away from your local machine. Availability depends on plan, policy, repository settings, and permissions.
 
+## Copilot Fusion
+
+A model-control option that selects models and an execution workflow for each request, then returns one response. It is not a single model or a session mode. Its effort levels are **Standard**, **High**, and **Max**. See [Copilot Fusion in Chapter 01](./01-tour-the-app/README.md#copilot-fusion).
+
 ## Create from
 
 The sidebar control next to a project name that starts a session from a branch, issue, or pull request. It appears when you point to the project in the sidebar.
@@ -56,11 +60,11 @@ A session mode where you and the agent work step by step. The agent waits for yo
 
 ## Issues
 
-The sidebar view that lists the GitHub issues that involve you. Tabs such as **Assigned to me** and **Created by me** filter the list, and the repository picker limits it to one repository. Start a session from an issue, or select **New issue** to create one.
+The sidebar view that lists the GitHub issues that involve you. Tabs such as **Assigned to me** and **Created by me** filter the list. Add a `repo:OWNER/REPOSITORY` term in **Query filter mode** to limit the list to one repository. Start a session from an issue, or select **New issue** to create one.
 
 ## Model
 
-The AI system used for a response or session. Different models may vary in speed, cost, reasoning ability, and output style. Some builds offer **Auto**, which chooses a model from the task.
+The AI system used for a response or session. Different models may vary in speed, cost, reasoning ability, and output style. Choose an individual model, or use [Copilot Fusion](#copilot-fusion) to select models and a workflow for the task.
 
 ## Model Context Protocol (MCP) server
 
@@ -100,7 +104,7 @@ A risk where untrusted text, such as an issue title or body, tries to steer the 
 
 ## Pull requests
 
-The sidebar view that lists the GitHub pull requests that involve you. Tabs such as **Authored by me** and **Review requests** filter the list, and the repository picker limits it to one repository. Open a pull request to read its checks and comments, or start a session to work on it.
+The sidebar view that lists the GitHub pull requests that involve you. Tabs such as **Authored by me** and **Review requests** filter the list. Add a `repo:OWNER/REPOSITORY` term in **Query filter mode** to limit the list to one repository. Open a pull request to read its checks and comments, or start a session to work on it.
 
 ## Reasoning effort
 
@@ -108,7 +112,7 @@ A setting that controls how much thinking the model spends on a task. Higher eff
 
 ## Review panel
 
-The session side panel for diffs (**Changes**), **Terminal**, **Browser** preview, and other work surfaces. Open it in a session with **View** > **Toggle Review Panel**.
+The session side panel for diffs (**Changes**), **Terminal**, **Browser** preview, and other work surfaces. Open it in a session with **View** > **Toggle Panel**.
 
 ## Rubber duck
 

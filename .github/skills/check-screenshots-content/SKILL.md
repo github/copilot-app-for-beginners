@@ -12,7 +12,7 @@ chapter READMEs that embed or describe it.
 
 ## Convention This Skill Assumes
 
-- App screenshots (real GitHub Copilot app captures, dark theme) are named
+- App screenshots (real GitHub Copilot app captures) are named
   **`app-<topic>.webp`** and live in a chapter's **`assets/`** folder, for
   example `03-development-workflows/assets/app-workspace-panel.webp`.
 - Illustrations and analogy art (recording-studio theme, flow diagrams) do **not**
@@ -28,15 +28,17 @@ course refers to it:
 
 1. **Label casing and wording** — UI labels must match the screenshot verbatim,
    including casing. For example the sidebar shows `Pull requests` (lowercase
-   "r"), `Issues`, `Automations`, `Customize`, `More`, and the `Chats` row under
-   `Projects`. Flag any course text that writes `Pull Requests`, `New Chat`,
-   etc.
+   "r"), `Issues`, `Dashboards`, `Automations`, and `Customize`. The `Chats`
+   row appears under `Sessions` after a chat exists. Match the specific control:
+   the cloud Tools group is `Pull Requests`, but the sidebar view is
+   `Pull requests`.
 2. **Buttons, menu items, and dialog options** — names the README tells the user
-   to click must match the screenshot, e.g. `Create from…`, `Toggle review panel`,
+   to click must match the screenshot, e.g. `Create from…`, `Toggle Panel`,
    `Exit plan mode and I will prompt myself`, `Local folder or repository`,
    `GitHub repository`, `Repository URL`.
 3. **Mode and control names** — `Interactive`, `Plan`, `Autopilot` plus their
-   descriptions, and the model / reasoning-effort controls.
+   descriptions, and the model / reasoning-effort controls. `Copilot Fusion`
+   has `Standard`, `High`, and `Max` effort levels; it is not a session mode.
 4. **Image embed and alt text** — every `app-*` image is embedded by at least one
    README (no orphan images), every `![...](...app-...)` link resolves to a file
    that exists (no broken paths), and the alt text matches what the image shows.

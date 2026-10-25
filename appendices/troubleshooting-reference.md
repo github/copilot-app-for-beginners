@@ -52,7 +52,7 @@ Related chapter: [03 Development and GitHub Workflows](../03-development-workflo
 | Browser preview does not update | Dev server, hot reload, or wrong port | Restart the server in the correct worktree and confirm the browser URL |
 | Diff is hard to trust | Too many unrelated changes | Ask the agent to explain the diff, then split or revert unrelated edits |
 | Pick & Polish changes hurt accessibility | Visual update changed contrast, layout, or labels | Review with accessibility goals and rerun tests or manual checks |
-| Issue or PR is missing from the Issues or Pull requests view | Wrong tab, repository picker, or permissions | Check the selected tab and repository, check repository access, and confirm assignment or review request |
+| Issue or PR is missing from the Issues or Pull requests view | Wrong tab, query filter, or permissions | Check the selected tab and the query's `repo:` term, check repository access, and confirm assignment or review request |
 | Cannot push a branch | No write access to upstream | Use a fork or a repository where you have write access |
 | CI fails but local tests pass | Different environment, secrets, or branch protection | Read the failing check log and compare Node version, commands, and secrets |
 | PR remains blocked | Required reviews, checks, branch protection, or conflicts | Triage in this order: failing checks, merge conflicts, required reviews, stale reviews, branch rules |

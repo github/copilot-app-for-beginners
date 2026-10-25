@@ -105,7 +105,7 @@ Before building your own canvas, try one from the community. [Awesome GitHub Cop
     - Select **Customize**, then the **Installed** tab. Confirm that the plugin appears under **Plugins**, with its toggle on.
 
 1. Return to the worktree session you prepared in the prerequisites and submit the prompt `Restart canvas extensions`. This will reload the extensions and pick up the newly installed one.
-1. In the review panel, select **+** (**Add tab**), then **Canvas**, and select **Repository Issues Kanban**. If the review panel is hidden, select **View** > **Toggle Review Panel** first. The package is named `accessibility-kanban`, but **Repository Issues Kanban** is the name shown in the app.
+1. In the review panel, select **+** (**Add tab**), then **Canvas**, and select **Repository Issues Kanban**. If the review panel is hidden, select **View** > **Toggle Panel** first. See the [View menu image in Chapter 00](../00-setup/README.md#check-your-tools-in-terminal). The package is named `accessibility-kanban`, but **Repository Issues Kanban** is the name shown in the app.
 
     ![Review panel + menu with Canvas open and Repository Issues Kanban highlighted](assets/app-open-repo-issues-canvas.webp)
 
@@ -258,7 +258,7 @@ Exercise 2 showed how you and the agent can read and update the same proposal, c
 
     ![Feature Workbench with the Plan stage current and the status Working while the session is in Plan mode](assets/app-feature-workbench-propose.webp)
 
-1. Review the plan in the **Plan** tab. In the **Review plan** box at the bottom of the chat, select **Exit plan mode and I will prompt myself**. Do not select **Approve and implement this plan**: the agent would start to change the app before you record a baseline. The canvas still records your approval. Then select the **Feature Workbench** tab to return to the canvas. The **Plan** stage should be complete, and the feature status should show **Approved**.
+1. Review the plan in the **Plan** tab. Do not select **Approve and implement this plan**: the agent would start to change the app before you record a baseline. In the **Review plan** box at the bottom of the chat, select **Exit plan mode and I will prompt myself**. If the box stays open, select **Continue**. Confirm that the mode is **Interactive**. The canvas still records your approval. Then select the **Feature Workbench** tab to return to the canvas. The **Plan** stage should be complete, and the feature status should show **Approved**.
 
     ![Feature Workbench with the Propose and Plan stages complete and the status Approved](assets/app-feature-workbench-plan.webp)
 
@@ -374,7 +374,7 @@ The agent can open extra copies of the canvas while it tests the canvas. A copy 
 
 ### The Terminal or Browser tab is missing
 
-If the review panel is hidden, select **View** > **Toggle Review Panel**. In the review panel, select **+**, then **Terminal** or **Browser**. If the tab is still missing, update the app to the latest version.
+If the review panel is hidden, select **View** > **Toggle Panel**. In the review panel, select **+**, then **Terminal** or **Browser**. If the tab is still missing, update the app to the latest version.
 
 ### The board does not match the evidence
 

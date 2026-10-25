@@ -55,7 +55,7 @@ This is the landing view. You can start a chat without a project, select a conne
 
 ### Pull requests
 
-This view lists the GitHub pull requests that involve you. Tabs such as **Authored by me** and **Review requests** filter the list, and the **All repositories** picker narrows it to one repository. Open a pull request to read its checks and comments, or start a session to work on it. The practice pull requests created during the setup chapter appear on the **Authored by me** tab.
+This view lists the GitHub pull requests that involve you. Tabs such as **Authored by me** and **Review requests** filter the list. Use the filter icon and a `repo:OWNER/REPOSITORY` query to limit the results to one repository. Chapter 03 shows the steps. Open a pull request to read its checks and comments, or start a session to work on it. The practice pull requests created during the setup chapter appear on the **Authored by me** tab.
 
 ![Pull requests view](assets/app-pull-requests-page.webp)
 
@@ -64,6 +64,12 @@ This view lists the GitHub pull requests that involve you. Tabs such as **Author
 This view works the same way for GitHub issues, with tabs such as **Assigned to me** and **Created by me**. You can start a session from an issue, or select **New issue** to create one. The practice issues created during setup are assigned to you, so they appear on the **Assigned to me** tab.
 
 ![Issues view](assets/app-issues-page.webp)
+
+### Dashboards
+
+This view shows your GitHub work as a board of widgets, small panels that each show a filtered list. You can see what needs your attention without opening each list. The default **My Work** dashboard has these widgets: **Pulls created**, **Pulls mentioned**, **Issues assigned**, **Issues mentioned**, and **Requested reviews**. The practice pull requests and issues created during the setup chapter appear in **Pulls created** and **Issues assigned**.
+
+![Dashboards view showing the My Work dashboard with the Pulls created, Issues assigned, Requested reviews, Pulls mentioned, and Issues mentioned widgets](assets/app-dashboards-page.webp)
 
 ### Automations
 
@@ -100,8 +106,8 @@ The GitHub Copilot app works the same way. First you choose the kind of session.
 
 Chat sessions help you learn and brainstorm without starting a branch. They are useful for general questions before you choose a repository. Try it:
 
-- Select **+** next to **Sessions**, then select **Chat**.
-   ![Projects menu with callouts for + and Chat](assets/app-quick-chat.webp)
+- Select **+** next to **Sessions** (callout 1), then select **Chat** (callout 2).
+   ![Sessions menu with callouts for + and Chat](assets/app-quick-chat.webp)
 - Confirm that the project picker below the prompt box shows **Chat**.
 - Submit the prompt below:
 
@@ -150,20 +156,40 @@ The session mode controls how independently the agent works. The model and reaso
 |---|---|
 | **Model** | The AI model that handles your request. Models differ in capabilities, speed, and usage cost. |
 | **Reasoning effort** | How much reasoning a supported model uses to work through a task. Higher effort can help with complex problems, but can take longer. |
-| **Context window** | How much text the model can hold at once, including the conversation and the files it reads. A larger window can help with long sessions or large codebases, but uses more AI credits. |
+| **Context window** | How much text the model can hold at once, including the conversation and the files it reads. A larger window can help with long sessions or large codebases, but can use more AI credits. |
 
-The model control is below the prompt box, next to the mode selector. It shows **Auto** or a model name. Open it to find **Model**, **Effort**, and **Context window**. If the **Auto** switch is on, these settings are hidden. Turn it off to see them. Some app versions show separate model and reasoning controls.
+The model control is below the prompt box, next to the mode selector. It shows **Copilot Fusion** or a model name. The available controls depend on your selection and app version. With an individual model, you can find **Model**, **Effort**, and **Context window**. With **Copilot Fusion**, the menu shows an **Effort level** instead.
 
-With **Auto**, the Copilot app chooses a model for your task and shows which model it selected in the conversation, alongside a short explanation of why it made that choice. This is different from **Autopilot**, which controls how independently the agent works.
-
-For a repository tour or a short explanation, keep **Auto** or the current model and its default reasoning effort. For a difficult bug or a change across several files, consider a model suited to complex coding and a higher effort level. Higher effort does not guarantee a correct answer.
+For a repository tour or a short explanation, use **Copilot Fusion** at **Standard**, or keep your current model and its default reasoning effort. For a difficult bug or a change across several files, consider a higher Fusion effort level or a model suited to complex coding. Higher effort does not guarantee a correct answer.
 
 You do not need a specific model for this course. Available models, effort levels, and context window sizes vary. Some models may not offer an effort or context window setting.
+
+### Copilot Fusion
+
+**Copilot Fusion** appears in the model control, but it is not a single model. It selects models and a workflow for each request, then returns one response. It can use one model, ask a stronger model to improve a draft, or ask another model to review the result.
+
+Copilot Fusion is different from **Autopilot**. Fusion controls how models handle your request. Autopilot controls how independently the agent works.
+
+Open the model control to see the **Copilot Fusion** switch and its effort levels. Turn off the switch if you want to choose an individual model. The following image shows **Standard** selected.
+
+![Copilot Fusion menu with Standard selected and High and Max effort levels available](assets/app-copilot-fusion-options.webp)
+
+| Effort level | When to use it |
+|---|---|
+| **Standard** | Everyday coding tasks. Prioritizes versatile models for efficient work. Start here for this course. |
+| **High** | Challenging tasks that need more capable models and deeper reasoning. |
+| **Max** | The most demanding tasks that need the most capable models and complex reasoning. |
+
+These levels guide Copilot Fusion's model choices. They are not the reasoning settings of one fixed model. Higher levels can take longer and use more AI credits. They do not guarantee a correct result, so continue to review changes and run tests.
+
+Availability depends on your app version, plan, and organization policy. You can complete the course with **Copilot Fusion** or another available model.
+
+The menu's **Learn more** link opens the [Copilot Fusion documentation][copilot-fusion]. That page can show older menu labels. Follow the current app controls shown here.
 
 ### Try the Controls
 
 1. Keep the project session open. Select **Interactive** mode below the prompt box.
-2. Open the model control. If you choose a model yourself, use **Model** to view the choices and select one. For this exercise, you can keep **Auto** or your current model.
+2. Open the model control. If **Copilot Fusion** is selected, keep **Standard**. Otherwise, use **Model** to select an available model.
 3. If **Effort** or a separate reasoning control is available, open it and review the levels. Keep the default for this simple question.
 4. Submit this prompt:
 
@@ -206,7 +232,7 @@ Select the gear icon at the bottom of the sidebar to open **Settings**. You do n
 | Customize | Points you to the **Customize** view in the sidebar, where you manage MCP servers, plugins, skills, and canvases |
 | Model providers | Configure custom models from other providers using your own API keys |
 | Experimental | Try preview features that can change or be removed |
-| Projects | Per-project settings, such as **Show in sidebar**, sandbox rules, and the default branch |
+| Repositories | Per-repository settings, such as **Show in sidebar**, sandbox rules, and the default branch |
 
 The **Model providers** setting connects the app to additional providers. It does not replace the model picker below the prompt box. You do not need to configure a provider for this exercise if a model is already available.
 
@@ -257,7 +283,7 @@ Check your plan, organization policy, project settings, and app version.
 ## Key Takeaways
 
 1. Keep your editor for deep coding. Open the GitHub Copilot app when agent work needs a clearer place to run and review, and jump back to your editor any time.
-2. The app is organized around work surfaces: New for starting work, Pull requests and Issues for GitHub items, Automations for repeatable tasks, Customize for extending the app, and Sessions for projects and chats.
+2. The app is organized around work surfaces: New for starting work, Pull requests and Issues for GitHub items, Dashboards for a board of your GitHub work, Automations for repeatable tasks, Customize for extending the app, and Sessions for projects and chats.
 3. **Chat sessions** are for exploration. **Project sessions** are for focused repository work. **Automations** are for repeatable agent runs.
 4. **Interactive**, **Plan**, and **Autopilot** change the level of autonomy.
 5. Choose the model and reasoning effort below the prompt box. Keep the defaults for simple tasks; consider higher effort for complex work.
@@ -278,6 +304,7 @@ In the next chapter, you'll solve the "shared working copy" challenge from this 
 - [GitHub Copilot app changelog][app-changelog]
 - [Voice dictation in the GitHub Copilot app][voice-input]
 - [AI models reference][ai-models]
+- [Copilot Fusion documentation][copilot-fusion]
 
 [getting-started]: https://docs.github.com/en/copilot/how-tos/github-copilot-app/getting-started
 [agent-sessions]: https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions
@@ -285,3 +312,4 @@ In the next chapter, you'll solve the "shared working copy" challenge from this 
 [app-changelog]: https://github.com/github/app/blob/main/changelog.md
 [voice-input]: https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions#using-voice-dictation
 [ai-models]: https://docs.github.com/en/copilot/reference/ai-models
+[copilot-fusion]: https://gh.io/github-copilot-fusion
