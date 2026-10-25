@@ -53,9 +53,9 @@ The app opens the **New** view. If it shows a short tip about a new feature, you
 
 1. [Fork the course repository on GitHub][fork-repo-link]. A fork is your own copy of the repository that lives on GitHub.
 
-2. In the Copilot app, select **+** next to **Sessions**, then select **Add GitHub repository**.
+2. In the Copilot app, select **+** next to **Sessions** (callout 1), then select **Add GitHub repository** (callout 2).
 
-    ![Projects menu with callouts for + and Add GitHub repository](assets/app-add-project.webp)
+    ![Sessions menu with callouts for + and Add GitHub repository](assets/app-add-project.webp)
 
 3. Type `copilot-app-for-beginners` in the search box. Select your fork, the result that starts with your GitHub username, not `github/copilot-app-for-beginners`. The app downloads a local copy (clones it) and adds the project to the sidebar.
 
@@ -80,7 +80,7 @@ Select **+** next to **Sessions**, then choose the option that matches what you 
 
 1. Point to the `copilot-app-for-beginners` project in the sidebar. Select the **+** that appears next to it to start a project session.
 
-1. Select the workspace selector below the prompt box, then choose **Current checkout**.
+1. Select the workspace selector below the prompt box (callout 1), then choose **Current checkout** (callout 2).
 
     This uses the clone already on your machine for setup. You'll learn about the other options in later chapters.
 
@@ -92,7 +92,7 @@ Select **+** next to **Sessions**, then choose the option that matches what you 
     Name the top-level folders in this repository. Do not change any files.
     ```
 
-1. Select **View** > **Toggle Review Panel** to open the side panel if it is not already visible.
+1. Select **View** > **Toggle Panel** to open the side panel if it is not already visible.
 
 1. Select **Terminal**. If you don't see it, select **+**, then **Terminal**.
 

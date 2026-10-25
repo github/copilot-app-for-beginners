@@ -100,7 +100,7 @@ In these exercises, you'll:
 
 ### Confirm Work Items Exist
 
-Before creating the automation, confirm work items exist. Select **Pull requests** in the sidebar, then select your fork in the repository picker.
+Before creating the automation, confirm work items exist. Select **Pull requests** in the sidebar, then select **Authored by me**. Add your fork's `repo:` term to that tab's query, as shown in [Chapter 03](../03-development-workflows/README.md#4-find-work-in-issues-and-pull-requests).
 
 On the **Authored by me** tab, you should see at least three open pull requests from the Chapter 00 setup script. If you completed Chapter 03, the review comment and the failing check may already be fixed, and your search-fix pull request also appears. That is expected; the report shows whatever state your pull requests are in now. If the list is empty, [run the script now](../00-setup/README.md#seed-the-repository) before continuing.
 
@@ -130,11 +130,11 @@ To create an automation:
    Present the results as a table. Do not edit files, add comments, change labels, approve reviews, or merge anything.
    ```
 
-1. Below the prompt, use **Select project** to choose your `copilot-app-for-beginners` project. The prompt says "this repository", so the automation must target your fork.
-1. In the **Workspace** picker that appears next to the project, select **Current checkout**. This report only reads data, so each run doesn't need its own new worktree.
+1. Below the prompt, use **Select repository** to choose your `copilot-app-for-beginners` repository. The prompt says "this repository", so the automation must target your fork.
+1. In the **Workspace** picker that appears next to the repository, select **Current checkout**. This report only reads data, so each run doesn't need its own new worktree.
 1. Select the arrow next to **Create**, then select **Create and run**.
 
-   ![New automation form with the Manual trigger, Run in the cloud off, the course project, Current checkout, and the Create and run option open](assets/app-new-automation.webp)
+   ![New automation form with the Manual trigger, Run in the cloud off, the course repository, Current checkout, and the Create and run option open](assets/app-new-automation.webp)
 
    **Expected Output:** Your automation should appear under **Your automations** with the **Manual** trigger. The run should start immediately and appear under **Recent runs**.
 
@@ -167,11 +167,11 @@ The manual report worked. Now make it run every morning so the summary is waitin
 1. Open **Automations** in the sidebar and find your `PR review readiness report`.
 1. Select the automation, then select **Edit**.
 1. Change the **Trigger** from **Manual** to **Daily**.
-1. Set **Hours** to a time before your workday starts, for example **08:00**, and keep **Minute** at **:00**.
+1. In **Hours**, select a time before your workday starts, for example **08:00**. This field allows more than one hour. Clear any other selected hours, including the default **09:00** if it is selected, so that only your chosen hour remains selected. Keep **Minute** at **:00**.
 
    Before you save, narrow the scope so the scheduled report stays useful:
 
-      - Confirm that the project picker still shows your `copilot-app-for-beginners` project, so the automation targets only your fork.
+      - Confirm that the repository picker still shows your `copilot-app-for-beginners` repository, so the automation targets only your fork.
       - If the prompt is noisy after a few runs, add a label or branch filter to reduce the output.
 
 1. Select **Save automation**.
@@ -182,6 +182,10 @@ The manual report worked. Now make it run every morning so the summary is waitin
    - Open the automation and select its name at the top. **Automation details** shows the **Schedule** and the **Next run** time.
    - The next morning, check **Recent runs** and confirm a new run completed.
    - If the summary is too long or noisy, tighten the prompt. For example, limit it to PRs with failing checks, then save again.
+
+   ![Automation details for the PR review readiness report showing Daily at 8:00 AM and its Next run time](assets/app-automation-schedule.webp)
+
+   This image shows a saved schedule before its first run. Use **Recent runs** to check the results of your own automation.
 
 **Expected Output:** The automation card shows the **Daily** trigger, and **Automation details** shows when the next run happens. If the app was running at the scheduled time, the new run appears under **Recent runs** without you selecting **Run**. If the result is noisy, you know where to narrow the prompt.
 
@@ -206,17 +210,23 @@ The current Trigger menu includes these event triggers:
 | Trigger | Fires when... | Example use |
 |---|---|---|
 | **Issue** | A matching issue event occurs | Summarize issue activity for triage |
+| **Automation failed** | An upstream automation fails | Report a failed automated task |
 | **Automation completed** | An automation that you name under **Upstream Automations** completes | Start a follow-up report after a triage run |
+| **Code scanning alert** | A matching code scanning alert event occurs | Summarize an alert for human review |
+| **Dependabot alert** | A matching Dependabot alert event occurs | Summarize a dependency alert |
 | **Discussion comment** | A comment is added to a discussion | Summarize new discussion feedback |
 | **Discussion opened** | A discussion is opened | Prepare a short discussion summary |
 | **Discussion updated** | A discussion is updated | Report what changed in a discussion |
 | **Pull request** | A matching pull request event occurs | Summarize changes for a reviewer |
+| **Secret scanning alert** | A matching secret scanning alert event occurs | Summarize an alert for human review |
 | **Sub issue added** | A sub-issue is added | Report changes to an issue breakdown |
 | **Workflow** | A GitHub Actions workflow that you name completes (for example, it fails) | Summarize why a CI run failed |
 
-Choose the trigger that matches the event you want the automation to handle. Schedule choices such as **Hourly**, **Daily**, **Weekly**, and **CRON** appear in the same menu.
+Choose the trigger that matches the event you want the automation to handle. Schedule choices such as **Hourly**, **Daily**, **Weekly**, and **CRON** appear in the same menu. The menu is longer than its window, so scroll it to see every choice. The first screenshot shows the top of the menu, and the second shows the end.
 
-<img src="assets/app-automation-new-triggers.webp" alt="Automation trigger options in the new-automation form" width="800" />
+<img src="assets/app-automation-new-triggers.webp" alt="Trigger menu in the new-automation form, showing Manual, Hourly, Daily (selected), Weekly, CRON, Issue, Automation failed, Automation completed, Code scanning alert, Dependabot alert, and Discussion comment" width="800" />
+
+<img src="assets/app-automation-new-triggers-scrolled.webp" alt="Trigger menu scrolled to the end, showing Automation failed through Workflow, including Pull request, Secret scanning alert, and Sub issue added" width="800" />
 
 ### Keeping Event Triggers Safe
 
@@ -246,13 +256,17 @@ Cloud automations have requirements that you may not control:
 
 - **Copilot cloud agent** must be enabled for the repository, and the organization must allow automations.
 - **Repository visibility**: the repository must be private or internal. Cloud automations are not available in public repositories. A fork of this public course repository is public, so read this section without creating a cloud automation.
-- **Billing**: each cloud run starts a Copilot cloud agent session that uses GitHub Actions minutes and AI credits. This usage is billed to the person who created the automation. Check your plan before you enable a high-frequency schedule.
+- **Billing**: each cloud run starts a Copilot cloud agent session that uses GitHub Actions minutes and AI credits. **Personal** automations charge AI credits to the creator; **Shared** automations charge AI credits to the repository owner. Check the applicable Actions billing and AI credit limits before you enable a high-frequency schedule.
 
-When you enable **Run in the cloud**, a **Tools** dropdown appears. It starts with **All tools selected**. Each tool grants the cloud agent a specific capability, such as pushing changes, updating labels, or creating a pull request. Built-in tools are always available.
+When you enable **Run in the cloud**, a **Tools** dropdown appears. Check its initial selection before you continue; the current form shows **Select tools** before you choose any. Each selected tool grants the cloud agent a specific capability, such as pushing changes, updating labels, or creating a pull request. Built-in tools are always available.
 
-<img src="assets/app-automation-cloud-tools.webp" alt="Cloud automation Tools selector with Read PR, List PRs, and Search PRs selected, showing 3 tools selected while write tools such as Create PR are cleared" width="800" />
+<img src="assets/app-automation-cloud-tools.webp" alt="Cloud automation form with the Tools list open above the Tools button. In the Pull Requests group, Read PR, List PRs, and Search PRs are checked, and the button reads 3 tools selected" width="800" />
 
-Select only the tools the task requires. The list starts with every tool selected, so clear each tool you don't need. The screenshot shows the pull request readiness report with three read-only pull request tools selected (**Read PR**, **List PRs**, and **Search PRs**) and every write tool cleared. For CI status, the report may also need a read-only **Actions** tool, such as **List workflows**. You can add tools later, after the output proves trustworthy.
+The list groups the tools by area, such as **Issues**, **Pull Requests**, **Discussions**, **Repos**, and **Actions**. Select only the tools the task requires. Use **Search tools…** to find and select each required tool. If your app starts with tools already selected, clear the tools you do not need. The screenshot shows three read-only pull request tools selected in the **Pull Requests** group (**Read PR**, **List PRs**, and **Search PRs**). The same group also lists write tools, such as **Create PR** and **Merge PR**, which stay unchecked. These three tools are a starting point, not proof that the report has all the access it needs. If CI status is missing, check the tool descriptions and add only the read-only tools needed to retrieve workflow runs or check results. Listing workflow definitions alone does not show the status of a pull request's checks.
+
+Below the tools, the **Type** setting decides who can see the automation and who pays for its AI credits. **Personal** is the default: only you can see the automation, AI credits are charged to your user, and actions on GitHub use your identity. **Shared** makes the automation visible to everyone with access to the repository, charges AI credits to the repository owner, and uses Copilot's identity for actions on GitHub. Start with **Personal**.
+
+The **Personal** setting does not make the resulting cloud agent sessions private. People with repository access can see those sessions and their logs. Keep secrets out of the prompt for both types.
 
 </details>
 
@@ -342,6 +356,6 @@ That last habit is the whole point: human judgment stays in the loop at every ma
 ## Source References
 
 - [Using automations in the GitHub Copilot app](https://docs.github.com/en/copilot/how-tos/github-copilot-app/using-automations)
-- [About automations in the GitHub Copilot app](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-automations)
+- [Copilot automations](https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-automations)
 - [GitHub Copilot app generally available](https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/)
 - [GitHub Copilot app product blog](https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience/)

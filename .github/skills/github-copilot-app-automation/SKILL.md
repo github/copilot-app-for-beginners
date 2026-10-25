@@ -149,7 +149,7 @@ Observed on this machine:
 
 After macOS Accessibility permission was enabled, `System Events` could address the app as process `GitHub Copilot`.
 
-Useful exposed controls (app 1.1.26, Customize and sidebar 1.1.30; see [app-ui-map.md](references/app-ui-map.md) for the full map):
+Useful exposed controls (sidebar 1.1.32, Customize 1.1.30, other controls 1.1.26; see [app-ui-map.md](references/app-ui-map.md) for the full map):
 
 | Control | Role | Use |
 |---|---|---|
@@ -157,10 +157,10 @@ Useful exposed controls (app 1.1.26, Customize and sidebar 1.1.30; see [app-ui-m
 | `GitHub Copilot` | `AXWebArea` | Main webview-backed app content |
 | `Sidebar` | `AXGroup` | Sidebar region |
 | `Toggle sidebar, Command + B` | `AXCheckBox` | Collapse/expand sidebar |
-| `New`, `Pull requests`, `Issues`, `Automations`, `Customize` | `AXButton` | Sidebar views (Quick links) |
+| `New`, `Pull requests`, `Issues`, `Dashboards`, `Automations`, `Customize` | `AXButton` | Sidebar views (Quick links) |
 | `Customize sections` | `AXTabGroup` | Customize **Browse** and **Installed** tabs (1.1.30) |
 | `Filter by type: <type>` | `AXPopUpButton` | Customize type filter: All types, MCP, Plugins, Skills, Extensions, Canvas |
-| `New project or session` | `AXPopUpButton` | Projects **+** menu |
+| `New repository or session` | `AXPopUpButton` | Sessions **+** menu |
 | `New session in <project>` | `AXButton` | Project-specific new session entry (visible on hover or focus) |
 | `Message` | `AXTextArea` | Prompt composer |
 | `Project: <project>` | `AXComboBox` | Composer project picker |
@@ -240,7 +240,9 @@ Only use this workflow when the user has agreed the App can be visible or when t
    cover a label or icon, and matches the instruction order. The standard style
    is a 26px-radius `#ff594b` circle with a white number. Keep each badge at
    least its radius plus 2 px from the image edge.
-7. Keep PNG as the source artifact; use WebP in web/course pages.
+7. Use WebP in web/course pages. Do not leave PNG files in a chapter `assets`
+   folder: capture to a scratch folder such as `/tmp` and copy only the WebP, or
+   delete the `.png` and `.raw.png` files after you verify the WebP.
 8. Confirm that full-window files are exactly 1920x1080. A crop keeps the size
    of its crop rectangle.
 9. Confirm that the image has a 2px `#cccccc` border inside its edges, and

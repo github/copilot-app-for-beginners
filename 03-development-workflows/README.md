@@ -82,7 +82,7 @@ Attach only the context that helps with the current task. Focused context makes 
    Summarize the @samples/book-app-web test framework and build tool that are used to validate changes. Include the commands to run tests and build the app.
    ```
 
-1. Select **View** > **Toggle Review Panel**.
+1. Select **View** > **Toggle Panel**. See the [View menu image in Chapter 00](../00-setup/README.md#check-your-tools-in-terminal).
 1. Select **Terminal**. If it isn't open, select **+**, then **Terminal**.
 
 1. Run:
@@ -144,7 +144,7 @@ In Chapter 02, you attached an issue to practice giving Copilot focused context.
    ```
 
 1. Review the plan. It should connect the displayed statistics to the books currently shown after filters are applied.
-1. Select **Exit plan mode and I will prompt myself**. The mode returns to **Interactive**. Submit:
+1. Select **Exit plan mode and I will prompt myself**. If the **Review plan** box stays open, select **Continue**. Confirm that the mode is **Interactive**. Submit:
 
    ```text
    Implement the plan. Keep the fix small, explain the root cause, and run the relevant tests.
@@ -286,21 +286,21 @@ The diagram shows the main path toward a merge. Feedback or a failed check can s
 
 ### 4. Find Work in Issues and Pull requests
 
-The **Issues** and **Pull requests** views in the sidebar list the GitHub work that involves you. Each view has tabs, such as **Assigned to me**, and a repository picker.
+The **Issues** and **Pull requests** views in the sidebar list the GitHub work that involves you. Each view has tabs, such as **Assigned to me**, and a filter that can limit the results to one repository.
 
 1. Select **Issues** in the sidebar and stay on the **Assigned to me** tab.
-1. Select **All repositories** at the top of the view, then select your fork from the list.
+1. Select the filter icon at the right end of the tab row (callout 1). Select the **Query filter mode** control, shown as `<>` (callout 2), then add `repo:YOUR-OWNER/copilot-app-for-beginners` to the existing query (callout 3). Replace `YOUR-OWNER` with the username or organization that owns your fork. Keep the existing `state:open assignee:@me` terms and press `Enter`.
 
-   <img src="assets/app-filter-repo.webp" alt="Issues repository picker with callouts for All repositories and the course repository" width="800" />
+   <img src="assets/app-filter-repo.webp" alt="Issues query filter with callouts for the filter icon, Query filter mode, and the query field containing the training fork's repository term" width="800" />
 
    The view now lists only the practice issues from your fork.
 
    ![Issues view filtered to the course repository](assets/app-issues-filtered.webp)
 
-1. Select **Pull requests** in the sidebar, then select your fork in its repository picker too. Each view keeps its own repository selection. The practice pull requests appear on the **Authored by me** tab.
+1. Select **Pull requests** in the sidebar, then select **Authored by me**. Open its filter, select **Query filter mode**, and add the same `repo:` value to its existing query as you did for the issues view. Keep `state:open author:@me` and press `Enter`. The practice pull requests appear on this tab.
 
 > [!TIP]
-> You can filter with a query instead. Select the filter icon at the right end of the tab row to show the query box, then add `repo:YOUR-OWNER/copilot-app-for-beginners` to the query. Replace `YOUR-OWNER` with the username or organization that owns your fork. The repository picker then shows **Custom**. A typed query resets when you change tabs, so the picker is easier for this course.
+> Filters belong to the selected view. When you change tabs, check the query and add the `repo:` term again if needed.
 
 Confirm that opening an item shows its title, repository, number, and current status. If an expected item is missing, check the selected tab and repository, your repository access, and organization policy.
 
@@ -321,7 +321,7 @@ Issue 1 asks you to make search in the book app case-insensitive. The intentiona
    Use the attached issue as the source of truth. Create a small implementation and validation plan. Name the files you expect to change and the tests or browser checks that should prove the fix. Don't edit files yet.
    ```
 
-1. Review the plan, then select **Exit plan mode and I will prompt myself**. The mode returns to **Interactive**. Submit:
+1. Review the plan and select **Exit plan mode and I will prompt myself**. If the **Review plan** box stays open, select **Continue**. Confirm that the mode is **Interactive**. Submit:
 
    ```text
    Implement the plan. Include a focused regression test that proves uppercase and lowercase searches return the same result.
@@ -353,7 +353,7 @@ Your local evidence should show that the behavior works. The pull request now gi
 
 The setup script created two separate pull requests for this exercise. They aren't the search-fix pull request you just opened.
 
-Select **Pull requests** in the sidebar. Your fork should still be selected in the repository picker, and the practice pull requests appear on the **Authored by me** tab.
+Select **Pull requests** in the sidebar, then **Authored by me**. Check that the query still includes your fork's `repo:` term. The practice pull requests appear on this tab.
 
 #### Respond to a Review Comment
 
@@ -438,7 +438,7 @@ Confirm that dependencies are installed in that worktree and that the session is
 
 ### I can't see an issue or pull request
 
-Check the selected tab and repository picker in the **Issues** or **Pull requests** view, then check repository access, permissions, and organization policy.
+Check the selected tab and the query's `repo:` term in the **Issues** or **Pull requests** view, then check repository access, permissions, and organization policy.
 
 ### Local results and CI don't agree
 

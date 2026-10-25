@@ -296,7 +296,7 @@ The exercises stopped at review and explanation. Now use one reviewed recommenda
 
    Note the test count and the build result. Both must pass before you change the app.
 
-1. Review the plan, then select **Exit plan mode and I will prompt myself**. Ask the Copilot app to implement only that change, with no unrelated refactoring or new dependencies.
+1. Review the plan and select **Exit plan mode and I will prompt myself**. If the **Review plan** box stays open, select **Continue**. Confirm that the mode is **Interactive**, then ask the Copilot app to implement only that change, with no unrelated refactoring or new dependencies.
 1. Validate the change with the Chapter 03 inner loop:
    - Inspect **Changes**, then rerun `npm test -- --run` and `npm run build`. Don't weaken existing tests.
    - Start the app with `npm run dev` and open its **Local** URL in the **Browser** tab. Check the headings at a wide and a narrow width. Ask the Copilot app to confirm the rendered heading levels, because appearance alone doesn't show them.

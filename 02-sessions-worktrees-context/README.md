@@ -148,7 +148,7 @@ Perform these steps:
 
    ![Review plan box with the options Approve and implement this plan, Exit plan mode and I will prompt myself, and Suggest changes to the plan, next to the plan in the Plan tab](assets/app-plan-from-issue.webp)
 
-1. Select **Exit plan mode and I will prompt myself**. The session leaves plan mode and returns to **Interactive**, so you can continue with your own prompts.
+1. Select **Exit plan mode and I will prompt myself**. If the **Review plan** box stays open, select **Continue**. Confirm that the session returns to **Interactive** before you send another prompt.
 
    Before making changes, run the Book App and observe its current behavior so you have a baseline for comparison.
 
@@ -198,12 +198,14 @@ Use the two slash commands from [Slash Commands](#slash-commands) to review the 
 
    **Expected Output:** The GitHub Copilot app opens the usage popup and displays plan, session, token, and context information.
 
-   ![Usage popup below the prompt box with session AI credits, token totals, and the expanded Context breakdown](assets/app-context-information.webp)
+   ![Usage popup with Usage hidden, session AI credits, token totals, and the expanded Context breakdown](assets/app-context-information.webp)
+
+   The image shows example usage totals. Your totals will differ.
 
    - **Plan** shows the percentage of your plan you have used. If **Streamer Mode** is on, this shows **Usage hidden** instead.
    - **Session** shows the AI credits used by the session.
    - **Tokens** shows how many tokens the session sent to the model (up arrow) and received from the model (down arrow).
-   - Expanding **Context** shows how the context window is divided among the system prompt, system tools, MCP tools, messages, free space, and buffer.
+   - Expanding **Context** shows how much of the context window is used by the system prompt, tools, and messages. The categories shown can differ with the model and the tools available in the session.
    - Select **View usage and plan...** to open your account's usage and billing details.
 
    > [!NOTE]
@@ -279,7 +281,7 @@ Use the workflow from this chapter to add a light and dark theme to the Book App
    Name the files you expect to change and the checks that will show the feature works. Keep the plan small. Do not change any files yet.
    ```
 
-1. Review the plan, then select **Exit plan mode and I will prompt myself** and ask Copilot to implement it.
+1. Review the plan and select **Exit plan mode and I will prompt myself**. If the **Review plan** box stays open, select **Continue**. Confirm that the mode is **Interactive**, then ask Copilot to implement the plan.
 
 1. Inspect the diff and confirm that it only contains changes needed for the theme toggle. Reload the browser preview and verify that the toggle switches between readable light and dark themes. Try `hobbit` and `zzzz-no-match` in both themes to check the book cards and empty state.
 
