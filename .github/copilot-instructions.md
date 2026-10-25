@@ -29,7 +29,7 @@ Default behavior to preserve unless a training scenario says otherwise:
 - Favorite count includes unread favorites.
 - Empty-state copy should mention changing the search term, genre, or reading status.
 
-Use the current Node.js LTS. The app declares `engines.node` as `>=24.0.0`. CI uses Node 24.
+Use the current Node.js LTS. The app declares `engines.node` as `>=24.15.0` because jsdom 30 requires it. CI uses Node 24.
 
 ## Validation
 
