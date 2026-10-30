@@ -21,6 +21,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 SAFE_DISPLAY_NAME = "Copilot Dev"
 SAFE_OWNER = "copilotdev"
+SAFE_FIRST_NAME = SAFE_DISPLAY_NAME.split()[0]
+GREETINGS = {"hey", "hi", "hello", "welcome"}
 # A machine name is private (it often includes the owner's first name). Shell
 # prompts, terminal output, and paths can show it, so it becomes this value.
 SAFE_HOST = "copilot-dev-mac"
@@ -948,6 +950,22 @@ def collect_replacements(
             original = " ".join(str(word["text"]) for word in match)
             replacements.append(
                 Replacement(match, original, 0, len(original), SAFE_DISPLAY_NAME, "profile name")
+            )
+
+    # The new Project page greets the user by first name ("Hey Dan!"). The full
+    # profile name does not match there, so replace a first name that follows a
+    # greeting word on the same line.
+    first_names = {
+        normalize(name.split()[0]) for name in display_names if len(name.split()) > 1
+    }
+    for previous, word in zip(words, words[1:]):
+        if previous["line"] != word["line"] or normalize(str(previous["text"])) not in GREETINGS:
+            continue
+        text = str(word["text"])
+        found = re.match(r"\w+", text)
+        if found and normalize(found.group()) in first_names:
+            replacements.append(
+                Replacement([word], text, 0, found.end(), SAFE_FIRST_NAME, "greeting name")
             )
 
     for token in private_tokens:

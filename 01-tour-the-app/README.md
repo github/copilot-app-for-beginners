@@ -2,7 +2,7 @@
 
 > **What if you could move from first prompt to pull request without manually piecing together context across multiple tools?**
 
-Now that the app is installed and connected to the course repository, this chapter answers why the desktop app helps if you already use GitHub Copilot in an editor or terminal. Then you'll tour the main navigation and compare chats with project sessions. You'll also learn how session modes control how much the agent does on its own, how to choose a model and reasoning effort, and where to find the app settings.
+Now that the app is installed and connected to the course repository, this chapter answers why the desktop app helps if you already use GitHub Copilot in an editor or terminal. Then you'll tour the main navigation and compare chats with project sessions. You'll also explore the Projects feature for ongoing goals. You'll learn how session modes control how much the agent does on its own, how to choose a model and reasoning effort, and where to find the app settings.
 
 ## Learning Objectives
 
@@ -11,6 +11,7 @@ By the end of this chapter, you'll be able to:
 - Explain why you should use the GitHub Copilot app compared to using Copilot in an editor or Copilot CLI in the terminal
 - Identify key app features and settings
 - Choose between a chat and a project session for a task
+- Explain how Projects can be used to coordinate work toward an ongoing goal
 - Explain the session modes: Interactive, Plan, and Autopilot
 - Select a model and reasoning effort based on task complexity
 - Use prompt history to reuse and search previous prompts
@@ -81,9 +82,88 @@ The **Automations** view is where you create recurring agent tasks. The view sho
 
 This is where you manage the ways to extend the app: skills, Model Context Protocol (MCP) servers, plugins, extensions, and canvases. You don't need any of them yet. Chapter 04 covers skills and custom agents, Chapter 05 covers MCP servers and plugins, and Chapter 06 introduces canvases.
 
+![Customize view with the Browse tab selected, showing the search box, Editor's picks, and a list of MCP servers](assets/app-customize-page.webp)
+
 ### Sessions and Chats
 
-The **Sessions** area of the sidebar lists each connected project. After you start your first chat, a **Chats** row also appears there. The next section explains when to use a chat and when to use a project session.
+The **Sessions** area of the sidebar lists each connected project. After you start your first chat, a **Chats** row also appears there. The [Chats, Project Sessions, and Modes](#chats-project-sessions-and-modes) section explains when to use each session type.
+
+![Sessions area of the sidebar showing the Chats row with one chat and the copilot-app-for-beginners project with one session](assets/app-sessions-and-chats.webp)
+
+### Projects
+
+> [!NOTE]
+> Projects is in **public preview** and can change. It is optional for this course. To turn it on, open **Settings** > **Experimental**, then turn on **Projects**.
+
+A **Project** gives Copilot an ongoing goal. You describe the goal, and Copilot coordinates the work. It can start sessions, create artifacts such as reports, and set up recurring tasks when you ask. A Project can use one repository, several repositories, or no repository. You follow all of its work in one place, not in each session.
+
+For example, a Project could collect feedback about the course book app, find common problems, and start follow-up work. When you get new feedback, you go back to the same Project and do not start again.
+
+A Project is different from a **project session**, which is one session in one repository.
+
+![Projects view showing a book app Project in the sidebar, its conversation, and the Overview panel with one finished session under Done](assets/app-projects-page.webp)
+
+<details>
+<summary>Learn how to enable and use Projects</summary>
+
+The course uses **project session** for a session connected to a repository. **Projects** is a separate feature that coordinates work across tasks and sessions. Adding a repository to the app does not create one of these Projects.
+
+| Use this | When you need to... |
+|---|---|
+| Chat | Ask a general question without selecting a repository |
+| Project session | Inspect, plan, or change code in a specific repository |
+| Project | Coordinate related work toward an ongoing goal |
+
+#### Enable Projects
+
+Open **Settings** with the gear icon at the bottom of the sidebar. Select **Experimental**, then turn on **Projects** under **Orchestration**. To find the switch quickly, type `Projects` in the **Filter experiments** box.
+
+![Settings with Experimental selected, the experiments filtered to Projects, and the Projects switch turned on under Orchestration](assets/app-enable-projects.webp)
+
+Close **Settings**. The **Projects** area appears in the sidebar. If the switch is not available in your app, continue with the rest of the tour.
+
+#### Start a Project
+
+Select **+** next to **Projects** (callout 1) to open **New project**. The page shows starting points such as **Start with one or more repositories**, **Work on parallel tasks**, and **Triage recent issues**.
+
+Repositories are optional. To add repositories, select **Start with one or more repositories** (callout 2). Under **Which repositories should this project use?**, select a suggestion or search by repository owner and name, then select the repository (callout 3). Select **Continue** (callout 4). Copilot names the Project and asks what you want to work on.
+
+![New project page with the plus next to Projects, Start with one or more repositories, the selected training repository, and Continue marked with callouts 1 to 4](assets/app-new-project.webp)
+
+In the prompt box, describe the goal, the first task, the expected result, and any limits. For example:
+
+```text
+Use this project to track improvements to the book app in samples/book-app-web.
+First, explain the current search, filters, and reading statistics.
+List three questions we can use to collect learner feedback.
+Do not change files, open pull requests, or create scheduled tasks.
+```
+
+Sending the prompt starts the work. You do not need to start a Project to complete this tour.
+
+#### Follow Progress and Share Context
+
+The right-hand panel has tabs for the Project's work:
+
+| Tab | What you can do |
+|---|---|
+| **Overview** | Review work under **Needs input**, **Open**, **Working**, and **Done**. **Open** contains work with an open pull request. Select a session to inspect its conversation, changes, pull request, or plan. Use **Steer this session** to give that session further direction. |
+| **Library** | Add supporting files and folders, and open generated artifacts. Under **All Files**, **Agent** contains generated artifacts and **User** contains material you added. |
+| **Automations** | Check recurring tasks, their schedules, and their next run times. You can edit a schedule, pause a task, or delete it from its menu. |
+
+Open **Overview** to find work that needs your attention. Review **Needs input** for decisions, reviews, and permission requests. In the screenshot at the start of this section, the Project started one read-only session, and that session shows under **Done** when it finishes.
+
+Open **Library** to share supporting material. Select **+** (**Add to Library**) (callout 1), then **Add file…** or **Add folder…** (callout 2). Tell Copilot which material to use for the task.
+
+![Library tab with the Add to Library menu open, showing Add file and Add folder, marked with callouts 1 and 2](assets/app-project-library.webp)
+
+To request recurring work, describe the task and schedule in the Project's conversation. For example, you could ask for a weekly summary of feedback in its Library. Open **Automations** to check the resulting schedule. Until you ask for recurring work, the tab is empty. Chapter 07 covers automations in more detail.
+
+![Automations tab of the Project with no recurring tasks yet](assets/app-project-automations.webp)
+
+Return to the Project's conversation to give a follow-up task or change the goal. See [Working with projects in the GitHub Copilot app][projects] for more examples.
+
+</details>
 
 ## Chats, Project Sessions, and Modes
 
@@ -284,7 +364,7 @@ Check your plan, organization policy, project settings, and app version.
 
 1. Keep your editor for deep coding. Open the GitHub Copilot app when agent work needs a clearer place to run and review, and jump back to your editor any time.
 2. The app is organized around work surfaces: New for starting work, Pull requests and Issues for GitHub items, Dashboards for a board of your GitHub work, Automations for repeatable tasks, Customize for extending the app, and Sessions for projects and chats.
-3. **Chat sessions** are for exploration. **Project sessions** are for focused repository work. **Automations** are for repeatable agent runs.
+3. **Chat sessions** are for exploration. **Project sessions** are for focused repository work. **Projects** (public preview) coordinate work toward ongoing goals. **Automations** are for repeatable agent runs.
 4. **Interactive**, **Plan**, and **Autopilot** change the level of autonomy.
 5. Choose the model and reasoning effort below the prompt box. Keep the defaults for simple tasks; consider higher effort for complex work.
 
@@ -300,6 +380,7 @@ In the next chapter, you'll solve the "shared working copy" challenge from this 
 
 - [Getting started with the GitHub Copilot app][getting-started]
 - [Working with agent sessions][agent-sessions]
+- [Working with projects][projects]
 - [Choosing a model and reasoning effort][model-selection]
 - [GitHub Copilot app changelog][app-changelog]
 - [Voice dictation in the GitHub Copilot app][voice-input]
@@ -308,6 +389,7 @@ In the next chapter, you'll solve the "shared working copy" challenge from this 
 
 [getting-started]: https://docs.github.com/en/copilot/how-tos/github-copilot-app/getting-started
 [agent-sessions]: https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions
+[projects]: https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects
 [model-selection]: https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions#choosing-a-model
 [app-changelog]: https://github.com/github/app/blob/main/changelog.md
 [voice-input]: https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions#using-voice-dictation
