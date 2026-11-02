@@ -89,6 +89,8 @@ The GitHub Copilot app lets you add context and commands in the prompt box with 
 
 In addition to typing `@` to reference files and folders, you can drag files from your computer and drop them directly onto a session or agent in the sidebar. This is useful when you have files ready to attach that aren't part of the repository. The dropped files are added to the session's context, and you can continue with your prompt.
 
+You can also drop files onto the **New** item in the sidebar to start a new session with those files already attached.
+
 ### Slash Commands
 
 Slash commands are shortcuts you type in the prompt box. They can open app utilities, invoke agent behaviors, inspect usage, or trigger installed skills. The safest way to discover what your app supports is to type `/` in the prompt box and read the palette. Commands can vary by app version, enabled plugins, installed skills, and organization policy.
