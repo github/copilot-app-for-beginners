@@ -46,7 +46,6 @@ bash "$SK/screenshots.sh" next          # or: next 13   for a specific index
 
 # b) Read the surrounding course instructions. Decide whether the image shows
 #    two or more controls that the reader must select in order.
-python3 "$SK/screenshot-context.py" <chapter>/README.md <slug>.webp
 
 # c) Prepare the dedicated demo persona and get that instance to the required
 #    state. Run the Node.js setup script first for data shots.
