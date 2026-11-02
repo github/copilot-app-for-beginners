@@ -4,6 +4,9 @@ description: "Weekly collection of repo traffic data (views and unique visitors)
 on:
   schedule: weekly on monday
   workflow_dispatch:
+checkout:
+  # create_pull_request needs origin/main to find the merge base, also in branch runs.
+  fetch: ["main"]
 tools:
   bash: ["date"]
   edit:

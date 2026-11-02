@@ -10,6 +10,9 @@ engine:
 permissions:
   contents: read
   pull-requests: read
+checkout:
+  # create_pull_request needs origin/main to find the merge base, also in branch runs.
+  fetch: ["main"]
 tools:
   bash: ["curl", "gh"]
   edit:
