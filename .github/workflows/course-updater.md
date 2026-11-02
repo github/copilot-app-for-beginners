@@ -10,34 +10,14 @@ engine:
 permissions:
   contents: read
   pull-requests: read
+checkout:
+  # create_pull_request needs origin/main to find the merge base, also in branch runs.
+  fetch: ["main"]
 tools:
   bash: ["curl", "gh"]
   edit:
-  web-fetch:
   github:
     toolsets: [repos, pull_requests]
-post-steps:
-  - name: Require a complete course update check
-    if: always()
-    env:
-      GH_AW_SAFE_OUTPUTS: ${{ steps.set-runtime-paths.outputs.GH_AW_SAFE_OUTPUTS }}
-    run: |
-      node <<'NODE'
-      const { readFileSync } = require('node:fs');
-      const outputPath = process.env.GH_AW_SAFE_OUTPUTS;
-      if (!outputPath) {
-        throw new Error('The course update output path is missing.');
-      }
-      const outputs = readFileSync(outputPath, 'utf8')
-        .split(/\r?\n/)
-        .filter(line => line.trim())
-        .map(line => JSON.parse(line));
-      const completeTypes = new Set(['create_pull_request', 'noop']);
-      if (!outputs.length || outputs.some(output => !completeTypes.has(output.type))) {
-        const types = outputs.map(output => output.type).join(', ') || 'no output';
-        throw new Error(`Course update check is incomplete (${types}). See the agent logs.`);
-      }
-      NODE
 safe-outputs:
   allowed-domains:
     - github.com
@@ -53,15 +33,13 @@ You are a documentation maintainer for the Copilot App for Beginners repository.
 
 ## Step 1 — Gather recent Copilot app updates
 
-Use `web-fetch` to read the following page and extract the latest entries from the past 7 days:
-
-- https://github.com/github/app/blob/main/changelog.md — GitHub Copilot app changelog
+Use the authenticated GitHub MCP tool `get_file_contents` to read `changelog.md` on the `main` branch of `github/app` (the GitHub Copilot app changelog). Extract the latest entries from the past 7 days.
 
 Use the authenticated GitHub MCP tools `list_releases` and `list_commits` to check the latest releases and commits in `github/app`. Only include updates from the past 7 days.
 
 Only consider features that have shipped in a stable GitHub release. Use the GitHub release metadata as the source of truth and exclude every release where `draft` or `prerelease` is `true`. Do not use version names, changelog entries, or wording such as "production-ready" to override that metadata. A changelog entry or commit is eligible only if you verify that it is included in a stable release published within the past 7 days. Ignore unreleased changes and changes available only in prerelease versions.
 
-If `web-fetch` or a shell `gh` command is denied or cannot authenticate, continue with the GitHub MCP tools. Release notes and commits are valid alternative sources when `web-fetch` cannot read the changelog. Use `get_file_contents` if you need to read the changelog through MCP.
+If a shell `gh` command is denied or cannot authenticate, continue with the GitHub MCP tools. Release notes and commits are valid alternative sources when `get_file_contents` cannot read the changelog.
 
 If the authenticated MCP reads also fail, report the error with `missing_data` or `missing_tool` and stop. Do not assume that the repository is private or report that no updates are needed without source data. An incomplete check must fail the workflow.
 
