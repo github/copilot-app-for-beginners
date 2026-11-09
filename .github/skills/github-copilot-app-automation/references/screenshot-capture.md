@@ -52,7 +52,6 @@ The preparation workflow:
   built-in laptop display and two zoom steps (125%). It retries and fails if it cannot confirm the zoom.
 - Enables and verifies Streamer Mode so unreleased features are hidden.
 - Verifies that the persona is signed in.
-- Opens the exact repository path through the native folder picker if needed.
 - Verifies that the repository name appears in the selected process.
 - Dismisses transient banners (only buttons on a safe allowlist) and moves the
   pointer away from the content.
