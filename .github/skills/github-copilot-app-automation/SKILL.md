@@ -204,7 +204,7 @@ Only use this workflow when the user has agreed the App can be visible or when t
    local training repository and keep the returned process ID. Turn off Siri
    before you capture: its waveform orb can appear next to a focused text field,
    and the capture script fails when it sees the orb.
-3. Map that process with `COPILOT_PID="$COPILOT_PID" map-app.sh` so steps match
+3. Map that process with `COPILOT_PID="$COPILOT_PID" bash "$SK/map-app.sh"` so steps match
    the current app build.
 4. Navigate that process to the exact state with Accessibility controls and let
    spinners settle. Use `prepare-copilot-state.swift` for states that a named
