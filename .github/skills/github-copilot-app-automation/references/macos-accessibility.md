@@ -88,9 +88,7 @@ belong to the Copilot instance that hosts the agent and can navigate the wrong
 window. After the persona starts, drive the screenshot instance through
 Accessibility selectors scoped to its process ID.
 
-`prepare-persona.sh` requires an existing signed-in persona. It verifies the
-repository and, when needed, opens the native folder picker and supplies the
-exact path. It does not succeed until the repository name appears in the
+`prepare-persona.sh` requires an existing signed-in persona. It does not succeed until the repository name appears in the
 selected process. After a verified capture, run `cleanup-persona.sh` with the
 same persona name and process ID. Cleanup preserves the persona and login.
 
