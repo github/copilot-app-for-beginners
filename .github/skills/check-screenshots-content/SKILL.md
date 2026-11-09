@@ -97,7 +97,6 @@ Keep citations exact (`path/README.md:NN`) so fixes are easy to apply.
 
 ## Safety and Notes
 
-- Read-only by default: analyze and report; only change course text when asked.
 - Convert `.webp` to PNG in a temp dir (`/tmp`), never write derived images into
   the repo.
 - Screenshots may contain account names, private repo names, or paths. Do not
