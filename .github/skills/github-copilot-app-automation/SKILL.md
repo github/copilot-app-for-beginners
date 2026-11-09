@@ -34,14 +34,7 @@ REPO="$HOME/copilot-app-for-beginners"
 COPILOT_PID="$(bash "$SK/prepare-persona.sh" "$PERSONA" "$REPO" 60)"
 ```
 
-This keeps the existing login and persona data, starts a separate app process,
-sets only that window to a standard 1920x1080-point frame, resets the display
-zoom and zooms in three times (the zoom is measured and confirmed), enables and
-verifies **Streamer Mode**, verifies that the account is signed in, verifies the
-exact local repository, dismisses transient banners, and returns its process
-ID. If the
-repository is missing, the pre-step opens the exact folder through the native
-folder picker and verifies it before capture. A setup failure keeps the process
+A setup failure keeps the process
 for inspection and does not return a successful process ID. Do not select a
 target by app name when another Copilot instance is open. Do not use full
 screen: it can draw the menu bar and title bar over the app content.
