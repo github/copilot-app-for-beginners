@@ -57,7 +57,7 @@ AXButton     Open changes
 Use the draft test to confirm write access to the prompt composer without submitting:
 
 ```bash
-osascript sample_codes/macos-accessibility/type-and-clear-draft.applescript "$COPILOT_PID"
+osascript .github/skills/github-copilot-app-automation/sample_codes/macos-accessibility/type-and-clear-draft.applescript "$COPILOT_PID"
 ```
 
 Expected shape:
