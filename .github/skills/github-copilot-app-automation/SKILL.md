@@ -218,7 +218,7 @@ Only use this workflow when the user has agreed the App can be visible or when t
    ID and convert it to WebP. Pass callouts in instruction order, highlight
    boxes, and an optional crop, all in final 1920x1080 coordinates:
    ```bash
-   bash sample_codes/macos-accessibility/capture-window.sh \
+   bash "$SK/capture-window.sh" \
      <chapter>/assets <base-name> 40 "$COPILOT_PID"
 
    bash sample_codes/macos-accessibility/capture-window.sh \
