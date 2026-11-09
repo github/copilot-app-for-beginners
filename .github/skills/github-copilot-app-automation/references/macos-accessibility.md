@@ -15,7 +15,7 @@ System Events got an error: osascript is not allowed assistive access.
 Use read-only probes first:
 
 ```bash
-COPILOT_PID="$COPILOT_PID" bash sample_codes/macos-accessibility/map-app.sh
+COPILOT_PID="$COPILOT_PID" bash .github/skills/github-copilot-app-automation/sample_codes/macos-accessibility/map-app.sh
 osascript sample_codes/macos-accessibility/probe-readonly.applescript "$COPILOT_PID"
 ```
 
