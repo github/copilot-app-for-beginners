@@ -415,7 +415,6 @@ The script removes a Settings version and enforces 1920x1080 even when no
 process ID is supplied. Identity discovery requires a process ID, so course
 captures must still pass the exact persona process ID.
 
-Only text bounding boxes are changed, so the profile avatar remains visible.
 If OCR cannot locate a detected profile name, capture fails closed and keeps
 the raw PNG for manual review.
 
