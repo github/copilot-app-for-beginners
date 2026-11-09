@@ -221,7 +221,7 @@ Only use this workflow when the user has agreed the App can be visible or when t
    bash "$SK/capture-window.sh" \
      <chapter>/assets <base-name> 40 "$COPILOT_PID"
 
-   bash sample_codes/macos-accessibility/capture-window.sh \
+   bash "$SK/capture-window.sh" \
      00-setup/assets app-add-project 40 "$COPILOT_PID" \
      --callout 1:372:338 --callout 2:585:437
 
