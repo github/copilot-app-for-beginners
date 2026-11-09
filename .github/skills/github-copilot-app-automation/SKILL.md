@@ -265,7 +265,7 @@ Use:
 - [missing-screenshots.md](references/missing-screenshots.md) — the generic, one-at-a-time capture workflow (shots are discovered dynamically, never hardcoded)
 - [screenshots.sh](sample_codes/macos-accessibility/screenshots.sh) — dynamically `list` / `next` / `embed` the chapters' `<!-- app-screenshot: ... -->` placeholders
 - [screenshot-context.py](sample_codes/macos-accessibility/screenshot-context.py) — extracts the course section that defines a screenshot's required state
-- [prepare-persona.sh](sample_codes/macos-accessibility/prepare-persona.sh) — launches a new process from a signed-in persona, verifies the exact local repository, and returns the process ID
+- [prepare-persona.sh](sample_codes/macos-accessibility/prepare-persona.sh) — launches a new process from a signed-in persona and returns the process ID
 - [ensure-streamer-mode.swift](sample_codes/macos-accessibility/ensure-streamer-mode.swift) — enables and verifies Streamer Mode before screenshot preparation
 - [cleanup-persona.sh](sample_codes/macos-accessibility/cleanup-persona.sh) — stops one exact screenshot process and preserves the signed-in persona
 - [launch-persona.sh](sample_codes/macos-accessibility/launch-persona.sh) — low-level launcher used by `prepare-persona.sh`
