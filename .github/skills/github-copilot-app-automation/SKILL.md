@@ -225,7 +225,7 @@ Only use this workflow when the user has agreed the App can be visible or when t
      00-setup/assets app-add-project 40 "$COPILOT_PID" \
      --callout 1:372:338 --callout 2:585:437
 
-   bash sample_codes/macos-accessibility/capture-window.sh \
+   bash "$SK/capture-window.sh" \
      06-canvases/assets app-open-repo-issues-canvas 40 "$COPILOT_PID" \
      --box 1287:266:1551:309 --crop 352:0:1920:700
    ```
