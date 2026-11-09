@@ -1,4 +1,3 @@
-// Register one exact local repository in a fresh GitHub Copilot persona.
 //
 // Usage:
 //   setup-copilot-persona <pid> <repository_path> [timeout_seconds]
