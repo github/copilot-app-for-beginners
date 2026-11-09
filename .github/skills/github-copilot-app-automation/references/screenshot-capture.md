@@ -370,7 +370,7 @@ window id and polls until the window appears. When a process ID is supplied, it
 only considers windows owned by that process:
 
 ```bash
-bash sample_codes/macos-accessibility/capture-window.sh \
+bash "$SK/capture-window.sh" \
   <chapter>/assets <base-name> 40 "$COPILOT_PID"
 ```
 
