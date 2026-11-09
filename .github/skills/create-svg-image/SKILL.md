@@ -40,8 +40,8 @@ longer editable text — prefer the SVG.)
 
 [`sample_codes/create-svg-badge.sh`](sample_codes/create-svg-badge.sh) does the
 whole job: detects the image size and mime type, base64-encodes the raster, writes
-the SVG, validates it with `xmllint`, and renders a PNG preview you can view to
-confirm placement.
+the SVG, validates it with `xmllint` when available, and renders a PNG preview
+when a renderer is available and previews are enabled.
 
 ```bash
 # Required: --image, --x, --y, --number
