@@ -120,8 +120,6 @@ consistent on-screen size, see below), `--color "#d1242f"` (GitHub danger red),
 - `--grid` writes nothing to the repo; it is purely a coordinate-finding preview.
 - Screenshots may contain account names, private repo names, or paths — describe
   the UI generically and don't surface private data when reporting placement.
-- Only edit a chapter README to swap in the `.svg` when the user asks; generating
-  the asset and changing the Markdown are separate steps.
 
 ## Related Skills
 
