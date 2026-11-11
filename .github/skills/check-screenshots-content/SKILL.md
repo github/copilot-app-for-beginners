@@ -48,10 +48,11 @@ course refers to it:
    (these are often already marked with `<!-- app-screenshot: ... -->` or
    `<!-- MANUAL STEP TO VERIFY ... -->` comments).
 
-Treat
-[`.github/skills/github-copilot-app-automation/references/app-ui-map.md`](../github-copilot-app-automation/references/app-ui-map.md)
-as the canonical source for UI label spelling and casing. If a screenshot and the
-UI map disagree, trust the screenshot and note that the UI map needs a refresh.
+Treat the current chapter READMEs and the app itself as the source for UI label
+spelling and casing. If the user-level `github-copilot-app-automation` skill is
+installed, its `references/app-ui-map.md` is a helpful cross-check. If a
+screenshot and the UI map disagree, trust the screenshot and note that the UI
+map needs a refresh.
 
 ## Workflow
 
