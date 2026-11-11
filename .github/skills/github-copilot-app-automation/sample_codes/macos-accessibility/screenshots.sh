@@ -89,7 +89,7 @@ if cmd == "next":
     print()
     print("Run from the repo root:")
     print(f"  # 1) Read the surrounding instructions and decide whether callouts are required:")
-    print(f"  python3 {skill}/screenshot-context.py {f} {s}.webp")
+    print(f"  python3 {skill}/screenshot-context.py {f} --line {i}")
     print(f"  # 2) Prepare a new demo persona in the 16:9 capture frame:")
     print(f'  COPILOT_PID="$(bash {skill}/prepare-persona.sh demo "$HOME/copilot-app-for-beginners" 60)"  # training-fork clone')
     print(f"  # 3) Get that instance to the required state, then capture only its window:")
