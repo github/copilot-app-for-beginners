@@ -1,6 +1,6 @@
 # GitHub Copilot app UI Map
 
-- app_version: 1.1.32 (menus, sidebar, Dashboards, Copilot Fusion, issue filters, Settings, and automations); Customize 1.1.30; other sections 1.1.26
+- app_version: 1.1.32 (menus, sidebar, Dashboards, Copilot Fusion, issue filters, Settings, and automations); Customize 1.1.30; other sections 1.1.26; 1.1.35 updates in "Updates for 1.1.35" below
 - captured: 2026-09-30, checked again on 2026-10-01 for 1.1.26 (macOS, `demo`
   persona, Streamer Mode on)
 - privacy: project names, session names, pull request titles, and the account name
@@ -313,6 +313,95 @@ Skills · Extensions · Canvas · Installed) were replaced.
   from course screenshots because it changes frequently.
 - Sessions > **Default branch prefix** has a **Reset default branch prefix**
   button that restores `%username%-`.
+
+## Updates for 1.1.35 (course video takes, November 2026)
+
+Seen with Accessibility while recording course demo videos (the `demo` persona, Streamer
+Mode on, zoom 125%). Where this differs from the 1.1.26 map above, this is newer.
+
+### Sidebar, New page, and session
+
+- Sidebar: a **Projects** heading is back above **Sessions** ("No projects yet" until one exists). Its "+" makes a
+  persistent Project, not a project session. Repositories and their sessions are under **Sessions**. Customize can
+  show a yellow re-authorization banner.
+- Prompt box on the New page: the mode, the model ("Copilot Fusion"), the repository ("Repository: Chat" for a
+  chat), and the environment.
+- Repository menu: Chat, Add from GitHub, Add from URL, Add local folder or repository. A local folder starts a
+  project session in a new worktree ("Workspace: New worktree").
+- The first prompt in a new repository asks about trust ("A. Always trust" or "B. Skip for now"). After Skip, the
+  app says that it still asks before it runs tools.
+- Busy: buttons named `Working …` or `Stop, Escape`. A session row's name gets a status prefix while it works
+  ("Working Autopilot"); match the end of the name.
+- The "+" on the repository row in the sidebar ("New session in <repo>", shown on hover) opens the New page with
+  the repository chosen. The Workspace picker can default to "Current checkout". A click on the item that is
+  already checked leaves the menu open: press Escape instead.
+- `@` in the prompt lists the repository files with their full paths; click the item to add it as a chip.
+- **Usage popover** (the `/context` popup above, also on the control left of the mic: AXPopUpButton "AI credits
+  quota: …, Command + Shift + U", tooltip "AI usage ⌘⇧U"): Plan, Session (AI credits of this session), Tokens (sent,
+  cached; received, reasoning), Context
+  (an AXButton "N% of 272K context used. Toggle breakdown"; a click opens System prompt, System tools, MCP tools,
+  Messages, Free space, and Buffer, and the popover grows upward), Compact conversation, and View usage and plan….
+  Escape closes it (0.25 s fade), and the button keeps a focus ring. **With Streamer Mode on** the button is an eye
+  with a slash ("Usage hidden") and the Plan row says "Usage hidden", but Session, Tokens, and Context still show,
+  so an employee account's "No usage limit" never shows. Turning Streamer Mode off did not change the icon in the
+  `demo` persona.
+- The session title in the header opens a menu with **Rename** (the title becomes a "Session name" text field).
+  This always renames the open session, so it is safer than the sidebar row's right-click menu.
+- The panel (top right, "Toggle panel, Command + Option + B"; not always in the AX tree, so click its position)
+  has tabs: Changes, Terminal (Ctrl+`), Browser, Files, Side chat, Insights, Canvas. File links in an answer open
+  the file in the Files tab.
+- Changes tab: "Collapse all files" shows one row per changed file with its +/- counts; click a row to expand its
+  diff. The "Changes +N −M" button above the composer opens the tab.
+- Terminal tab: a shell in the session's worktree. It reads the persona home's `.zshrc`.
+- **Run** in the header runs a script from Settings > the repository > Scripts ("Add script": a name and a command;
+  macOS changes `--` to an em dash in that field, so use a command without dashes, for example
+  `cd <project folder> && dotnet run`). The "Run options" pop-up (an AXPopUpButton) lists the scripts; after
+  the first run, a "Run app, recent" item comes first. A web app opens in the Browser tab ("Browser auto-open").
+  While it runs, the Run button stops it. The script is stored with the repository and goes away with it.
+- Header: **Create PR** (green) shows once the session has changes. The PR goes to the repository of the folder's
+  `origin` remote. If the account cannot push there, the app pushes the branch to the account's fork (it finds or
+  makes `<account>/<same name>`) and opens the PR on the original repository.
+
+### Modes, permissions, and trust
+
+- **Autopilot with Always ask is blocked.** "Always ask rejects tool requests in Autopilot": the agent cannot write
+  a file or run a command, answers its own questions ("user is not available"), and stops. When you choose
+  Autopilot, a toast "Recommended permissions for Autopilot … Consider using Assisted or Approve all instead. This
+  action changes the default for new sessions." offers **Use Assisted**.
+- **Assisted and Approve all need a trusted repository.** In an untrusted repository, Copilot still asks before it
+  runs tools; the banner says "Repository trust was skipped. Copilot still asks before running tools." with a
+  **Review repository trust** button that opens the trust card again. Trust is stored in the persona's
+  `data.db` (`project_host_trust`) and in `config.json` `trustedFolders`. Settings > the repository > **Revoke all
+  trust** clears it ("Trust repository" sets it again); after a revoke, the first prompt of a session asks again.
+- The Tool permissions choice is also the default for new local sessions (`app_state`
+  `permission-mode-default-on`: `allow-all` for Approve all, `assisted`, or `manual` for Always ask). A choice in a
+  session's mode menu changes this default too.
+- **Interactive with Always ask** shows a card for each file write ("A. Write this file", "B. Always allow file
+  writes for this session", …) and each command ("A. Run this command", "B. Don’t run this command" with a curly
+  apostrophe, …). One small request took 11 approvals. A read-only `git status` ran without a card.
+- **Plan** asks Question cards (A is the recommended answer and is preselected; Continue) and asks before read-only
+  commands too. The plan opens in the panel (Plan tab). The **Review plan** card: "A. Approve and implement this
+  plan" (it sends at once and switches the session to Autopilot), "B. Exit plan mode and I will prompt myself", and
+  a "C. Suggest changes to the plan" text area (type, then Continue; the plan is updated in about 15 s and the card
+  shows again). While the card shows, the mode picker is hidden, so set Tool permissions before the plan prompt.
+- **Memory** (Settings > Sessions > Memory) adds "Vote on memory" cards to sessions. Its only store is
+  `app_state` `memory-settings` (`{"state":{"memoryEnabled":true},"version":1}`) in the persona's
+  `.copilot/data.db`. In 1.1.35 the Settings page showed no element named "Memory" to the Accessibility tree.
+- Copilot Fusion's Cascade shows its passes ("Main pass · …", "Review pass · … Changes requested", "Fix pass · …").
+  Once, after a plan was approved, the main pass printed "I'm sorry, but I cannot assist with that request." for
+  7 s before the fix pass did the work.
+
+### Accessibility quirks
+
+- Some AXStaticText items report a wrong size (the left and top are correct). Click at left + 130, top + 17.
+- The folder panel belongs to `com.apple.appkit.xpc.openAndSavePanelService`. The click on Open needs
+  `--allow <panel pid>` (`panel_pid()` in `take_app.py`).
+- Menu items: filter `find_all(APP, role="AXMenuItem")` by a visible size and an x position in the frame.
+- Menu items report wrong sizes too (left and top are right): click at left + 130, top + 17.
+- Submenus (Tool permissions): move with `act move … --straight` (no arc) along the menu item, then down into the
+  submenu. A curved move passes over other items and closes the submenu.
+- Cmd+Shift+G (Go to folder in the open panel) can be taken by another app's global hotkey, which then takes the
+  focus. To add a folder, click through the open panel instead.
 
 ## Notes for the course
 

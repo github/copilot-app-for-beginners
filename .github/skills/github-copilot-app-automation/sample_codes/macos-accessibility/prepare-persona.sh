@@ -96,6 +96,8 @@ chmod 700 "$cache_dir"
 printf '%s\n' "$identities" >"$cache_dir/$pid.json"
 chmod 600 "$cache_dir/$pid.json"
 
+# The next steps activate the app and press controls; park moves the pointer. Wait until nobody is using the computer.
+bash "$here/safe-input.sh" idle "${COPILOT_INPUT_IDLE:-3}" >&2
 if ! "$streamer_binary" "$pid" "$timeout" >/dev/null; then
   echo "Streamer Mode could not be enabled and verified. Process $pid was kept for inspection." >&2
   exit 4
@@ -118,7 +120,7 @@ fi
 # Remove promotions and update notices, then move the pointer off the content
 # so no hover state or tooltip appears in the first capture.
 "$state_binary" "$pid" dismiss-banners >/dev/null || true
-"$state_binary" "$pid" park >/dev/null || true
+bash "$here/safe-input.sh" idle "${COPILOT_INPUT_IDLE:-3}" >&2 && "$state_binary" "$pid" park >/dev/null || true
 if [ -n "$front_pid" ] && [ "$front_pid" != "$pid" ]; then
   osascript -e "tell application \"System Events\" to set frontmost of (first process whose unix id is $front_pid) to true" >/dev/null 2>&1 || true
 fi

@@ -57,7 +57,9 @@ AXButton     Open changes
 Use the draft test to confirm write access to the prompt composer without submitting:
 
 ```bash
-osascript sample_codes/macos-accessibility/type-and-clear-draft.applescript "$COPILOT_PID"
+# The AppleScript types system-wide keystrokes: wait until nobody is using the computer first.
+bash sample_codes/macos-accessibility/safe-input.sh idle 3 &&
+  osascript sample_codes/macos-accessibility/type-and-clear-draft.applescript "$COPILOT_PID"
 ```
 
 Expected shape:

@@ -97,6 +97,8 @@ swiftc "$window_control_src" -o "$window_control" 2>/dev/null || {
   exit 3
 }
 "$window_control" "$pid" frame "$timeout" "$capture_width" >/dev/null
+# The zoom sends Command+=/- to the app: wait until nobody is typing or clicking.
+bash "$here/safe-input.sh" idle "${COPILOT_INPUT_IDLE:-3}" >&2
 zoom_steps="${COPILOT_CAPTURE_ZOOM_STEPS:-}"
 if [ -z "$zoom_steps" ] && [ "${COPILOT_CAPTURE_DISPLAY:-}" = "builtin" ]; then
   zoom_steps=2

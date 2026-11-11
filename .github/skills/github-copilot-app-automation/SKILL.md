@@ -195,7 +195,8 @@ Use:
 6. Clear it with Command+A and Delete.
 7. Verify the returned `cleared-value` is empty.
 
-Use [type-and-clear-draft.applescript](sample_codes/macos-accessibility/type-and-clear-draft.applescript).
+Use [type-and-clear-draft.applescript](sample_codes/macos-accessibility/type-and-clear-draft.applescript), after
+`safe-input.sh idle 3` (its keystrokes go to whatever app is in front).
 
 ### Capture Screenshots for Course Assets
 
@@ -275,6 +276,7 @@ Use:
 - [prepare-persona.sh](sample_codes/macos-accessibility/prepare-persona.sh) — launches a new process from a signed-in persona, verifies the exact local repository, and returns the process ID
 - [ensure-streamer-mode.swift](sample_codes/macos-accessibility/ensure-streamer-mode.swift) — enables and verifies Streamer Mode before screenshot preparation
 - [cleanup-persona.sh](sample_codes/macos-accessibility/cleanup-persona.sh) — stops one exact screenshot process and preserves the signed-in persona
+- [safe-input.sh](sample_codes/macos-accessibility/safe-input.sh) — waits until nobody has used the keyboard or mouse (`idle`) and checks the frontmost app (`front`, with app-demo-automation's `act` when installed); `prepare-persona.sh` and `launch-persona.sh` call it before pointer moves and shortcuts (`COPILOT_INPUT_IDLE`, default 3 s; 0 turns it off)
 - [launch-persona.sh](sample_codes/macos-accessibility/launch-persona.sh) — low-level launcher used by `prepare-persona.sh`
 - [control-copilot-window.swift](sample_codes/macos-accessibility/control-copilot-window.swift) — sets the 1920x1080-point capture frame and the measured 150% capture zoom (125% on the built-in display) for one exact app process
 - [control-copilot-ui.swift](sample_codes/macos-accessibility/control-copilot-ui.swift) — presses one named Accessibility control in an exact app process
@@ -282,7 +284,7 @@ Use:
 - [locate-copilot-element.swift](sample_codes/macos-accessibility/locate-copilot-element.swift) — prints the final 1920x1080 coordinates of named controls for callouts, boxes, and crops
 - [find-private-identities.swift](sample_codes/macos-accessibility/find-private-identities.swift) — derives profile names and matching personal repository owners without hard-coded identities
 - [sanitize-screenshot.sh](sample_codes/macos-accessibility/sanitize-screenshot.sh) — replaces identity text while preserving avatars; caches identities per process because dialogs can hide the sidebar
-- [app-ui-map.md](references/app-ui-map.md) — sanitized factual UI map (menus, sidebar, views, composer controls), regenerable via map-app.sh
+- [app-ui-map.md](references/app-ui-map.md) — sanitized factual UI map (menus, sidebar, views, composer controls), regenerable via map-app.sh; its "Updates for 1.1.35" section adds the usage popover, modes, trust, and Accessibility quirks from the app-demo-automation video takes
 - [capture-window.sh](sample_codes/macos-accessibility/capture-window.sh) — recommended: process-filtered CoreGraphics window capture + WebP, with `--callout`, `--box`, `--arrow`, and `--crop`
 - [finalize-screenshot.py](sample_codes/macos-accessibility/finalize-screenshot.py) — enforces 1920x1080 output, adds the required 2px `#cccccc` inside border, and crops
 - [hide-window-controls.py](sample_codes/macos-accessibility/hide-window-controls.py) — removes the macOS window buttons and moves the sidebar icon into their place, so screenshots do not show the operating system
