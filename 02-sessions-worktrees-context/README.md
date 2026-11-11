@@ -110,6 +110,7 @@ For this chapter, you only need two commands:
 | `/agent` | Select or switch the active agent for a session. It appears after you add a custom agent (Chapter 04). |
 | `/collect-debug-logs` | Create a debug log archive for troubleshooting, or upload one as a secret gist. |
 | `/create-canvas` | Create or change a canvas with the built-in canvas-authoring skill. Chapter 06 covers canvases. |
+| `/new` | Start a fresh conversation, like `/clear`. |
 | `/orchestrate` | Coordinate multi-session or multi-repo work by delegating to child sessions. |
 | `/research` | Research a topic and produce a cited report. |
 | `/review` | Review the changes in the current session. |
