@@ -37,11 +37,13 @@ COPILOT_PID="$(bash "$SK/prepare-persona.sh" "$PERSONA" "$REPO" 60)"
 This keeps the existing login and persona data, starts a separate app process,
 sets only that window to a standard 1920x1080-point frame, resets the display
 zoom and zooms in three times (the zoom is measured and confirmed), enables and
-verifies **Streamer Mode**, verifies that the account is signed in, verifies the
-exact local repository, dismisses transient banners, and returns its process
-ID. If the
-repository is missing, the pre-step opens the exact folder through the native
-folder picker and verifies it before capture. A setup failure keeps the process
+verifies **Streamer Mode**, verifies that the account is signed in, and
+dismisses transient banners before it returns the process ID. If no repository
+with the folder name of the given path is in the sidebar, the pre-step adds the
+exact folder through the native folder picker. It then checks that a repository
+with that folder name appears. It checks the name, not the full path, so do not
+keep another clone with the same folder name in the persona. A setup failure
+keeps the process
 for inspection and does not return a successful process ID. Do not select a
 target by app name when another Copilot instance is open. Do not use full
 screen: it can draw the menu bar and title bar over the app content.
@@ -60,6 +62,9 @@ reference:
 ```bash
 python3 "$SK/screenshot-context.py" <chapter>/README.md <image-name>
 ```
+
+For a pending `<!-- app-screenshot: ... -->` placeholder, which has no image
+name yet, pass `--line <line>` with the line that `screenshots.sh next` prints.
 
 Use the section heading, instructions before the image, and instructions after
 the image to define the exact screen, open menu, selected item, and callouts.
@@ -211,7 +216,7 @@ Only use this workflow when the user has agreed the App can be visible or when t
    local training repository and keep the returned process ID. Turn off Siri
    before you capture: its waveform orb can appear next to a focused text field,
    and the capture script fails when it sees the orb.
-3. Map that process with `COPILOT_PID="$COPILOT_PID" map-app.sh` so steps match
+3. Map that process with `COPILOT_PID="$COPILOT_PID" bash "$SK/map-app.sh"` so steps match
    the current app build.
 4. Navigate that process to the exact state with Accessibility controls and let
    spinners settle. Use `prepare-copilot-state.swift` for states that a named
@@ -225,14 +230,14 @@ Only use this workflow when the user has agreed the App can be visible or when t
    ID and convert it to WebP. Pass callouts in instruction order, highlight
    boxes, and an optional crop, all in final 1920x1080 coordinates:
    ```bash
-   bash sample_codes/macos-accessibility/capture-window.sh \
+   bash "$SK/capture-window.sh" \
      <chapter>/assets <base-name> 40 "$COPILOT_PID"
 
-   bash sample_codes/macos-accessibility/capture-window.sh \
+   bash "$SK/capture-window.sh" \
      00-setup/assets app-add-project 40 "$COPILOT_PID" \
      --callout 1:372:338 --callout 2:585:437
 
-   bash sample_codes/macos-accessibility/capture-window.sh \
+   bash "$SK/capture-window.sh" \
      06-canvases/assets app-open-repo-issues-canvas 40 "$COPILOT_PID" \
      --box 1287:266:1551:309 --crop 352:0:1920:700
    ```
@@ -272,7 +277,7 @@ Use:
 - [missing-screenshots.md](references/missing-screenshots.md) — the generic, one-at-a-time capture workflow (shots are discovered dynamically, never hardcoded)
 - [screenshots.sh](sample_codes/macos-accessibility/screenshots.sh) — dynamically `list` / `next` / `embed` the chapters' `<!-- app-screenshot: ... -->` placeholders
 - [screenshot-context.py](sample_codes/macos-accessibility/screenshot-context.py) — extracts the course section that defines a screenshot's required state
-- [prepare-persona.sh](sample_codes/macos-accessibility/prepare-persona.sh) — launches a new process from a signed-in persona, verifies the exact local repository, and returns the process ID
+- [prepare-persona.sh](sample_codes/macos-accessibility/prepare-persona.sh) — launches a new process from a signed-in persona, adds the local repository when it is missing, checks its folder name in the sidebar, and returns the process ID
 - [ensure-streamer-mode.swift](sample_codes/macos-accessibility/ensure-streamer-mode.swift) — enables and verifies Streamer Mode before screenshot preparation
 - [cleanup-persona.sh](sample_codes/macos-accessibility/cleanup-persona.sh) — stops one exact screenshot process and preserves the signed-in persona
 - [launch-persona.sh](sample_codes/macos-accessibility/launch-persona.sh) — low-level launcher used by `prepare-persona.sh`

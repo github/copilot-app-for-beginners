@@ -15,8 +15,8 @@ System Events got an error: osascript is not allowed assistive access.
 Use read-only probes first:
 
 ```bash
-COPILOT_PID="$COPILOT_PID" bash sample_codes/macos-accessibility/map-app.sh
-osascript sample_codes/macos-accessibility/probe-readonly.applescript "$COPILOT_PID"
+COPILOT_PID="$COPILOT_PID" bash .github/skills/github-copilot-app-automation/sample_codes/macos-accessibility/map-app.sh
+osascript .github/skills/github-copilot-app-automation/sample_codes/macos-accessibility/probe-readonly.applescript "$COPILOT_PID"
 ```
 
 Expected useful outputs include:
@@ -57,7 +57,7 @@ AXButton     Open changes
 Use the draft test to confirm write access to the prompt composer without submitting:
 
 ```bash
-osascript sample_codes/macos-accessibility/type-and-clear-draft.applescript "$COPILOT_PID"
+osascript .github/skills/github-copilot-app-automation/sample_codes/macos-accessibility/type-and-clear-draft.applescript "$COPILOT_PID"
 ```
 
 Expected shape:
@@ -88,10 +88,10 @@ belong to the Copilot instance that hosts the agent and can navigate the wrong
 window. After the persona starts, drive the screenshot instance through
 Accessibility selectors scoped to its process ID.
 
-`prepare-persona.sh` requires an existing signed-in persona. It verifies the
-repository and, when needed, opens the native folder picker and supplies the
-exact path. It does not succeed until the repository name appears in the
-selected process. After a verified capture, run `cleanup-persona.sh` with the
+`prepare-persona.sh` requires an existing signed-in persona. If the repository
+is missing, it opens the native folder picker and supplies the exact path. It
+does not succeed until the repository's folder name appears in the selected
+process. It checks the name, not the full path. After a verified capture, run `cleanup-persona.sh` with the
 same persona name and process ID. Cleanup preserves the persona and login.
 
 ## Screenshot Identity Sanitization

@@ -45,8 +45,9 @@ Capture is semi-automated (a human navigates the app; the CLI has no
 bash "$SK/screenshots.sh" next          # or: next 13   for a specific index
 
 # b) Read the surrounding course instructions. Decide whether the image shows
-#    two or more controls that the reader must select in order.
-python3 "$SK/screenshot-context.py" <chapter>/README.md <slug>.webp
+#    two or more controls that the reader must select in order. Use the file and
+#    line that `next` printed; the placeholder has no image name yet.
+python3 "$SK/screenshot-context.py" <chapter>/README.md --line <line>
 
 # c) Prepare the dedicated demo persona and get that instance to the required
 #    state. Run the Node.js setup script first for data shots.

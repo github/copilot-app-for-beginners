@@ -40,8 +40,8 @@ longer editable text — prefer the SVG.)
 
 [`sample_codes/create-svg-badge.sh`](sample_codes/create-svg-badge.sh) does the
 whole job: detects the image size and mime type, base64-encodes the raster, writes
-the SVG, validates it with `xmllint`, and renders a PNG preview you can view to
-confirm placement.
+the SVG, validates it with `xmllint` when available, and renders a PNG preview
+when a renderer is available and previews are enabled.
 
 ```bash
 # Required: --image, --x, --y, --number
@@ -120,8 +120,6 @@ consistent on-screen size, see below), `--color "#d1242f"` (GitHub danger red),
 - `--grid` writes nothing to the repo; it is purely a coordinate-finding preview.
 - Screenshots may contain account names, private repo names, or paths — describe
   the UI generically and don't surface private data when reporting placement.
-- Only edit a chapter README to swap in the `.svg` when the user asks; generating
-  the asset and changing the Markdown are separate steps.
 
 ## Related Skills
 

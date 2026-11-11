@@ -52,8 +52,10 @@ The preparation workflow:
   built-in laptop display and two zoom steps (125%). It retries and fails if it cannot confirm the zoom.
 - Enables and verifies Streamer Mode so unreleased features are hidden.
 - Verifies that the persona is signed in.
-- Opens the exact repository path through the native folder picker if needed.
-- Verifies that the repository name appears in the selected process.
+- Opens the exact repository path through the native folder picker if no
+  repository with that folder name is in the sidebar.
+- Verifies that the repository's folder name appears in the selected process.
+  It checks the name, not the full path.
 - Dismisses transient banners (only buttons on a safe allowlist) and moves the
   pointer away from the content.
 - Prints its process ID for exact capture targeting.
@@ -371,7 +373,7 @@ window id and polls until the window appears. When a process ID is supplied, it
 only considers windows owned by that process:
 
 ```bash
-bash sample_codes/macos-accessibility/capture-window.sh \
+bash "$SK/capture-window.sh" \
   <chapter>/assets <base-name> 40 "$COPILOT_PID"
 ```
 
@@ -416,7 +418,11 @@ The script removes a Settings version and enforces 1920x1080 even when no
 process ID is supplied. Identity discovery requires a process ID, so course
 captures must still pass the exact persona process ID.
 
-Only text bounding boxes are changed, so the profile avatar remains visible.
+The sanitizer redraws only the identity text spans, so the profile avatar
+remains visible. Later steps change other pixels: `hide-window-controls.py`
+removes the window buttons, and `--callout`, `--box`, and `--arrow` draw on the
+image.
+
 If OCR cannot locate a detected profile name, capture fails closed and keeps
 the raw PNG for manual review.
 
