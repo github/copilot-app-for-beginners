@@ -121,8 +121,6 @@ for manual review.
 
 ## Robustness Requirements
 
-- For screenshot work, run `launch-persona.sh` and target its returned process
-  ID instead of opening or selecting an arbitrary instance.
 - Add short delays after focusing the app.
 - Re-find the `AXWebArea` and `Message` text area before every operation.
 - Prefer setting `value` directly over simulated typing when possible.
