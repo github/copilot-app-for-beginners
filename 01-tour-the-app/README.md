@@ -281,6 +281,8 @@ The menu's **Learn more** link opens the [Copilot Fusion documentation][copilot-
 
 You can change the model and reasoning effort during a session without changing its mode.
 
+To avoid picking a model every time, open **Settings** > **Sessions** and choose a default for new sessions. You can keep using the model you used last, or pick a preferred model, reasoning effort, and context window. If that model is no longer available, new sessions use the default model instead.
+
 ### Try Again with a Different Model
 
 If the agent's response doesn't work for you, you can retry it with a different model or reasoning effort without re-typing your prompt. Look for the **Retry** button that appears below a response in the conversation. Select it to retry with a different model, effort level, or context window. This is useful when the first attempt doesn't quite match your needs or when a higher reasoning effort might help with a tricky problem.
@@ -305,7 +307,7 @@ Select the gear icon at the bottom of the sidebar to open **Settings**. You do n
 |---|---|
 | General | - Check for app updates <br> - View or change where repositories are stored <br> - Change the theme and other app preferences |
 | Accounts | - View personal and enterprise account information <br> - Add another GitHub account |
-| Sessions | - Manage sessions and chats <br> - Set the response style <br> - Set app-wide instructions <br> - Configure branch naming and session behavior |
+| Sessions | - Manage sessions and chats <br> - Set the response style <br> - Set app-wide instructions <br> - Choose the default model, reasoning effort, and context window for new sessions <br> - Configure branch naming and session behavior |
 | Themes | Select and customize the app theme |
 | Accessibility | - Display zoom, keyboard shortcuts <br> - Notifications & Announcements |
 | Voice dictation | - Microphone settings <br> - Keyboard shortcut setup for activation <br> - Transcription models |
