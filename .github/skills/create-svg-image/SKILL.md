@@ -48,7 +48,7 @@ when a renderer is available and previews are enabled.
 bash .github/skills/create-svg-image/sample_codes/create-svg-badge.sh \
   --image 02-sessions-worktrees-context/assets/app-create-from-icon.webp \
   --x 710 --y 72 --number 1
-# -> writes assets/app-create-from-icon-step1.svg and prints a PREVIEW png path
+# -> writes 02-sessions-worktrees-context/assets/app-create-from-icon-step1.svg and prints a PREVIEW png path
 ```
 
 Useful options: `--radius` (defaults to ~2.5% of the image width so badges stay a
